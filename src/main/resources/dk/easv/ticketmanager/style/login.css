@@ -1,0 +1,44 @@
+/* Apply background color to the root container */
+.root {
+    -fx-background-color: #CFCFCF;
+    -fx-font-family: 'Verdana';
+    -fx-padding: 50px;
+}
+
+
+/* Style for labels */
+.label {
+    -fx-font-size: 19px;
+    -fx-text-fill: #333333;
+    -fx-font-family: 'Verdana';
+
+}
+
+/* Style for text fields and password fields */
+.text-field, .password-field {
+    -fx-border-radius: 10px;
+    -fx-font-size: 17px;
+    -fx-background-color: #FFFFFF;
+    -fx-background-insets: 0;
+    -fx-background-radius: 10px;
+    -fx-font-family: 'Verdana';
+    -fx-pref-height: 40px;
+    -fx-effect: dropshadow(gaussian, rgba(114, 114, 114, 1), 0, 0, -6, 6);
+
+}
+
+/* Style for buttons */
+.button {
+    -fx-background-color: #26A0FC;
+    -fx-text-fill: white;
+    -fx-font-size: 17px;
+    -fx-background-radius: 10px;
+    -fx-padding: 8px 16px;
+    -fx-font-family: 'Verdana';
+    -fx-pref-width: 200px;
+    -fx-pref-height: 40px;
+}
+
+.button:hover {
+    -fx-background-color: #45A049;
+}
