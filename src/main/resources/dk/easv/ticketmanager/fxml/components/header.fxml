@@ -22,6 +22,6 @@
       </Label>
    </children>
    <padding>
-      <Insets bottom="25.0" left="65.0" right="65.0" top="25.0" />
+      <Insets bottom="17.0" left="65.0" right="65.0" top="17.0" />
    </padding>
 </HBox>
