@@ -11,7 +11,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<VBox alignment="TOP_CENTER" prefHeight="500.0" prefWidth="450.0" styleClass="root" stylesheets="@../../style/login.css" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="dk.easv.ticketmanager.gui.controllers.main.LoginController">
+<VBox alignment="TOP_CENTER" prefHeight="500.0" prefWidth="450.0" styleClass="root" stylesheets="@../../style/main/login.css" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="dk.easv.ticketmanager.gui.controllers.main.LoginController">
    <children>
       <ImageView fitHeight="94.0" fitWidth="247.0" pickOnBounds="true" preserveRatio="true">
          <image>
