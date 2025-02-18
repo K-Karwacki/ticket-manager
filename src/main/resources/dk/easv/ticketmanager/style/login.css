@@ -2,7 +2,6 @@
 .root {
     -fx-background-color: #CFCFCF;
     -fx-font-family: 'Verdana';
-    -fx-padding: 50px;
 }
 
 
@@ -40,5 +39,6 @@
 }
 
 .button:hover {
-    -fx-background-color: #45A049;
+    -fx-background-color: #0A95FF;
+    -fx-cursor: hand;
 }

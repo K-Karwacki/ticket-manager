@@ -13,7 +13,7 @@
 
 <VBox alignment="TOP_CENTER" prefHeight="500.0" prefWidth="450.0" styleClass="root" stylesheets="@../../style/login.css" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="dk.easv.ticketmanager.gui.controllers.main.LoginController">
    <children>
-      <ImageView fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fitHeight="94.0" fitWidth="247.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../../images/easv_logo.png" />
          </image>
@@ -32,7 +32,7 @@
             </TextField>
          </children>
          <VBox.margin>
-            <Insets top="50.0" />
+            <Insets top="40.0" />
          </VBox.margin>
       </VBox>
       <VBox>
@@ -45,10 +45,10 @@
                   <Insets bottom="10.0" left="10.0" />
                </VBox.margin>
             </Label>
-            <PasswordField fx:id="passwordText" />
+            <PasswordField />
          </children>
          <VBox.margin>
-            <Insets top="30.0" />
+            <Insets top="35.0" />
          </VBox.margin>
       </VBox>
       <Button mnemonicParsing="false" text="Login">
@@ -57,4 +57,7 @@
          </VBox.margin>
       </Button>
    </children>
+   <padding>
+      <Insets bottom="50.0" left="40.0" right="40.0" top="50.0" />
+   </padding>
 </VBox>
