@@ -8,6 +8,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.Parent;
+import javafx.scene.control.ScrollPane;
 import javafx.scene.layout.FlowPane;
 
 import java.io.IOException;
@@ -19,6 +20,8 @@ public class EventListDashboardController implements Initializable
 {
   @FXML
   private FlowPane eventListRoot;
+  @FXML
+  private ScrollPane eventListScrollPane;
   private ArrayList<Event> events = new ArrayList<>();
 
 
@@ -33,6 +36,8 @@ public class EventListDashboardController implements Initializable
 
   @Override public void initialize(URL location, ResourceBundle resources)
   {
+    System.out.println("initialized :)");
+    eventListScrollPane.setFocusTraversable(false);
     for (Event event : events) {
       try{
         addEventCardToContainer(event);

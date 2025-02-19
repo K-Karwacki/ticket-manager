@@ -2,6 +2,7 @@
 
 <?import java.lang.String?>
 <?import javafx.geometry.Insets?>
+<?import javafx.geometry.Point3D?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
@@ -9,7 +10,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="550.0" prefWidth="300.0" spacing="22.0" style="-fx-background-color: #c8c8c8; -fx-border-color: #616161; -fx-border-width: 0 2 0 0;" styleClass="root" stylesheets="@../../style/components/menu.css" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="dk.easv.ticketmanager.gui.controllers.components.MenuComponentController">
+<VBox fx:id="menuRoot" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="550.0" prefWidth="300.0" spacing="22.0" styleClass="root" stylesheets="@../../style/components/menu.css" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="dk.easv.ticketmanager.gui.controllers.components.MenuComponentController">
    <HBox alignment="CENTER_LEFT" prefHeight="40.0" prefWidth="360.0" VBox.vgrow="NEVER">
       <padding>
          <Insets bottom="10.0" left="20.0" top="17.0" />
@@ -25,7 +26,7 @@
          </font>
       </Label>
    </HBox>
-   <HBox alignment="CENTER_LEFT" prefHeight="60.0" prefWidth="360.0">
+   <HBox accessibleRole="BUTTON" alignment="CENTER_LEFT" onMouseClicked="#onClickOpenHome" prefHeight="60.0" prefWidth="360.0">
       <padding>
          <Insets left="41.0" />
       </padding>
@@ -45,7 +46,7 @@
          <String fx:value="active-menu-btn" />
       </styleClass>
    </HBox>
-   <HBox alignment="CENTER_LEFT" prefHeight="60.0" prefWidth="360.0" styleClass="menu-btn">
+   <HBox accessibleRole="BUTTON" alignment="CENTER_LEFT" onMouseClicked="#onClickOpenUsers" prefHeight="60.0" prefWidth="360.0" styleClass="menu-btn">
       <padding>
          <Insets left="41.0" />
       </padding>
@@ -61,7 +62,7 @@
          </HBox.margin>
       </Label>
    </HBox>
-   <HBox alignment="CENTER_LEFT" prefHeight="60.0" prefWidth="360.0" styleClass="menu-btn">
+   <HBox accessibleRole="BUTTON" alignment="CENTER_LEFT" onMouseClicked="#onClickOpenEvents" prefHeight="60.0" prefWidth="360.0" styleClass="menu-btn">
       <padding>
          <Insets left="41.0" />
       </padding>
@@ -77,7 +78,7 @@
          </HBox.margin>
       </Label>
    </HBox>
-   <HBox alignment="CENTER_LEFT" prefHeight="60.0" prefWidth="360.0" styleClass="menu-btn">
+   <HBox accessibleRole="BUTTON" alignment="CENTER_LEFT" onMouseClicked="#onClickOpenSettings" prefHeight="60.0" prefWidth="360.0" styleClass="menu-btn">
       <padding>
          <Insets left="41.0" />
       </padding>
@@ -96,7 +97,7 @@
          </HBox.margin>
       </Label>
    </HBox>
-   <HBox alignment="CENTER_LEFT" prefHeight="60.0" prefWidth="356.0">
+   <HBox accessibleRole="BUTTON" alignment="CENTER_LEFT" prefHeight="60.0" prefWidth="356.0">
       <padding>
          <Insets left="41.0" />
       </padding>
@@ -116,4 +117,7 @@
          <String fx:value="logout-btn" />
       </styleClass>
    </HBox>
+   <rotationAxis>
+      <Point3D />
+   </rotationAxis>
 </VBox>

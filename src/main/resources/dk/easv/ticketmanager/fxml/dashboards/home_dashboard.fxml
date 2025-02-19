@@ -14,7 +14,7 @@
 <?import javafx.scene.shape.Rectangle?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="550.0" prefWidth="940.0" style="-fx-background-color: #D1D1D1;" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="dk.easv.ticketmanager.gui.controllers.dashboards.HomeDashboardController">
+<AnchorPane styleClass="dashboard-root"  prefHeight="550.0" prefWidth="940.0" style="-fx-background-color: #D1D1D1;" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="dk.easv.ticketmanager.gui.controllers.dashboards.HomeDashboardController">
    <children>
       <HBox alignment="CENTER_LEFT" layoutX="100.0" layoutY="50.0" prefHeight="35.0" prefWidth="200.0" spacing="10.0" AnchorPane.rightAnchor="640.0">
          <children>

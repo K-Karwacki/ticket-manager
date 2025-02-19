@@ -6,7 +6,7 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 
-public class LoginController
+public class LoginWindowController
 {
   @FXML private Label errorLabel;
   @FXML private TextField usernameField;

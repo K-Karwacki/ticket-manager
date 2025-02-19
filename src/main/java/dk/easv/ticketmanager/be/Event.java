@@ -1,15 +1,9 @@
 package dk.easv.ticketmanager.be;
 
-import dk.easv.ticketmanager.Main;
-import dk.easv.ticketmanager.utils.DateTimeUtils;
-import javafx.scene.control.Label;
+import dk.easv.ticketmanager.utils.DateTimeUtil;
 import javafx.scene.image.Image;
 
-import java.sql.Time;
-import java.time.LocalDate;
 import java.time.LocalDateTime;
-import java.util.Date;
-import java.util.Objects;
 
 public class Event
 {
@@ -31,9 +25,8 @@ public class Event
 //    this.eventImage = new Image(
 //        String.valueOf(Main.class.getResource("event-template.jpg")));
     LocalDateTime now = LocalDateTime.now();
-    this.eventDate = DateTimeUtils.formatDate(now);
-    this.eventTime = DateTimeUtils.formatTime(now);
-    System.out.println(eventTime);
+    this.eventDate = DateTimeUtil.formatDate(now);
+    this.eventTime = DateTimeUtil.formatTime(now);
     this.eventLocation = "123 Main Street, Anytown, USA, 12345";
     this.normalTicketsAmount = 100;
     this.vipTicketsAmount = 100;
@@ -44,8 +37,8 @@ public class Event
     this.eventName = eventName;
     this.eventDescription = eventDescription;
     this.eventImage = new Image(imagePath);
-    this.eventDate = DateTimeUtils.formatDate(eventDate);
-    this.eventTime = DateTimeUtils.formatTime(eventDate);
+    this.eventDate = DateTimeUtil.formatDate(eventDate);
+    this.eventTime = DateTimeUtil.formatTime(eventDate);
     this.eventLocation = eventLocation;
     this.normalTicketsAmount = normalTicketsAmount;
     this.vipTicketsAmount = vipTicketsAmount;
@@ -89,7 +82,7 @@ public class Event
 
   public void setEventDate(LocalDateTime eventDate)
   {
-    this.eventDate = DateTimeUtils.formatDate(eventDate);
+    this.eventDate = DateTimeUtil.formatDate(eventDate);
   }
 
 

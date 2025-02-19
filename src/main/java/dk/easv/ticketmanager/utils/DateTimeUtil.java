@@ -5,7 +5,7 @@ import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 
-public class DateTimeUtils
+public class DateTimeUtil
 {
   private static final DateTimeFormatter dateFormatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
   private static final DateTimeFormatter timeFormatter = DateTimeFormatter.ofPattern("HH:mm");

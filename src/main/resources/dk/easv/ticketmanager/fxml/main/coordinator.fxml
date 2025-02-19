@@ -2,15 +2,14 @@
 
 <?import javafx.scene.layout.BorderPane?>
 
-
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="dk.easv.ticketmanager.gui.controllers.main.CoordinatorController">
+<BorderPane fx:id="root" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="dk.easv.ticketmanager.gui.controllers.main.CoordinatorWindowController">
     <top>
-        <fx:include source="../components/header.fxml"/>
+        <fx:include source="../components/header.fxml" />
     </top>
     <left>
-        <fx:include source="../components/menu.fxml"/>
+<!--        <fx:include fx:id="menuComponent" source="../components/menu.fxml" />-->
     </left>
     <center>
-        <fx:include source="../dashboards/event_list_dashboard.fxml"/>
+        <fx:include source="../dashboards/event_list_dashboard.fxml" />
     </center>
 </BorderPane>
