@@ -278,7 +278,7 @@
       </ScrollPane>
       <VBox layoutX="77.0" layoutY="100.0" prefHeight="250.0" prefWidth="200.0">
          <children>
-            <VBox alignment="TOP_CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="275.0" spacing="4.0" style="-fx-background-radius: 10px; -fx-border-radius: 10px; -fx-background-color: #F0F0F0;" styleClass="event" stylesheets="@../../style/components/event.css">
+            <VBox alignment="TOP_CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="275.0" spacing="4.0" style="-fx-background-radius: 10px; -fx-border-radius: 10px; -fx-background-color: #F0F0F0;" styleClass="event" stylesheets="@../../style/components/event_card.css">
                <children>
                   <Rectangle arcHeight="15.0" arcWidth="15.0" fill="#e4c931" height="125.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="275.0" />
                   <Label text="Event name">

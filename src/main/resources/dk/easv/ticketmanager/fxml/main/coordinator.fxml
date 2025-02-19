@@ -10,4 +10,7 @@
     <left>
         <fx:include source="../components/menu.fxml"/>
     </left>
+    <center>
+        <fx:include source="../dashboards/event_list_dashboard.fxml"/>
+    </center>
 </BorderPane>
