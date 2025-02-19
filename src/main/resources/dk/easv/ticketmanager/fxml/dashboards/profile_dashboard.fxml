@@ -1,14 +1,122 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import java.lang.*?>
-<?import java.util.*?>
-<?import javafx.scene.*?>
-<?import javafx.scene.control.*?>
-<?import javafx.scene.layout.*?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Region?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.shape.Circle?>
+<?import javafx.scene.shape.Rectangle?>
+<?import javafx.scene.text.Font?>
 
-<AnchorPane xmlns="http://javafx.com/javafx"
-            xmlns:fx="http://javafx.com/fxml"
-            fx:controller="dk.easv.ticketmanager.gui.controllers.dashboards.ProfileDashboardController"
-            prefHeight="400.0" prefWidth="600.0">
 
+<AnchorPane prefHeight="550.0" prefWidth="940.0" style="-fx-background-color: D1D1D1;" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="dk.easv.ticketmanager.gui.controllers.dashboards.ProfileDashboardController">
+   <children>
+      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#555555" height="550.0" layoutX="59.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="300.0" />
+      <Circle fill="DODGERBLUE" layoutX="212.0" layoutY="287.0" radius="167.0" stroke="#d1d1d1" strokeType="INSIDE" strokeWidth="10.0" />
+      <VBox layoutX="539.0" layoutY="89.0" prefHeight="300.0" prefWidth="288.0" spacing="10.0">
+         <children>
+            <HBox alignment="TOP_CENTER" prefHeight="0.0" prefWidth="272.0">
+               <children>
+                  <VBox alignment="TOP_CENTER" prefHeight="100.0" prefWidth="220.0">
+                     <children>
+                        <Label text="Full Name">
+                           <font>
+                              <Font name="Verdana Bold" size="22.0" />
+                           </font>
+                        </Label>
+                        <Label text="Ronaldihno Gaucho">
+                           <font>
+                              <Font name="Verdana" size="20.0" />
+                           </font>
+                        </Label>
+                     </children>
+                  </VBox>
+                  <Region prefHeight="53.0" prefWidth="37.0" HBox.hgrow="ALWAYS" />
+                  <ImageView fitHeight="40.0" fitWidth="40.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../../images/icons/edit-icon.png" />
+                     </image>
+                  </ImageView>
+               </children>
+            </HBox>
+            <HBox alignment="CENTER" prefHeight="78.0" prefWidth="321.0">
+               <children>
+                  <VBox alignment="TOP_CENTER" prefHeight="94.0" prefWidth="198.0">
+                     <children>
+                        <Label prefHeight="28.0" prefWidth="187.0" text="Phone Number">
+                           <font>
+                              <Font name="Verdana Bold" size="22.0" />
+                           </font>
+                           <VBox.margin>
+                              <Insets top="25.0" />
+                           </VBox.margin>
+                        </Label>
+                        <Label text="+45 77 30 40 20">
+                           <font>
+                              <Font name="Verdana" size="20.0" />
+                           </font>
+                        </Label>
+                     </children>
+                  </VBox>
+                  <Region prefHeight="78.0" prefWidth="45.0" HBox.hgrow="ALWAYS" />
+                  <ImageView fitHeight="40.0" fitWidth="40.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../../images/icons/edit-icon.png" />
+                     </image>
+                  </ImageView>
+               </children>
+            </HBox>
+            <HBox alignment="CENTER" prefHeight="0.0" prefWidth="272.0">
+               <children>
+                  <VBox alignment="TOP_CENTER" prefHeight="78.0" prefWidth="257.0">
+                     <children>
+                        <Label text="Email Address">
+                           <font>
+                              <Font name="Verdana Bold" size="22.0" />
+                           </font>
+                           <VBox.margin>
+                              <Insets top="25.0" />
+                           </VBox.margin>
+                        </Label>
+                        <Label text="rongauch@gmail.com">
+                           <font>
+                              <Font name="Verdana" size="20.0" />
+                           </font>
+                        </Label>
+                     </children>
+                  </VBox>
+                  <Region prefHeight="78.0" prefWidth="45.0" HBox.hgrow="ALWAYS" />
+                  <ImageView fitHeight="40.0" fitWidth="40.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../../images/icons/edit-icon.png" />
+                     </image>
+                  </ImageView>
+               </children>
+            </HBox>
+         </children>
+      </VBox>
+      <TextField layoutX="441.0" layoutY="410.0" minHeight="40.0" prefWidth="200.0" style="-fx-border-radius: 10; -fx-background-radius: 10; -fx-background-color: E9E9E9; -fx-border-color: black;" />
+      <TextField layoutX="687.0" layoutY="410.0" minHeight="40.0" prefWidth="200.0" style="-fx-border-radius: 10; -fx-background-radius: 10; -fx-background-color: E9E9E9; -fx-border-color: black;" />
+      <Label layoutX="468.0" layoutY="382.0" text="Current password">
+         <font>
+            <Font name="Verdana" size="16.0" />
+         </font>
+      </Label>
+      <Label layoutX="724.0" layoutY="382.0" text="New Password">
+         <font>
+            <Font name="Verdana" size="16.0" />
+         </font>
+      </Label>
+      <Button layoutX="687.0" layoutY="482.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="200.0" style="-fx-background-color: #7BD4F9; -fx-border-color: black; -fx-border-radius: 10px; -fx-background-radius: 10px;" text="Change Password">
+         <font>
+            <Font name="Verdana" size="16.0" />
+         </font>
+      </Button>
+   </children>
 </AnchorPane>
