@@ -45,4 +45,6 @@
 .coordinator .button{
     -fx-effect: dropshadow(gaussian, #50505040, 7, 0, -3, 3);
 }
-
+.drop-shadow{
+    -fx-effect: dropshadow(gaussian, #50505040, 5, 0, -3, 7);
+}

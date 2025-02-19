@@ -22,8 +22,7 @@ public class Event
     this.eventId = 0;
     this.eventName = "Default name";
     this.eventDescription = "Default description";
-//    this.eventImage = new Image(
-//        String.valueOf(Main.class.getResource("event-template.jpg")));
+    this.eventImage = new Image(String.valueOf(Main.class.getResource("images/event-template.jpg")));
     LocalDateTime now = LocalDateTime.now();
     this.eventDate = DateTimeUtil.formatDate(now);
     this.eventTime = DateTimeUtil.formatTime(now);
@@ -42,7 +41,6 @@ public class Event
     this.eventLocation = eventLocation;
     this.normalTicketsAmount = normalTicketsAmount;
     this.vipTicketsAmount = vipTicketsAmount;
-
   }
 
   public void setEventDate(String eventDate)

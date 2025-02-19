@@ -6,6 +6,7 @@ import javafx.scene.Node;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.paint.ImagePattern;
 import javafx.scene.shape.Rectangle;
 
 import java.awt.*;
@@ -27,7 +28,7 @@ public class EventCardComponentController
 
   public void setEventData(Event event){
     eventNameLbl.setText(event.getEventName());
-//    eventImageCont.setImage(event.getEventImage());
+    eventImageContainer.setFill(new ImagePattern(event.getEventImage()));
     eventDateLbl.setText(event.getEventDate().toString());
     eventTimeLbl.setText(event.getEventTime());
     eventLocationLbl.setText(event.getEventLocation());
