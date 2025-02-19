@@ -1,6 +1,5 @@
 package dk.easv.ticketmanager.be;
 
-import dk.easv.ticketmanager.Main;
 import dk.easv.ticketmanager.utils.DateTimeUtil;
 import javafx.scene.image.Image;
 
