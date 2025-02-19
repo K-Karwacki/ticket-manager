@@ -1,14 +1,481 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import java.lang.*?>
-<?import java.util.*?>
-<?import javafx.scene.*?>
-<?import javafx.scene.control.*?>
-<?import javafx.scene.layout.*?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.FlowPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.shape.Rectangle?>
+<?import javafx.scene.text.Font?>
 
-<AnchorPane xmlns="http://javafx.com/javafx"
-            xmlns:fx="http://javafx.com/fxml"
-            fx:controller="dk.easv.ticketmanager.gui.controllers.dashboards.EventListDashboardController"
-            prefHeight="400.0" prefWidth="600.0">
 
+<AnchorPane prefHeight="550.0" prefWidth="940.0" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="dk.easv.ticketmanager.gui.controllers.dashboards.EventListDashboardController">
+   <children>
+      <ScrollPane hbarPolicy="NEVER" prefHeight="550.0" prefWidth="940.0" stylesheets="@../../style/dashboard/dashboard.css">
+         <content>
+            <FlowPane hgap="26.0" prefHeight="950.0" prefWidth="918.0" vgap="100.0">
+               <children>
+                  <VBox alignment="TOP_CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="275.0" spacing="4.0" style="-fx-background-radius: 10px; -fx-border-radius: 10px; -fx-background-color: #F0F0F0;" styleClass="event" stylesheets="@../../style/components/event.css">
+                     <children>
+                        <Rectangle arcHeight="15.0" arcWidth="15.0" fill="#e4c931" height="125.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="275.0" />
+                        <Label text="Event name">
+                           <VBox.margin>
+                              <Insets bottom="10.0" top="10.0" />
+                           </VBox.margin>
+                           <font>
+                              <Font name="System Bold" size="16.0" />
+                           </font>
+                        </Label>
+                        <HBox alignment="CENTER" prefHeight="36.0" prefWidth="275.0" spacing="10.0">
+                           <children>
+                              <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@../../images/icons/calendar-icon.png" />
+                                 </image>
+                              </ImageView>
+                              <Label text="00.00.0000" />
+                              <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@../../images/icons/clock-icon.png" />
+                                 </image>
+                                 <HBox.margin>
+                                    <Insets left="10.0" />
+                                 </HBox.margin>
+                              </ImageView>
+                              <Label text="00:00" />
+                           </children>
+                        </HBox>
+                        <HBox prefHeight="40.0" prefWidth="275.0" spacing="10.0">
+                           <children>
+                              <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@../../images/icons/pin-icon.png" />
+                                 </image>
+                              </ImageView>
+                              <Label prefHeight="34.0" prefWidth="125.0" text="123 Main Street, Anytown, USA, 12345" wrapText="true" />
+                           </children>
+                           <padding>
+                              <Insets left="45.0" right="50.0" />
+                           </padding>
+                           <VBox.margin>
+                              <Insets bottom="10.0" top="10.0" />
+                           </VBox.margin>
+                        </HBox>
+                        <HBox alignment="CENTER_LEFT" prefHeight="28.0" prefWidth="275.0" spacing="6.0">
+                           <children>
+                              <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@../../images/icons/ticket-icon.png" />
+                                 </image>
+                              </ImageView>
+                              <Label text="100" />
+                              <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@../../images/icons/diamond-icon.png" />
+                                 </image>
+                                 <HBox.margin>
+                                    <Insets left="10.0" />
+                                 </HBox.margin>
+                              </ImageView>
+                              <Label text="100" />
+                           </children>
+                           <VBox.margin>
+                              <Insets left="45.0" />
+                           </VBox.margin>
+                        </HBox>
+                        <Button mnemonicParsing="false" prefHeight="40.0" prefWidth="100.0" style="-fx-background-color: #ddd; -fx-border-color: #999; -fx-border-radius: 5px;" text="Read More">
+                           <VBox.margin>
+                              <Insets top="25.0" />
+                           </VBox.margin>
+                        </Button>
+                     </children>
+                  </VBox>
+                  <VBox alignment="TOP_CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="275.0" spacing="4.0" style="-fx-background-radius: 10px; -fx-border-radius: 10px; -fx-background-color: #F0F0F0;" styleClass="event" stylesheets="@../../style/components/event.css">
+                     <children>
+                        <Rectangle arcHeight="15.0" arcWidth="15.0" fill="#e4c931" height="125.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="275.0" />
+                        <Label text="Event name">
+                           <VBox.margin>
+                              <Insets bottom="10.0" top="10.0" />
+                           </VBox.margin>
+                           <font>
+                              <Font name="System Bold" size="16.0" />
+                           </font>
+                        </Label>
+                        <HBox alignment="CENTER" prefHeight="36.0" prefWidth="275.0" spacing="10.0">
+                           <children>
+                              <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@../../images/icons/calendar-icon.png" />
+                                 </image>
+                              </ImageView>
+                              <Label text="00.00.0000" />
+                              <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@../../images/icons/clock-icon.png" />
+                                 </image>
+                                 <HBox.margin>
+                                    <Insets left="10.0" />
+                                 </HBox.margin>
+                              </ImageView>
+                              <Label text="00:00" />
+                           </children>
+                        </HBox>
+                        <HBox prefHeight="40.0" prefWidth="275.0" spacing="10.0">
+                           <children>
+                              <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@../../images/icons/pin-icon.png" />
+                                 </image>
+                              </ImageView>
+                              <Label prefHeight="34.0" prefWidth="125.0" text="123 Main Street, Anytown, USA, 12345" wrapText="true" />
+                           </children>
+                           <padding>
+                              <Insets left="45.0" right="50.0" />
+                           </padding>
+                           <VBox.margin>
+                              <Insets bottom="10.0" top="10.0" />
+                           </VBox.margin>
+                        </HBox>
+                        <HBox alignment="CENTER_LEFT" prefHeight="28.0" prefWidth="275.0" spacing="6.0">
+                           <children>
+                              <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@../../images/icons/ticket-icon.png" />
+                                 </image>
+                              </ImageView>
+                              <Label text="100" />
+                              <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@../../images/icons/diamond-icon.png" />
+                                 </image>
+                                 <HBox.margin>
+                                    <Insets left="10.0" />
+                                 </HBox.margin>
+                              </ImageView>
+                              <Label text="100" />
+                           </children>
+                           <VBox.margin>
+                              <Insets left="45.0" />
+                           </VBox.margin>
+                        </HBox>
+                        <Button mnemonicParsing="false" prefHeight="40.0" prefWidth="100.0" style="-fx-background-color: #ddd; -fx-border-color: #999; -fx-border-radius: 5px;" text="Read More">
+                           <VBox.margin>
+                              <Insets top="25.0" />
+                           </VBox.margin>
+                        </Button>
+                     </children>
+                  </VBox>
+                  <VBox alignment="TOP_CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="275.0" spacing="4.0" style="-fx-background-radius: 10px; -fx-border-radius: 10px; -fx-background-color: #F0F0F0;" styleClass="event" stylesheets="@../../style/components/event.css">
+                     <children>
+                        <Rectangle arcHeight="15.0" arcWidth="15.0" fill="#e4c931" height="125.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="275.0" />
+                        <Label text="Event name">
+                           <VBox.margin>
+                              <Insets bottom="10.0" top="10.0" />
+                           </VBox.margin>
+                           <font>
+                              <Font name="System Bold" size="16.0" />
+                           </font>
+                        </Label>
+                        <HBox alignment="CENTER" prefHeight="36.0" prefWidth="275.0" spacing="10.0">
+                           <children>
+                              <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@../../images/icons/calendar-icon.png" />
+                                 </image>
+                              </ImageView>
+                              <Label text="00.00.0000" />
+                              <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@../../images/icons/clock-icon.png" />
+                                 </image>
+                                 <HBox.margin>
+                                    <Insets left="10.0" />
+                                 </HBox.margin>
+                              </ImageView>
+                              <Label text="00:00" />
+                           </children>
+                        </HBox>
+                        <HBox prefHeight="40.0" prefWidth="275.0" spacing="10.0">
+                           <children>
+                              <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@../../images/icons/pin-icon.png" />
+                                 </image>
+                              </ImageView>
+                              <Label prefHeight="34.0" prefWidth="125.0" text="123 Main Street, Anytown, USA, 12345" wrapText="true" />
+                           </children>
+                           <padding>
+                              <Insets left="45.0" right="50.0" />
+                           </padding>
+                           <VBox.margin>
+                              <Insets bottom="10.0" top="10.0" />
+                           </VBox.margin>
+                        </HBox>
+                        <HBox alignment="CENTER_LEFT" prefHeight="28.0" prefWidth="275.0" spacing="6.0">
+                           <children>
+                              <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@../../images/icons/ticket-icon.png" />
+                                 </image>
+                              </ImageView>
+                              <Label text="100" />
+                              <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@../../images/icons/diamond-icon.png" />
+                                 </image>
+                                 <HBox.margin>
+                                    <Insets left="10.0" />
+                                 </HBox.margin>
+                              </ImageView>
+                              <Label text="100" />
+                           </children>
+                           <VBox.margin>
+                              <Insets left="45.0" />
+                           </VBox.margin>
+                        </HBox>
+                        <Button mnemonicParsing="false" prefHeight="40.0" prefWidth="100.0" style="-fx-background-color: #ddd; -fx-border-color: #999; -fx-border-radius: 5px;" text="Read More">
+                           <VBox.margin>
+                              <Insets top="25.0" />
+                           </VBox.margin>
+                        </Button>
+                     </children>
+                  </VBox>
+                  <VBox alignment="TOP_CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="275.0" spacing="4.0" style="-fx-background-radius: 10px; -fx-border-radius: 10px; -fx-background-color: #F0F0F0;" styleClass="event" stylesheets="@../../style/components/event.css">
+                     <children>
+                        <Rectangle arcHeight="15.0" arcWidth="15.0" fill="#e4c931" height="125.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="275.0" />
+                        <Label text="Event name">
+                           <VBox.margin>
+                              <Insets bottom="10.0" top="10.0" />
+                           </VBox.margin>
+                           <font>
+                              <Font name="System Bold" size="16.0" />
+                           </font>
+                        </Label>
+                        <HBox alignment="CENTER" prefHeight="36.0" prefWidth="275.0" spacing="10.0">
+                           <children>
+                              <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@../../images/icons/calendar-icon.png" />
+                                 </image>
+                              </ImageView>
+                              <Label text="00.00.0000" />
+                              <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@../../images/icons/clock-icon.png" />
+                                 </image>
+                                 <HBox.margin>
+                                    <Insets left="10.0" />
+                                 </HBox.margin>
+                              </ImageView>
+                              <Label text="00:00" />
+                           </children>
+                        </HBox>
+                        <HBox prefHeight="40.0" prefWidth="275.0" spacing="10.0">
+                           <children>
+                              <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@../../images/icons/pin-icon.png" />
+                                 </image>
+                              </ImageView>
+                              <Label prefHeight="34.0" prefWidth="125.0" text="123 Main Street, Anytown, USA, 12345" wrapText="true" />
+                           </children>
+                           <padding>
+                              <Insets left="45.0" right="50.0" />
+                           </padding>
+                           <VBox.margin>
+                              <Insets bottom="10.0" top="10.0" />
+                           </VBox.margin>
+                        </HBox>
+                        <HBox alignment="CENTER_LEFT" prefHeight="28.0" prefWidth="275.0" spacing="6.0">
+                           <children>
+                              <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@../../images/icons/ticket-icon.png" />
+                                 </image>
+                              </ImageView>
+                              <Label text="100" />
+                              <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@../../images/icons/diamond-icon.png" />
+                                 </image>
+                                 <HBox.margin>
+                                    <Insets left="10.0" />
+                                 </HBox.margin>
+                              </ImageView>
+                              <Label text="100" />
+                           </children>
+                           <VBox.margin>
+                              <Insets left="45.0" />
+                           </VBox.margin>
+                        </HBox>
+                        <Button mnemonicParsing="false" prefHeight="40.0" prefWidth="100.0" style="-fx-background-color: #ddd; -fx-border-color: #999; -fx-border-radius: 5px;" text="Read More">
+                           <VBox.margin>
+                              <Insets top="25.0" />
+                           </VBox.margin>
+                        </Button>
+                     </children>
+                  </VBox>
+                  <VBox alignment="TOP_CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="275.0" spacing="4.0" style="-fx-background-radius: 10px; -fx-border-radius: 10px; -fx-background-color: #F0F0F0;" styleClass="event" stylesheets="@../../style/components/event.css">
+                     <children>
+                        <Rectangle arcHeight="15.0" arcWidth="15.0" fill="#e4c931" height="125.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="275.0" />
+                        <Label text="Event name">
+                           <VBox.margin>
+                              <Insets bottom="10.0" top="10.0" />
+                           </VBox.margin>
+                           <font>
+                              <Font name="System Bold" size="16.0" />
+                           </font>
+                        </Label>
+                        <HBox alignment="CENTER" prefHeight="36.0" prefWidth="275.0" spacing="10.0">
+                           <children>
+                              <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@../../images/icons/calendar-icon.png" />
+                                 </image>
+                              </ImageView>
+                              <Label text="00.00.0000" />
+                              <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@../../images/icons/clock-icon.png" />
+                                 </image>
+                                 <HBox.margin>
+                                    <Insets left="10.0" />
+                                 </HBox.margin>
+                              </ImageView>
+                              <Label text="00:00" />
+                           </children>
+                        </HBox>
+                        <HBox prefHeight="40.0" prefWidth="275.0" spacing="10.0">
+                           <children>
+                              <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@../../images/icons/pin-icon.png" />
+                                 </image>
+                              </ImageView>
+                              <Label prefHeight="34.0" prefWidth="125.0" text="123 Main Street, Anytown, USA, 12345" wrapText="true" />
+                           </children>
+                           <padding>
+                              <Insets left="45.0" right="50.0" />
+                           </padding>
+                           <VBox.margin>
+                              <Insets bottom="10.0" top="10.0" />
+                           </VBox.margin>
+                        </HBox>
+                        <HBox alignment="CENTER_LEFT" prefHeight="28.0" prefWidth="275.0" spacing="6.0">
+                           <children>
+                              <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@../../images/icons/ticket-icon.png" />
+                                 </image>
+                              </ImageView>
+                              <Label text="100" />
+                              <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@../../images/icons/diamond-icon.png" />
+                                 </image>
+                                 <HBox.margin>
+                                    <Insets left="10.0" />
+                                 </HBox.margin>
+                              </ImageView>
+                              <Label text="100" />
+                           </children>
+                           <VBox.margin>
+                              <Insets left="45.0" />
+                           </VBox.margin>
+                        </HBox>
+                        <Button mnemonicParsing="false" prefHeight="40.0" prefWidth="100.0" style="-fx-background-color: #ddd; -fx-border-color: #999; -fx-border-radius: 5px;" text="Read More">
+                           <VBox.margin>
+                              <Insets top="25.0" />
+                           </VBox.margin>
+                        </Button>
+                     </children>
+                  </VBox>
+                  <VBox alignment="TOP_CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="275.0" spacing="4.0" style="-fx-background-radius: 10px; -fx-border-radius: 10px; -fx-background-color: #F0F0F0;" styleClass="event" stylesheets="@../../style/components/event.css">
+                     <children>
+                        <Rectangle arcHeight="15.0" arcWidth="15.0" fill="#e4c931" height="125.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="275.0" />
+                        <Label text="Event name">
+                           <VBox.margin>
+                              <Insets bottom="10.0" top="10.0" />
+                           </VBox.margin>
+                           <font>
+                              <Font name="System Bold" size="16.0" />
+                           </font>
+                        </Label>
+                        <HBox alignment="CENTER" prefHeight="36.0" prefWidth="275.0" spacing="10.0">
+                           <children>
+                              <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@../../images/icons/calendar-icon.png" />
+                                 </image>
+                              </ImageView>
+                              <Label text="00.00.0000" />
+                              <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@../../images/icons/clock-icon.png" />
+                                 </image>
+                                 <HBox.margin>
+                                    <Insets left="10.0" />
+                                 </HBox.margin>
+                              </ImageView>
+                              <Label text="00:00" />
+                           </children>
+                        </HBox>
+                        <HBox prefHeight="40.0" prefWidth="275.0" spacing="10.0">
+                           <children>
+                              <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@../../images/icons/pin-icon.png" />
+                                 </image>
+                              </ImageView>
+                              <Label prefHeight="34.0" prefWidth="125.0" text="123 Main Street, Anytown, USA, 12345" wrapText="true" />
+                           </children>
+                           <padding>
+                              <Insets left="45.0" right="50.0" />
+                           </padding>
+                           <VBox.margin>
+                              <Insets bottom="10.0" top="10.0" />
+                           </VBox.margin>
+                        </HBox>
+                        <HBox alignment="CENTER_LEFT" prefHeight="28.0" prefWidth="275.0" spacing="6.0">
+                           <children>
+                              <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@../../images/icons/ticket-icon.png" />
+                                 </image>
+                              </ImageView>
+                              <Label text="100" />
+                              <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@../../images/icons/diamond-icon.png" />
+                                 </image>
+                                 <HBox.margin>
+                                    <Insets left="10.0" />
+                                 </HBox.margin>
+                              </ImageView>
+                              <Label text="100" />
+                           </children>
+                           <VBox.margin>
+                              <Insets left="45.0" />
+                           </VBox.margin>
+                        </HBox>
+                        <Button mnemonicParsing="false" prefHeight="40.0" prefWidth="100.0" style="-fx-background-color: #ddd; -fx-border-color: #999; -fx-border-radius: 5px;" text="Read More">
+                           <VBox.margin>
+                              <Insets top="25.0" />
+                           </VBox.margin>
+                        </Button>
+                     </children>
+                  </VBox>
+               </children>
+               <padding>
+                  <Insets bottom="10.0" left="20.0" right="20.0" top="50.0" />
+               </padding>
+            </FlowPane>
+         </content>
+      </ScrollPane>
+   </children>
 </AnchorPane>
