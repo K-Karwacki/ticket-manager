@@ -1,0 +1,27 @@
+.root{
+  -fx-background-color: #c8c8c8;
+  -fx-border-color: #616161;
+  -fx-border-width: 0 2 0 0;
+}
+
+.menu-btn{
+  -fx-background-color: #F0F0F0;
+  -fx-border-width: 1 0 1 0;
+  -fx-border-color: #000;
+}
+.menu-btn:hover{
+  -fx-background-color: #B2E8FF;
+  -fx-cursor: hand;
+}
+
+.active-menu-btn{
+  -fx-background-color: #9CE2FF;
+}
+
+.logout-btn{
+  -fx-background-color: #FFDF99;
+}
+
+.logout-btn:hover{
+  -fx-background-color: #FFE7B1;
+}

@@ -1,10 +1,13 @@
 package dk.easv.ticketmanager.be;
 
 import dk.easv.ticketmanager.Main;
+import dk.easv.ticketmanager.utils.DateTimeUtils;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 
 import java.sql.Time;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.Date;
 import java.util.Objects;
 
@@ -14,7 +17,8 @@ public class Event
   private String eventName;
   private String eventDescription;
   private Image eventImage;
-  private Date eventDate;
+  private String eventDate;
+  private String eventTime;
   private String eventLocation;
   private int normalTicketsAmount;
   private int vipTicketsAmount;
@@ -26,22 +30,36 @@ public class Event
     this.eventDescription = "Default description";
 //    this.eventImage = new Image(
 //        String.valueOf(Main.class.getResource("event-template.jpg")));
-    this.eventDate = new Date();
-    this.eventLocation = "Default location";
+    LocalDateTime now = LocalDateTime.now();
+    this.eventDate = DateTimeUtils.formatDate(now);
+    this.eventTime = DateTimeUtils.formatTime(now);
+    System.out.println(eventTime);
+    this.eventLocation = "123 Main Street, Anytown, USA, 12345";
     this.normalTicketsAmount = 100;
     this.vipTicketsAmount = 100;
   }
 
-  public Event(int eventId, String eventName, String eventDescription, String imagePath, Date eventDate, String eventLocation, int normalTicketsAmount, int vipTicketsAmount){
+  public Event(int eventId, String eventName, String eventDescription, String imagePath, LocalDateTime eventDate, String eventLocation, int normalTicketsAmount, int vipTicketsAmount){
     this.eventId = eventId;
     this.eventName = eventName;
     this.eventDescription = eventDescription;
     this.eventImage = new Image(imagePath);
-    this.eventDate = eventDate;
+    this.eventDate = DateTimeUtils.formatDate(eventDate);
+    this.eventTime = DateTimeUtils.formatTime(eventDate);
     this.eventLocation = eventLocation;
     this.normalTicketsAmount = normalTicketsAmount;
     this.vipTicketsAmount = vipTicketsAmount;
 
+  }
+
+  public void setEventDate(String eventDate)
+  {
+    this.eventDate = eventDate;
+  }
+
+  public void setEventTime(String eventTime)
+  {
+    this.eventTime = eventTime;
   }
 
   public void setEventId(int eventId)
@@ -69,10 +87,11 @@ public class Event
     this.eventLocation = eventLocation;
   }
 
-  public void setEventDate(Date eventDate)
+  public void setEventDate(LocalDateTime eventDate)
   {
-    this.eventDate = eventDate;
+    this.eventDate = DateTimeUtils.formatDate(eventDate);
   }
+
 
   public void setNormalTicketsAmount(int normalTicketsAmount)
   {
@@ -85,9 +104,14 @@ public class Event
   }
 
 
-  public Date getEventDate()
+  public String getEventDate()
   {
     return eventDate;
+  }
+
+  public String getEventTime()
+  {
+    return eventTime;
   }
 
   public Image getEventImage()

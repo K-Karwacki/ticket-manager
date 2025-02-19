@@ -46,7 +46,7 @@ public class EventListDashboardController implements Initializable
   private void addEventCardToContainer(Event event) throws IOException
   {
     FXMLLoader loader = new FXMLLoader(Main.class.getResource("fxml/components/event_card.fxml"));
-    Parent node = loader.load();
+    Node node = loader.load();
     EventCardComponentController eventCardComponentController = loader.getController();
     eventCardComponentController.setEventData(event);
 

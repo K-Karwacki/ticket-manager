@@ -10,81 +10,66 @@
 <?import javafx.scene.shape.Rectangle?>
 <?import javafx.scene.text.Font?>
 
-
-<VBox alignment="TOP_CENTER" maxHeight="-Infinity" maxWidth="-Infinity"
-      minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0"
-      prefWidth="275.0" spacing="4.0"
-      style="-fx-background-radius: 10px; -fx-border-radius: 10px; -fx-background-color: #F0F0F0;"
-      styleClass="event-card"
-      stylesheets="@../../style/components/event_card.css"
-      xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1"
-      fx:controller="dk.easv.ticketmanager.gui.controllers.components.EventCardComponentController">
-
-    <Rectangle arcHeight="15.0" arcWidth="15.0" fill="#e4c931" height="125.0"
-               stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0"
-               width="275.0"/>
-    <Label text="Event name" fx:id="eventNameLbl">
-        <VBox.margin>
-          <Insets bottom="10.0" top="10.0"/>
-        </VBox.margin>
-        <font>
-          <Font name="System Bold" size="16.0"/>
-        </font>
-    </Label>
-    <HBox alignment="CENTER" prefHeight="36.0" prefWidth="275.0" spacing="10.0">
-        <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true"
-                   preserveRatio="true" fx:id="eventImage">
-            <Image url="@../../images/icons/calendar-icon.png"/>
-        </ImageView>
-        <Label text="00.00.0000" fx:id="eventDateLbl"/>
-        <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true"
-                   preserveRatio="true">
-            <HBox.margin>
-                <Insets left="10.0"/>
-            </HBox.margin>
-            <Image url="@../../images/icons/clock-icon.png"/>
-        </ImageView>
-        <Label text="00:00" fx:id="eventTimeLbl"/>
-    </HBox>
-    <HBox prefHeight="40.0" prefWidth="275.0" spacing="10.0">
-        <padding>
-            <Insets left="45.0" right="50.0"/>
-        </padding>
-        <VBox.margin>
-            <Insets bottom="10.0" top="10.0"/>
-        </VBox.margin>
-        <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true"
-                   preserveRatio="true">
-            <Image url="@../../images/icons/pin-icon.png"/>
-        </ImageView>
-        <Label prefHeight="34.0" prefWidth="125.0"
-               text="123 Main Street, Anytown, USA, 12345" wrapText="true"
-               fx:id="eventLocationLbl"/>
-    </HBox>
-    <HBox alignment="CENTER_LEFT" prefHeight="28.0" prefWidth="275.0"
-          spacing="6.0">
-        <VBox.margin>
-            <Insets left="45.0"/>
-        </VBox.margin>
-        <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true"
-                   preserveRatio="true">
-            <Image url="@../../images/icons/ticket-icon.png"/>
-        </ImageView>
-        <Label text="100" fx:id="normalTicketsAmountLbl"/>
-        <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true"
-                   preserveRatio="true">
-            <HBox.margin>
-                <Insets left="10.0"/>
-            </HBox.margin>
-            <Image url="@../../images/icons/diamond-icon.png"/>
-        </ImageView>
-        <Label text="100" fx:id="vipTicketsAmountLbl"/>
-    </HBox>
-    <Button mnemonicParsing="false" prefHeight="40.0" prefWidth="100.0"
-            style="-fx-background-color: #ddd; -fx-border-color: #999; -fx-border-radius: 5px;"
-            text="Read More">
-        <VBox.margin>
-          <Insets top="25.0"/>
-        </VBox.margin>
-    </Button>
+<VBox alignment="TOP_CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="275.0" spacing="4.0" style="-fx-background-radius: 10px; -fx-border-radius: 10px; -fx-background-color: #F0F0F0; -fx-border-color: gray;" styleClass="event-card" stylesheets="@../../style/components/event_card.css" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="dk.easv.ticketmanager.gui.controllers.components.EventCardComponentController">
+   <Rectangle fx:id="eventImageContainer" arcHeight="15.0" arcWidth="15.0" fill="#e4c931" height="125.0" stroke="#727272" strokeLineJoin="ROUND" strokeType="INSIDE" width="273.0" y="-2.0" VBox.vgrow="NEVER" />
+   <Label fx:id="eventNameLbl" text="Event name">
+      <VBox.margin>
+         <Insets bottom="10.0" top="10.0" />
+      </VBox.margin>
+      <font>
+         <Font name="System Bold" size="16.0" />
+      </font>
+   </Label>
+   <HBox alignment="CENTER" prefHeight="36.0" prefWidth="275.0" spacing="7.0">
+      <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true" style="-fx-opacity: 0.8;">
+         <Image url="@../../images/icons/calendar-icon.png" />
+      </ImageView>
+      <Label fx:id="eventDateLbl" text="00.00.0000" />
+      <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true" style="-fx-opacity: 0.8;">
+         <HBox.margin>
+            <Insets left="10.0" />
+         </HBox.margin>
+         <Image url="@../../images/icons/clock-icon.png" />
+      </ImageView>
+      <Label fx:id="eventTimeLbl" text="00:00" />
+      <padding>
+         <Insets left="40.0" right="40.0" />
+      </padding>
+   </HBox>
+   <HBox alignment="CENTER" prefHeight="40.0" prefWidth="275.0" spacing="7.0">
+      <VBox.margin>
+         <Insets bottom="10.0" top="10.0" />
+      </VBox.margin>
+      <ImageView fitHeight="30.0" fitWidth="27.0" pickOnBounds="true" preserveRatio="true" style="-fx-opacity: 0.8;">
+         <Image url="@../../images/icons/pin-icon.png" />
+      </ImageView>
+      <Label fx:id="eventLocationLbl" alignment="CENTER" prefHeight="34.0" text="123 Main Street, Anytown, USA, 12345" wrapText="true" HBox.hgrow="NEVER" />
+      <padding>
+         <Insets left="46.0" right="46.0" />
+      </padding>
+   </HBox>
+   <HBox alignment="CENTER" prefHeight="28.0" prefWidth="119.0" spacing="7.0" VBox.vgrow="NEVER">
+      <VBox.margin>
+         <Insets />
+      </VBox.margin>
+      <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true" style="-fx-opacity: 0.8;">
+         <Image url="@../../images/icons/ticket-icon.png" />
+      </ImageView>
+      <Label fx:id="normalTicketsAmountLbl" text="100" />
+      <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true" style="-fx-opacity: 0.8;">
+         <HBox.margin>
+            <Insets left="10.0" />
+         </HBox.margin>
+         <Image url="@../../images/icons/diamond-icon.png" />
+      </ImageView>
+      <Label fx:id="vipTicketsAmountLbl" text="100" />
+      <padding>
+         <Insets left="40.0" right="40.0" />
+      </padding>
+   </HBox>
+   <Button mnemonicParsing="false" prefHeight="40.0" prefWidth="100.0" text="Read More" styleClass="read-more-event-btn">
+      <VBox.margin>
+         <Insets top="25.0" />
+      </VBox.margin>
+   </Button>
 </VBox>

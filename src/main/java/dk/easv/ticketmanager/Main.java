@@ -17,6 +17,8 @@ public class Main extends Application
     stage.setTitle("Login page");
     stage.setScene(scene);
     stage.show();
+    stage.setResizable(false);
+    stage.setMaximized(false);
   }
 
   public static void main(String[] args)
