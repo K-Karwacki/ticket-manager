@@ -11,12 +11,21 @@
 <?import javafx.scene.shape.Rectangle?>
 <?import javafx.scene.text.Font?>
 
-
 <AnchorPane prefHeight="550.0" prefWidth="940.0" style="-fx-background-color: D1D1D1;" stylesheets="@../../style/dashboard/dashboard.css" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="dk.easv.ticketmanager.fxml.dashboards.EventDetailsDashboard">
    <children>
       <Rectangle arcHeight="20.0" arcWidth="20.0" fill="DODGERBLUE" height="220.0" layoutX="35.0" layoutY="21.0" stroke="BLACK" strokeType="INSIDE" width="875.0" />
-      <VBox layoutX="36.0" layoutY="272.0" prefHeight="250.0" prefWidth="180.0" spacing="15.0" style="-fx-background-color: F0F0F0; -fx-background-radius: 20;" styleClass="drop-shadow">
+      <VBox layoutX="36.0" layoutY="272.0" prefHeight="265.0" prefWidth="180.0" spacing="15.0" style="-fx-background-color: F0F0F0; -fx-background-radius: 20;" styleClass="drop-shadow">
          <children>
+            <HBox alignment="CENTER_LEFT" prefHeight="0.0" prefWidth="160.0" spacing="12.0">
+               <children>
+                  <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true" style="-fx-opacity: 80%;">
+                     <image>
+                        <Image url="@../../images/icons/person-icon.png" />
+                     </image>
+                  </ImageView>
+                  <Label text="Ronaldihno" />
+               </children>
+            </HBox>
             <HBox alignment="CENTER_LEFT" prefHeight="0.0" prefWidth="160.0" spacing="12.0">
                <children>
                   <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true" style="-fx-opacity: 80%;">
@@ -69,7 +78,7 @@
             </HBox>
          </children>
          <padding>
-            <Insets left="25.0" top="25.0" />
+            <Insets left="25.0" top="20.0" />
          </padding>
       </VBox>
       <Label layoutX="258.0" layoutY="272.0" prefHeight="33.0" prefWidth="460.0" style="-fx-background-color: F0F0F0; -fx-background-radius: 20;" styleClass="drop-shadow" text="Event: Event name">
@@ -80,7 +89,7 @@
             <Font name="Verdana Bold" size="13.0" />
          </font>
       </Label>
-      <Label alignment="TOP_LEFT" layoutX="255.0" layoutY="321.0" prefHeight="200.0" prefWidth="460.0" style="-fx-background-color: F0F0F0; -fx-background-radius: 20;" styleClass="drop-shadow" text="As midnight arrives, lanterns light up the sky, carrying wishes into the night. Music, fire performers, and delicious street food fill the riverside park with life. Friends and strangers gather around bonfires, sharing stories until a grand fireworks display closes the magical evening." wrapText="true">
+      <Label alignment="TOP_LEFT" layoutX="255.0" layoutY="321.0" prefHeight="217.0" prefWidth="460.0" style="-fx-background-color: F0F0F0; -fx-background-radius: 20;" styleClass="drop-shadow" text="As midnight arrives, lanterns light up the sky, carrying wishes into the night. Music, fire performers, and delicious street food fill the riverside park with life. Friends and strangers gather around bonfires, sharing stories until a grand fireworks display closes the magical evening." wrapText="true">
          <padding>
             <Insets left="30.0" right="50.0" top="25.0" />
          </padding>
@@ -88,12 +97,17 @@
             <Font name="Verdana" size="13.0" />
          </font>
       </Label>
-      <Button layoutX="758.0" layoutY="336.0" mnemonicParsing="false" prefHeight="60.0" prefWidth="150.0" style="-fx-border-radius: 10; -fx-background-radius: 10; -fx-background-color: #7BD4F9;" styleClass="drop-shadow" text="Print ticket">
+      <Button layoutX="758.0" layoutY="372.0" mnemonicParsing="false" prefHeight="60.0" prefWidth="150.0" style="-fx-border-radius: 10; -fx-background-radius: 10; -fx-background-color: #7BD4F9;" styleClass="drop-shadow" text="Assign to">
          <font>
             <Font name="Verdana" size="18.0" />
          </font>
       </Button>
-      <Button layoutX="759.0" layoutY="423.0" mnemonicParsing="false" prefHeight="60.0" prefWidth="150.0" style="-fx-border-radius: 10; -fx-background-radius: 10; -fx-background-color: FFE7B1;" styleClass="drop-shadow" text="Return">
+      <Button layoutX="759.0" layoutY="464.0" mnemonicParsing="false" prefHeight="60.0" prefWidth="150.0" style="-fx-border-radius: 10; -fx-background-radius: 10; -fx-background-color: FFE7B1;" styleClass="drop-shadow" text="Return">
+         <font>
+            <Font name="Verdana" size="18.0" />
+         </font>
+      </Button>
+      <Button layoutX="759.0" layoutY="279.0" mnemonicParsing="false" prefHeight="60.0" prefWidth="150.0" style="-fx-border-radius: 10; -fx-background-radius: 10; -fx-background-color: #7BD4F9;" styleClass="drop-shadow" text="Print ticket">
          <font>
             <Font name="Verdana" size="18.0" />
          </font>
