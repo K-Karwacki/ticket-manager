@@ -58,7 +58,7 @@
       <Label fx:id="normalTicketsAmountLbl" text="100" />
       <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true" style="-fx-opacity: 0.8;">
          <HBox.margin>
-            <Insets left="10.0" />
+            <Insets left="69.0" />
          </HBox.margin>
          <Image url="@../../images/icons/diamond-icon.png" />
       </ImageView>
