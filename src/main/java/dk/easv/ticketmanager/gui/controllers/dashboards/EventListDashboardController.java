@@ -36,7 +36,6 @@ public class EventListDashboardController implements Initializable
 
   @Override public void initialize(URL location, ResourceBundle resources)
   {
-    System.out.println("initialized :)");
     eventListScrollPane.setFocusTraversable(false);
     for (Event event : events) {
       try{

@@ -9,10 +9,12 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.AccessibleRole;
 import javafx.scene.Node;
 import javafx.scene.Parent;
+import javafx.scene.control.Label;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
+import javafx.scene.text.Text;
 
 import java.io.IOException;
 
@@ -59,9 +61,15 @@ public class MenuComponentController
     menuRoot.getChildrenUnmodifiable().forEach(node -> {
       node.getStyleClass().remove("active-menu-btn");
     });
-    HBox node = (HBox) event.getTarget();
-    if(node.getAccessibleRole().equals(AccessibleRole.BUTTON)){
-      node.getStyleClass().add("active-menu-btn");
+    Node clickedNode = (Node) event.getTarget();
+    HBox root = null;
+    if(clickedNode instanceof Text || clickedNode instanceof Label){
+      HBox parent = (HBox) clickedNode.getParent().getParent();
+      parent.getStyleClass().add("active-menu-btn");
+    }else if(clickedNode instanceof HBox hBox){
+      hBox.getStyleClass().add("active-menu-btn");
+    }else{
+      clickedNode.getParent().getStyleClass().add("active-menu-btn");
     }
   }
 }

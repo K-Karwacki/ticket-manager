@@ -21,6 +21,7 @@ public class FXMLManager
     return INSTANCE;
   }
 
+  // Loads FXML document and put it into the cache memory, returns a pair of a root element and controller of the document
   public <T> Pair<Parent, T> loadFXML(String fxmlPath) {
     try {
       FXMLLoader loader = new FXMLLoader(getFXMLPath(fxmlPath));
@@ -34,6 +35,7 @@ public class FXMLManager
     }
   }
 
+  // Gets fxml document from the cache, if fxml is not in the cache load document
   public <T> Pair<Parent, T> getFXML(String fxmlPath) {
     if (!loadedFXMLs.containsKey(fxmlPath)) {
       return loadFXML(fxmlPath); // Load if not cached
@@ -42,6 +44,7 @@ public class FXMLManager
     return new Pair<>(cached.getKey(), (T) cached.getValue());
   }
 
+  // returns FXML document path
   private static URL getFXMLPath(String fxmlPath) {
     URL resource = Main.class.getResource(fxmlPath);
     if (resource == null) {

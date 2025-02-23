@@ -6,8 +6,8 @@
 
 .coordinators-window{
     -fx-effect: dropshadow(gaussian, #50505040, 5, 0, -3, 7);
-    -fx-background-radius: 10;
-    -fx-border-radius: 10;
+    -fx-background-radius: 10px;
+    -fx-border-radius: 10px;
 }
 .scroll-pane:focused{
     -fx-border-width: 0px;
@@ -16,7 +16,7 @@
 }
 
 .scroll-pane .viewport {
-    -fx-background-color: #D1D1D1;
+    -fx-background-color: transparent;
 
 }
 .scroll-pane .scroll-bar:vertical {
@@ -39,8 +39,9 @@
     -fx-min-height: 0;
 }
 .coordinator{
-    -fx-background-radius: 10;
-    -fx-border-radius: 10;
+    -fx-background-radius: 10px;
+    -fx-border-radius: 10px;
+    -fx-background-color: #FFFFFF;
 }
 .coordinator .button{
     -fx-effect: dropshadow(gaussian, #50505040, 7, 0, -3, 3);
