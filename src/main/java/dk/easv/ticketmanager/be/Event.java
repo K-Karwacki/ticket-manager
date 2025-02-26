@@ -6,8 +6,8 @@ import jakarta.persistence.*;
 import javafx.scene.image.Image;
 
 import java.sql.Timestamp;
-import java.time.LocalDateTime;
-import java.util.Date;
+import java.time.LocalDate;
+import java.time.LocalTime;
 
 @Entity
 @Table(name = "Event")
@@ -15,6 +15,7 @@ public class Event
 {
   @Id
   @GeneratedValue(strategy = GenerationType.IDENTITY)
+  @Column(name="ID")
   private long ID;
   @Column(name = "name")
   private String name;
@@ -23,8 +24,11 @@ public class Event
   @Column(name = "image_path")
   private String imagePath;
   @Column(name = "date")
-//  private Date;
+  private LocalDate date;
+  @Column(name = "time")
+  private LocalTime time;
   @Column(name = "location")
+  @OneToOne(targetEntity = )
   private Location location;
 
   private int normal_ticket_amount;

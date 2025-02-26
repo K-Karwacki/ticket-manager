@@ -1,7 +1,7 @@
 package dk.easv.ticketmanager.be;
 
 public class Customer {
-    private int id;
+    private long ID;
     private String firstName;
     private String lastName;
     private String email;
