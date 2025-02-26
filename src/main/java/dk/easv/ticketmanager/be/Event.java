@@ -2,142 +2,161 @@ package dk.easv.ticketmanager.be;
 
 import dk.easv.ticketmanager.Main;
 import dk.easv.ticketmanager.utils.DateTimeUtil;
+import jakarta.persistence.*;
 import javafx.scene.image.Image;
 
+import java.sql.Timestamp;
 import java.time.LocalDateTime;
+import java.util.Date;
 
+@Entity
+@Table(name = "Event")
 public class Event
 {
-  private int eventId;
-  private String eventName;
-  private String eventDescription;
-  private Image eventImage;
-  private String eventDate;
-  private String eventTime;
-  private String eventLocation;
-  private int normalTicketsAmount;
-  private int vipTicketsAmount;
+  @Id
+  @GeneratedValue(strategy = GenerationType.IDENTITY)
+  private long ID;
+  @Column(name = "name")
+  private String name;
+  @Column(name = "description")
+  private String description;
+  @Column(name = "image_path")
+  private String imagePath;
+  @Column(name = "date")
+//  private Date;
+  @Column(name = "location")
+  private Location location;
+
+  private int normal_ticket_amount;
+  private int vip_ticket_amount;
+  private int normal_ticket_amount_limit;
+  private int vip_ticket_amount_limit;
 
   //Default constructor for event entity
   public Event(){
-    this.eventId = 0;
-    this.eventName = "Default name";
-    this.eventDescription = "Default description";
-    this.eventImage = new Image(String.valueOf(Main.class.getResource("images/event-template.jpg")));
-    LocalDateTime now = LocalDateTime.now();
-    this.eventDate = DateTimeUtil.formatDate(now);
-    this.eventTime = DateTimeUtil.formatTime(now);
-    this.eventLocation = "123 Main Street, Anytown, USA, 12345";
-    this.normalTicketsAmount = 100;
-    this.vipTicketsAmount = 100;
+    this.ID = 0;
+    this.name = "Default name";
+    this.description = "Default description";
+    this.imagePath = "images/event-template.jpg";
+    this.dateTime = new Timestamp();
+    this.location = "123 Main Street, Anytown, USA, 12345";
+    this.normal_ticket_amount = 100;
+    this.vip_ticket_amount = 100;
+    this.normal_ticket_amount_limit = 200;
+    this.vip_ticket_amount_limit = 150;
   }
 
-  public Event(int eventId, String eventName, String eventDescription, String imagePath, LocalDateTime eventDate, String eventLocation, int normalTicketsAmount, int vipTicketsAmount){
-    this.eventId = eventId;
-    this.eventName = eventName;
-    this.eventDescription = eventDescription;
-    this.eventImage = new Image(imagePath);
-    this.eventDate = DateTimeUtil.formatDate(eventDate);
-    this.eventTime = DateTimeUtil.formatTime(eventDate);
-    this.eventLocation = eventLocation;
-    this.normalTicketsAmount = normalTicketsAmount;
-    this.vipTicketsAmount = vipTicketsAmount;
-  }
-
-  public void setEventDate(String eventDate)
+  public int getID()
   {
-    this.eventDate = eventDate;
+    return ID;
   }
 
-  public void setEventTime(String eventTime)
+  public void setID(int ID)
   {
-    this.eventTime = eventTime;
+    this.ID = ID;
   }
 
-  public void setEventId(int eventId)
+  public String getName()
   {
-    this.eventId = eventId;
+    return name;
   }
 
-  public void setEventName(String eventName)
+  public void setName(String name)
   {
-    this.eventName = eventName;
+    this.name = name;
   }
 
-  public void setEventDescription(String eventDescription)
+  public String getDescription()
   {
-    this.eventDescription = eventDescription;
+    return description;
   }
 
-  public void setEventImageFromPath(String path)
+  public void setDescription(String description)
   {
-    this.eventImage = new Image(path);
+    this.description = description;
   }
 
-  public void setEventLocation(String eventLocation)
+  public String getImage_path()
   {
-    this.eventLocation = eventLocation;
+    return image_path;
   }
 
-  public void setEventDate(LocalDateTime eventDate)
+  public void setImage_path(String image_path)
   {
-    this.eventDate = DateTimeUtil.formatDate(eventDate);
+    this.image_path = image_path;
   }
 
-
-  public void setNormalTicketsAmount(int normalTicketsAmount)
-  {
-    this.normalTicketsAmount = normalTicketsAmount;
+  public Image getImage(){
+    return new Image(this.getImage_path());
   }
 
-  public void setVipTicketsAmount(int vipTicketsAmount)
+  public String getDate()
   {
-    this.vipTicketsAmount = vipTicketsAmount;
+    return date;
   }
 
-
-  public String getEventDate()
+  public void setDate(String date)
   {
-    return eventDate;
+    this.date = date;
   }
 
-  public String getEventTime()
+  public String getTime()
   {
-    return eventTime;
+    return time;
   }
 
-  public Image getEventImage()
+  public void setTime(String time)
   {
-    return eventImage;
+    this.time = time;
   }
 
-  public int getEventId()
+  public String getLocation()
   {
-    return eventId;
+    return location;
   }
 
-  public int getNormalTicketsAmount()
+  public void setLocation(String location)
   {
-    return normalTicketsAmount;
+    this.location = location;
   }
 
-  public int getVipTicketsAmount()
+  public int getNormal_ticket_amount()
   {
-    return vipTicketsAmount;
+    return normal_ticket_amount;
   }
 
-  public String getEventDescription()
+  public void setNormal_ticket_amount(int normal_ticket_amount)
   {
-    return eventDescription;
+    this.normal_ticket_amount = normal_ticket_amount;
   }
 
-  public String getEventLocation()
+  public int getVip_ticket_amount()
   {
-    return eventLocation;
+    return vip_ticket_amount;
   }
 
-  public String getEventName()
+  public void setVip_ticket_amount(int vip_ticket_amount)
   {
-    return eventName;
+    this.vip_ticket_amount = vip_ticket_amount;
+  }
+
+  public int getNormal_ticket_amount_limit()
+  {
+    return normal_ticket_amount_limit;
+  }
+
+  public void setNormal_ticket_amount_limit(int normal_ticket_amount_limit)
+  {
+    this.normal_ticket_amount_limit = normal_ticket_amount_limit;
+  }
+
+  public int getVip_ticket_amount_limit()
+  {
+    return vip_ticket_amount_limit;
+  }
+
+  public void setVip_ticket_amount_limit(int vip_ticket_amount_limit)
+  {
+    this.vip_ticket_amount_limit = vip_ticket_amount_limit;
   }
 }

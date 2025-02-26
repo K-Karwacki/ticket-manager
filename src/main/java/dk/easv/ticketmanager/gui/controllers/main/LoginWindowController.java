@@ -1,5 +1,6 @@
 package dk.easv.ticketmanager.gui.controllers.main;
 
+import dk.easv.ticketmanager.bll.AuthenticationService;
 import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -12,6 +13,7 @@ public class LoginWindowController
   @FXML private TextField usernameField;
   @FXML private TextField passwordField;
 
+  AuthenticationService authenticationService = AuthenticationService.getInstance();
 
   public void onClickLogin(ActionEvent actionEvent) throws InterruptedException
   {
