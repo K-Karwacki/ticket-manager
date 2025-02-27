@@ -9,6 +9,8 @@ public class JPAUtil
   private static final EntityManagerFactory entityManagerFactory =
       Persistence.createEntityManagerFactory("MSSQL_PU");
 
+  private JPAUtil(){}
+
   public static EntityManager getEntityManager() {
     return entityManagerFactory.createEntityManager();
   }

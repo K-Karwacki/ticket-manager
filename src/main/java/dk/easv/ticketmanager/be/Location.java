@@ -17,5 +17,15 @@ public class Location
   @Column(name = "post_code") private String postCode;
 
 
+  public Location(){}
+
+  public Location(String name, String address1, String address2, String address3, String city, String postCode){
+    this.name = name;
+    this.address1 = address1;
+    this.address2 = address2;
+    this.address3 = address3;
+    this.city = city;
+    this.postCode = postCode;
+  }
 
 }
