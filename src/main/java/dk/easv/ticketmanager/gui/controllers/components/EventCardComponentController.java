@@ -27,12 +27,12 @@ public class EventCardComponentController
 
 
   public void setEventData(Event event){
-    eventNameLbl.setText(event.getEventName());
-    eventImageContainer.setFill(new ImagePattern(event.getEventImage()));
-    eventDateLbl.setText(event.getEventDate().toString());
-    eventTimeLbl.setText(event.getEventTime());
-    eventLocationLbl.setText(event.getEventLocation());
-    normalTicketsAmountLbl.setText(event.getNormalTicketsAmount()+"");
-    vipTicketsAmountLbl.setText(event.getVipTicketsAmount()+"");
+//    eventNameLbl.setText(event.getEventName());
+//    eventImageContainer.setFill(new ImagePattern(event.getEventImage()));
+//    eventDateLbl.setText(event.getEventDate().toString());
+//    eventTimeLbl.setText(event.getEventTime());
+//    eventLocationLbl.setText(event.getEventLocation());
+//    normalTicketsAmountLbl.setText(event.getNormalTicketsAmount()+"");
+//    vipTicketsAmountLbl.setText(event.getVipTicketsAmount()+"");
   }
 }

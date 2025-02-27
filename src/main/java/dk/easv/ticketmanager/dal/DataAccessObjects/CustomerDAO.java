@@ -1,6 +1,5 @@
-package dk.easv.ticketmanager.dal.DAOentities;
+package dk.easv.ticketmanager.dal.DataAccessObjects;
 
-import com.microsoft.sqlserver.jdbc.SQLServerException;
 import dk.easv.ticketmanager.be.Customer;
 import dk.easv.ticketmanager.dal.connection.DBConnection;
 
@@ -33,21 +32,21 @@ public class CustomerDAO {
         }
         return customers;
     }
-
-    public Customer add(Customer customer) throws SQLServerException {
-        try (Connection c = con.getConnection()) {
-            String sql = "INSERT INTO customer VALUES (?,?,?,?,?)";
-            PreparedStatement stmt = c.prepareStatement(sql);
-            stmt.setInt(1, customer.getId());
-            stmt.setString(2, customer.getFirstName());
-            stmt.setString(3, customer.getLastName());
-            stmt.setString(4, customer.getEmail());
-            stmt.setInt(5, customer.getPhoneNumber());
-            stmt.executeUpdate();
-        } catch (SQLException e) {
-            throw new RuntimeException(e);
-        }
-        return customer;
-    }
+//
+//    public Customer add(Customer customer) throws SQLServerException {
+//        try (Connection c = con.getConnection()) {
+//            String sql = "INSERT INTO customer VALUES (?,?,?,?,?)";
+//            PreparedStatement stmt = c.prepareStatement(sql);
+//            stmt.setInt(1, customer.getID());
+//            stmt.setString(2, customer.getFirstName());
+//            stmt.setString(3, customer.getLastName());
+//            stmt.setString(4, customer.getEmail());
+//            stmt.setInt(5, customer.getPhoneNumber());
+//            stmt.executeUpdate();
+//        } catch (SQLException e) {
+//            throw new RuntimeException(e);
+//        }
+//        return customer;
+//    }
 
 }

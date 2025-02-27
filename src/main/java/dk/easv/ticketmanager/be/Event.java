@@ -7,6 +7,7 @@ import javafx.scene.image.Image;
 
 import java.sql.Timestamp;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.time.LocalTime;
 
 @Entity
@@ -15,26 +16,30 @@ public class Event
 {
   @Id
   @GeneratedValue(strategy = GenerationType.IDENTITY)
-  @Column(name="ID")
   private long ID;
+
   @Column(name = "name")
   private String name;
+
   @Column(name = "description")
   private String description;
+
   @Column(name = "image_path")
   private String imagePath;
+
   @Column(name = "date")
   private LocalDate date;
+
   @Column(name = "time")
   private LocalTime time;
-  @Column(name = "location")
-  @OneToOne(targetEntity = )
+
+  @OneToOne(cascade = CascadeType.ALL)
+  @JoinColumn(name = "location_id")
   private Location location;
 
+  @Column(name = "normal_ticket_amount")
   private int normal_ticket_amount;
   private int vip_ticket_amount;
-  private int normal_ticket_amount_limit;
-  private int vip_ticket_amount_limit;
 
   //Default constructor for event entity
   public Event(){
@@ -42,20 +47,28 @@ public class Event
     this.name = "Default name";
     this.description = "Default description";
     this.imagePath = "images/event-template.jpg";
-    this.dateTime = new Timestamp();
-    this.location = "123 Main Street, Anytown, USA, 12345";
+    this.date = LocalDate.now();
+    this.time = LocalTime.now();
+    this.location = new Location();
     this.normal_ticket_amount = 100;
     this.vip_ticket_amount = 100;
-    this.normal_ticket_amount_limit = 200;
-    this.vip_ticket_amount_limit = 150;
   }
 
-  public int getID()
+  public Event(String name, String description, String imagePath, LocalDate date, LocalTime time, Location location){
+    this.name = name;
+    this.description = description;
+    this.imagePath = imagePath;
+    this.date = date;
+    this.time = time;
+    this.location = location;
+  }
+
+  public long getID()
   {
     return ID;
   }
 
-  public void setID(int ID)
+  public void setID(long ID)
   {
     this.ID = ID;
   }
@@ -80,46 +93,42 @@ public class Event
     this.description = description;
   }
 
-  public String getImage_path()
+  public String getImagePath()
   {
-    return image_path;
+    return imagePath;
   }
 
-  public void setImage_path(String image_path)
+  public void setImagePath(String imagePath)
   {
-    this.image_path = image_path;
+    this.imagePath = imagePath;
   }
 
-  public Image getImage(){
-    return new Image(this.getImage_path());
-  }
-
-  public String getDate()
+  public LocalDate getDate()
   {
     return date;
   }
 
-  public void setDate(String date)
+  public void setDate(LocalDate date)
   {
     this.date = date;
   }
 
-  public String getTime()
+  public LocalTime getTime()
   {
     return time;
   }
 
-  public void setTime(String time)
+  public void setTime(LocalTime time)
   {
     this.time = time;
   }
 
-  public String getLocation()
+  public Location getLocation()
   {
     return location;
   }
 
-  public void setLocation(String location)
+  public void setLocation(Location location)
   {
     this.location = location;
   }
@@ -142,25 +151,5 @@ public class Event
   public void setVip_ticket_amount(int vip_ticket_amount)
   {
     this.vip_ticket_amount = vip_ticket_amount;
-  }
-
-  public int getNormal_ticket_amount_limit()
-  {
-    return normal_ticket_amount_limit;
-  }
-
-  public void setNormal_ticket_amount_limit(int normal_ticket_amount_limit)
-  {
-    this.normal_ticket_amount_limit = normal_ticket_amount_limit;
-  }
-
-  public int getVip_ticket_amount_limit()
-  {
-    return vip_ticket_amount_limit;
-  }
-
-  public void setVip_ticket_amount_limit(int vip_ticket_amount_limit)
-  {
-    this.vip_ticket_amount_limit = vip_ticket_amount_limit;
   }
 }
