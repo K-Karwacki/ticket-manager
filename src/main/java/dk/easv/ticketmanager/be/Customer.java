@@ -1,7 +1,7 @@
 package dk.easv.ticketmanager.be;
 
 public class Customer {
-    private long ID;
+    private long id;
     private String firstName;
     private String lastName;
     private String email;
@@ -25,7 +25,7 @@ public Customer(int id, String firstName, String lastName, String email, int pho
     this.phoneNumber = phoneNumber;
     }
 
-public int getId() { return id; }
+public int getId() { return getId(); }
 public String getFirstName() { return firstName; }
 public String getLastName() { return lastName; }
 public String getEmail() { return email; }
