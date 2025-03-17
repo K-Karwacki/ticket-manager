@@ -1,5 +1,5 @@
 package dk.easv.ticketmanager.gui.controllers.dashboards;
 
-public class HomeDashboardController
-{
-}
+public class HomeDashboardController {
+
+    }
