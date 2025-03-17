@@ -11,7 +11,7 @@ public class DBConnection {
     public Connection getConnection() throws SQLServerException {
         SQLServerDataSource ds;
         ds = new SQLServerDataSource();
-        ds.setDatabaseName("TicketsEASV");
+        ds.setDatabaseName("TicketMasters");
         ds.setUser("CSe2024b_e_10");
         ds.setPassword("CSe2024bE10!24");
         ds.setServerName("EASV-DB4");

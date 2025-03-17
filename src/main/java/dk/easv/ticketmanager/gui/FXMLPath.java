@@ -14,5 +14,6 @@ public class FXMLPath
   public static String EVENTS_DASHBOARD = "fxml/dashboards/event_list_dashboard.fxml";
   public static String USERS_DASHBOARD = "fxml/dashboards/user_list_dashboard.fxml";
   public static String SETTINGS_DASHBOARD = "fxml/dashboards/profile_dashboard.fxml";
+  public static String EVENT_DETAILS_DASHBOARD = "fxml/dashboards/event_details_dashboard.fxml";
 
 }
