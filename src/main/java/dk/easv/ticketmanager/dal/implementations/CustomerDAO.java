@@ -1,4 +1,4 @@
-package dk.easv.ticketmanager.dal.DataAccessObjects;
+package dk.easv.ticketmanager.dal.implementations;
 
 import dk.easv.ticketmanager.be.Customer;
 import dk.easv.ticketmanager.dal.connection.DBConnection;

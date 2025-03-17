@@ -2,6 +2,7 @@ package dk.easv.ticketmanager.gui.controllers.components;
 
 import dk.easv.ticketmanager.be.Event;
 import dk.easv.ticketmanager.gui.FXMLManager;
+import dk.easv.ticketmanager.gui.controllers.dashboards.EventDetailsDashboardController;
 import javafx.fxml.FXML;
 import javafx.scene.Node;
 import javafx.scene.Parent;
@@ -34,7 +35,8 @@ public class EventCardComponentController
 
   @FXML
   private void openEvent(){
-    Pair<Parent, ?> eventScene = fxmlManager.loadFXML(EVENT_DETAILS_DASHBOARD);
+    Pair<Parent, EventDetailsDashboardController> eventScene = fxmlManager.loadFXML(EVENT_DETAILS_DASHBOARD);
+    eventScene.getValue().setEventDetails(event);
     Stage stage = new Stage();
     stage.setTitle("Event Details");
     stage.setScene(new Scene(eventScene.getKey()));
@@ -43,6 +45,10 @@ public class EventCardComponentController
 
   public void setEvent(Event event){
     this.event = event;
+    eventNameLbl.setText(event.getName());
+    eventDateLbl.setText(event.getDate().toString());
+    eventTimeLbl.setText(event.getTime().toString());
+    eventLocationLbl.setText(event.getLocation().toString());
   }
   public Event getEvent(){
     return event;
