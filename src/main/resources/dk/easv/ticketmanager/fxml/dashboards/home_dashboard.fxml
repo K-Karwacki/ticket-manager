@@ -364,11 +364,6 @@
                   </FlowPane>
                </content>
             </ScrollPane>
-            <Button alignment="CENTER" contentDisplay="BOTTOM" mnemonicParsing="false" onAction="#addNewCoordinator" prefHeight="26.0" prefWidth="68.0" text="Button">
-               <VBox.margin>
-                  <Insets bottom="10.0" top="10.0" />
-               </VBox.margin>
-            </Button>
          </children>
       </VBox>
    </children>

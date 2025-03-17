@@ -44,5 +44,7 @@ public class LoginWindowController
       stage.setMaximized(false);
       stage.show();
 
+      Stage currentStage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+      currentStage.close();
   }
 }
