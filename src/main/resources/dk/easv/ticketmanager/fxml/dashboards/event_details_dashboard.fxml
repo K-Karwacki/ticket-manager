@@ -14,26 +14,24 @@
 <AnchorPane prefHeight="550.0" prefWidth="940.0" style="-fx-background-color: D1D1D1;" stylesheets="@../../style/dashboard/dashboard.css" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="dk.easv.ticketmanager.gui.controllers.dashboards.EventDetailsDashboardController">
    <children>
       <Rectangle arcHeight="20.0" arcWidth="20.0" fill="DODGERBLUE" height="220.0" layoutX="35.0" layoutY="21.0" stroke="BLACK" strokeType="INSIDE" width="875.0" />
-      <VBox layoutX="36.0" layoutY="272.0" prefHeight="265.0" prefWidth="180.0" spacing="15.0" style="-fx-background-color: F0F0F0; -fx-background-radius: 20;" styleClass="drop-shadow">
+      <VBox layoutX="36.0" layoutY="272.0" prefHeight="265.0" prefWidth="191.0" spacing="15.0" style="-fx-background-color: F0F0F0; -fx-background-radius: 20;" styleClass="drop-shadow">
          <children>
-            <HBox alignment="CENTER_LEFT" prefHeight="0.0" prefWidth="160.0" spacing="12.0">
+            <HBox alignment="CENTER" prefHeight="26.0" prefWidth="204.0" spacing="12.0">
                <children>
-                  <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true" style="-fx-opacity: 80%;">
-                     <image>
-                        <Image url="@../../images/icons/person-icon.png" />
-                     </image>
-                  </ImageView>
-                  <Label text="Ronaldihno" />
+                  <Button mnemonicParsing="false" text="Show coordinators" />
                </children>
+               <VBox.margin>
+                  <Insets right="25.0" />
+               </VBox.margin>
             </HBox>
-            <HBox alignment="CENTER_LEFT" prefHeight="0.0" prefWidth="160.0" spacing="12.0">
+            <HBox fx:id="lbl" alignment="CENTER_LEFT" prefHeight="0.0" prefWidth="160.0" spacing="12.0">
                <children>
                   <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true" style="-fx-opacity: 80%;">
                      <image>
                         <Image url="@../../images/icons/calendar-icon.png" />
                      </image>
                   </ImageView>
-                  <Label text="00.00.00" />
+                  <Label fx:id="lblEventDate" text="00.00.00" />
                </children>
             </HBox>
             <HBox alignment="CENTER_LEFT" prefHeight="21.0" prefWidth="160.0" spacing="12.0">
@@ -43,7 +41,7 @@
                         <Image url="@../../images/icons/clock-icon.png" />
                      </image>
                   </ImageView>
-                  <Label text="00:00" />
+                  <Label fx:id="lblEventTime" text="00:00" />
                </children>
             </HBox>
             <HBox alignment="CENTER_LEFT" prefHeight="52.0" prefWidth="160.0" spacing="12.0">
@@ -53,7 +51,7 @@
                         <Image url="@../../images/icons/pin-icon.png" />
                      </image>
                   </ImageView>
-                  <Label prefHeight="80.0" prefWidth="112.0" text="123 Main Street, Anytown, USA, 12345" wrapText="true" />
+                  <Label fx:id="lblEventLocation" prefHeight="80.0" prefWidth="112.0" text="123 Main Street, Anytown, USA, 12345" wrapText="true" />
                </children>
             </HBox>
             <HBox alignment="CENTER_LEFT" prefHeight="22.0" prefWidth="160.0" spacing="12.0">
@@ -63,7 +61,7 @@
                         <Image url="@../../images/icons/ticket-icon.png" />
                      </image>
                   </ImageView>
-                  <Label text="321" />
+                  <Label fx:id="lblNormalEventTickets" text="321" />
                </children>
             </HBox>
             <HBox alignment="CENTER_LEFT" prefHeight="7.0" prefWidth="160.0" spacing="12.0">
@@ -73,7 +71,7 @@
                         <Image url="@../../images/icons/diamond-icon.png" />
                      </image>
                   </ImageView>
-                  <Label text="100" />
+                  <Label fx:id="lblSpecialEventTickets" text="100" />
                </children>
             </HBox>
          </children>
@@ -81,7 +79,7 @@
             <Insets left="25.0" top="20.0" />
          </padding>
       </VBox>
-      <Label layoutX="258.0" layoutY="272.0" prefHeight="33.0" prefWidth="460.0" style="-fx-background-color: F0F0F0; -fx-background-radius: 20;" styleClass="drop-shadow" text="Event: Event name">
+      <Label fx:id="lblEventName" layoutX="258.0" layoutY="272.0" prefHeight="33.0" prefWidth="460.0" style="-fx-background-color: F0F0F0; -fx-background-radius: 20;" styleClass="drop-shadow" text="Event: Event name">
          <padding>
             <Insets left="20.0" />
          </padding>
@@ -89,7 +87,7 @@
             <Font name="Verdana Bold" size="13.0" />
          </font>
       </Label>
-      <Label alignment="TOP_LEFT" layoutX="255.0" layoutY="321.0" prefHeight="217.0" prefWidth="460.0" style="-fx-background-color: F0F0F0; -fx-background-radius: 20;" styleClass="drop-shadow" text="As midnight arrives, lanterns light up the sky, carrying wishes into the night. Music, fire performers, and delicious street food fill the riverside park with life. Friends and strangers gather around bonfires, sharing stories until a grand fireworks display closes the magical evening." wrapText="true">
+      <Label fx:id="lblEventDescription" alignment="TOP_LEFT" layoutX="255.0" layoutY="321.0" prefHeight="217.0" prefWidth="460.0" style="-fx-background-color: F0F0F0; -fx-background-radius: 20;" styleClass="drop-shadow" text="As midnight arrives, lanterns light up the sky, carrying wishes into the night. Music, fire performers, and delicious street food fill the riverside park with life. Friends and strangers gather around bonfires, sharing stories until a grand fireworks display closes the magical evening." wrapText="true">
          <padding>
             <Insets left="30.0" right="50.0" top="25.0" />
          </padding>

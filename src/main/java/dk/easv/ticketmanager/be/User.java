@@ -1,9 +1,13 @@
 package dk.easv.ticketmanager.be;
 
 import dk.easv.ticketmanager.Main;
+import jakarta.persistence.Entity;
+import jakarta.persistence.Id;
+import jakarta.persistence.Table;
 import javafx.scene.image.Image;
 
 import java.time.LocalDateTime;
+
 
 public class User
 {

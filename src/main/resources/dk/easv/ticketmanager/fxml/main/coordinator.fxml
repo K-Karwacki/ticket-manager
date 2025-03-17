@@ -1,15 +1,19 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
 <?import javafx.scene.layout.BorderPane?>
 
-<BorderPane fx:id="root" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="dk.easv.ticketmanager.gui.controllers.main.CoordinatorWindowController">
+<BorderPane fx:id="root" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="633.0" prefWidth="1258.0" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="dk.easv.ticketmanager.gui.controllers.main.CoordinatorWindowController">
     <top>
         <fx:include source="../components/header.fxml" />
     </top>
     <left>
-<!--        <fx:include fx:id="menuComponent" source="../components/menu.fxml" />-->
+        <fx:include fx:id="menuComponent" source="../components/menu.fxml" />
     </left>
     <center>
         <fx:include source="../dashboards/home_dashboard.fxml" />
     </center>
+   <bottom>
+   </bottom>
 </BorderPane>

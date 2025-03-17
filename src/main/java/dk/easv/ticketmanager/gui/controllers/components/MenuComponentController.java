@@ -9,12 +9,14 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.AccessibleRole;
 import javafx.scene.Node;
 import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Label;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
+import javafx.stage.Stage;
 
 import java.io.IOException;
 
@@ -70,6 +72,20 @@ public class MenuComponentController
       hBox.getStyleClass().add("active-menu-btn");
     }else{
       clickedNode.getParent().getStyleClass().add("active-menu-btn");
+    }
+  }
+
+  public void onClickLogout(MouseEvent event) {
+    try {
+
+      FXMLLoader loader = new FXMLLoader(getClass().getResource("/dk/easv/ticketmanager/fxml/main/login.fxml"));
+      Parent root = loader.load();
+
+      Stage currentStage = (Stage) parentContainer.getScene().getWindow();
+      currentStage.setScene(new Scene(root));
+
+    } catch (IOException e) {
+      e.printStackTrace();
     }
   }
 }

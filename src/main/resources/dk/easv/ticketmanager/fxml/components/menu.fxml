@@ -20,7 +20,7 @@
             <Insets right="20.0" />
          </HBox.margin>
       </ImageView>
-      <Label prefHeight="17.0" prefWidth="235.0" text="Hi User!">
+      <Label fx:id="menuTextLabel" prefHeight="17.0" prefWidth="235.0" text="Hi User!">
          <font>
             <Font size="23.0" />
          </font>
@@ -97,7 +97,7 @@
          </HBox.margin>
       </Label>
    </HBox>
-   <HBox accessibleRole="BUTTON" alignment="CENTER_LEFT" prefHeight="60.0" prefWidth="356.0">
+   <HBox accessibleRole="BUTTON" alignment="CENTER_LEFT" onMouseClicked="#onClickLogout" prefHeight="60.0" prefWidth="356.0">
       <padding>
          <Insets left="41.0" />
       </padding>

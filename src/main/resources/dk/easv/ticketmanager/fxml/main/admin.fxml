@@ -10,7 +10,7 @@
     <top>
         <fx:include source="../components/header.fxml" />
     </top>
-   <center>
-      <Button mnemonicParsing="false" text="Button" BorderPane.alignment="CENTER" />
-   </center>
+    <center>
+        <fx:include source="../dashboards/home_dashboard.fxml" />
+    </center>
 </BorderPane>
