@@ -3,14 +3,20 @@
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.ScrollPane?>
 <?import javafx.scene.layout.FlowPane?>
+<?import javafx.scene.layout.Pane?>
 
-<ScrollPane fx:id="eventListScrollPane" fitToHeight="true" fitToWidth="true" hbarPolicy="NEVER" prefHeight="550.0" styleClass="dashboard-root" stylesheets="@../../style/dashboard/dashboard.css" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="dk.easv.ticketmanager.gui.controllers.dashboards.EventListDashboardController">
-   <content>
-      <FlowPane fx:id="eventListRoot" alignment="CENTER" columnHalignment="CENTER" hgap="26.0" prefHeight="950.0" vgap="100.0">
 
-         <padding>
-            <Insets bottom="50.0" left="30.0" right="30.0" top="50.0" />
-         </padding>
-      </FlowPane>
-   </content>
-</ScrollPane>
+<Pane xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="dk.easv.ticketmanager.gui.controllers.dashboards.EventListDashboardController">
+   <children>
+      <ScrollPane fx:id="eventListScrollPane" fitToHeight="true" fitToWidth="true" hbarPolicy="NEVER" layoutY="35.0" prefHeight="515.0" prefWidth="462.0" styleClass="dashboard-root" stylesheets="@../../style/dashboard/dashboard.css">
+         <content>
+            <FlowPane fx:id="eventListRoot" alignment="CENTER" columnHalignment="CENTER" hgap="26.0" prefHeight="950.0" vgap="100.0">
+      
+                     <padding>
+                  <Insets bottom="50.0" left="30.0" right="30.0" top="50.0" />
+               </padding>
+            </FlowPane>
+         </content>
+      </ScrollPane>
+   </children>
+</Pane>

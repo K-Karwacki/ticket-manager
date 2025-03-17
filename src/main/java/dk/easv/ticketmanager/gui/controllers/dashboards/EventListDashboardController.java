@@ -18,20 +18,18 @@ import java.util.ResourceBundle;
 
 public class EventListDashboardController implements Initializable
 {
+  private ArrayList<Event> events = new ArrayList<>();
+
   @FXML
   private FlowPane eventListRoot;
   @FXML
   private ScrollPane eventListScrollPane;
-  private ArrayList<Event> events = new ArrayList<>();
 
 
   public EventListDashboardController() {
     for(int i = 0; i<10; i++){
       events.add(new Event());
     }
-
-
-
   }
 
   @Override public void initialize(URL location, ResourceBundle resources)
@@ -52,7 +50,7 @@ public class EventListDashboardController implements Initializable
     FXMLLoader loader = new FXMLLoader(Main.class.getResource("fxml/components/event_card.fxml"));
     Node node = loader.load();
     EventCardComponentController eventCardComponentController = loader.getController();
-    eventCardComponentController.setEventData(event);
+    eventCardComponentController.setEvent(event);
 
     eventListRoot.getChildren().add(node);
   }

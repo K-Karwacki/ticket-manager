@@ -152,4 +152,8 @@ public class Event
   {
     this.vip_ticket_amount = vip_ticket_amount;
   }
+
+  public Image getImage() {
+    return new Image(imagePath);
+  }
 }
