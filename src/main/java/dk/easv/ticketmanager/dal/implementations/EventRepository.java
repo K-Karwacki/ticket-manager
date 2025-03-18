@@ -7,6 +7,7 @@ import dk.easv.ticketmanager.utils.JPAUtil;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.EntityTransaction;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class EventRepository implements IEventRepository
@@ -46,10 +47,8 @@ public class EventRepository implements IEventRepository
   public void delete(Event event) {
     em.remove(event);
   }
-
   @Override
-  public Event getByCity(String city) {
-    Location location = em.find(Location.class, city);
-    return em.find(Event.class, location);
+  public List<Location> getAllLocations() {
+    return new ArrayList<>();
   }
 }

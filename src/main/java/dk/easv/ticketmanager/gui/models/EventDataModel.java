@@ -8,12 +8,17 @@ import javafx.collections.ObservableList;
 public class EventDataModel {
     private final EventService eventService = new EventService();
     private static final ObservableList<Event> events = FXCollections.observableArrayList();
+    private static final ObservableList<String> cities = FXCollections.observableArrayList();
 
     public void loadEvents(){
         events.setAll(eventService.getAllEvents());
+        cities.setAll(eventService.getAllUniqueCities());
     }
     public ObservableList<Event> getEvents() {
         return events;
+    }
+    public ObservableList<String> getCities() {
+        return cities;
     }
 
 }

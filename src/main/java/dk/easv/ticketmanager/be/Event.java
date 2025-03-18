@@ -50,8 +50,8 @@ public class Event
     this.date = LocalDate.now();
     this.time = LocalTime.now();
     this.location = new Location();
-    this.normal_ticket_amount = 100;
-    this.vip_ticket_amount = 100;
+    this.normal_ticket_amount = 0;
+    this.vip_ticket_amount = 0;
   }
 
   public Event(String name, String description, String imagePath, LocalDate date, LocalTime time, Location location){
