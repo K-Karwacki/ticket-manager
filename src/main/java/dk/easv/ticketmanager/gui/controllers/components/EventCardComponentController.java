@@ -2,20 +2,18 @@ package dk.easv.ticketmanager.gui.controllers.components;
 
 import dk.easv.ticketmanager.be.Event;
 import dk.easv.ticketmanager.gui.FXMLManager;
-import dk.easv.ticketmanager.gui.controllers.dashboards.EventDetailsDashboardController;
+import dk.easv.ticketmanager.gui.controllers.popups.EventDetailsPopupController;
 import javafx.fxml.FXML;
-import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
 import javafx.scene.paint.ImagePattern;
 import javafx.scene.shape.Rectangle;
 import javafx.stage.Stage;
 import javafx.util.Pair;
 
-import static dk.easv.ticketmanager.gui.FXMLPath.EVENT_DETAILS_DASHBOARD;
+import static dk.easv.ticketmanager.gui.FXMLPath.EVENT_DETAILS_POPUP;
 
 public class EventCardComponentController
 {
@@ -35,7 +33,7 @@ public class EventCardComponentController
 
   @FXML
   private void openEvent(){
-    Pair<Parent, EventDetailsDashboardController> eventScene = fxmlManager.loadFXML(EVENT_DETAILS_DASHBOARD);
+    Pair<Parent, EventDetailsPopupController> eventScene = fxmlManager.loadFXML(EVENT_DETAILS_POPUP);
     eventScene.getValue().setEventDetails(event);
     Stage stage = new Stage();
     stage.setTitle("Event Details");
@@ -48,7 +46,12 @@ public class EventCardComponentController
     eventNameLbl.setText(event.getName());
     eventDateLbl.setText(event.getDate().toString());
     eventTimeLbl.setText(event.getTime().toString());
+    normalTicketsAmountLbl.setText(String.valueOf(event.getNormal_ticket_amount()));
+    vipTicketsAmountLbl.setText(String.valueOf(event.getVip_ticket_amount()));
     eventLocationLbl.setText(event.getLocation().toString());
+    Image image = new Image(event.getImagePath());
+    ImagePattern pattern = new ImagePattern(image);
+    eventImageContainer.setFill(pattern);
   }
   public Event getEvent(){
     return event;
