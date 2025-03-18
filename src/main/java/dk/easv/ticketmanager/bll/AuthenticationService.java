@@ -4,6 +4,7 @@ import org.mindrot.jbcrypt.BCrypt;
 
 public class AuthenticationService
 {
+
   private static final AuthenticationService INSTANCE = new AuthenticationService();
 
   public AuthenticationService() {}

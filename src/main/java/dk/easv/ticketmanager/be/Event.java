@@ -39,6 +39,8 @@ public class Event
 
   @Column(name = "normal_ticket_amount")
   private int normal_ticket_amount;
+
+  @Column(name = "vip_ticket_amount")
   private int vip_ticket_amount;
 
   //Default constructor for event entity

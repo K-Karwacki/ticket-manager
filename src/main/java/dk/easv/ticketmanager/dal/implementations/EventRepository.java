@@ -27,7 +27,6 @@ public class EventRepository implements IEventRepository
 
   @Override
   public void save(Event event){
-    EntityManager em = JPAUtil.getEntityManager();
     EntityTransaction tx = em.getTransaction();
 
     try {
