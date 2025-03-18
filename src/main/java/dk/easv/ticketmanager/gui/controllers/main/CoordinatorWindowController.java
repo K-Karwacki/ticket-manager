@@ -34,6 +34,8 @@ public class CoordinatorWindowController implements Initializable
   {
 
     FXMLManager fxmlManager = FXMLManager.getInstance();
+
+
     Pair<Parent, MenuComponentController> menuComponentFxmlResult = fxmlManager.getFXML(FXMLPath.MENU_COMPONENT);
     Parent menuRoot = menuComponentFxmlResult.getKey();
     MenuComponentController menuComponentController = menuComponentFxmlResult.getValue();

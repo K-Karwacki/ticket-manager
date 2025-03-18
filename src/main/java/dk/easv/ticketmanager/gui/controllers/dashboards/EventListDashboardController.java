@@ -29,7 +29,7 @@ import static dk.easv.ticketmanager.gui.FXMLPath.EVENT_CREATOR_POPUP;
 
 public class EventListDashboardController implements Initializable
 {
-  private EventDataModel eventDataModel = new EventDataModel();
+  private final EventDataModel eventDataModel = new EventDataModel();
   private final FXMLManager fxmlManager = FXMLManager.getInstance();
 
   @FXML
