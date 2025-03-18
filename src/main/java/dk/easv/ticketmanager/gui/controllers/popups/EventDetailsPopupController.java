@@ -1,18 +1,29 @@
 package dk.easv.ticketmanager.gui.controllers.popups;
 
 import dk.easv.ticketmanager.be.Event;
+import dk.easv.ticketmanager.gui.FXMLManager;
+import dk.easv.ticketmanager.gui.controllers.components.CoordinatorCardController;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.paint.ImagePattern;
 import javafx.scene.shape.Rectangle;
+import javafx.stage.Stage;
+import javafx.util.Pair;
 
 import java.net.URL;
 import java.util.Objects;
 import java.util.ResourceBundle;
 
+import static dk.easv.ticketmanager.gui.FXMLPath.COORDINATOR_CARD_COMPONENT;
+import static dk.easv.ticketmanager.gui.FXMLPath.COORDINATOR_LIST_POPUP;
+
 public class EventDetailsPopupController implements Initializable {
+    private final FXMLManager fxmlManager = FXMLManager.getInstance();
+
     private Event event;
 
     @FXML
@@ -43,6 +54,14 @@ public class EventDetailsPopupController implements Initializable {
     public void initialize(URL location, ResourceBundle resources) {
 //        setEventDetails();
     }
+    @FXML private void showCoordinators(){
+        Pair<Parent, CoordinatorListPopupController> p = fxmlManager.loadFXML(COORDINATOR_LIST_POPUP);
+        Stage stage = new Stage();
+        stage.setTitle("Coordinators List");
+        stage.setScene(new Scene(p.getKey()));
+        stage.show();
+    }
+
     public void setEvent(Event event) {
         this.event = event;
     }
@@ -58,6 +77,7 @@ public class EventDetailsPopupController implements Initializable {
         ImagePattern imagePattern = new ImagePattern(image);
         rectangleImageContainer.setFill(imagePattern);
     }
+
 
 
 }

@@ -10,9 +10,7 @@ public class EventDataModel {
     private static final ObservableList<Event> events = FXCollections.observableArrayList();
     private static final ObservableList<String> cities = FXCollections.observableArrayList();
 
-    public EventDataModel(){
-        loadEvents();
-    }
+    public EventDataModel(){}
     public void loadEvents(){
         events.setAll(eventService.getAllEvents());
         cities.setAll(eventService.getAllUniqueCities());
