@@ -41,5 +41,27 @@ public class Location
     }
     return name + ", " + address1 + ", " + address2 + ", " + address3 + ", " + city + ", " + postCode;
   }
+  public void setAddress1(String address1){
+    this.address1 = address1;
+  }
+  public void setAddress2(String address2){
+    this.address2 = address2;
+  }
+  public void setAddress3(String address3){
+    this.address3 = address3;
+  }
+  public void setCity(String city){
+    this.city = city;
+  }
+  public void setPostCode(String postCode){
+    this.postCode = postCode;
+  }
 
+  public void setName(String name) {
+    this.name = name;
+  }
+
+  public String getCity() {
+    return city;
+  }
 }
