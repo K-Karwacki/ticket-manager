@@ -2,6 +2,7 @@ package dk.easv.ticketmanager.be;
 
 import jakarta.persistence.*;
 import javafx.scene.image.Image;
+
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.util.ArrayList;
@@ -41,7 +42,7 @@ public class Event {
   @Column(name = "vip_ticket_amount")
   private int vipTicketAmount;
 
-  @ManyToMany(fetch = FetchType.EAGER)
+  @ManyToMany
   @JoinTable(
           name = "EventCoordinator",
           joinColumns = @JoinColumn(name = "event_id"),
@@ -101,7 +102,7 @@ public class Event {
     this.time = time;
   }
   public long getId() {
-    return this.id;
+    return id;
   }
 
   public int getNormal_ticket_amount() {

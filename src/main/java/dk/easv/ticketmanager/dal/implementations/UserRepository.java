@@ -18,14 +18,11 @@ public class UserRepository implements IUserRepository {
 
     @Override
     public List<User> getByRole(Role role) {
-//        long roleId = role.getId();
-//        return em.createQuery("SELECT u FROM User u WHERE u.role_id = :roleId", User.class)
-//                .setParameter("roleId", roleId)
-//                .getResultList();
-        return null;
+        long roleId = role.getId();
+        return em.createQuery("SELECT u FROM User u WHERE u.role_id = :roleId", User.class)
+                .setParameter("roleId", roleId)
+                .getResultList();
     }
-
-
 
     @Override
     public void save(User user) {
@@ -64,24 +61,6 @@ public class UserRepository implements IUserRepository {
             em.close();
         }
 
-    }
-
-    @Override
-    public List<Role> getRoles()
-    {
-        EntityManager em = JPAUtil.getEntityManager();
-        try {
-            em.getTransaction().begin();
-            return em.createQuery("Select r from Role r", Role.class).getResultList();
-        } catch (Exception e) {
-            if (em.getTransaction().isActive()){
-                em.getTransaction().rollback();
-            }
-            throw new RuntimeException(e);
-        }
-        finally {
-            em.close();
-        }
     }
 
 }

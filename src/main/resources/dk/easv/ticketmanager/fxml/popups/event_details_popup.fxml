@@ -95,12 +95,12 @@
             <Font name="Verdana" size="13.0" />
          </font>
       </Label>
-      <Button fx:id="btnAssign" layoutX="759.0" layoutY="444.0" mnemonicParsing="false" onAction="#showAllCoordinators" prefHeight="60.0" prefWidth="150.0" style="-fx-border-radius: 10; -fx-background-radius: 10; -fx-background-color: #7BD4F9;" styleClass="drop-shadow" text="Assign to">
+      <Button layoutX="759.0" layoutY="444.0" mnemonicParsing="false" onAction="#showCoordinators" prefHeight="60.0" prefWidth="150.0" style="-fx-border-radius: 10; -fx-background-radius: 10; -fx-background-color: #7BD4F9;" styleClass="drop-shadow" text="Assign to">
          <font>
             <Font name="Verdana" size="18.0" />
          </font>
       </Button>
-      <Button fx:id="btnPrintTicket" layoutX="759.0" layoutY="345.0" mnemonicParsing="false" prefHeight="60.0" prefWidth="150.0" style="-fx-border-radius: 10; -fx-background-radius: 10; -fx-background-color: #7BD4F9;" styleClass="drop-shadow" text="Print ticket">
+      <Button layoutX="759.0" layoutY="345.0" mnemonicParsing="false" prefHeight="60.0" prefWidth="150.0" style="-fx-border-radius: 10; -fx-background-radius: 10; -fx-background-color: #7BD4F9;" styleClass="drop-shadow" text="Print ticket">
          <font>
             <Font name="Verdana" size="18.0" />
          </font>
