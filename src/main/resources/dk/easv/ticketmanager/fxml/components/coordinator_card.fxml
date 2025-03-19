@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import java.lang.String?>
-<?import java.net.URL?>
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.Cursor?>
 <?import javafx.scene.control.Button?>
@@ -11,7 +10,7 @@
 <?import javafx.scene.shape.Circle?>
 <?import javafx.scene.text.Font?>
 
-<HBox fx:id="hboxContainer" alignment="CENTER_LEFT" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="75.0" prefWidth="413.0" spacing="5.0" styleClass="coordinator" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="dk.easv.ticketmanager.gui.controllers.components.CoordinatorCardController">
+<HBox alignment="CENTER_LEFT" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="75.0" prefWidth="413.0" spacing="5.0" styleClass="coordinator" stylesheets="@../../style/dashboard/dashboard.css" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="dk.easv.ticketmanager.gui.controllers.components.CoordinatorCardController">
     <children>
         <Circle fill="DODGERBLUE" radius="28.0" stroke="#aaaaaa" strokeType="INSIDE">
             <HBox.margin>
@@ -50,32 +49,16 @@
          <font>
             <Font size="12.0" />
          </font>
-         <cursor>
-            <Cursor fx:constant="HAND" />
-         </cursor>
          <styleClass>
             <String fx:value="inactive" />
             <String fx:value="assign-btn" />
          </styleClass>
-      </Button>
-      <Button fx:id="btnDeleteButton" layoutX="330.0" layoutY="24.0" mnemonicParsing="false" onAction="#unassign" prefHeight="48.0" prefWidth="80.0" stylesheets="@../../style/components/coordinator_card.css" text="Unassign" textAlignment="CENTER" wrapText="true">
-         <font>
-            <Font size="12.0" />
-         </font>
          <cursor>
             <Cursor fx:constant="HAND" />
          </cursor>
-         <styleClass>
-            <String fx:value="active" />
-            <String fx:value="assign-btn" />
-         </styleClass>
       </Button>
     </children>
     <padding>
         <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
     </padding>
-   <stylesheets>
-      <URL value="@../../style/dashboard/dashboard.css" />
-      <URL value="@../../style/components/coordinator_card.css" />
-   </stylesheets>
 </HBox>

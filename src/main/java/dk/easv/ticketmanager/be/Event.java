@@ -2,6 +2,7 @@ package dk.easv.ticketmanager.be;
 
 import jakarta.persistence.*;
 import javafx.scene.image.Image;
+
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.util.ArrayList;
@@ -47,7 +48,7 @@ public class Event {
           joinColumns = @JoinColumn(name = "event_id"),
           inverseJoinColumns = @JoinColumn(name = "coordinator_id")
   )
-  private Set<User> coordinators = new HashSet<>();
+  private List<User> coordinators = new ArrayList<>();
 
   // Constructors, getters, setters (unchanged except for normalTicketAmount and vipTicketAmount)
   public int getNormalTicketAmount() {
@@ -66,11 +67,11 @@ public class Event {
     this.vipTicketAmount = vipTicketAmount;
   }
 
-  public Set<User> getCoordinators() {
+  public List<User> getCoordinators() {
     return coordinators;
   }
 
-  public void setCoordinators(Set<User> coordinators) {
+  public void setCoordinators(List<User> coordinators) {
     this.coordinators = coordinators;
   }
 
@@ -101,7 +102,7 @@ public class Event {
     this.time = time;
   }
   public long getId() {
-    return this.id;
+    return id;
   }
 
   public int getNormal_ticket_amount() {
@@ -138,7 +139,7 @@ public class Event {
   public void removeCoordinatorFromEvent(User user) {
     coordinators.remove(user);
   }
-  public Set<User> getAssignedCoordinators() {
+  public List<User> getAssignedCoordinators() {
     return coordinators;
   }
 }

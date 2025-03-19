@@ -3,8 +3,6 @@ package dk.easv.ticketmanager.gui.controllers.popups;
 import dk.easv.ticketmanager.be.Event;
 import dk.easv.ticketmanager.gui.FXMLManager;
 import dk.easv.ticketmanager.gui.controllers.components.CoordinatorCardController;
-import dk.easv.ticketmanager.gui.models.EventDataModel;
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.Parent;
@@ -25,7 +23,7 @@ import static dk.easv.ticketmanager.gui.FXMLPath.COORDINATOR_LIST_POPUP;
 
 public class EventDetailsPopupController implements Initializable {
     private final FXMLManager fxmlManager = FXMLManager.getInstance();
-    private final EventDataModel eventDataModel = new EventDataModel();
+
     private Event event;
 
     @FXML
@@ -56,21 +54,24 @@ public class EventDetailsPopupController implements Initializable {
     public void initialize(URL location, ResourceBundle resources) {
 //        setEventDetails();
     }
-    @FXML private void showCoordinatorsListPopup(){
-        Pair<Parent, CoordinatorListPopupController> p = fxmlManager.loadFXML(COORDINATOR_LIST_POPUP);
-        p.getValue().setEvent(event);
-        p.getValue().displayNotAssignedCoordinatorsToEventList();
+    @FXML private void showCoordinators(){
 
+        Pair<Parent, CoordinatorListPopupController> p = fxmlManager.loadFXML(COORDINATOR_LIST_POPUP);
+        p.getValue().showAll();
+        Stage stage = new Stage();
+        stage.setTitle("Coordinators List");
+        stage.setScene(new Scene(p.getKey()));
+        stage.show();
     }
 
-
-
-    @FXML private void showAssignedCoordinatorsToEventPopup(){
+    @FXML private void showAssignedCoordinators(){
         Pair<Parent, CoordinatorListPopupController> p = fxmlManager.loadFXML(COORDINATOR_LIST_POPUP);
-        p.getValue().setEvent(event);
-        p.getValue().displayAssignedCoordinatorsToTheEventList();
+        Stage stage = new Stage();
+        p.getValue().showAssignedUsers();
+        stage.setTitle("Coordinators List");
+        stage.setScene(new Scene(p.getKey()));
+        stage.show();
     }
-
     public void setEventDetails(Event event) {
         this.event = event;
         lblEventDate.setText(event.getDate().toString());

@@ -9,9 +9,7 @@ import dk.easv.ticketmanager.gui.models.UserDataModel;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.Parent;
-import javafx.scene.Scene;
 import javafx.scene.layout.FlowPane;
-import javafx.stage.Stage;
 import javafx.util.Pair;
 
 import java.net.URL;
@@ -19,7 +17,6 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.ResourceBundle;
 import java.util.Set;
-import java.util.stream.Collectors;
 
 import static dk.easv.ticketmanager.gui.FXMLPath.COORDINATOR_CARD_COMPONENT;
 import static dk.easv.ticketmanager.gui.FXMLPath.EVENT_DETAILS_POPUP;
@@ -33,49 +30,39 @@ public class CoordinatorListPopupController {
     private FlowPane flowPaneCoordinatorContainer;
 
 
-    public void displayNotAssignedCoordinatorsToEventList(){
-        flowPaneCoordinatorContainer.getChildren().clear();
-        List<User> notAssignedCoordinators = userDataModel.getAllCoordinators().stream()
-            .filter(user -> !user.getCoordinatedEvents().contains(event))
-            .collect(Collectors.toList());
-
-
-        notAssignedCoordinators.forEach(coordinator->{
+    private void addAssignedUsers(List<User> users){
+        users.forEach(user -> {
             Pair<Parent, CoordinatorCardController> p = fxmlManager.loadFXML(COORDINATOR_CARD_COMPONENT);
-            p.getValue().setDependencies(coordinator, event);
-            //            p.getValue().setUser(coordinator);
-            //            p.getValue().setEvent(event);
+            p.getValue().setUser(user);
+            p.getValue().setEvent(event);
+            p.getValue().setButtonToActive();
             flowPaneCoordinatorContainer.getChildren().add(p.getKey());
         });
-
-
-        Stage stage = new Stage();
-        stage.setTitle("Coordinators List");
-        stage.setScene(new Scene(flowPaneCoordinatorContainer));
-        stage.show();
     }
-
-    public void displayAssignedCoordinatorsToTheEventList(){
-        flowPaneCoordinatorContainer.getChildren().clear();
-        event.getAssignedCoordinators().forEach(assignedCoordinator -> {
+    private void addUnassignedUsers(List<User> users) {
+        users.forEach(user -> {
             Pair<Parent, CoordinatorCardController> p = fxmlManager.loadFXML(COORDINATOR_CARD_COMPONENT);
-            p.getValue().setDependencies(assignedCoordinator, event);
-//            p.getValue().setUser(assignedCoordinator);
-//            p.getValue().setEvent(event);
+            p.getValue().setUser(user);
+            p.getValue().setEvent(event);
             flowPaneCoordinatorContainer.getChildren().add(p.getKey());
         });
-        Stage stage = new Stage();
-        stage.setTitle("Coordinators List");
-        stage.setScene(new Scene(flowPaneCoordinatorContainer));
-        stage.show();
     }
 
-    public FlowPane getFlowPaneCoordinatorContainer() {
-        return flowPaneCoordinatorContainer;
+    public void showAssignedUsers() {
+        Pair<Parent, EventDetailsPopupController> parent = fxmlManager.getFXML(EVENT_DETAILS_POPUP);
+        event = parent.getValue().getEvent();
+        List<User> assignedUsers = event.getAssignedCoordinators();
+        addAssignedUsers(assignedUsers);
+
     }
 
-    public void setEvent(Event event)
-    {
-        this.event = event;
+    public void showAll(){
+        Pair<Parent, EventDetailsPopupController> parent = fxmlManager.getFXML(EVENT_DETAILS_POPUP);
+        event = parent.getValue().getEvent();
+        List<User> assignedUsers = event.getAssignedCoordinators();
+        List<User> unassignedUsers = userDataModel.getUsers();
+        unassignedUsers.removeAll(assignedUsers);
+        addAssignedUsers(assignedUsers);
+        addUnassignedUsers(unassignedUsers);
     }
 }

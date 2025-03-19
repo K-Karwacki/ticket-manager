@@ -19,9 +19,8 @@ public class User {
     @Column(name = "last_name")
     private String lastName;
 
-    @OneToOne(targetEntity = Role.class)
-    @JoinColumn(name = "role_id")
-    private Role role;
+    @Column(name = "role_id")
+    private long role_id;
 
     @Column(name = "email")
     private String email;
@@ -44,7 +43,7 @@ public class User {
     }
 
     // Parameterized constructor
-    public User(long id, String firstName, String lastName, String email, String password, String phoneNumber, String imagePath, Role role) {
+    public User(long id, String firstName, String lastName, String email, String password, String phoneNumber, String imagePath, long role_id) {
         this.id = id;
         this.firstName = firstName;
         this.lastName = lastName;
@@ -52,18 +51,7 @@ public class User {
         this.password = password;
         this.phoneNumber = phoneNumber;
         this.imagePath = imagePath;
-        this.role = role;
-    }
-
-    public User(String firstName, String lastName, String email, String password, String phone, String imagePath, Role role)
-    {
-        this.firstName = firstName;
-        this.lastName = lastName;
-        this.email = email;
-        this.password = password;
-        this.phoneNumber = phone;
-        this.imagePath = imagePath;
-        this.role = role;
+        this.role_id = role_id;
     }
 
     // Getters and setters (updated naming)
@@ -83,12 +71,12 @@ public class User {
         this.lastName = lastName;
     }
 
-    public Role getRole() {
-        return role;
+    public long getRoleId() {
+        return role_id;
     }
 
-    public void setRole(Role role) {
-        this.role = role;
+    public void setRoleId(long roleId) {
+        this.role_id = roleId;
     }
 
     // Other getters/setters unchanged
@@ -119,17 +107,7 @@ public class User {
     public String getLast_name() {
         return lastName;
     }
-
-    public void assignEventToCoordinator(Event event) {
+    public void assignCoordinator(Event event) {
         this.coordinatedEvents.add(event);
-    }
-
-    @Override public String toString()
-    {
-        return "User{" + "firstName='" + firstName + '\'' + ", lastName='"
-            + lastName + '\'' + ", role=" + role + ", email='" + email + '\''
-            + ", password='" + password + '\'' + ", phoneNumber='" + phoneNumber
-            + '\'' + ", imagePath='" + imagePath + '\'' + ", coordinatedEvents="
-            + coordinatedEvents + '}';
     }
 }
