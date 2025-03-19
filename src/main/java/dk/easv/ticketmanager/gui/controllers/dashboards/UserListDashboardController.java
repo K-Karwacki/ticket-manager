@@ -1,14 +1,13 @@
 package dk.easv.ticketmanager.gui.controllers.dashboards;
 
-import dk.easv.ticketmanager.be.Role;
 import dk.easv.ticketmanager.be.User;
 import dk.easv.ticketmanager.bll.UserService;
 import dk.easv.ticketmanager.gui.models.UserDataModel;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.geometry.Insets;
-import javafx.scene.Scene;
 import javafx.geometry.Pos;
+import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
@@ -25,6 +24,7 @@ public class UserListDashboardController implements Initializable
 {
   @FXML
   private ListView<User> usersListView;
+  private final UserService userService = new UserService();
   private final UserDataModel userDataModel = new UserDataModel();
 
   @Override public void initialize(URL location, ResourceBundle resources)
@@ -41,8 +41,9 @@ public class UserListDashboardController implements Initializable
     dialogLayout.setAlignment(Pos.CENTER);
 
     Label roleLabel = new Label("Select Role:");
-    ComboBox<Role> roleComboBox = new ComboBox<>();
-    roleComboBox.getItems().addAll(userDataModel.getRoles());
+    ComboBox<String> roleComboBox = new ComboBox<>();
+    roleComboBox.getItems().addAll("Admin", "Coordinator");
+    roleComboBox.setValue("Admin");
 
     GridPane gridPane = new GridPane();
     gridPane.setHgap(10);
@@ -134,7 +135,7 @@ public class UserListDashboardController implements Initializable
       String lastName = lastNameField.getText().trim();
       String phone = phoneField.getText().trim();
       String email = emailField.getText().trim();
-      Role role = roleComboBox.getValue();
+      String role = roleComboBox.getValue();
       String password = passwordField.getText();
 
 
@@ -151,10 +152,10 @@ public class UserListDashboardController implements Initializable
       }
 
 
-      User user = new User(firstName, lastName, email, password, phone, "default.jpg", role);
+      User user = new User(0, firstName, lastName, email, password, phone, "default.jpg", role.equals("Admin") ? 1 : 2);
 
       try {
-        userDataModel.addNewUser(user);
+        userService.addUser(user);
         resultLabel.setStyle("-fx-text-fill: green;");
         resultLabel.setText("User successfully added.");
 
