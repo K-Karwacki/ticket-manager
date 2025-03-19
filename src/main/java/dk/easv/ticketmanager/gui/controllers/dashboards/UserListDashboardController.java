@@ -18,21 +18,14 @@ import java.io.File;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
+import java.util.List;
 import java.util.ResourceBundle;
 
 public class UserListDashboardController implements Initializable
 {
   @FXML
   private ListView<String> usersListView;
-  private ArrayList<String> users;
-
-  public UserListDashboardController(){
-    this.users = new ArrayList<>();
-
-    for(int i=0; i<10; i++){
-      users.add("User "+i);
-    }
-  }
+  private List<String> users = new ArrayList<>();
 
   @Override public void initialize(URL location, ResourceBundle resources)
   {
@@ -68,13 +61,19 @@ public class UserListDashboardController implements Initializable
     TextField lastNameField = new TextField();
     lastNameField.setPromptText("Enter Last Name");
 
-    Label addressLabel = new Label("Address:");
-    TextField addressField = new TextField();
-    addressField.setPromptText("Enter Address");
-
     Label phoneLabel = new Label("Phone Number:");
     TextField phoneField = new TextField();
     phoneField.setPromptText("Enter Phone Number");
+
+    Label emailLabel = new Label("Email:");
+    TextField emailField = new TextField();
+    emailField.setPromptText("Enter email");
+
+    Label passwordLabel = new Label("Password:");
+    PasswordField passwordField = new PasswordField();
+    passwordField.setPromptText("Enter Password");
+
+
 
     Label profilePictureLabel = new Label("Profile Picture:");
     Button browseButton = new Button("Browse...");
@@ -107,13 +106,17 @@ public class UserListDashboardController implements Initializable
     gridPane.add(firstNameField, 1, 0);
     gridPane.add(lastNameLabel, 0, 1);
     gridPane.add(lastNameField, 1, 1);
-    gridPane.add(addressLabel, 0, 2);
-    gridPane.add(addressField, 1, 2);
-    gridPane.add(phoneLabel, 0, 3);
-    gridPane.add(phoneField, 1, 3);
-    gridPane.add(profilePictureLabel, 0, 4);
-    gridPane.add(browseButton, 1, 4);
-    gridPane.add(profilePictureView, 1, 5);
+    gridPane.add(phoneLabel, 0, 2);
+    gridPane.add(phoneField, 1, 2);
+    gridPane.add(emailLabel, 0, 3);
+    gridPane.add(emailField, 1, 3);
+    gridPane.add(passwordLabel, 0, 4);
+    gridPane.add(passwordField, 1, 4);
+
+
+    gridPane.add(profilePictureLabel, 0, 5);
+    gridPane.add(browseButton, 1, 5);
+    gridPane.add(profilePictureView, 1, 6);
 
     Button submitButton = new Button("Add User");
     Button cancelButton = new Button("Cancel");
@@ -133,12 +136,13 @@ public class UserListDashboardController implements Initializable
     submitButton.setOnAction(e -> {
       String firstName = firstNameField.getText().trim();
       String lastName = lastNameField.getText().trim();
-      String address = addressField.getText().trim();
       String phone = phoneField.getText().trim();
+      String email = emailField.getText().trim();
       String role = roleComboBox.getValue();
+      String password = passwordField.getText();
 
 
-      if (firstName.isEmpty() || lastName.isEmpty() || address.isEmpty() || phone.isEmpty()) {
+      if (firstName.isEmpty() || lastName.isEmpty() || email.isEmpty() || phone.isEmpty() || password.isEmpty()) {
         resultLabel.setStyle("-fx-text-fill: red;");
         resultLabel.setText("Please fill in all fields.");
         return;
@@ -170,7 +174,7 @@ public class UserListDashboardController implements Initializable
       }).start();
     });
 
-    Scene dialogScene = new Scene(dialogLayout, 500, 500);
+    Scene dialogScene = new Scene(dialogLayout, 550, 550);
     dialogStage.setScene(dialogScene);
     dialogStage.showAndWait();
   }

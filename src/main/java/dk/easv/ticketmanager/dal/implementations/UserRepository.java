@@ -28,6 +28,7 @@ public class UserRepository implements IUserRepository {
     @Override
     public void save(User user) {
         em.persist(user);
+
     }
 
     @Override
