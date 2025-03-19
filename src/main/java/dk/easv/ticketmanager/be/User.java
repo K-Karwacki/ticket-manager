@@ -1,76 +1,104 @@
 package dk.easv.ticketmanager.be;
 
-import dk.easv.ticketmanager.Main;
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 import javafx.scene.image.Image;
 
-import java.time.LocalDateTime;
+@Entity
+@Table(name = "[User]")
+public class User {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private long id;
 
+    @Column(name = "first_name")
+    private String first_name;
 
-public class User
-{
-    private int userId;
-    private String fullName;
+    @Column(name = "last_name")
+    private String last_name;
+
+    @Column(name = "role_id")
+    private long role_id;
+
+    @Column(name = "email")
     private String email;
-    private String password;
-    private String phoneNumber;
-    private Image userImage;
 
-    public User(){
-        this.userId = 0;
-        this.userImage = new Image(String.valueOf(Main.class.getResource("images/event-template.jpg")));
-        LocalDateTime now = LocalDateTime.now();
+    @Column(name = "password")
+    private String password;
+
+
+    @Column(name = "image_path")
+    private String imagePath;
+
+    // Default constructor
+    public User() {
+        this.id = 0;
+        this.first_name = "Ronaldihno";
+        this.last_name = "Gaucho";
         this.email = "ronaldihnogaucho123@gmail.com";
         this.password = "password";
-        this.fullName = "Ronaldihno Gaucho";
+        this.imagePath = "images/event-template.jpg"; // Default image path
     }
 
-    public User(int userId, String fullName, String email, String password, String phoneNumber, String imagePath)
-    {
-        this.userId = userId;
-        this.fullName = fullName;
+    // Parameterized constructor
+    public User(int id, String first_name,String last_name, String email, String password, String phoneNumber, String imagePath, long role_id) {
+        this.id = id;
+        this.first_name = first_name;
+        this.last_name = last_name;
         this.email = email;
         this.password = password;
-        this.phoneNumber = phoneNumber;
-        this.userImage = new Image(imagePath);
+        this.role_id = role_id;
+//        this.imagePath = imagePath;
     }
 
-    public void setUserId(int userId) {
-        this.userId = userId;
+    // Getters and Setters
+    public long getId() {
+        return id;
     }
-    public void setFullName(String fullName) {
-        this.fullName = fullName;
+
+    public void setId(int id) {
+        this.id = id;
     }
-    public void setEmail(String email) {
-        this.email = email;
+
+    public String getFirst_name() {
+        return first_name;
     }
-    public void setPassword(String password) {
-        this.password = password;
+    public String getLast_name() {
+        return last_name;
     }
-    public void setPhoneNumber(String phoneNumber) {
-        this.phoneNumber = phoneNumber;
+    public void setLast_name(String last_name) {
+        this.last_name = last_name;
     }
-    public void setUserImage(Image userImage) {
-        this.userImage = userImage;
+
+    public void setFirst_name(String first_name) {
+        this.first_name = first_name;
     }
-    public int getUserId() {
-        return userId;
-    }
-    public String getFullName() {
-        return fullName;
-    }
+
     public String getEmail() {
         return email;
     }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
     public String getPassword() {
         return password;
     }
-    public String getPhoneNumber() {
-        return phoneNumber;
+
+    public void setPassword(String password) {
+        this.password = password;
     }
+
+    public String getImagePath() {
+        return imagePath;
+    }
+
+    public void setImagePath(String imagePath) {
+        this.imagePath = imagePath;
+    }
+
+    // Method to get the JavaFX Image from the image path (similar to Event)
     public Image getUserImage() {
-        return userImage;
+        return new Image(imagePath);
     }
 }

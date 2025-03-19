@@ -11,7 +11,7 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 
-<VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="531.0" prefWidth="438.0" spacing="5.0" styleClass="dashboard-root" stylesheets="@../../style/dashboard/dashboard.css" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="dk.easv.ticketmanager.gui.controllers.popups.EventCreatorPopupController">
+<VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="578.0" prefWidth="438.0" spacing="5.0" styleClass="dashboard-root" stylesheets="@../../style/dashboard/dashboard.css" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="dk.easv.ticketmanager.gui.controllers.popups.EventCreatorPopupController">
    <children>
       <ImageView fitHeight="59.0" fitWidth="255.0" pickOnBounds="true" preserveRatio="true">
          <image>
@@ -45,6 +45,11 @@
             </ImageView>
          </children>
       </HBox>
+      <Button mnemonicParsing="false" style="-fx-background-color: #FFE7B1;" text="Assign to coordinators">
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
+      </Button>
       <Button mnemonicParsing="false" onAction="#addEvent" style="-fx-background-color: #9CE2FF; -fx-border-color: black; -fx-border-radius: 5; -fx-background-radius: 5;" text="Sumbit">
          <VBox.margin>
             <Insets top="10.0" />

@@ -8,41 +8,45 @@
 <?import javafx.scene.shape.Circle?>
 <?import javafx.scene.text.Font?>
 
-
-<HBox alignment="CENTER_LEFT" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="75.0" prefWidth="320.0" styleClass="coordinator" stylesheets="@../../style/dashboard/dashboard.css" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1">
-   <children>
-      <Circle fill="DODGERBLUE" radius="28.0" stroke="#aaaaaa" strokeType="INSIDE">
-         <HBox.margin>
-            <Insets left="5.0" />
-         </HBox.margin>
-      </Circle>
-      <VBox alignment="CENTER_LEFT" prefHeight="90.0" prefWidth="139.0" spacing="5.0">
-         <children>
-            <Label text="Ronaldinho">
-               <font>
-                  <Font size="16.0" />
-               </font>
-            </Label>
-            <Label text="Gaúcho">
-               <font>
-                  <Font size="16.0" />
-               </font>
-            </Label>
-         </children>
-         <padding>
-            <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
-         </padding>
-         <HBox.margin>
-            <Insets left="20.0" />
-         </HBox.margin>
-      </VBox>
-      <Button mnemonicParsing="false" prefHeight="48.0" prefWidth="80.0" style="-fx-background-color: #ddd; -fx-border-color: #aaa; -fx-border-radius: 5; -fx-background-radius: 5;" text="More information" textAlignment="CENTER" wrapText="true">
+<HBox alignment="CENTER_LEFT" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="75.0" prefWidth="413.0" spacing="5.0" styleClass="coordinator" stylesheets="@../../style/dashboard/dashboard.css" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="dk.easv.ticketmanager.gui.controllers.components.CoordinatorCardController">
+    <children>
+        <Circle fill="DODGERBLUE" radius="28.0" stroke="#aaaaaa" strokeType="INSIDE">
+            <HBox.margin>
+                <Insets left="5.0" />
+            </HBox.margin>
+        </Circle>
+        <VBox alignment="CENTER_LEFT" prefHeight="90.0" prefWidth="139.0" spacing="5.0">
+            <children>
+                <Label fx:id="lblCoordinatorFirstName" text="Ronaldinho">
+                    <font>
+                        <Font size="16.0" />
+                    </font>
+                </Label>
+                <Label fx:id="lblCoordinatorLastName" text="Gaúcho">
+                    <font>
+                        <Font size="16.0" />
+                    </font>
+                </Label>
+            </children>
+            <padding>
+                <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+            </padding>
+            <HBox.margin>
+                <Insets left="20.0" />
+            </HBox.margin>
+        </VBox>
+        <Button fx:id="btnCoordinatorButton" mnemonicParsing="false" prefHeight="48.0" prefWidth="80.0" style="-fx-background-color: #FFE7B1; -fx-border-color: #aaa; -fx-border-radius: 5; -fx-background-radius: 5;" text="More information" textAlignment="CENTER" wrapText="true">
+            <font>
+                <Font size="12.0" />
+            </font>
+        </Button>
+      <Button fx:id="btnCoordinatorButton1" mnemonicParsing="false" prefHeight="48.0" prefWidth="80.0" style="-fx-background-color: #9CE2FF; -fx-border-color: #aaa; -fx-border-radius: 5; -fx-background-radius: 5;" text="Assign" textAlignment="CENTER" wrapText="true">
          <font>
             <Font size="12.0" />
          </font>
       </Button>
-   </children>
-   <padding>
-      <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
-   </padding>
+    </children>
+    <padding>
+        <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+    </padding>
 </HBox>
