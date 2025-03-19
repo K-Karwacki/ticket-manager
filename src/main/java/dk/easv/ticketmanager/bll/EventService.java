@@ -2,6 +2,7 @@ package dk.easv.ticketmanager.bll;
 
 import dk.easv.ticketmanager.be.Event;
 import dk.easv.ticketmanager.be.Location;
+import dk.easv.ticketmanager.be.User;
 import dk.easv.ticketmanager.dal.implementations.EventRepository;
 import dk.easv.ticketmanager.dal.interfaces.IEventRepository;
 
@@ -30,5 +31,11 @@ public class EventService {
         cities.clear();
         cities.addAll(set);
         return cities;
+    }
+    public void assignCoordinatorToEvent(Event event, User user){
+        eventRepository.assignCoordinatorToEvent(event, user);
+    }
+    public void dissociateEventFromCoordinator(Event event, User user){
+        eventRepository.dissociateEventFromCoordinator(event, user);
     }
 }

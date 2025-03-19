@@ -7,7 +7,7 @@
 <?import javafx.scene.layout.FlowPane?>
 <?import javafx.scene.layout.VBox?>
 
-<VBox alignment="TOP_CENTER" prefHeight="593.0" prefWidth="453.0" styleClass="dashboard-root" stylesheets="@../../style/dashboard/dashboard.css" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="dk.easv.ticketmanager.gui.controllers.popups.CoordinatorListPopupController">
+<VBox alignment="TOP_CENTER" prefHeight="593.0" prefWidth="472.0" styleClass="dashboard-root" stylesheets="@../../style/dashboard/dashboard.css" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="dk.easv.ticketmanager.gui.controllers.popups.CoordinatorListPopupController">
    <children>
       <ImageView fitHeight="59.0" fitWidth="255.0" pickOnBounds="true" preserveRatio="true">
          <image>
@@ -16,7 +16,7 @@
       </ImageView>
       <ScrollPane hbarPolicy="NEVER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="533.0" prefWidth="639.0" styleClass="dashboard-root" stylesheets="@../../style/dashboard/dashboard.css">
          <content>
-            <FlowPane fx:id="flowPaneCoordinatorContainer" hgap="5.0" prefHeight="20.0" prefWidth="436.0" vgap="15.0">
+            <FlowPane fx:id="flowPaneCoordinatorContainer" hgap="5.0" prefHeight="20.0" prefWidth="430.0" vgap="15.0">
                <padding>
                   <Insets bottom="10.0" left="15.0" right="15.0" top="10.0" />
                </padding>

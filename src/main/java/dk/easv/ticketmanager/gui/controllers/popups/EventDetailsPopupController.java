@@ -55,17 +55,25 @@ public class EventDetailsPopupController implements Initializable {
 //        setEventDetails();
     }
     @FXML private void showCoordinators(){
+
         Pair<Parent, CoordinatorListPopupController> p = fxmlManager.loadFXML(COORDINATOR_LIST_POPUP);
+        p.getValue().showAll();
         Stage stage = new Stage();
         stage.setTitle("Coordinators List");
         stage.setScene(new Scene(p.getKey()));
         stage.show();
     }
 
-    public void setEvent(Event event) {
-        this.event = event;
+    @FXML private void showAssignedCoordinators(){
+        Pair<Parent, CoordinatorListPopupController> p = fxmlManager.loadFXML(COORDINATOR_LIST_POPUP);
+        Stage stage = new Stage();
+        p.getValue().showAssignedUsers();
+        stage.setTitle("Coordinators List");
+        stage.setScene(new Scene(p.getKey()));
+        stage.show();
     }
     public void setEventDetails(Event event) {
+        this.event = event;
         lblEventDate.setText(event.getDate().toString());
         lblEventTime.setText(event.getTime().toString());
         lblEventLocation.setText(event.getLocation().toString());
@@ -78,6 +86,9 @@ public class EventDetailsPopupController implements Initializable {
         rectangleImageContainer.setFill(imagePattern);
     }
 
+    public Event getEvent() {
+        return event;
+    }
 
 
 }

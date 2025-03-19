@@ -1,0 +1,12 @@
+.inactive{
+    -fx-background-color: #9CE2FF;
+}
+
+.active{
+    -fx-background-color: #FFE7B1;
+}
+.assign-btn{
+    -fx-border-color:  #aaa;
+    -fx-border-radius: 5;
+    -fx-background-radius: 5;
+}

@@ -2,6 +2,7 @@ package dk.easv.ticketmanager.dal.implementations;
 
 import dk.easv.ticketmanager.be.Event;
 import dk.easv.ticketmanager.be.Location;
+import dk.easv.ticketmanager.be.User;
 import dk.easv.ticketmanager.dal.interfaces.IEventRepository;
 import dk.easv.ticketmanager.utils.JPAUtil;
 import jakarta.persistence.EntityManager;
@@ -50,4 +51,29 @@ public class EventRepository implements IEventRepository
   public List<Location> getAllLocations() {
     return new ArrayList<>();
   }
-}
+
+  public void assignCoordinatorToEvent(Event event, User user) {
+    try (EntityManager em = JPAUtil.getEntityManager()) {
+      EntityTransaction tx = em.getTransaction();
+      tx.begin();
+      event.assignCoordinatorToEvent(user);
+      em.merge(event);
+      tx.commit();
+    } catch (Exception e) {
+      e.printStackTrace();
+    }
+  }
+
+  public void dissociateEventFromCoordinator(Event event, User user) {
+    try (EntityManager em = JPAUtil.getEntityManager()) {
+      EntityTransaction tx = em.getTransaction();
+      tx.begin();
+      event.removeCoordinatorFromEvent(user);
+      em.merge(event);
+      tx.commit();
+    } catch (Exception e) {
+      e.printStackTrace();
+    }
+    }
+  }
+
