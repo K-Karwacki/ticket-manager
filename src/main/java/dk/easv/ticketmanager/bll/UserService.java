@@ -17,9 +17,19 @@ public class UserService {
         return userRepository.getByRole(role);
     }
     public void addUser(User user){
-        userRepository.save(user);
+
+        try {
+            userRepository.save(user);
+        } catch (Exception e) {
+            throw new RuntimeException("you miserably failed", e);
+        }
+
     }
     public void deleteUser(User user){
+        try{
         userRepository.delete(user);
+        } catch (Exception e) {
+            throw new RuntimeException("you miserably failed", e);
+        }
     }
 }

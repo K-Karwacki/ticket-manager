@@ -19,12 +19,14 @@ public class User {
     @Column(name = "role_id")
     private long role_id;
 
+    @Column(name = "phone_number")
+    private String phone_number;
+
     @Column(name = "email")
     private String email;
 
     @Column(name = "password")
     private String password;
-
 
     @Column(name = "image_path")
     private String imagePath;
@@ -40,11 +42,12 @@ public class User {
     }
 
     // Parameterized constructor
-    public User(int id, String first_name,String last_name, String email, String password, String phoneNumber, String imagePath, long role_id) {
+    public User(int id, String first_name,String last_name, String email, String password, String phone_number, String imagePath, long role_id) {
         this.id = id;
         this.first_name = first_name;
         this.last_name = last_name;
         this.email = email;
+        this.phone_number = phone_number;
         this.password = password;
         this.role_id = role_id;
 //        this.imagePath = imagePath;
@@ -81,6 +84,11 @@ public class User {
         this.email = email;
     }
 
+
+    public String getPhone_number() { return phone_number;}
+    public void setPhone_number(String phone_number) {this.phone_number = phone_number;}
+
+
     public String getPassword() {
         return password;
     }
@@ -100,5 +108,10 @@ public class User {
     // Method to get the JavaFX Image from the image path (similar to Event)
     public Image getUserImage() {
         return new Image(imagePath);
+    }
+
+    @Override
+    public String toString() {
+        return first_name + " " + last_name;
     }
 }

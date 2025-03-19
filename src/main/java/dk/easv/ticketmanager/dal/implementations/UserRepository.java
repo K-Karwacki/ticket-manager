@@ -1,6 +1,5 @@
 package dk.easv.ticketmanager.dal.implementations;
 
-import dk.easv.ticketmanager.be.Event;
 import dk.easv.ticketmanager.be.Role;
 import dk.easv.ticketmanager.be.User;
 import dk.easv.ticketmanager.dal.interfaces.IUserRepository;
@@ -27,12 +26,40 @@ public class UserRepository implements IUserRepository {
 
     @Override
     public void save(User user) {
-        em.persist(user);
+        EntityManager em = JPAUtil.getEntityManager();
+        try {
+            em.getTransaction().begin();
+            em.persist(user);
+            em.getTransaction().commit();
+
+        }  catch (Exception e) {
+            if (em.getTransaction().isActive()){
+                em.getTransaction().rollback();
+            }
+            throw new RuntimeException(e);
+        }
+        finally {
+            em.close();
+        }
 
     }
 
     @Override
     public void delete(User user) {
-        em.remove(user);
+        EntityManager em = JPAUtil.getEntityManager();
+        try {
+            em.getTransaction().begin();
+            em.remove(user);
+            em.getTransaction().commit();
+        } catch (Exception e) {
+            if (em.getTransaction().isActive()){
+                em.getTransaction().rollback();
+            }
+            throw new RuntimeException(e);
+        }
+        finally {
+            em.close();
+        }
+
     }
 }
