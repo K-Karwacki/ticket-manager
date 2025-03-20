@@ -8,16 +8,21 @@ import dk.easv.ticketmanager.gui.models.EventDataModel;
 import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.layout.HBox;
 import javafx.util.Pair;
 
+import java.net.URL;
+import java.util.ResourceBundle;
+
 import static dk.easv.ticketmanager.gui.FXMLPath.COORDINATOR_LIST_POPUP;
 import static dk.easv.ticketmanager.gui.FXMLPath.EVENT_DETAILS_POPUP;
 
-public class CoordinatorCardController {
+public class CoordinatorCardController
+{
     private final EventDataModel eventDataModel = new EventDataModel();
     private final FXMLManager fxmlManager = FXMLManager.getInstance();
 
@@ -36,6 +41,7 @@ public class CoordinatorCardController {
     @FXML
     private Button btnAssignButton;
 
+
     public void setUser(User user) {
         this.user = user;
         lblCoordinatorFirstName.setText(user.getFirst_name());
@@ -46,6 +52,7 @@ public class CoordinatorCardController {
     private void assign(ActionEvent event) {
         Button btnAssign = (Button) event.getSource();
         if (btnAssign.getStyleClass().contains("inactive")) {
+            System.out.println(this.event);
             eventDataModel.assignCoordinatorToEvent(this.event, user);
             btnAssign.getStyleClass().remove("inactive");
             btnAssign.getStyleClass().add("active");
@@ -96,4 +103,5 @@ public class CoordinatorCardController {
             dbThread.start();
         });
     }
+
 }

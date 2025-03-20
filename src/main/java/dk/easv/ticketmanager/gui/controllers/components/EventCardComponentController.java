@@ -33,11 +33,11 @@ public class EventCardComponentController
 
   @FXML
   private void openEvent(){
-    Pair<Parent, EventDetailsPopupController> eventScene = fxmlManager.loadFXML(EVENT_DETAILS_POPUP);
-    eventScene.getValue().setEventDetails(event);
+    Pair<Parent, EventDetailsPopupController> eventDetailsPopupControllerPair = fxmlManager.loadFXML(EVENT_DETAILS_POPUP);
+    eventDetailsPopupControllerPair.getValue().setEventDetails(event);
     Stage stage = new Stage();
     stage.setTitle("Event Details");
-    stage.setScene(new Scene(eventScene.getKey()));
+    stage.setScene(new Scene(eventDetailsPopupControllerPair.getKey()));
     stage.show();
   }
 

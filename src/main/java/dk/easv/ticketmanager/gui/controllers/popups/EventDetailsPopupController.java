@@ -4,6 +4,7 @@ import dk.easv.ticketmanager.be.Event;
 import dk.easv.ticketmanager.gui.FXMLManager;
 import dk.easv.ticketmanager.gui.controllers.components.CoordinatorCardController;
 import dk.easv.ticketmanager.gui.models.EventDataModel;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.Parent;
@@ -55,24 +56,19 @@ public class EventDetailsPopupController implements Initializable {
     public void initialize(URL location, ResourceBundle resources) {
 //        setEventDetails();
     }
-    @FXML private void showCoordinators(){
-
+    @FXML private void showCoordinatorsListPopup(){
         Pair<Parent, CoordinatorListPopupController> p = fxmlManager.loadFXML(COORDINATOR_LIST_POPUP);
-        p.getValue().showAll();
-        Stage stage = new Stage();
-        stage.setTitle("Coordinators List");
-        stage.setScene(new Scene(p.getKey()));
-        stage.show();
+        p.getValue().setEvent(event);
+        p.getValue().displayAllCoordinatorsList();
+
     }
 
-    @FXML private void showAssignedCoordinators(){
+    @FXML private void showAssignedCoordinatorsToEventPopup(){
         Pair<Parent, CoordinatorListPopupController> p = fxmlManager.loadFXML(COORDINATOR_LIST_POPUP);
-        Stage stage = new Stage();
-        p.getValue().showAssignedUsers();
-        stage.setTitle("Coordinators List");
-        stage.setScene(new Scene(p.getKey()));
-        stage.show();
+        p.getValue().setEvent(event);
+        p.getValue().displayAssignedCoordinatorsToTheEventList();
     }
+
     public void setEventDetails(Event event) {
         this.event = event;
         lblEventDate.setText(event.getDate().toString());

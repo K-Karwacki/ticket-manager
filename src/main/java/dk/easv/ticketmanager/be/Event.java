@@ -2,7 +2,6 @@ package dk.easv.ticketmanager.be;
 
 import jakarta.persistence.*;
 import javafx.scene.image.Image;
-
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.util.ArrayList;
@@ -102,7 +101,7 @@ public class Event {
     this.time = time;
   }
   public long getId() {
-    return id;
+    return this.id;
   }
 
   public int getNormal_ticket_amount() {

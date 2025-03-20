@@ -24,7 +24,6 @@ public class CoordinatorWindowController implements Initializable
   @FXML
   private Node menuComponent;
 
-  private final IEventRepository eventRepository = new EventRepository();
 
   @FXML
   private BorderPane root;

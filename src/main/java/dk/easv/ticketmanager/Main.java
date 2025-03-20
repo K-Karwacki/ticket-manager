@@ -15,6 +15,7 @@ public class Main extends Application
   {
     UserDataModel userDataModel = new UserDataModel();
     EventDataModel eventDataModel = new EventDataModel();
+    System.out.println(eventDataModel);
     userDataModel.loadUsers();
     eventDataModel.loadEvents();
     FXMLLoader fxmlLoader = new FXMLLoader(

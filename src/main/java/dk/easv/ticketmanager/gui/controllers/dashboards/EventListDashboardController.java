@@ -18,6 +18,7 @@ import javafx.scene.control.ScrollPane;
 import javafx.scene.layout.FlowPane;
 import javafx.stage.Stage;
 import javafx.util.Pair;
+import org.w3c.dom.ls.LSOutput;
 
 import java.io.IOException;
 import java.net.URL;
@@ -41,7 +42,7 @@ public class EventListDashboardController implements Initializable
 
 
   public EventListDashboardController() {
-
+    System.out.println(eventDataModel);
   }
   @FXML private void openEventCreator(){
     Pair<Parent, EventCreatorPopupController> p = fxmlManager.loadFXML(EVENT_CREATOR_POPUP);
@@ -60,9 +61,11 @@ public class EventListDashboardController implements Initializable
     eventListRoot.getChildren().clear();
     comboBoxCities.getItems().clear();
   }
+
   public void load() {
     clear();
     eventDataModel.getEvents().forEach(event -> {
+//      System.out.println(event);
       Pair<Parent, EventCardComponentController> p = fxmlManager.loadFXML(EVENT_CARD_COMPONENT);
       p.getValue().setEvent(event);
       eventListRoot.getChildren().add(p.getKey());

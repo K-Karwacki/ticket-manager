@@ -32,4 +32,13 @@ public class UserService {
             throw new RuntimeException("you miserably failed", e);
         }
     }
+
+  public List<Role> getAllRoles()
+  {
+      try{
+          return userRepository.getRoles();
+      }catch (Exception e){
+          throw new RuntimeException("Couldn't fetch roles: ", e);
+      }
+  }
 }
