@@ -1,5 +1,6 @@
 package dk.easv.ticketmanager.gui.controllers.dashboards;
 
+import dk.easv.ticketmanager.be.Role;
 import dk.easv.ticketmanager.be.User;
 import dk.easv.ticketmanager.bll.UserService;
 import dk.easv.ticketmanager.gui.models.UserDataModel;
@@ -152,7 +153,7 @@ public class UserListDashboardController implements Initializable
       }
 
 
-      User user = new User(0, firstName, lastName, email, password, phone, "default.jpg", role.equals("Admin") ? 1 : 2);
+      User user = new User(0, firstName, lastName, email, password, phone, "default.jpg", new Role("coordinator"));
 
       try {
         userService.addUser(user);

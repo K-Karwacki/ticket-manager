@@ -28,9 +28,11 @@ public class EventDataModel {
 
     public void assignCoordinatorToEvent(Event event, User user){
         eventService.assignCoordinatorToEvent(event, user);
+        loadEvents();
     }
     public void dissociateEventFromCoordinator(Event event, User user){
         eventService.dissociateEventFromCoordinator(event, user);
+        loadEvents();
     }
     public Event getEventById(long id) {
         return eventService.getEventById(id);

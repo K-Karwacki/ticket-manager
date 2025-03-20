@@ -42,7 +42,7 @@ public class Event {
   @Column(name = "vip_ticket_amount")
   private int vipTicketAmount;
 
-  @ManyToMany
+  @ManyToMany(fetch = FetchType.EAGER)
   @JoinTable(
           name = "EventCoordinator",
           joinColumns = @JoinColumn(name = "event_id"),

@@ -1,13 +1,10 @@
 package dk.easv.ticketmanager.gui.models;
 
-import dk.easv.ticketmanager.be.Role;
 import dk.easv.ticketmanager.be.User;
 import dk.easv.ticketmanager.bll.UserService;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-
 import java.util.List;
-import java.util.stream.Collectors;
 
 public class UserDataModel {
     private final UserService userService = new UserService();
@@ -20,20 +17,10 @@ public class UserDataModel {
     public ObservableList<User> getUsers() {
         return users;
     }
-    public void addNewUser(User user){
-        userService.addUser(user);
-        users.add(user);
-    }
 
-    public List<Role> getRoles()
-    {
-        return userService.getAllRoles();
-    }
-
-    public List<User> getAllCoordinators()
-    {
+    public List<User> getCoordinators() {
         return users.stream()
-            .filter(user -> user.getRole().getName().equals("coordinator"))
-            .collect(Collectors.toList());
+                .filter(user -> user.getRole().getName().equals("coordinator"))
+                .toList();
     }
 }

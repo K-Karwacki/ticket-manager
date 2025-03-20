@@ -3,6 +3,8 @@ package dk.easv.ticketmanager.gui.controllers.popups;
 import dk.easv.ticketmanager.be.Event;
 import dk.easv.ticketmanager.gui.FXMLManager;
 import dk.easv.ticketmanager.gui.controllers.components.CoordinatorCardController;
+import dk.easv.ticketmanager.gui.models.EventDataModel;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.Parent;
@@ -23,7 +25,7 @@ import static dk.easv.ticketmanager.gui.FXMLPath.COORDINATOR_LIST_POPUP;
 
 public class EventDetailsPopupController implements Initializable {
     private final FXMLManager fxmlManager = FXMLManager.getInstance();
-
+    private final EventDataModel eventDataModel = new EventDataModel();
     private Event event;
 
     @FXML
@@ -54,20 +56,21 @@ public class EventDetailsPopupController implements Initializable {
     public void initialize(URL location, ResourceBundle resources) {
 //        setEventDetails();
     }
-    @FXML private void showCoordinators(){
-
+    @FXML private void showAllCoordinators() {
         Pair<Parent, CoordinatorListPopupController> p = fxmlManager.loadFXML(COORDINATOR_LIST_POPUP);
-        p.getValue().showAll();
+        p.getValue().setEvent(event);
+        p.getValue().displayAllCoordinators();
         Stage stage = new Stage();
         stage.setTitle("Coordinators List");
         stage.setScene(new Scene(p.getKey()));
         stage.show();
     }
 
-    @FXML private void showAssignedCoordinators(){
+    @FXML private void showAssignedCoordinators() {
         Pair<Parent, CoordinatorListPopupController> p = fxmlManager.loadFXML(COORDINATOR_LIST_POPUP);
         Stage stage = new Stage();
-        p.getValue().showAssignedUsers();
+        p.getValue().setEvent(event);
+        p.getValue().displayAssignedCoordinators();
         stage.setTitle("Coordinators List");
         stage.setScene(new Scene(p.getKey()));
         stage.show();
@@ -90,5 +93,7 @@ public class EventDetailsPopupController implements Initializable {
         return event;
     }
 
-
+    public void reloadEvent() {
+//        event = eventDataModel.getEventById(event.getId());
+    }
 }

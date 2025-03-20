@@ -30,39 +30,39 @@ public class CoordinatorListPopupController {
     private FlowPane flowPaneCoordinatorContainer;
 
 
-    private void addAssignedUsers(List<User> users){
-        users.forEach(user -> {
+    public void displayAllCoordinators() {
+        flowPaneCoordinatorContainer.getChildren().clear();
+        userDataModel.getCoordinators().forEach(coordinator -> {
             Pair<Parent, CoordinatorCardController> p = fxmlManager.loadFXML(COORDINATOR_CARD_COMPONENT);
-            p.getValue().setUser(user);
+            p.getValue().setCoordinator(coordinator);
             p.getValue().setEvent(event);
-            p.getValue().setButtonToActive();
-            flowPaneCoordinatorContainer.getChildren().add(p.getKey());
-        });
-    }
-    private void addUnassignedUsers(List<User> users) {
-        users.forEach(user -> {
-            Pair<Parent, CoordinatorCardController> p = fxmlManager.loadFXML(COORDINATOR_CARD_COMPONENT);
-            p.getValue().setUser(user);
-            p.getValue().setEvent(event);
+            p.getValue().setButton();
             flowPaneCoordinatorContainer.getChildren().add(p.getKey());
         });
     }
 
-    public void showAssignedUsers() {
-        Pair<Parent, EventDetailsPopupController> parent = fxmlManager.getFXML(EVENT_DETAILS_POPUP);
-        event = parent.getValue().getEvent();
-        List<User> assignedUsers = event.getAssignedCoordinators();
-        addAssignedUsers(assignedUsers);
-
+    public void displayAssignedCoordinators() {
+        flowPaneCoordinatorContainer.getChildren().clear();
+        userDataModel.getCoordinators().forEach(coordinator -> {
+                Pair<Parent, CoordinatorCardController> p = fxmlManager.loadFXML(COORDINATOR_CARD_COMPONENT);
+                p.getValue().setEvent(event);
+                p.getValue().setCoordinator(coordinator);
+                p.getValue().setDeletionButton();
+                flowPaneCoordinatorContainer.getChildren().add(p.getKey());
+        });
     }
 
-    public void showAll(){
-        Pair<Parent, EventDetailsPopupController> parent = fxmlManager.getFXML(EVENT_DETAILS_POPUP);
-        event = parent.getValue().getEvent();
-        List<User> assignedUsers = event.getAssignedCoordinators();
-        List<User> unassignedUsers = userDataModel.getUsers();
-        unassignedUsers.removeAll(assignedUsers);
-        addAssignedUsers(assignedUsers);
-        addUnassignedUsers(unassignedUsers);
+        public FlowPane getFlowPaneCoordinatorContainer() {
+        return flowPaneCoordinatorContainer;
+    }
+
+    public void setEvent(Event event) {
+        this.event = event;
+    }
+
+    public void reloadEvent() {
+        Pair<Parent, EventDetailsPopupController> p = fxmlManager.loadFXML(EVENT_DETAILS_POPUP);
+        p.getValue().reloadEvent();
+
     }
 }

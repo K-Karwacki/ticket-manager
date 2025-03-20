@@ -19,8 +19,9 @@ public class User {
     @Column(name = "last_name")
     private String lastName;
 
-    @Column(name = "role_id")
-    private long role_id;
+    @OneToOne(targetEntity = Role.class, fetch = FetchType.EAGER)
+    @JoinColumn(name = "role_id")
+    private Role role;
 
     @Column(name = "email")
     private String email;
@@ -43,7 +44,7 @@ public class User {
     }
 
     // Parameterized constructor
-    public User(long id, String firstName, String lastName, String email, String password, String phoneNumber, String imagePath, long role_id) {
+    public User(long id, String firstName, String lastName, String email, String password, String phoneNumber, String imagePath, Role role) {
         this.id = id;
         this.firstName = firstName;
         this.lastName = lastName;
@@ -51,7 +52,7 @@ public class User {
         this.password = password;
         this.phoneNumber = phoneNumber;
         this.imagePath = imagePath;
-        this.role_id = role_id;
+        this.role = role;
     }
 
     // Getters and setters (updated naming)
@@ -71,12 +72,12 @@ public class User {
         this.lastName = lastName;
     }
 
-    public long getRoleId() {
-        return role_id;
+    public Role getRole() {
+        return role;
     }
 
-    public void setRoleId(long roleId) {
-        this.role_id = roleId;
+    public void setRole(Role role) {
+        this.role = role;
     }
 
     // Other getters/setters unchanged
