@@ -59,9 +59,11 @@ public class EventDetailsPopupController implements Initializable {
     @FXML private void showCoordinatorsListPopup(){
         Pair<Parent, CoordinatorListPopupController> p = fxmlManager.loadFXML(COORDINATOR_LIST_POPUP);
         p.getValue().setEvent(event);
-        p.getValue().displayAllCoordinatorsList();
+        p.getValue().displayNotAssignedCoordinatorsToEventList();
 
     }
+
+
 
     @FXML private void showAssignedCoordinatorsToEventPopup(){
         Pair<Parent, CoordinatorListPopupController> p = fxmlManager.loadFXML(COORDINATOR_LIST_POPUP);
