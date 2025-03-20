@@ -66,4 +66,21 @@ public class UserRepository implements IUserRepository {
 
     }
 
+    @Override public List<Role> getRoles()
+    {
+        EntityManager em = JPAUtil.getEntityManager();
+        try {
+            em.getTransaction().begin();
+            return em.createQuery("Select r from Role r", Role.class).getResultList();
+        } catch (Exception e) {
+            if (em.getTransaction().isActive()){
+                em.getTransaction().rollback();
+            }
+            throw new RuntimeException(e);
+        }
+        finally {
+            em.close();
+        }
+    }
+
 }
