@@ -35,10 +35,5 @@ public class UserDataModel {
                 .findFirst()
                 .orElse(null);
     }
-    public User getUserByEmail(String email) {
-        return users.stream()
-                .filter(user -> user.getEmail().equals(email))
-                .findFirst()
-                .orElse(null);
-    }
+
 }
