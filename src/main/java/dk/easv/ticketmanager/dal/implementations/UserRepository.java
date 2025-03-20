@@ -19,7 +19,7 @@ public class UserRepository implements IUserRepository {
     @Override
     public List<User> getByRole(Role role) {
         long roleId = role.getId();
-        return em.createQuery("SELECT u FROM User u WHERE u.role_id = :roleId", User.class)
+        return em.createQuery("SELECT u FROM User u WHERE u.role = :roleId", User.class)
                 .setParameter("roleId", roleId)
                 .getResultList();
     }
