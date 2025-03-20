@@ -7,8 +7,8 @@ import dk.easv.ticketmanager.gui.models.UserDataModel;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.geometry.Insets;
-import javafx.geometry.Pos;
 import javafx.scene.Scene;
+import javafx.geometry.Pos;
 import javafx.scene.control.*;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
@@ -25,7 +25,6 @@ public class UserListDashboardController implements Initializable
 {
   @FXML
   private ListView<User> usersListView;
-  private final UserService userService = new UserService();
   private final UserDataModel userDataModel = new UserDataModel();
 
   @Override public void initialize(URL location, ResourceBundle resources)
@@ -42,9 +41,8 @@ public class UserListDashboardController implements Initializable
     dialogLayout.setAlignment(Pos.CENTER);
 
     Label roleLabel = new Label("Select Role:");
-    ComboBox<String> roleComboBox = new ComboBox<>();
-    roleComboBox.getItems().addAll("Admin", "Coordinator");
-    roleComboBox.setValue("Admin");
+    ComboBox<Role> roleComboBox = new ComboBox<>();
+    roleComboBox.getItems().addAll(userDataModel.getRoles());
 
     GridPane gridPane = new GridPane();
     gridPane.setHgap(10);
@@ -136,7 +134,7 @@ public class UserListDashboardController implements Initializable
       String lastName = lastNameField.getText().trim();
       String phone = phoneField.getText().trim();
       String email = emailField.getText().trim();
-      String role = roleComboBox.getValue();
+      Role role = roleComboBox.getValue();
       String password = passwordField.getText();
 
 
@@ -153,10 +151,10 @@ public class UserListDashboardController implements Initializable
       }
 
 
-      User user = new User(0, firstName, lastName, email, password, phone, "default.jpg", new Role("coordinator"));
+      User user = new User(firstName, lastName, email, password, phone, "default.jpg", role);
 
       try {
-        userService.addUser(user);
+        userDataModel.addNewUser(user);
         resultLabel.setStyle("-fx-text-fill: green;");
         resultLabel.setText("User successfully added.");
 

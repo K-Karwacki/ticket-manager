@@ -14,20 +14,22 @@ import java.util.List;
 public class EventRepository implements IEventRepository
 {
 
-  private final EntityManager em = JPAUtil.getEntityManager();
 
   @Override
   public List<Event> getAll() {
+    EntityManager em = JPAUtil.getEntityManager();
     return em.createQuery("select e from Event e", Event.class).getResultList();
   }
 
   @Override
-  public Event getById(int id) {
+  public Event getById(long id) {
+    EntityManager em = JPAUtil.getEntityManager();
     return em.find(Event.class, id);
   }
 
   @Override
   public void save(Event event){
+    EntityManager em = JPAUtil.getEntityManager();
     EntityTransaction tx = em.getTransaction();
 
     try {
@@ -45,6 +47,7 @@ public class EventRepository implements IEventRepository
 
   @Override
   public void delete(Event event) {
+    EntityManager em = JPAUtil.getEntityManager();
     em.remove(event);
   }
   @Override
@@ -53,16 +56,26 @@ public class EventRepository implements IEventRepository
   }
 
   public void assignCoordinatorToEvent(Event event, User user) {
-    try (EntityManager em = JPAUtil.getEntityManager()) {
-      EntityTransaction tx = em.getTransaction();
+    EntityManager em = JPAUtil.getEntityManager();
+    EntityTransaction tx = em.getTransaction();
+    try {
       tx.begin();
-      event.assignCoordinatorToEvent(user);
-      em.merge(event);
+        event = em.find(Event.class, event.getId());
+        event.assignCoordinatorToEvent(user);
+        em.merge(event);
+      if (event != null) {
+      }
       tx.commit();
     } catch (Exception e) {
+      if (tx.isActive()) {
+        tx.rollback();
+      }
       e.printStackTrace();
+    } finally {
+      em.close();
     }
   }
+
 
   public void dissociateEventFromCoordinator(Event event, User user) {
     try (EntityManager em = JPAUtil.getEntityManager()) {

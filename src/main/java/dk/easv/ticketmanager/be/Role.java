@@ -14,12 +14,6 @@ public class Role {
     @Column(name = "name")
     private String name;
 
-    public Role() {}
-
-    public Role(String name) {
-        this.name = name;
-    }
-
     public void setId(Long id) {
         this.id = id;
     }
@@ -35,6 +29,6 @@ public class Role {
 
     @Override public String toString()
     {
-        return name;
+        return "Role{" + "id=" + id + ", name='" + name + '\'' + '}';
     }
 }
