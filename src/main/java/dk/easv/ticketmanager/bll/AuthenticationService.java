@@ -29,7 +29,7 @@ public class AuthenticationService {
       if (plainPassword == null || hashedPassword == null) {
         return false;
       }
-      return BCrypt.checkpw(plainPassword, hashedPassword); // DELETE LATER - FOR NOW PASSWORDS ARE NOT HASHED IN THE DB
+      return BCrypt.checkpw(plainPassword, hashedPassword);
     } catch (IllegalArgumentException e) {
       return false;
     }

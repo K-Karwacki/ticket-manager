@@ -2,6 +2,7 @@ package dk.easv.ticketmanager.gui.controllers.dashboards;
 
 import dk.easv.ticketmanager.be.Role;
 import dk.easv.ticketmanager.be.User;
+import dk.easv.ticketmanager.bll.AuthenticationService;
 import dk.easv.ticketmanager.bll.UserService;
 import dk.easv.ticketmanager.gui.models.UserDataModel;
 import javafx.fxml.FXML;
@@ -26,6 +27,8 @@ public class UserListDashboardController implements Initializable
   @FXML
   private ListView<User> usersListView;
   private final UserDataModel userDataModel = new UserDataModel();
+  private final AuthenticationService authenticationService = AuthenticationService.getInstance();
+
 
   @Override public void initialize(URL location, ResourceBundle resources)
   {
@@ -150,7 +153,7 @@ public class UserListDashboardController implements Initializable
         return;
       }
 
-
+      password = authenticationService.hashPassword(password);
       User user = new User(firstName, lastName, email, password, phone, "default.jpg", role);
 
       try {

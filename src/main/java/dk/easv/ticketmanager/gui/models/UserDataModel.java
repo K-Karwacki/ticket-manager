@@ -36,4 +36,11 @@ public class UserDataModel {
             .filter(user -> user.getRole().getName().equals("coordinator"))
             .collect(Collectors.toList());
     }
+
+    public User getUserByEmail(String email) {
+        return users.stream()
+                .filter(user -> user.getEmail().equals(email))
+                .findFirst()
+                .orElse(null);
+    }
 }
