@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.geometry.Insets?>
+<?import javafx.scene.Cursor?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.image.Image?>
@@ -18,7 +19,10 @@
          <children>
             <HBox alignment="CENTER" prefHeight="26.0" prefWidth="204.0" spacing="12.0">
                <children>
-                  <Button mnemonicParsing="false" onAction="#showAssignedCoordinators" style="-fx-background-color: #FFE7B1; -fx-border-color: #aaa; -fx-background-radius: 5; -fx-border-radius: 5;" text="Show coordinators" />
+                  <Button mnemonicParsing="false" onAction="#showAssignedCoordinators" style="-fx-background-color: #FFE7B1; -fx-border-color: #aaa; -fx-background-radius: 5; -fx-border-radius: 5;" text="Show coordinators">
+                     <cursor>
+                        <Cursor fx:constant="HAND" />
+                     </cursor></Button>
                </children>
                <VBox.margin>
                   <Insets right="25.0" />

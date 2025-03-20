@@ -38,4 +38,7 @@ public class EventService {
     public void dissociateEventFromCoordinator(Event event, User user){
         eventRepository.dissociateEventFromCoordinator(event, user);
     }
+    public Event getEventById(long id) {
+        return eventRepository.getById(id);
+    }
 }

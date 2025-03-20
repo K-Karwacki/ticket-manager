@@ -5,6 +5,15 @@
 .active{
     -fx-background-color: #FFE7B1;
 }
+.delete{
+    -fx-background-color: #F88;
+    -fx-border-color:  #aaa;
+    -fx-border-radius: 5;
+    -fx-background-radius: 5;
+    -fx-pref-height: 48;
+    -fx-pref-width: 80;
+    -fx-cursor: hand;
+}
 .assign-btn{
     -fx-border-color:  #aaa;
     -fx-border-radius: 5;

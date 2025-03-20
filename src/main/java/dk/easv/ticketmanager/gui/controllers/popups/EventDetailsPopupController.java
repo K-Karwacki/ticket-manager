@@ -3,6 +3,7 @@ package dk.easv.ticketmanager.gui.controllers.popups;
 import dk.easv.ticketmanager.be.Event;
 import dk.easv.ticketmanager.gui.FXMLManager;
 import dk.easv.ticketmanager.gui.controllers.components.CoordinatorCardController;
+import dk.easv.ticketmanager.gui.models.EventDataModel;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.Parent;
@@ -23,7 +24,7 @@ import static dk.easv.ticketmanager.gui.FXMLPath.COORDINATOR_LIST_POPUP;
 
 public class EventDetailsPopupController implements Initializable {
     private final FXMLManager fxmlManager = FXMLManager.getInstance();
-
+    private final EventDataModel eventDataModel = new EventDataModel();
     private Event event;
 
     @FXML

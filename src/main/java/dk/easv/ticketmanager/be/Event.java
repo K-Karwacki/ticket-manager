@@ -48,7 +48,7 @@ public class Event {
           joinColumns = @JoinColumn(name = "event_id"),
           inverseJoinColumns = @JoinColumn(name = "coordinator_id")
   )
-  private List<User> coordinators = new ArrayList<>();
+  private Set<User> coordinators = new HashSet<>();
 
   // Constructors, getters, setters (unchanged except for normalTicketAmount and vipTicketAmount)
   public int getNormalTicketAmount() {
@@ -67,11 +67,11 @@ public class Event {
     this.vipTicketAmount = vipTicketAmount;
   }
 
-  public List<User> getCoordinators() {
+  public Set<User> getCoordinators() {
     return coordinators;
   }
 
-  public void setCoordinators(List<User> coordinators) {
+  public void setCoordinators(Set<User> coordinators) {
     this.coordinators = coordinators;
   }
 
@@ -139,7 +139,7 @@ public class Event {
   public void removeCoordinatorFromEvent(User user) {
     coordinators.remove(user);
   }
-  public List<User> getAssignedCoordinators() {
+  public Set<User> getAssignedCoordinators() {
     return coordinators;
   }
 }

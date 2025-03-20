@@ -22,7 +22,7 @@ public class EventRepository implements IEventRepository
   }
 
   @Override
-  public Event getById(int id) {
+  public Event getById(long id) {
     return em.find(Event.class, id);
   }
 
@@ -53,16 +53,26 @@ public class EventRepository implements IEventRepository
   }
 
   public void assignCoordinatorToEvent(Event event, User user) {
-    try (EntityManager em = JPAUtil.getEntityManager()) {
-      EntityTransaction tx = em.getTransaction();
+    EntityManager em = JPAUtil.getEntityManager();
+    EntityTransaction tx = em.getTransaction();
+    try {
       tx.begin();
-      event.assignCoordinatorToEvent(user);
-      em.merge(event);
+      event = em.find(Event.class, event.getId());
+      if (event != null) {
+        event.assignCoordinatorToEvent(user);
+        em.merge(event);
+      }
       tx.commit();
     } catch (Exception e) {
+      if (tx.isActive()) {
+        tx.rollback();
+      }
       e.printStackTrace();
+    } finally {
+      em.close();
     }
   }
+
 
   public void dissociateEventFromCoordinator(Event event, User user) {
     try (EntityManager em = JPAUtil.getEntityManager()) {

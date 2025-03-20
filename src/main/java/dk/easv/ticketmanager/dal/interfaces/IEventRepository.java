@@ -8,7 +8,7 @@ import java.util.List;
 
 public interface IEventRepository {
     List<Event> getAll();
-    Event getById(int id);
+    Event getById(long id);
     void save(Event event);
     void delete(Event event);
     List<Location> getAllLocations();

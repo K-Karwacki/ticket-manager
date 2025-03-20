@@ -28,7 +28,6 @@ import static dk.easv.ticketmanager.gui.FXMLPath.EVENTS_DASHBOARD;
 import static dk.easv.ticketmanager.gui.FXMLPath.IMAGE_SELECTOR_POPUP;
 
 public class EventCreatorPopupController {
-    private final EventService eventService = new EventService();
     private final EventDataModel eventDataModel = new EventDataModel();
     private final FXMLManager fxmlManager = FXMLManager.getInstance();
     private Event event = new Event();
@@ -61,7 +60,7 @@ public class EventCreatorPopupController {
         setEventData();
         Stage stage = (Stage) txtFieldEventName.getScene().getWindow();
         stage.close();
-        eventService.addEvent(event);
+        eventDataModel.addEvent(event);
         eventDataModel.loadEvents();
         Pair<Parent, EventListDashboardController> p = fxmlManager.getFXML(EVENTS_DASHBOARD);
         p.getValue().load();
