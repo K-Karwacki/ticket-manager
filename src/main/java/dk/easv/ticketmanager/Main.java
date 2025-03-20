@@ -19,7 +19,7 @@ public class Main extends Application
     userDataModel.loadUsers();
     eventDataModel.loadEvents();
     FXMLLoader fxmlLoader = new FXMLLoader(
-        Main.class.getResource("fxml/main/coordinator.fxml"));
+        Main.class.getResource("fxml/main/login.fxml"));
     Scene scene = new Scene(fxmlLoader.load());
     stage.setTitle("Login page");
     stage.setScene(scene);

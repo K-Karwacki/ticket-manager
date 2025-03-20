@@ -1,41 +1,70 @@
 package dk.easv.ticketmanager.gui.controllers.main;
 
 
+import dk.easv.ticketmanager.be.User;
 import dk.easv.ticketmanager.bll.AuthenticationService;
+import dk.easv.ticketmanager.gui.models.UserDataModel;
+import dk.easv.ticketmanager.gui.models.UserSession;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.Alert;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 
 import java.io.IOException;
-import java.sql.SQLOutput;
 
 
 public class LoginWindowController
 {
+    private final UserDataModel userDataModel = new UserDataModel();
+    private final UserSession userSession = UserSession.getInstance();
+
   @FXML private Label errorLabel;
-  @FXML private TextField usernameField;
-  @FXML private TextField passwordField;
+  @FXML private TextField textFieldUsername;
+  @FXML private TextField textFieldPassword;
 
   AuthenticationService authenticationService = AuthenticationService.getInstance();
 
-  public void onClickLogin(ActionEvent actionEvent) throws InterruptedException
-  {
-    if(usernameField.getText().isEmpty() || passwordField.getText().isEmpty()){
-      errorLabel.setText("Username and password cannot be empty.");
+    @FXML
+    private void onClickLogin(ActionEvent actionEvent) {
+        try {
+            String inputUsername = textFieldUsername.getText().trim();
+            String inputPassword = textFieldPassword.getText();
+
+            if (inputUsername.isEmpty() || inputPassword.isEmpty()) {
+                blankInputMessage();
+                return;
+            }
+
+            User authenticatedUser = authenticationService.authenticateUser(inputUsername, inputPassword);
+            if (authenticatedUser != null) {
+                userSession.setUser(authenticatedUser);
+                goToMainPage(actionEvent);
+            } else {
+                errorLabel.setText("Invalid username or password");
+            }
+        } catch (Exception e) {
+            errorLabel.setText("An error occurred during login");
+            e.printStackTrace();
+        }
     }
+  private void userNotFoundMessage(){
+      errorLabel.setText("User not found");
+  }
+  private void wrongPasswordMessage(){
+      errorLabel.setText("Wrong password");
+  }
+  private void blankInputMessage(){
+      errorLabel.setText("Please enter an email and password");
   }
 
-  @FXML
   private void goToMainPage(ActionEvent event) throws IOException {
 
-      FXMLLoader loader = new FXMLLoader(getClass().getResource("/dk/easv/ticketmanager/fxml/main/coordinator.fxml"));
+      FXMLLoader loader = new FXMLLoader(getClass().getResource("/dk/easv/ticketmanager/fxml/main/main.fxml"));
       Parent root = loader.load();
       Stage stage = new Stage();
       stage.setScene(new Scene(root));

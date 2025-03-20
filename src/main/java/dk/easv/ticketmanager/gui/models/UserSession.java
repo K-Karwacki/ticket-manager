@@ -1,32 +1,29 @@
 package dk.easv.ticketmanager.gui.models;
 
+import dk.easv.ticketmanager.be.Role;
+import dk.easv.ticketmanager.be.User;
+
 public class UserSession {
     private static UserSession instance;
-    private String username;
-    private Role role;
+    private User user;
 
-    enum Role{
-        Admin,
-        Coordinator;
-    }
-
-    private UserSession(String username, Role role) {
-        this.username = username;
-        this.role = role;
-    }
-
-    public static void createSession(String username, Role role) {
-        instance = new UserSession(username, role);
-    }
+    private UserSession() {}
 
     public static UserSession getInstance() {
+        if (instance == null)
+            instance = new UserSession();
         return instance;
     }
 
-    public Role getRole() {
-        return role;
+    public void setUser(User user) {
+        this.user = user;
     }
-
+    public User getUser() {
+        return user;
+    }
+    public String getRoleName() {
+        return user.getRole().getName();
+    }
     public void clearSession() {
         instance = null;
     }

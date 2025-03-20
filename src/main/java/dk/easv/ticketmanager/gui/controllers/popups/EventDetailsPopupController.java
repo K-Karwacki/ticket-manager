@@ -4,11 +4,13 @@ import dk.easv.ticketmanager.be.Event;
 import dk.easv.ticketmanager.gui.FXMLManager;
 import dk.easv.ticketmanager.gui.controllers.components.CoordinatorCardController;
 import dk.easv.ticketmanager.gui.models.EventDataModel;
+import dk.easv.ticketmanager.gui.models.UserSession;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.paint.ImagePattern;
@@ -25,7 +27,7 @@ import static dk.easv.ticketmanager.gui.FXMLPath.COORDINATOR_LIST_POPUP;
 
 public class EventDetailsPopupController implements Initializable {
     private final FXMLManager fxmlManager = FXMLManager.getInstance();
-    private final EventDataModel eventDataModel = new EventDataModel();
+    private final UserSession userSession = UserSession.getInstance();
     private Event event;
 
     @FXML
@@ -52,9 +54,14 @@ public class EventDetailsPopupController implements Initializable {
     @FXML
     private Label lblEventName;
 
+    @FXML
+    private Button btnPrintTicket;
+
+    @FXML
+    private Button btnAssign;
+
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-//        setEventDetails();
     }
     @FXML private void showAllCoordinators() {
         Pair<Parent, CoordinatorListPopupController> p = fxmlManager.loadFXML(COORDINATOR_LIST_POPUP);

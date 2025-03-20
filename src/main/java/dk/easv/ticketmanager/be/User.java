@@ -111,4 +111,10 @@ public class User {
     public void assignCoordinator(Event event) {
         this.coordinatedEvents.add(event);
     }
+    public String getEmail() {
+        return email;
+    }
+    public String getPassword() {
+        return password;
+    }
 }
