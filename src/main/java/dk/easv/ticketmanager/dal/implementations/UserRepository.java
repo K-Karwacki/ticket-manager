@@ -66,7 +66,8 @@ public class UserRepository implements IUserRepository {
 
     }
 
-    @Override public List<Role> getRoles()
+    @Override
+    public List<Role> getRoles()
     {
         EntityManager em = JPAUtil.getEntityManager();
         try {

@@ -11,4 +11,5 @@ public interface IUserRepository {
     void save(User user);
     void delete(User user);
 
+    List<Role> getRoles();
 }
