@@ -21,7 +21,7 @@ import java.util.ResourceBundle;
 import static dk.easv.ticketmanager.gui.FXMLPath.COORDINATOR_LIST_POPUP;
 import static dk.easv.ticketmanager.gui.FXMLPath.EVENT_DETAILS_POPUP;
 
-public class CoordinatorCardController
+public class CoordinatorCardController implements Initializable
 {
     private final EventDataModel eventDataModel = new EventDataModel();
     private final FXMLManager fxmlManager = FXMLManager.getInstance();
@@ -41,34 +41,21 @@ public class CoordinatorCardController
     @FXML
     private Button btnAssignButton;
 
+    @FXML
+    private Button btnDeleteButton;
 
-    public void setUser(User user) {
-        this.user = user;
-        lblCoordinatorFirstName.setText(user.getFirst_name());
-        lblCoordinatorLastName.setText(user.getLast_name());
-    }
 
     @FXML
     private void assign(ActionEvent event) {
-        Button btnAssign = (Button) event.getSource();
-        if (btnAssign.getStyleClass().contains("inactive")) {
-            System.out.println(this.event);
-            eventDataModel.assignCoordinatorToEvent(this.event, user);
-            btnAssign.getStyleClass().remove("inactive");
-            btnAssign.getStyleClass().add("active");
-            btnAssign.setText("Assigned");
-        } else {
-            eventDataModel.dissociateEventFromCoordinator(this.event, user);
-            btnAssign.getStyleClass().remove("active");
-            btnAssign.getStyleClass().add("inactive");
-            btnAssign.setText("Assign");
-        }
+        eventDataModel.assignCoordinatorToEvent(this.event, this.user);
+    }
+
+    @FXML
+    private void unassign(ActionEvent event){
+        System.out.println("DELETE");
     }
 
 
-    public void setEvent(Event event) {
-        this.event = event;
-    }
 
     public void setButtonToActive() {
         btnAssignButton.setText("Assigned");
@@ -104,4 +91,29 @@ public class CoordinatorCardController
         });
     }
 
+
+    public void setDependencies(User user, Event event){
+        this.user = user;
+        this.event = event;
+        lblCoordinatorFirstName.setText(user.getFirst_name());
+        lblCoordinatorLastName.setText(user.getLast_name());
+
+        if(user.getCoordinatedEvents().contains(event)){
+            hboxContainer.getChildren().remove(btnAssignButton);
+            if(!hboxContainer.getChildren().contains(btnDeleteButton)){
+                hboxContainer.getChildren().add(btnDeleteButton);
+            }
+        }else{
+            hboxContainer.getChildren().remove(btnDeleteButton);
+            if(!hboxContainer.getChildren().contains(btnAssignButton)){
+                hboxContainer.getChildren().add(btnAssignButton);
+            }
+        }
+    }
+
+    @Override public void initialize(URL location, ResourceBundle resources)
+    {
+//        hboxContainer.getChildren().remove(btnDeleteButton);
+//        hboxContainer.getChildren().remove(btnAssignButton);
+    }
 }
