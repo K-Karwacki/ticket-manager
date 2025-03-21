@@ -1,11 +1,22 @@
 package dk.easv.ticketmanager.be;
 
+import jakarta.persistence.*;
+
+@Entity
+@Table(name = "Customer")
 public class Customer {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
+
+    @Column(name = "first_name")
     private String firstName;
+
+    @Column(name = "last_name")
     private String lastName;
+
+    @Column(name = "email")
     private String email;
-    private int phoneNumber;
 
 
 
@@ -14,7 +25,6 @@ public Customer() {
     this.firstName = "";
     this.lastName = "";
     this.email = "";
-    this.phoneNumber = 0;
 }
 
 public Customer(int id, String firstName, String lastName, String email, int phoneNumber) {
@@ -22,18 +32,15 @@ public Customer(int id, String firstName, String lastName, String email, int pho
     this.firstName = firstName;
     this.lastName = lastName;
     this.email = email;
-    this.phoneNumber = phoneNumber;
     }
 
 public int getId() { return getId(); }
 public String getFirstName() { return firstName; }
 public String getLastName() { return lastName; }
 public String getEmail() { return email; }
-public int getPhoneNumber() {  return phoneNumber; }
 
 public void setId(int id) { this.id = id; }
 public void setFirstName(String firstName) { this.firstName = firstName; }
 public void setLastName(String lastName) { this.lastName = lastName; }
 public void setEmail(String email) { this.email = email; }
-public void setPhoneNumber(int phoneNumber) { this.phoneNumber = phoneNumber; }
 }

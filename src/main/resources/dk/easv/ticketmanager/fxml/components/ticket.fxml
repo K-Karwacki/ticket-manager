@@ -9,10 +9,9 @@
 <?import javafx.scene.shape.Circle?>
 <?import javafx.scene.text.Font?>
 
-
-<HBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="150.0" prefWidth="450.0" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1">
+<HBox fx:controller="dk.easv.ticketmanager.gui.controllers.components.TicketController" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="150.0" prefWidth="450.0" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1">
    <children>
-      <VBox prefHeight="100.0" prefWidth="375.0" styleClass="background" stylesheets="@../../style/components/ticket.css">
+      <VBox fx:id="vboxBackground" prefHeight="100.0" prefWidth="375.0" styleClass="background" stylesheets="@../../style/components/ticket.css">
          <children>
             <VBox alignment="TOP_CENTER" prefHeight="50.0" prefWidth="100.0" styleClass="backdrop3">
                <children>
@@ -33,7 +32,7 @@
                         </Label>
                      </children>
                   </HBox>
-                  <Label text="Event Name" textFill="WHITE">
+                  <Label fx:id="lblEventName" text="Event Name" textFill="WHITE">
                      <font>
                         <Font name="System Bold" size="16.0" />
                      </font>
@@ -46,13 +45,13 @@
                      <children>
                         <HBox alignment="CENTER" prefHeight="73.0" prefWidth="188.0" spacing="10.0" styleClass="backdrop">
                            <children>
-                              <Label text="12  July, 2026">
+                              <Label fx:id="lblEventDate" text="12  July, 2026">
                                  <font>
                                     <Font size="12.0" />
                                  </font>
                               </Label>
                               <Circle radius="2.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" />
-                              <Label text="20:00 - 21:00">
+                              <Label fx:id="lblEventTime" text="20:00 - 21:00">
                                  <font>
                                     <Font size="12.0" />
                                  </font>
@@ -62,7 +61,7 @@
                               <Insets bottom="15.0" left="10.0" right="10.0" top="15.0" />
                            </padding>
                         </HBox>
-                        <Label alignment="CENTER" prefHeight="53.0" prefWidth="280.0" styleClass="backdrop2" text="123,  Anywhere Street, 6700">
+                        <Label fx:id="lblEventAddress" alignment="CENTER" prefHeight="53.0" prefWidth="280.0" styleClass="backdrop2" text="123,  Anywhere Street, 6700">
                            <VBox.margin>
                               <Insets />
                            </VBox.margin>
@@ -74,12 +73,12 @@
                   </VBox>
                   <VBox alignment="TOP_CENTER" prefHeight="100.0" prefWidth="164.0">
                      <children>
-                        <Label alignment="CENTER" prefHeight="65.0" prefWidth="188.0" styleClass="backdrop" text="Price: 95 DKK">
+                        <Label fx:id="lblEventPrice" alignment="CENTER" prefHeight="65.0" prefWidth="188.0" styleClass="backdrop" text="Price: 95 DKK">
                            <padding>
                               <Insets bottom="15.0" top="15.0" />
                            </padding>
                         </Label>
-                        <Label alignment="CENTER" prefWidth="188.0" styleClass="backdrop2" text="Standard Ticket">
+                        <Label fx:id="lblTicketType" alignment="CENTER" prefWidth="188.0" styleClass="backdrop2" text="Standard Ticket">
                            <VBox.margin>
                               <Insets />
                            </VBox.margin>
@@ -98,12 +97,12 @@
       </VBox>
       <VBox alignment="CENTER" prefHeight="100.0" prefWidth="75.0" spacing="5.0" style="-fx-background-color: #FFCE61;">
          <children>
-            <ImageView fitHeight="37.0" fitWidth="37.0" pickOnBounds="true" preserveRatio="true">
+            <ImageView fx:id="imgQR" fitHeight="37.0" fitWidth="37.0" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@../../images/qr-template.png" />
                </image>
             </ImageView>
-            <ImageView fitHeight="98.0" fitWidth="41.0" pickOnBounds="true" preserveRatio="true">
+            <ImageView fx:id="imgBarcode" fitHeight="98.0" fitWidth="41.0" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@../../images/barcode-template.png" />
                </image>
