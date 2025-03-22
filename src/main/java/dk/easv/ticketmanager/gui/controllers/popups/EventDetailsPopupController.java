@@ -26,6 +26,7 @@ import static dk.easv.ticketmanager.gui.FXMLPath.COORDINATOR_LIST_POPUP;
 public class EventDetailsPopupController implements Initializable {
     private final FXMLManager fxmlManager = FXMLManager.getInstance();
     private final EventDataModel eventDataModel = new EventDataModel();
+    private final TicketGeneratorPopupController ticketGeneratorPopupController = new TicketGeneratorPopupController();
     private Event event;
 
     @FXML
@@ -70,6 +71,10 @@ public class EventDetailsPopupController implements Initializable {
         p.getValue().setEvent(event);
         p.getValue().displayAssignedCoordinatorsToTheEventList();
     }
+    
+    @FXML private void showTicketGeneratorForm(){
+        ticketGeneratorPopupController.load(event);
+    }
 
     public void setEventDetails(Event event) {
         this.event = event;
@@ -88,6 +93,7 @@ public class EventDetailsPopupController implements Initializable {
     public Event getEvent() {
         return event;
     }
+
 
 
 }

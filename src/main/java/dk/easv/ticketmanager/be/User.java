@@ -126,11 +126,7 @@ public class User {
 
     @Override public String toString()
     {
-        return "User{" + "firstName='" + firstName + '\'' + ", lastName='"
-            + lastName + '\'' + ", role=" + role + ", email='" + email + '\''
-            + ", password='" + password + '\'' + ", phoneNumber='" + phoneNumber
-            + '\'' + ", imagePath='" + imagePath + '\'' + ", coordinatedEvents="
-            + coordinatedEvents + '}';
+        return firstName + " " + lastName + " " + role.toString();
     }
 
     public String getPassword() {
