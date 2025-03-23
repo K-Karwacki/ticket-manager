@@ -23,11 +23,15 @@ public class Ticket {
     @Column(name = "type")
     private String type;
 
-    public Ticket(Event event, Customer customer, double price, String type) {
+    @Column(name = "ticket_code")
+    private String ticket_code;
+
+    public Ticket(Event event, Customer customer, double price, String type, String ticket_code) {
         this.event = event;
         this.customer = customer;
         this.price = price;
         this.type = type;
+        this.ticket_code = ticket_code;
     }
 
     public Ticket() {
@@ -60,5 +64,11 @@ public class Ticket {
     }
     public long getId() {
         return id;
+    }
+    public void setTicketCode(String ticket_code) {
+        this.ticket_code = ticket_code;
+    }
+    public String getTicketCode() {
+        return ticket_code;
     }
 }

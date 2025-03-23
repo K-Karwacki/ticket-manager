@@ -93,7 +93,4 @@ public class EventDetailsPopupController implements Initializable {
     public Event getEvent() {
         return event;
     }
-
-
-
 }

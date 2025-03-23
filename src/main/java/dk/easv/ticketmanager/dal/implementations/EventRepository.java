@@ -56,7 +56,7 @@ public class EventRepository implements IEventRepository
   }
 
   public void assignCoordinatorToEvent(Event event, User user) {
-    EntityManager em = JPAUtil.getEntityManager();
+    EntityManager em = JPAUtil.getEntityManager(); // Might be bugged because of using the same em
     EntityTransaction tx = em.getTransaction();
     try {
       tx.begin();
