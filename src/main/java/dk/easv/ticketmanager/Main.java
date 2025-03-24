@@ -9,11 +9,13 @@ import javafx.scene.Scene;
 import javafx.stage.Stage;
 
 import java.io.IOException;
+import java.util.Locale;
 
 public class Main extends Application
 {
   @Override public void start(Stage stage) throws IOException
   {
+    Locale.setDefault(Locale.ENGLISH);
     UserDataModel userDataModel = new UserDataModel();
     EventDataModel eventDataModel = new EventDataModel();
     TicketDataModel ticketDataModel = new TicketDataModel();

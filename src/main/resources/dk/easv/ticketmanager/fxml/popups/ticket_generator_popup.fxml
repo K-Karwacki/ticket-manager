@@ -34,7 +34,7 @@
             <Label fx:id="lblTicketPrice" text="Price: " />
          </children>
       </HBox>
-      <Button mnemonicParsing="false" onAction="#generateTicket" style="-fx-background-color: #9CE2FF; -fx-border-radius: 5; -fx-background-radius: 5;" text="Generate">
+      <Button mnemonicParsing="false" onAction="#generateTicket" style="-fx-background-color: #9CE2FF; -fx-border-radius: 5; -fx-background-radius: 5;" styleClass="btn" text="Generate">
          <VBox.margin>
             <Insets top="10.0" />
          </VBox.margin>

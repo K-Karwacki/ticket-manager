@@ -8,6 +8,7 @@ import dk.easv.ticketmanager.gui.controllers.dashboards.EventListDashboardContro
 import dk.easv.ticketmanager.gui.models.EventDataModel;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.DatePicker;
@@ -18,11 +19,14 @@ import javafx.scene.image.ImageView;
 import javafx.stage.Stage;
 import javafx.util.Pair;
 
+import java.net.URL;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
+import java.util.Locale;
 import java.util.Objects;
+import java.util.ResourceBundle;
 
 import static dk.easv.ticketmanager.gui.FXMLPath.EVENTS_DASHBOARD;
 import static dk.easv.ticketmanager.gui.FXMLPath.IMAGE_SELECTOR_POPUP;
