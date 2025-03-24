@@ -25,6 +25,15 @@ public class UserDataModel {
         users.add(user);
     }
 
+    public void editUser(User user){
+        userService.editUser(user);
+    }
+
+    public void deleteUser(User user){
+        userService.deleteUser(user);
+        users.remove(user);
+    }
+
     public List<Role> getRoles()
     {
         return userService.getAllRoles();

@@ -1,6 +1,6 @@
 package dk.easv.ticketmanager.gui.models;
 
-import dk.easv.ticketmanager.be.Role;
+
 import dk.easv.ticketmanager.be.User;
 
 public class UserSession {

@@ -25,6 +25,15 @@ public class UserService {
         }
 
     }
+
+    public void editUser(User user){
+        try {
+            userRepository.edit(user);
+        } catch (Exception e) {
+            throw new RuntimeException("you miserably failed", e);
+        }
+    }
+
     public void deleteUser(User user){
         try{
         userRepository.delete(user);

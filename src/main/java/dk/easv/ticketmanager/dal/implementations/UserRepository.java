@@ -5,8 +5,10 @@ import dk.easv.ticketmanager.be.User;
 import dk.easv.ticketmanager.dal.interfaces.IUserRepository;
 import dk.easv.ticketmanager.utils.JPAUtil;
 import jakarta.persistence.EntityManager;
+import jakarta.persistence.EntityTransaction;
 
 import java.util.List;
+import java.util.logging.Level;
 
 public class UserRepository implements IUserRepository {
     private final EntityManager em = JPAUtil.getEntityManager();
@@ -45,22 +47,38 @@ public class UserRepository implements IUserRepository {
     }
 
     @Override
+    public void edit(User user) {
+        EntityManager em = JPAUtil.getEntityManager();
+        try {
+            em.getTransaction().begin();
+            em.merge(user);
+            em.getTransaction().commit();
+
+        } catch (Exception e) {
+            if (em.getTransaction().isActive()) {
+                em.getTransaction().rollback();
+            }
+            throw new RuntimeException(e);
+        } finally {
+            em.close();
+        }
+    }
+
+
+    @Override
     public void delete(User user) {
         EntityManager em = JPAUtil.getEntityManager();
         try {
             em.getTransaction().begin();
-            em.remove(user);
+            User managedUser = em.contains(user) ? user : em.merge(user);
+            em.remove(managedUser);
             em.getTransaction().commit();
         } catch (Exception e) {
-            if (em.getTransaction().isActive()){
+            if (em.getTransaction().isActive()) {
                 em.getTransaction().rollback();
             }
-            throw new RuntimeException(e);
+            throw new RuntimeException("Failed to delete user", e);
         }
-        finally {
-            em.close();
-        }
-
     }
 
     @Override public List<Role> getRoles()

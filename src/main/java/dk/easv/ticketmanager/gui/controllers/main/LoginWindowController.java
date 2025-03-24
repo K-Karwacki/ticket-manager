@@ -13,6 +13,7 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
+import javafx.scene.input.KeyCode;
 import javafx.stage.Stage;
 
 import java.io.IOException;
@@ -30,7 +31,7 @@ public class LoginWindowController
   AuthenticationService authenticationService = AuthenticationService.getInstance();
 
     @FXML
-    private void onClickLogin(ActionEvent actionEvent) {
+    private void onClickLogin() {
         try {
             String inputUsername = textFieldUsername.getText().trim();
             String inputPassword = textFieldPassword.getText();
@@ -43,7 +44,7 @@ public class LoginWindowController
             User authenticatedUser = authenticationService.authenticateUser(inputUsername, inputPassword);
             if (authenticatedUser != null) {
                 userSession.setUser(authenticatedUser);
-                goToMainPage(actionEvent);
+                goToMainPage();
             } else {
                 errorLabel.setText("Invalid username or password");
             }
@@ -52,6 +53,21 @@ public class LoginWindowController
             e.printStackTrace();
         }
     }
+
+    @FXML
+    public void initialize() {
+        textFieldUsername.setOnKeyPressed(event -> {
+            if(event.getCode() == KeyCode.ENTER) {
+                textFieldPassword.requestFocus();
+            }
+        });
+        textFieldPassword.setOnKeyPressed(event -> {
+            if(event.getCode() == KeyCode.ENTER) {
+                onClickLogin();
+            }
+        });
+    }
+
   private void userNotFoundMessage(){
       errorLabel.setText("User not found");
   }
@@ -62,7 +78,7 @@ public class LoginWindowController
       errorLabel.setText("Please enter an email and password");
   }
 
-  private void goToMainPage(ActionEvent event) throws IOException {
+  private void goToMainPage() throws IOException {
 
       FXMLLoader loader = new FXMLLoader(getClass().getResource("/dk/easv/ticketmanager/fxml/main/main.fxml"));
       Parent root = loader.load();
@@ -73,7 +89,7 @@ public class LoginWindowController
       stage.setMaximized(false);
       stage.show();
 
-      Stage currentStage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+      Stage currentStage = (Stage) textFieldPassword.getScene().getWindow();
       currentStage.close();
   }
 }
