@@ -38,9 +38,6 @@ public class EventListDashboardController implements Initializable
   private FlowPane eventListRoot;
   @FXML
   private ScrollPane eventListScrollPane;
-  @FXML
-  private ComboBox<String> comboBoxCities;
-
 
   public EventListDashboardController() {
     System.out.println(eventDataModel);
@@ -60,7 +57,6 @@ public class EventListDashboardController implements Initializable
 
   public void clear(){
     eventListRoot.getChildren().clear();
-    comboBoxCities.getItems().clear();
   }
 
   public void load() {
@@ -71,6 +67,5 @@ public class EventListDashboardController implements Initializable
       p.getValue().setEvent(event);
       eventListRoot.getChildren().add(p.getKey());
     });
-    comboBoxCities.getItems().setAll(eventDataModel.getCities());
   }
 }

@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import java.lang.String?>
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.Cursor?>
 <?import javafx.scene.control.Button?>
@@ -12,10 +13,10 @@
 <?import javafx.scene.shape.Rectangle?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="550.0" prefWidth="940.0" style="-fx-background-color: D1D1D1;" stylesheets="@../../style/dashboard/dashboard.css" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="dk.easv.ticketmanager.gui.controllers.popups.EventDetailsPopupController">
+<AnchorPane prefHeight="558.0" prefWidth="940.0" style="-fx-background-color: D1D1D1;" stylesheets="@../../style/dashboard/dashboard.css" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="dk.easv.ticketmanager.gui.controllers.popups.EventDetailsPopupController">
    <children>
-      <Rectangle fx:id="rectangleImageContainer" arcHeight="20.0" arcWidth="20.0" fill="DODGERBLUE" height="220.0" layoutX="35.0" layoutY="21.0" stroke="BLACK" strokeType="INSIDE" width="875.0" />
-      <VBox layoutX="36.0" layoutY="272.0" prefHeight="265.0" prefWidth="191.0" spacing="15.0" style="-fx-background-color: F0F0F0; -fx-background-radius: 20;" styleClass="drop-shadow">
+      <Rectangle fx:id="rectangleImageContainer" arcHeight="20.0" arcWidth="20.0" fill="DODGERBLUE" height="220.0" layoutX="35.0" layoutY="21.0" stroke="BLACK" strokeType="INSIDE" width="600.0" />
+      <VBox layoutX="36.0" layoutY="272.0" prefHeight="270.0" prefWidth="191.0" spacing="15.0" style="-fx-background-color: F0F0F0; -fx-background-radius: 20;" styleClass="drop-shadow">
          <children>
             <HBox alignment="CENTER" prefHeight="26.0" prefWidth="204.0" spacing="12.0">
                <children>
@@ -83,7 +84,7 @@
             <Insets left="25.0" top="20.0" />
          </padding>
       </VBox>
-      <Label fx:id="lblEventName" layoutX="258.0" layoutY="272.0" prefHeight="33.0" prefWidth="460.0" style="-fx-background-color: F0F0F0; -fx-background-radius: 20;" styleClass="drop-shadow" text="Event: Event name">
+      <Label fx:id="lblEventName" layoutX="258.0" layoutY="272.0" prefHeight="33.0" prefWidth="377.0" style="-fx-background-color: F0F0F0; -fx-background-radius: 20;" styleClass="drop-shadow" text="Event: Event name">
          <padding>
             <Insets left="20.0" />
          </padding>
@@ -91,23 +92,38 @@
             <Font name="Verdana Bold" size="13.0" />
          </font>
       </Label>
-      <Label fx:id="lblEventDescription" alignment="TOP_LEFT" layoutX="255.0" layoutY="321.0" prefHeight="217.0" prefWidth="460.0" style="-fx-background-color: F0F0F0; -fx-background-radius: 20;" styleClass="drop-shadow" text="As midnight arrives, lanterns light up the sky, carrying wishes into the night. Music, fire performers, and delicious street food fill the riverside park with life. Friends and strangers gather around bonfires, sharing stories until a grand fireworks display closes the magical evening." wrapText="true">
+      <Label fx:id="lblEventDescription" alignment="TOP_LEFT" layoutX="255.0" layoutY="321.0" prefHeight="220.0" prefWidth="377.0" style="-fx-background-color: F0F0F0; -fx-background-radius: 20;" text="As midnight arrives, lanterns light up the sky, carrying wishes into the night. Music, fire performers, and delicious street food fill the riverside park with life. Friends and strangers gather around bonfires, sharing stories until a grand fireworks display closes the magical evening." wrapText="true">
          <padding>
             <Insets left="30.0" right="50.0" top="25.0" />
          </padding>
          <font>
             <Font name="Verdana" size="13.0" />
          </font>
+         <styleClass>
+            <String fx:value="drop-shadow" />
+            <String fx:value="btn" />
+         </styleClass>
       </Label>
-      <Button layoutX="759.0" layoutY="444.0" mnemonicParsing="false" onAction="#showCoordinatorsListPopup" prefHeight="60.0" prefWidth="150.0" style="-fx-border-radius: 10; -fx-background-radius: 10; -fx-background-color: #7BD4F9;" styleClass="drop-shadow" text="Assign to">
+      <Button layoutX="718.0" layoutY="469.0" mnemonicParsing="false" onAction="#showCoordinatorsListPopup" prefHeight="60.0" prefWidth="150.0" style="-fx-background-radius: 10; -fx-background-color: #7BD4F9;" styleClass="btn" text="Assign to">
          <font>
             <Font name="Verdana" size="18.0" />
          </font>
       </Button>
-      <Button layoutX="759.0" layoutY="345.0" mnemonicParsing="false" onAction="#showTicketGeneratorForm" prefHeight="60.0" prefWidth="150.0" style="-fx-border-radius: 10; -fx-background-radius: 10; -fx-background-color: #7BD4F9;" styleClass="drop-shadow" text="Print ticket">
+      <Button layoutX="718.0" layoutY="388.0" mnemonicParsing="false" onAction="#showTicketGeneratorForm" prefHeight="60.0" prefWidth="150.0" style="-fx-background-radius: 10; -fx-background-color: #FFDF99;" styleClass="btn" text="Print ticket">
          <font>
             <Font name="Verdana" size="18.0" />
          </font>
       </Button>
+      <Button layoutX="718.0" layoutY="305.0" mnemonicParsing="false" onAction="#showTicketTypeCreatorForm" prefHeight="60.0" prefWidth="150.0" style="-fx-background-radius: 10; -fx-background-color: #FFDF99;" styleClass="btn" text="Add ticket">
+         <font>
+            <Font name="Verdana" size="18.0" />
+         </font>
+      </Button>
+      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="220.0" layoutX="693.0" layoutY="21.0" stroke="BLACK" strokeType="INSIDE" width="217.0" />
+      <Label layoutX="710.0" layoutY="47.0" prefHeight="156.0" prefWidth="184.0" text="PLACE FOR COORDINATORS ASSIGNED TO THIS EVENT" textAlignment="CENTER" textFill="#863d3d" wrapText="true">
+         <font>
+            <Font size="24.0" />
+         </font>
+      </Label>
    </children>
 </AnchorPane>
