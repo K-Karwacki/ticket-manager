@@ -11,6 +11,8 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
+import javafx.scene.control.Hyperlink;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.input.KeyCode;
@@ -27,8 +29,19 @@ public class LoginWindowController
   @FXML private Label errorLabel;
   @FXML private TextField textFieldUsername;
   @FXML private TextField textFieldPassword;
+  @FXML private Hyperlink forgotPasswordLink;
 
   AuthenticationService authenticationService = AuthenticationService.getInstance();
+
+    private void userNotFoundMessage(){
+        errorLabel.setText("User not found");
+    }
+    private void wrongPasswordMessage(){
+        errorLabel.setText("Wrong password");
+    }
+    private void blankInputMessage(){
+        errorLabel.setText("Please enter an email and password");
+    }
 
     @FXML
     private void onClickLogin() {
@@ -68,16 +81,6 @@ public class LoginWindowController
         });
     }
 
-  private void userNotFoundMessage(){
-      errorLabel.setText("User not found");
-  }
-  private void wrongPasswordMessage(){
-      errorLabel.setText("Wrong password");
-  }
-  private void blankInputMessage(){
-      errorLabel.setText("Please enter an email and password");
-  }
-
   private void goToMainPage() throws IOException {
 
       FXMLLoader loader = new FXMLLoader(getClass().getResource("/dk/easv/ticketmanager/fxml/main/main.fxml"));
@@ -92,4 +95,14 @@ public class LoginWindowController
       Stage currentStage = (Stage) textFieldPassword.getScene().getWindow();
       currentStage.close();
   }
+
+
+    @FXML
+    public void onClickForgotPassword(ActionEvent event) {
+        Alert alert = new Alert(Alert.AlertType.INFORMATION);
+        alert.setTitle("Password Recovery");
+        alert.setHeaderText(null);
+        alert.setContentText("Please check your email for instructions to reset your password.");
+        alert.showAndWait();
+    }
 }
