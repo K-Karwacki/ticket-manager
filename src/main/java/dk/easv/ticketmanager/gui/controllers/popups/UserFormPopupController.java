@@ -19,7 +19,7 @@ public class UserFormPopupController implements Initializable {
     @FXML private ComboBox<Role> roleComboBox;
     @FXML private TextField firstNameField, lastNameField, phoneField, emailField;
     @FXML private PasswordField passwordField;
-    @FXML private Button browseButton, submitButton, cancelButton;
+    @FXML private Button browseButton, submitButton;
     @FXML private ImageView profilePictureView;
     @FXML private Label resultLabel;
 
@@ -32,7 +32,6 @@ public class UserFormPopupController implements Initializable {
 
         browseButton.setOnAction(e -> handleBrowseImage());
         submitButton.setOnAction(e -> handleSubmit());
-        cancelButton.setOnAction(e -> closePopup());
     }
 
     private void handleBrowseImage() {
@@ -54,13 +53,26 @@ public class UserFormPopupController implements Initializable {
         Role role = roleComboBox.getValue();
         String password = passwordField.getText().trim();
 
-        if (firstName.isEmpty() || lastName.isEmpty() || email.isEmpty() || phone.isEmpty() || password.isEmpty()) {
-            resultLabel.setText("Please fill in all fields.");
+        resetFieldStyles();
+        resultLabel.setText("");
+        resetResultLabelColor();
+
+        if (firstName.isEmpty() || lastName.isEmpty() || email.isEmpty() || phone.isEmpty() || password.isEmpty() || role == null) {
+            resultLabel.setText("All fields need to be used.");
+            resultLabel.setStyle("-fx-text-fill: red;");  // Set error text color to red
+            if (firstName.isEmpty()) showError(firstNameField);
+            if (lastName.isEmpty()) showError(lastNameField);
+            if (email.isEmpty()) showError(emailField);
+            if (phone.isEmpty()) showError(phoneField);
+            if (password.isEmpty()) showError(passwordField);
+            if (role == null) showError(roleComboBox);
             return;
         }
 
         if (!phone.matches("\\d{8,12}")) {
+            showError(phoneField);
             resultLabel.setText("Phone number must be between 8 and 12 digits.");
+            resultLabel.setStyle("-fx-text-fill: red;");  // Set error text color to red
             return;
         }
 
@@ -70,13 +82,47 @@ public class UserFormPopupController implements Initializable {
         try {
             userDataModel.addNewUser(user);
             resultLabel.setText("User successfully added.");
+            resultLabel.setStyle("-fx-text-fill: green;");
+
+
+            new Thread(() -> {
+                try {
+                    Thread.sleep(2000);
+                    javafx.application.Platform.runLater(() -> {
+                        Stage stage = (Stage) submitButton.getScene().getWindow();
+                        stage.close();
+                    });
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+            }).start();
+
         } catch (Exception ex) {
             resultLabel.setText("Error: " + ex.getMessage());
+            resultLabel.setStyle("-fx-text-fill: red;");
         }
     }
 
-    private void closePopup() {
-        Stage stage = (Stage) cancelButton.getScene().getWindow();
-        stage.close();
+    private void resetResultLabelColor() {
+        resultLabel.setStyle("-fx-text-fill: black;");
+    }
+
+    private void showError(Control field) {
+        if (field instanceof TextField) {
+            ((TextField) field).setStyle("-fx-border-color: red;");
+        } else if (field instanceof PasswordField) {
+            ((PasswordField) field).setStyle("-fx-border-color: red;");
+        } else if (field instanceof ComboBox) {
+            ((ComboBox<?>) field).setStyle("-fx-border-color: red;");
+        }
+    }
+
+    private void resetFieldStyles() {
+        firstNameField.setStyle("-fx-border-color: transparent;");
+        lastNameField.setStyle("-fx-border-color: transparent;");
+        phoneField.setStyle("-fx-border-color: transparent;");
+        emailField.setStyle("-fx-border-color: transparent;");
+        passwordField.setStyle("-fx-border-color: transparent;");
+        roleComboBox.setStyle("-fx-border-color: transparent;");
     }
 }
