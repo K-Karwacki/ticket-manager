@@ -37,10 +37,10 @@
       <Label text="Time" />
       <TextField fx:id="txtFieldEventTime" promptText="Time (e.g. 21:00 or 20:00 - 21:00)" />
       <Label text="Date" />
-      <DatePicker fx:id="datePickerEventDate" prefHeight="33.0" prefWidth="155.0" />
+      <DatePicker fx:id="datePickerEventDate" prefHeight="33.0" prefWidth="155.0" styleClass="date-picker" />
       <HBox alignment="CENTER_LEFT" prefHeight="88.0" prefWidth="368.0" spacing="75.0">
          <children>
-            <Button mnemonicParsing="false" onAction="#chooseImage" style="-fx-background-color: #FFE7B1;" text="Choose image">
+            <Button mnemonicParsing="false" onAction="#chooseImage" style="-fx-background-color: #FFE7B1;" styleClass="btn" text="Choose image">
                <cursor>
                   <Cursor fx:constant="HAND" />
                </cursor>
@@ -58,12 +58,12 @@
             <Insets bottom="10.0" top="10.0" />
          </VBox.margin>
       </HBox>
-      <Button mnemonicParsing="false" style="-fx-background-color: #FFE7B1;" text="Assign to coordinators">
+      <Button mnemonicParsing="false" style="-fx-background-color: #FFE7B1;" styleClass="btn" text="Assign to coordinators">
          <cursor>
             <Cursor fx:constant="HAND" />
          </cursor>
       </Button>
-      <Button mnemonicParsing="false" onAction="#addEvent" style="-fx-background-color: #9CE2FF; -fx-border-radius: 5; -fx-background-radius: 5;" text="Sumbit">
+      <Button mnemonicParsing="false" onAction="#addEvent" style="-fx-background-color: #9CE2FF; -fx-border-radius: 5; -fx-background-radius: 5;" styleClass="btn" text="Sumbit">
          <VBox.margin>
             <Insets top="10.0" />
          </VBox.margin>

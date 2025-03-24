@@ -17,7 +17,7 @@
 .combo-box{
     -fx-effect: dropshadow(gaussian, #555, 0, 0, -3, 3);
 }
-.button{
+.btn{
     -fx-effect: dropshadow(gaussian, #555, 0, 0, -3, 3);
 }
 .date-picker{
@@ -33,6 +33,9 @@
 .date-picker .arrow-button{
     -fx-background-color: #FFDF99;
     -fx-padding: 10;
+}
+.date-picker.button{
+    -fx-effect: none;
 }
 .image{
     -fx-effect: dropshadow(gaussian, #555, 25, 0, 0, 0);
