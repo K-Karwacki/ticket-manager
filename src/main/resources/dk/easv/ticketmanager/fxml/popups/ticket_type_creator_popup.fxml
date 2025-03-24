@@ -23,7 +23,7 @@
         <TextField fx:id="txtFieldTicketTypeName" />
       <Label text="Price" />
         <TextField fx:id="txtFieldTicketPrice" />
-        <Button mnemonicParsing="false" onAction="#addTicketType" style="-fx-background-color: #9CE2FF; -fx-border-radius: 5; -fx-background-radius: 5;" styleClass="btn" text="Sumbit">
+        <Button mnemonicParsing="false" onAction="#addTicketType" style="-fx-background-color: #9CE2FF; -fx-border-radius: 5; -fx-background-radius: 5;" text="Sumbit">
             <VBox.margin>
                 <Insets top="10.0" />
             </VBox.margin>
