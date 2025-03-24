@@ -25,6 +25,8 @@ public class FXMLPath
   public final static String IMAGE_SELECTOR_POPUP = "fxml/popups/image_selector_popup.fxml";
   public final static String COORDINATOR_LIST_POPUP = "fxml/popups/coordinator_list_popup.fxml";
   public final static String TICKET_GENERATOR_POPUP = "fxml/popups/ticket_generator_popup.fxml";
+  public final static String USER_FORM_POPUP = "fxml/popups/user_form_popup.fxml";
+  public final static String EDIT_USER_POPUP = "fxml/popups/edit_user_popup.fxml";
   public final static String PROFILE_SETTINGS_POPUP = "fxml/popups/profile_settings_popup.fxml";
   public final static String TICKET_TYPE_CREATOR_POPUP = "fxml/popups/ticket_type_creator_popup.fxml";
   public final static String SPECIAL_TICKET_TYPE_CREATOR_POPUP = "fxml/popups/special_ticket_type_creator_popup.fxml";
