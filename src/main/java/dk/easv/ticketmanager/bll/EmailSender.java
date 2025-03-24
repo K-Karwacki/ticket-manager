@@ -7,7 +7,7 @@ import java.io.File;
 import java.util.Properties;
 
 public class EmailSender {
-    public void sendEmail(String recipient, String subject, File attachment) {
+    public static void sendEmail(String recipient, String subject, File attachment) {
         final String senderEmail = "ticketmanagerpaki@gmail.com";
         final String senderPassword = "neua mutj wypy jsbu";
 
@@ -15,7 +15,7 @@ public class EmailSender {
         properties.put("mail.smtp.auth", "true");
         properties.put("mail.smtp.starttls.enable", "true");
         properties.put("mail.smtp.host", "smtp.gmail.com");
-        properties.put("mail.smtp.port", "587");
+        properties.put("mail.smtp.port", "465");
 
         Session session = Session.getInstance(properties, new Authenticator() {
             @Override
@@ -35,7 +35,7 @@ public class EmailSender {
 
             // Attachment
             MimeBodyPart attachmentPart = new MimeBodyPart();
-            attachmentPart.attachFile(attachment);
+//            attachmentPart.attachFile(attachment);
 
             // Combine both parts
             Multipart multipart = new MimeMultipart();
@@ -51,5 +51,8 @@ public class EmailSender {
         } catch (Exception e) {
             e.printStackTrace();
         }
+    }
+    public static void main(String[] args) {
+        sendEmail("pawelchrostek22@gmail.com", "Test", null);
     }
 }

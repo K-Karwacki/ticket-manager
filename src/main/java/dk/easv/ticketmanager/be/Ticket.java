@@ -10,26 +10,18 @@ public class Ticket {
     private long id;
 
     @ManyToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "event_id")
-    private Event event;
-
-    @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "customer_id")
     private Customer customer;
 
-    @Column(name = "price")
-    private double price;
-
-    @Column(name = "type")
-    private String type;
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "type_id")
+    private TicketType type;
 
     @Column(name = "ticket_code")
     private String ticket_code;
 
-    public Ticket(Event event, Customer customer, double price, String type, String ticket_code) {
-        this.event = event;
+    public Ticket(Event event, Customer customer, double price, TicketType type, String ticket_code) {
         this.customer = customer;
-        this.price = price;
         this.type = type;
         this.ticket_code = ticket_code;
     }
@@ -39,21 +31,15 @@ public class Ticket {
     }
 
     public Event getEvent() {
-        return event;
-    }
-    public void setEvent(Event event) {
-        this.event = event;
+        return type.getEvent();
     }
     public double getPrice() {
-        return price;
+        return type.getPrice();
     }
-    public void setPrice(double price) {
-        this.price = price;
-    }
-    public String getType() {
+    public TicketType getType() {
         return type;
     }
-    public void setType(String type) {
+    public void setType(TicketType type) {
         this.type = type;
     }
     public Customer getCustomer() {

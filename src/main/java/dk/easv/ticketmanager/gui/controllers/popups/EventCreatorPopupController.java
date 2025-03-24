@@ -46,11 +46,7 @@ public class EventCreatorPopupController {
     @FXML
     private TextField txtFieldEventLocationName;
     @FXML
-    private TextField txtFieldEventAddress1;
-    @FXML
-    private TextField txtFieldEventAddress2;
-    @FXML
-    private TextField txtFieldEventAddress3;
+    private TextField txtFieldEventAddress;
     @FXML
     private TextField txtFieldEventCity;
     @FXML
@@ -61,7 +57,7 @@ public class EventCreatorPopupController {
         Stage stage = (Stage) txtFieldEventName.getScene().getWindow();
         stage.close();
         eventDataModel.addEvent(event);
-        eventDataModel.loadEvents();
+        eventDataModel.load();
         Pair<Parent, EventListDashboardController> p = fxmlManager.getFXML(EVENTS_DASHBOARD);
         p.getValue().load();
     }
@@ -71,16 +67,15 @@ public class EventCreatorPopupController {
         location.setName(txtFieldEventLocationName.getText());
         location.setCity(txtFieldEventCity.getText());
         location.setPostCode(txtFieldEventPostalCode.getText());
-        location.setAddress1(txtFieldEventAddress1.getText());
-        location.setAddress2(txtFieldEventAddress2.getText());
-        location.setAddress3(txtFieldEventAddress3.getText());
+        location.setAddress(txtFieldEventAddress.getText());
+
 
         event.setLocation(location);
         event.setImagePath(imagePath);
         event.setName(txtFieldEventName.getText());
         event.setDescription(txtAreaEventDescription.getText());
         event.setDate(datePickerEventDate.getValue());
-        event.setTime(LocalTime.parse(txtFieldEventTime.getText(), DateTimeFormatter.ofPattern("HH:mm")));
+        event.setTime(txtFieldEventTime.getText());
         event.setDate(datePickerEventDate.getValue());
     }
 

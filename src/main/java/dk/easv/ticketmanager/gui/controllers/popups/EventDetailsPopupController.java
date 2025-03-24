@@ -1,5 +1,6 @@
 package dk.easv.ticketmanager.gui.controllers.popups;
 
+import com.sun.jdi.PrimitiveValue;
 import dk.easv.ticketmanager.be.Event;
 import dk.easv.ticketmanager.gui.FXMLManager;
 import dk.easv.ticketmanager.gui.controllers.components.CoordinatorCardController;
@@ -27,6 +28,9 @@ public class EventDetailsPopupController implements Initializable {
     private final FXMLManager fxmlManager = FXMLManager.getInstance();
     private final EventDataModel eventDataModel = new EventDataModel();
     private final TicketGeneratorPopupController ticketGeneratorPopupController = new TicketGeneratorPopupController();
+    private final TicketTypeCreatorPopupController ticketTypeCreatorPopupController = new TicketTypeCreatorPopupController();
+    private final int IMAGE_WIDTH = 875;
+    private final int IMAGE_HEIGHT = 220;
     private Event event;
 
     @FXML
@@ -64,8 +68,6 @@ public class EventDetailsPopupController implements Initializable {
 
     }
 
-
-
     @FXML private void showAssignedCoordinatorsToEventPopup(){
         Pair<Parent, CoordinatorListPopupController> p = fxmlManager.loadFXML(COORDINATOR_LIST_POPUP);
         p.getValue().setEvent(event);
@@ -74,6 +76,9 @@ public class EventDetailsPopupController implements Initializable {
     
     @FXML private void showTicketGeneratorForm(){
         ticketGeneratorPopupController.load(event);
+    }
+    @FXML private void showTicketTypeCreatorForm(){
+        ticketTypeCreatorPopupController.load(event);
     }
 
     public void setEventDetails(Event event) {
@@ -86,11 +91,11 @@ public class EventDetailsPopupController implements Initializable {
         lblEventDescription.setText(event.getDescription());
         lblEventName.setText(event.getName());
         Image image = new Image(Objects.requireNonNull(getClass().getResource(event.getImagePath())).toExternalForm());
-        ImagePattern imagePattern = new ImagePattern(image);
-        rectangleImageContainer.setFill(imagePattern);
+        rectangleImageContainer.setFill(new ImagePattern(image));
     }
 
     public Event getEvent() {
         return event;
     }
+
 }

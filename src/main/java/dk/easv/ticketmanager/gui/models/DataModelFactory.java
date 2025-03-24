@@ -21,8 +21,8 @@ public class DataModelFactory
   public static TicketDataModel getTicketDataModel(){return ticketDataModel;}
 
   public void loadModels(){
-    userDataModel.loadUsers();
-    eventDataModel.loadEvents();
-    ticketDataModel.loadTickets();
+    userDataModel.load();
+    eventDataModel.load();
+    ticketDataModel.load();
   }
 }

@@ -41,8 +41,8 @@ public class TicketController {
         lblEventName.setText(ticket.getEvent().getName());
         lblEventTime.setText(ticket.getEvent().getTime().toString());
         lblEventDate.setText(ticket.getEvent().getDate().toString());
-        lblEventPrice.setText(String.valueOf(ticket.getPrice()) + " DKK");
-        lblTicketType.setText(ticket.getType());
+        lblEventPrice.setText(ticket.getType().getPrice() + " DKK");
+        lblTicketType.setText(ticket.getType().getName());
         lblEventAddress.setText(String.valueOf(ticket.getEvent().getLocation()));
         Image QRCode = ticketDataModel.generateQRCode(ticket.getTicketCode());
         Image Barcode = ticketDataModel.generateBarcode(ticket.getTicketCode());

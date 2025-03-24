@@ -1,9 +1,17 @@
 .dashboard-root{
   -fx-background-color: #c8c8c8;
 }
+.checkBox .box{
+    -fx-pref-width: 25;
+    -fx-pref-height: 25;
+    -fx-background-color: #FFDF99;
+    -fx-effect: dropshadow(gaussian, #555, 0, 0, -2, 2);
+}
 
-
-
+.btn{
+    -fx-effect: dropshadow(gaussian, #555, 0, 0, -3, 3);
+    -fx-cursor: hand;
+}
 .coordinators-window{
     -fx-effect: dropshadow(gaussian, #50505040, 5, 0, -3, 7);
     -fx-background-radius: 10px;

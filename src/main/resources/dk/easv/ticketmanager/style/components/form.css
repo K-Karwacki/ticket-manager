@@ -1,0 +1,39 @@
+.container{
+    -fx-background-color: #c8c8c8;
+    -fx-spacing: 5;
+}
+.text-field{
+    -fx-effect: dropshadow(gaussian, #555, 0, 0, -3, 3);
+    -fx-padding: 8;
+}
+.text-area{
+    -fx-effect: dropshadow(gaussian, #555, 0, 0, -3, 3);
+}
+.text-field:focused, .text-area:focused, .date-picker:focused{
+    -fx-focus-color: #FFDF99;
+    -fx-faint-focus-color:transparent;
+    -fx-effect: dropshadow(gaussian, #FFDF99, 0, 2, -3, 3);
+}
+.combo-box{
+    -fx-effect: dropshadow(gaussian, #555, 0, 0, -3, 3);
+}
+.button{
+    -fx-effect: dropshadow(gaussian, #555, 0, 0, -3, 3);
+}
+.date-picker{
+    -fx-effect: dropshadow(gaussian, #555, 0, 0, -3, 3);
+}
+.date-picker .text-field {
+    -fx-effect: none;
+}
+.date-picker .text-field:focused{
+    -fx-focus-color: transparent;
+    -fx-faint-focus-color: transparent;
+}
+.date-picker .arrow-button{
+    -fx-background-color: #FFDF99;
+    -fx-padding: 10;
+}
+.image{
+    -fx-effect: dropshadow(gaussian, #555, 25, 0, 0, 0);
+}

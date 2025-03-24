@@ -1,6 +1,7 @@
 package dk.easv.ticketmanager;
 
 import dk.easv.ticketmanager.gui.models.EventDataModel;
+import dk.easv.ticketmanager.gui.models.TicketDataModel;
 import dk.easv.ticketmanager.gui.models.UserDataModel;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
@@ -15,8 +16,10 @@ public class Main extends Application
   {
     UserDataModel userDataModel = new UserDataModel();
     EventDataModel eventDataModel = new EventDataModel();
-    userDataModel.loadUsers();
-    eventDataModel.loadEvents();
+    TicketDataModel ticketDataModel = new TicketDataModel();
+    userDataModel.load();
+    eventDataModel.load();
+    ticketDataModel.load();
     FXMLLoader fxmlLoader = new FXMLLoader(
         Main.class.getResource("fxml/main/login.fxml"));
     Scene scene = new Scene(fxmlLoader.load());
