@@ -21,17 +21,15 @@ public class TicketRepository implements ITicketRepository {
     @Override
     public void addTicket(Ticket ticket) {
         EntityManager em = JPAUtil.getEntityManager();
-        EntityTransaction tx = em.getTransaction();
-
         try {
-            tx.begin();
+            em.getTransaction().begin();
             Event managedEvent = em.merge(ticket.getEvent());
             ticket.setEvent(managedEvent);
 
             em.persist(ticket);
-            tx.commit();
+            em.getTransaction().commit();
         } catch (Exception e) {
-            if (tx.isActive()) tx.rollback();
+            if (em.getTransaction().isActive()) em.getTransaction().rollback();
             e.printStackTrace();
         } finally {
             em.close();

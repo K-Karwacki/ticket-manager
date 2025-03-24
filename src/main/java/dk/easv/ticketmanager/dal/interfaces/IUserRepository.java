@@ -9,6 +9,7 @@ public interface IUserRepository {
     List<User> getAll();
     List<User> getByRole(Role role);
     void save(User user);
+    void edit(User user);
     void delete(User user);
     List<Role> getRoles();
 }

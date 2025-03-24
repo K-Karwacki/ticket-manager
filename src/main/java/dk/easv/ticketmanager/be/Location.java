@@ -30,15 +30,6 @@ public class Location
 
   @Override
   public String toString() {
-    if(address2.isEmpty() && address3.isEmpty()){
-      return name + ", " + address1 + ", " + city + ", " + postCode;
-    }
-    else if(address2.isEmpty()){
-      return name + ", " + address1 + ", "  + address3 + ", " + city + ", " + postCode;
-    }
-    else if(address3.isEmpty()){
-      return name + ", " + address1 + ", "  + address2 + ", " + city + ", " + postCode;
-    }
     return name + ", " + address1 + ", " + address2 + ", " + address3 + ", " + city + ", " + postCode;
   }
   public void setAddress1(String address1){
