@@ -57,7 +57,7 @@ public class LoginWindowController
             User authenticatedUser = authenticationService.authenticateUser(inputUsername, inputPassword);
             if (authenticatedUser != null) {
                 userSession.setUser(authenticatedUser);
-                goToMainPage();
+                goToMainPage(actionEvent);
             } else {
                 errorLabel.setText("Invalid username or password");
             }
@@ -81,7 +81,7 @@ public class LoginWindowController
         });
     }
 
-  private void goToMainPage() throws IOException {
+  private void goToMainPage(ActionEvent event) throws IOException {
 
       FXMLLoader loader = new FXMLLoader(getClass().getResource("/dk/easv/ticketmanager/fxml/main/main.fxml"));
       Parent root = loader.load();
@@ -92,7 +92,7 @@ public class LoginWindowController
       stage.setMaximized(false);
       stage.show();
 
-      Stage currentStage = (Stage) textFieldPassword.getScene().getWindow();
+      Stage currentStage = (Stage) ((Node) event.getSource()).getScene().getWindow();
       currentStage.close();
   }
 
