@@ -37,7 +37,7 @@ public class UserListDashboardController implements Initializable {
     Stage popupStage = new Stage();
     popupStage.setTitle("Add New User");
 
-    Scene scene = new Scene(p.getKey());
+    Scene scene = new Scene(p.getKey(), 400, 400);
     popupStage.setScene(scene);
     popupStage.show();
   }
@@ -56,7 +56,7 @@ public class UserListDashboardController implements Initializable {
     Stage popupStage = new Stage();
     popupStage.setTitle("Edit User");
 
-    Scene scene = new Scene(p.getKey());
+    Scene scene = new Scene(p.getKey(), 400, 400);
     popupStage.setScene(scene);
     popupStage.show();
   }
