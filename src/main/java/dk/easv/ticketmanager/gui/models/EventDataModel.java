@@ -12,7 +12,7 @@ public class EventDataModel {
     private static final ObservableList<String> cities = FXCollections.observableArrayList();
 
     public EventDataModel(){}
-    public void loadEvents(){
+    public void load(){
         events.setAll(eventService.getAllEvents());
         cities.setAll(eventService.getAllUniqueCities());
     }
@@ -28,11 +28,11 @@ public class EventDataModel {
 
     public void assignCoordinatorToEvent(Event event, User user){
         eventService.assignCoordinatorToEvent(event, user);
-        loadEvents();
+        load();
     }
     public void dissociateEventFromCoordinator(Event event, User user){
         eventService.dissociateEventFromCoordinator(event, user);
-        loadEvents();
+        load();
     }
     public Event getEventById(long id) {
         return eventService.getEventById(id);

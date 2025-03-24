@@ -14,7 +14,7 @@ public class UserDataModel {
     private static final ObservableList<User> users = FXCollections.observableArrayList();
     public UserDataModel() {
     }
-    public void loadUsers(){
+    public void load(){
         users.setAll(userService.getAllUsers());
     }
     public ObservableList<User> getUsers() {

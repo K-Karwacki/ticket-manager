@@ -29,7 +29,7 @@ public class Event {
   private LocalDate date;
 
   @Column(name = "time")
-  private LocalTime time;
+  private String time;
 
   @OneToOne(cascade = CascadeType.ALL)
   @JoinColumn(name = "location_id")
@@ -94,10 +94,10 @@ public class Event {
   public void setDate(LocalDate date) {
     this.date = date;
   }
-  public LocalTime getTime() {
+  public String getTime() {
     return time;
   }
-  public void setTime(LocalTime time) {
+  public void setTime(String time) {
     this.time = time;
   }
   public long getId() {

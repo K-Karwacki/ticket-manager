@@ -2,6 +2,7 @@ package dk.easv.ticketmanager.bll;
 
 import java.io.File;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.UUID;
 
@@ -11,7 +12,9 @@ import com.google.zxing.MultiFormatWriter;
 import com.google.zxing.WriterException;
 import com.google.zxing.common.BitMatrix;
 import com.google.zxing.qrcode.QRCodeWriter;
+import dk.easv.ticketmanager.be.Event;
 import dk.easv.ticketmanager.be.Ticket;
+import dk.easv.ticketmanager.be.TicketType;
 import javafx.scene.image.Image;
 import javafx.scene.image.PixelWriter;
 import javafx.scene.image.WritableImage;
@@ -77,4 +80,11 @@ public class TicketService {
 //        emailSender.sendEmail(email, subject, ticketImage);
 //    }
 
+    public void addTicketType(TicketType ticketType){
+        ticketRepository.addTicketType(ticketType);
+    }
+
+    public List<TicketType> getAllTicketTypes() {
+        return ticketRepository.getAllTicketTypes();
+    }
 }
