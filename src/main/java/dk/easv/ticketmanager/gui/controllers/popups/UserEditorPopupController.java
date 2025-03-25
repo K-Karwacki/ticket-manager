@@ -7,7 +7,7 @@ import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.stage.Stage;
 
-public class EditUserPopupController {
+public class UserEditorPopupController {
 
     @FXML
     private TextField textFieldFirstName;
@@ -26,7 +26,6 @@ public class EditUserPopupController {
 
     private User user;
     private final UserRepository userRepository = new UserRepository();
-
     public void setUser(User user) {
         this.user = user;
         if (user != null) {
@@ -34,7 +33,6 @@ public class EditUserPopupController {
             textFieldLastName.setText(user.getLastName());
             textFieldEmail.setText(user.getEmail());
             textFieldPhone.setText(user.getPhoneNumber());
-            textFieldPassword.setText(user.getPassword());
         }
     }
 

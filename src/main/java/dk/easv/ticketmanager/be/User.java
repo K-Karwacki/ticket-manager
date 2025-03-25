@@ -1,5 +1,6 @@
 package dk.easv.ticketmanager.be;
 
+import dk.easv.ticketmanager.bll.AuthenticationService;
 import jakarta.persistence.*;
 import javafx.scene.image.Image;
 
@@ -42,25 +43,12 @@ public class User {
     public User() {
         // Minimal defaults
     }
-
-    // Parameterized constructor
-    public User(long id, String firstName, String lastName, String email, String password, String phoneNumber, String imagePath, Role role) {
-        this.id = id;
-        this.firstName = firstName;
-        this.lastName = lastName;
-        this.email = email;
-        this.password = password;
-        this.phoneNumber = phoneNumber;
-        this.imagePath = imagePath;
-        this.role = role;
-    }
-
     public User(String firstName, String lastName, String email, String password, String phone, String imagePath, Role role)
     {
         this.firstName = firstName;
         this.lastName = lastName;
         this.email = email;
-        this.password = password;
+        this.password = AuthenticationService.hashPassword(password);
         this.phoneNumber = phone;
         this.imagePath = imagePath;
         this.role = role;
@@ -91,7 +79,7 @@ public class User {
     public String getPassword() {
         return password;
     }
-    public void setPassword(String password) {this.password = password;}
+    public void setPassword(String password) {this.password = AuthenticationService.hashPassword(password);}
 
     public String getImagePath() {return imagePath;}
     public void setImagePath(String imagePath) {this.imagePath = imagePath;}

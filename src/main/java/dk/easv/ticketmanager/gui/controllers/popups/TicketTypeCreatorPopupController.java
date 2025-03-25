@@ -17,6 +17,7 @@ import static dk.easv.ticketmanager.gui.FXMLPath.TICKET_TYPE_CREATOR_POPUP;
 public class TicketTypeCreatorPopupController {
     private final TicketDataModel ticketDataModel = new TicketDataModel();
     private final FXMLManager fxmlManager = FXMLManager.getInstance();
+
     private Event event;
 
     @FXML
