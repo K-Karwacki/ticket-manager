@@ -1,19 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import java.lang.String?>
-<?import javafx.geometry.Insets?>
-<?import javafx.scene.Cursor?>
-<?import javafx.scene.control.Button?>
-<?import javafx.scene.control.Label?>
-<?import javafx.scene.image.Image?>
-<?import javafx.scene.image.ImageView?>
-<?import javafx.scene.layout.AnchorPane?>
-<?import javafx.scene.layout.HBox?>
-<?import javafx.scene.layout.VBox?>
-<?import javafx.scene.shape.Rectangle?>
-<?import javafx.scene.text.Font?>
+<?import java.lang.*?>
+<?import javafx.geometry.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.shape.*?>
+<?import javafx.scene.text.*?>
 
-<AnchorPane prefHeight="558.0" prefWidth="940.0" style="-fx-background-color: D1D1D1;" stylesheets="@../../style/dashboard/dashboard.css" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="dk.easv.ticketmanager.gui.controllers.popups.EventDetailsPopupController">
+<AnchorPane prefHeight="558.0" prefWidth="940.0" style="-fx-background-color: D1D1D1;" stylesheets="@../../style/dashboard/dashboard.css" xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1" fx:controller="dk.easv.ticketmanager.gui.controllers.popups.EventDetailsPopupController">
    <children>
       <Rectangle fx:id="rectangleImageContainer" arcHeight="20.0" arcWidth="20.0" fill="DODGERBLUE" height="220.0" layoutX="35.0" layoutY="21.0" stroke="BLACK" strokeType="INSIDE" width="600.0" />
       <VBox layoutX="36.0" layoutY="272.0" prefHeight="270.0" prefWidth="191.0" spacing="15.0" style="-fx-background-color: F0F0F0; -fx-background-radius: 20;" styleClass="drop-shadow">
@@ -104,17 +100,17 @@
             <String fx:value="btn" />
          </styleClass>
       </Label>
-      <Button layoutX="718.0" layoutY="469.0" mnemonicParsing="false" onAction="#showCoordinatorsListPopup" prefHeight="60.0" prefWidth="150.0" style="-fx-background-radius: 10; -fx-background-color: #7BD4F9;" styleClass="btn" text="Assign to">
+      <Button layoutX="718.0" layoutY="412.0" mnemonicParsing="false" onAction="#showCoordinatorsListPopup" prefHeight="60.0" prefWidth="150.0" style="-fx-background-radius: 10; -fx-background-color: #7BD4F9;" styleClass="btn" text="Assign to">
          <font>
             <Font name="Verdana" size="18.0" />
          </font>
       </Button>
-      <Button layoutX="718.0" layoutY="388.0" mnemonicParsing="false" onAction="#showTicketGeneratorForm" prefHeight="60.0" prefWidth="150.0" style="-fx-background-radius: 10; -fx-background-color: #FFDF99;" styleClass="btn" text="Print ticket">
+      <Button layoutX="718.0" layoutY="342.0" mnemonicParsing="false" onAction="#showTicketGeneratorForm" prefHeight="60.0" prefWidth="150.0" style="-fx-background-radius: 10; -fx-background-color: #FFDF99;" styleClass="btn" text="Print ticket">
          <font>
             <Font name="Verdana" size="18.0" />
          </font>
       </Button>
-      <Button layoutX="718.0" layoutY="305.0" mnemonicParsing="false" onAction="#showTicketTypeCreatorForm" prefHeight="60.0" prefWidth="150.0" style="-fx-background-radius: 10; -fx-background-color: #FFDF99;" styleClass="btn" text="Add ticket">
+      <Button layoutX="718.0" layoutY="273.0" mnemonicParsing="false" onAction="#showTicketTypeCreatorForm" prefHeight="60.0" prefWidth="150.0" style="-fx-background-radius: 10; -fx-background-color: #FFDF99;" styleClass="btn" text="Add ticket">
          <font>
             <Font name="Verdana" size="18.0" />
          </font>
@@ -125,5 +121,10 @@
             <Font size="24.0" />
          </font>
       </Label>
+      <Button fx:id="deleteButton" layoutX="718.0" layoutY="481.0" mnemonicParsing="false" onAction="#onClickDelete" prefHeight="60.0" prefWidth="150.0" style="-fx-background-radius: 10; -fx-background-color: #F77;" styleClass="btn" text="Delete Event">
+         <font>
+            <Font name="Verdana" size="18.0" />
+         </font>
+      </Button>
    </children>
 </AnchorPane>

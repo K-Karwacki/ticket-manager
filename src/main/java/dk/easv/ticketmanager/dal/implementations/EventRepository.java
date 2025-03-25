@@ -48,8 +48,22 @@ public class EventRepository implements IEventRepository
   @Override
   public void delete(Event event) {
     EntityManager em = JPAUtil.getEntityManager();
-    em.remove(event);
+    EntityTransaction tx = em.getTransaction();
+    try {
+      tx.begin();
+      Event managedEvent = em.merge(event); // Merge to get the managed instance
+      em.remove(managedEvent); // Remove the managed entity
+      tx.commit();
+    } catch (Exception e) {
+      if (tx.isActive()) {
+        tx.rollback();
+      }
+      throw new RuntimeException("Failed to delete event: " + e.getMessage(), e);
+    } finally {
+      em.close();
+    }
   }
+
   @Override
   public List<Location> getAllLocations() {
     return new ArrayList<>();

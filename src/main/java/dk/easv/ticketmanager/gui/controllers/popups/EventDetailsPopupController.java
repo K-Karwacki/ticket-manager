@@ -10,6 +10,9 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
+import javafx.scene.control.Button;
+import javafx.scene.control.ButtonType;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.paint.ImagePattern;
@@ -20,6 +23,8 @@ import javafx.util.Pair;
 import java.net.URL;
 import java.util.Objects;
 import java.util.ResourceBundle;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 import static dk.easv.ticketmanager.gui.FXMLPath.COORDINATOR_CARD_COMPONENT;
 import static dk.easv.ticketmanager.gui.FXMLPath.COORDINATOR_LIST_POPUP;
@@ -57,6 +62,9 @@ public class EventDetailsPopupController implements Initializable {
     @FXML
     private Label lblEventName;
 
+    @FXML
+    private Button deleteButton;
+
     @Override
     public void initialize(URL location, ResourceBundle resources) {
 //        setEventDetails();
@@ -91,11 +99,56 @@ public class EventDetailsPopupController implements Initializable {
         lblEventDescription.setText(event.getDescription());
         lblEventName.setText(event.getName());
         Image image = new Image(Objects.requireNonNull(getClass().getResource(event.getImagePath())).toExternalForm());
-        rectangleImageContainer.setFill(new ImagePattern(image));
+
     }
 
     public Event getEvent() {
         return event;
     }
 
+    @FXML
+    public void onClickDelete() {
+        Alert confirmation = new Alert(Alert.AlertType.CONFIRMATION);
+        confirmation.setTitle("Confirm Deletion");
+        confirmation.setHeaderText("Delete Event");
+        confirmation.setContentText("Are you sure you want to delete " + event.getName() + "?");
+
+        confirmation.showAndWait().ifPresent(response -> {
+            if (response == ButtonType.OK) {
+                try {
+                    eventDataModel.deleteEvent(event);
+
+
+                    Alert successAlert = new Alert(Alert.AlertType.INFORMATION);
+                    successAlert.setTitle("Success");
+                    successAlert.setHeaderText(null);
+                    successAlert.setContentText("Event deleted successfully.");
+
+                    successAlert.show();
+                    new Thread(() -> {
+                        try {
+                            Thread.sleep(2000);
+                            javafx.application.Platform.runLater(() -> {
+                                successAlert.close();
+                                Stage stage = (Stage) deleteButton.getScene().getWindow();
+                                stage.close();
+                            });
+                        } catch (InterruptedException e) {
+                            Thread.currentThread().interrupt(); //
+                        }
+                    }).start();
+
+                } catch (Exception e) {
+                    showAlert(Alert.AlertType.ERROR, "Error", "Failed to delete event: " + e.getMessage());
+                }
+            }
+        });
+    }
+    private void showAlert(Alert.AlertType type, String title, String content) {
+        Alert alert = new Alert(type);
+        alert.setTitle(title);
+        alert.setHeaderText(null);
+        alert.setContentText(content);
+        alert.showAndWait();
+    }
 }
