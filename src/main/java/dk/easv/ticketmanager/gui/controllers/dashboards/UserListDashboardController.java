@@ -18,9 +18,8 @@ import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-import static dk.easv.ticketmanager.gui.FXMLPath.USER_EDITOR_POPUP;
 import static dk.easv.ticketmanager.gui.FXMLPath.USER_CREATOR_POPUP;
-
+import static dk.easv.ticketmanager.gui.FXMLPath.USER_EDITOR_POPUP;
 
 public class UserListDashboardController implements Initializable {
   @FXML
