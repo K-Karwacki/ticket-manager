@@ -3,6 +3,7 @@
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
@@ -13,84 +14,125 @@
 <?import javafx.scene.shape.Rectangle?>
 <?import javafx.scene.text.Font?>
 
-
 <HBox styleClass="dashboard-root" stylesheets="@../../style/dashboard/dashboard.css" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="dk.easv.ticketmanager.gui.controllers.dashboards.ProfileDashboardController">
    <children>
-      <AnchorPane prefHeight="550.0" prefWidth="268.0" styleClass="dashboard-root" stylesheets="@../../style/dashboard/dashboard.css">
+      <AnchorPane prefHeight="486.0" prefWidth="334.0" styleClass="dashboard-root" stylesheets="@../../style/dashboard/dashboard.css">
          <children>
-            <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#555555" height="550.0" layoutX="17.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="300.0" />
-            <Circle fx:id="profileImage" fill="DODGERBLUE" layoutX="167.0" layoutY="292.0" radius="167.0" stroke="#d1d1d1" strokeType="INSIDE" strokeWidth="10.0" />
+            <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#555555" height="515.0" layoutX="17.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="300.0" />
+            <Circle fx:id="profileImage" fill="DODGERBLUE" layoutX="167.0" layoutY="292.0" radius="167.0" smooth="false" stroke="#c8c8c8" strokeLineJoin="ROUND" strokeType="INSIDE" strokeWidth="10.0" />
             <ImageView fitHeight="150.0" fitWidth="200.0" layoutX="67.0" layoutY="217.0" pickOnBounds="true" preserveRatio="true" />
          </children>
       </AnchorPane>
-      <VBox alignment="CENTER" prefHeight="300.0" prefWidth="354.0" spacing="10.0">
+      <VBox prefHeight="515.0" prefWidth="499.0">
          <children>
-            <VBox alignment="CENTER" prefHeight="18.0" prefWidth="288.0">
+            <HBox prefHeight="358.0" prefWidth="456.0">
                <children>
-                  <Label text="Full Name">
-                     <font>
-                        <Font name="Verdana Bold" size="22.0" />
-                     </font>
-                  </Label>
-                  <Label fx:id="profileFullName" text="Ronaldihno Gaucho">
-                     <font>
-                        <Font name="Verdana" size="20.0" />
-                     </font>
-                  </Label>
+                  <VBox alignment="CENTER" prefHeight="358.0" prefWidth="380.0" spacing="10.0">
+                     <children>
+                        <VBox alignment="CENTER" prefHeight="18.0" prefWidth="288.0">
+                           <children>
+                              <Label text="Full Name">
+                                 <font>
+                                    <Font name="Verdana Bold" size="22.0" />
+                                 </font>
+                              </Label>
+                              <Label fx:id="profileFullName" text="Ronaldihno Gaucho">
+                                 <font>
+                                    <Font name="Verdana" size="20.0" />
+                                 </font>
+                              </Label>
+                           </children>
+                        </VBox>
+                        <VBox alignment="CENTER" prefHeight="42.0" prefWidth="288.0">
+                           <children>
+                              <Label text="Email Address">
+                                 <font>
+                                    <Font name="Verdana Bold" size="22.0" />
+                                 </font>
+                                 <VBox.margin>
+                                    <Insets top="25.0" />
+                                 </VBox.margin>
+                              </Label>
+                              <Label fx:id="profileEmail" text="rongauch@gmail.com">
+                                 <font>
+                                    <Font name="Verdana" size="20.0" />
+                                 </font>
+                              </Label>
+                           </children>
+                        </VBox>
+                        <VBox alignment="CENTER" prefHeight="46.0" prefWidth="288.0">
+                           <children>
+                              <Label prefHeight="28.0" prefWidth="187.0" text="Phone Number">
+                                 <font>
+                                    <Font name="Verdana Bold" size="22.0" />
+                                 </font>
+                                 <VBox.margin>
+                                    <Insets top="25.0" />
+                                 </VBox.margin>
+                              </Label>
+                              <Label fx:id="profilePhoneNumber" text="+45 77 30 40 20">
+                                 <font>
+                                    <Font name="Verdana" size="20.0" />
+                                 </font>
+                              </Label>
+                           </children>
+                        </VBox>
+                     </children>
+                  </VBox>
+                  <VBox alignment="CENTER" stylesheets="@../../style/dashboard/dashboard.css">
+                     <children>
+                        <Button fx:id="editProfileButton" alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" onAction="#editUserInformation" prefHeight="74.0" prefWidth="74.0" style="-fx-background-color: #7BD4F9; -fx-border-color: dark blue; -fx-border-radius: 15px; -fx-background-radius: 15px;" textAlignment="CENTER">
+                           <font>
+                              <Font name="Verdana" size="16.0" />
+                           </font>
+                           <graphic>
+                              <ImageView fitHeight="49.0" fitWidth="58.0" nodeOrientation="INHERIT" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@../../images/icons/edit-icon.png" />
+                                 </image>
+                              </ImageView>
+                           </graphic>
+                        </Button>
+                     </children>
+                  </VBox>
                </children>
-            </VBox>
-            <VBox alignment="CENTER" prefHeight="42.0" prefWidth="288.0">
+            </HBox>
+            <HBox alignment="CENTER" prefHeight="100.0" prefWidth="635.0">
                <children>
-                  <Label text="Email Address">
-                     <font>
-                        <Font name="Verdana Bold" size="22.0" />
-                     </font>
-                     <VBox.margin>
-                        <Insets top="25.0" />
-                     </VBox.margin>
-                  </Label>
-                  <Label fx:id="profileEmail" text="rongauch@gmail.com">
-                     <font>
-                        <Font name="Verdana" size="20.0" />
-                     </font>
-                  </Label>
+                  <Region layoutX="175.0" layoutY="10.0" prefHeight="200.0" prefWidth="50.0" />
+                  <VBox alignment="CENTER">
+                     <children>
+                        <Label text="Current Password">
+                           <font>
+                              <Font name="System Regular" size="19.0" />
+                           </font>
+                        </Label>
+                        <TextField fx:id="txtFieldCurrentPassword" prefWidth="200.0" />
+                     </children>
+                  </VBox>
+                  <Region prefHeight="100.0" prefWidth="70.0" />
+                  <VBox alignment="CENTER" layoutX="112.0" layoutY="10.0">
+                     <children>
+                        <Label text="New Password">
+                           <font>
+                              <Font size="19.0" />
+                           </font>
+                        </Label>
+                        <TextField fx:id="txtFieldNewPassword" alignment="CENTER" prefHeight="26.0" prefWidth="200.0" />
+                     </children>
+                  </VBox>
+                  <Region layoutX="168.0" layoutY="10.0" prefHeight="200.0" prefWidth="50.0" />
                </children>
-            </VBox>
-            <VBox alignment="CENTER" prefHeight="46.0" prefWidth="288.0">
+            </HBox>
+            <HBox alignment="CENTER" layoutX="10.0" layoutY="368.0" prefHeight="100.0" prefWidth="635.0">
                <children>
-                  <Label prefHeight="28.0" prefWidth="187.0" text="Phone Number">
-                     <font>
-                        <Font name="Verdana Bold" size="22.0" />
-                     </font>
-                     <VBox.margin>
-                        <Insets top="25.0" />
-                     </VBox.margin>
-                  </Label>
-                  <Label fx:id="profilePhoneNumber" text="+45 77 30 40 20">
-                     <font>
-                        <Font name="Verdana" size="20.0" />
-                     </font>
-                  </Label>
+                  <VBox alignment="CENTER_RIGHT" layoutX="112.0" layoutY="10.0">
+                     <children>
+                        <Button fx:id="saveNewPasswordButton" mnemonicParsing="false" onAction="#updatePassword" prefHeight="41.0" prefWidth="138.0" stylesheets="@../../style/dashboard/dashboard.css" text="Save New Password" />
+                     </children>
+                  </VBox>
                </children>
-            </VBox>
-         </children>
-      </VBox>
-      <VBox alignment="CENTER" stylesheets="@../../style/dashboard/dashboard.css">
-         <children>
-            <Region prefHeight="200.0" prefWidth="200.0" />
-            <Button fx:id="editProfileButton" alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" onAction="#editUserInformation" prefHeight="74.0" prefWidth="74.0" style="-fx-background-color: #7BD4F9; -fx-border-color: dark blue; -fx-border-radius: 15px; -fx-background-radius: 15px;" textAlignment="CENTER">
-               <font>
-                  <Font name="Verdana" size="16.0" />
-               </font>
-               <graphic>
-                  <ImageView fitHeight="49.0" fitWidth="58.0" pickOnBounds="true" preserveRatio="true">
-                     <image>
-                        <Image url="@../../images/icons/edit-icon.png" />
-                     </image>
-                  </ImageView>
-               </graphic>
-            </Button>
-            <Region prefHeight="200.0" prefWidth="200.0" />
+            </HBox>
          </children>
       </VBox>
    </children>

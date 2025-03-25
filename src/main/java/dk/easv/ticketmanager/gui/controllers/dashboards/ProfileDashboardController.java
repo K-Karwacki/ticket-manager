@@ -11,6 +11,7 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.paint.ImagePattern;
 import javafx.scene.shape.Circle;
@@ -25,6 +26,12 @@ import static dk.easv.ticketmanager.gui.FXMLPath.PROFILE_SETTINGS_POPUP;
 
 public class ProfileDashboardController implements Initializable
 {
+    @FXML
+    private TextField txtFieldCurrentPassword;
+    @FXML
+    private TextField txtFieldNewPassword;
+    @FXML
+    private Button saveNewPasswordButton;
     @FXML
     private Circle profileImage;
     @FXML
@@ -55,5 +62,8 @@ public class ProfileDashboardController implements Initializable
         stage.setTitle("Edit Profile");
         stage.setScene(new Scene(p.getKey()));
         stage.show();
+    }
+
+    public void updatePassword(ActionEvent actionEvent) {
     }
 }
