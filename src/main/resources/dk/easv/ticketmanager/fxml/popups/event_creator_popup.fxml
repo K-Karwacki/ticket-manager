@@ -30,10 +30,10 @@
       <TextField fx:id="txtFieldEventLocationName" />
       <Label text="Address" />
       <TextField fx:id="txtFieldEventAddress" />
-      <Label text="City" />
-      <TextField fx:id="txtFieldEventCity" />
       <Label text="Postal code" />
       <TextField fx:id="txtFieldEventPostalCode" />
+      <Label text="City" />
+      <TextField fx:id="txtFieldEventCity" />
       <Label text="Time" />
       <TextField fx:id="txtFieldEventTime" promptText="Time (e.g. 21:00 or 20:00 - 21:00)" />
       <Label text="Date" />
