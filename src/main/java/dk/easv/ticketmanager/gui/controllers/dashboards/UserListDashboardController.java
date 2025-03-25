@@ -48,6 +48,13 @@ public class UserListDashboardController implements Initializable {
 
   @FXML
   public void onClickEditUser() {
+    User selectedUser = usersListView.getSelectionModel().getSelectedItem();
+
+    if (selectedUser == null) {
+      showAlert(Alert.AlertType.WARNING, "No Selection", "Please select a user to delete.");
+      return;
+    }
+
     Pair<Parent, EditUserPopupController> p = fxmlManager.loadFXML(USER_EDITOR_POPUP);
     Stage popupStage = new Stage();
     popupStage.setTitle("Edit User");

@@ -101,6 +101,7 @@ public class User {
     }
     public void setEmail(String email) {this.email = email;}
 
+
     // Other getters/setters unchanged
 
     public Set<Event> getCoordinatedEvents() {
