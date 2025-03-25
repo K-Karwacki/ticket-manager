@@ -1,38 +1,26 @@
 package dk.easv.ticketmanager.gui.controllers.dashboards;
 
-import dk.easv.ticketmanager.be.Role;
 import dk.easv.ticketmanager.be.User;
 import dk.easv.ticketmanager.bll.AuthenticationService;
 import dk.easv.ticketmanager.gui.FXMLManager;
 import dk.easv.ticketmanager.gui.controllers.popups.EditUserPopupController;
-import dk.easv.ticketmanager.gui.controllers.popups.EventCreatorPopupController;
 import dk.easv.ticketmanager.gui.controllers.popups.UserFormPopupController;
 import dk.easv.ticketmanager.gui.models.UserDataModel;
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.geometry.Insets;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.geometry.Pos;
 import javafx.scene.control.*;
-import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
-import javafx.scene.layout.GridPane;
-import javafx.scene.layout.VBox;
-import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 import javafx.util.Pair;
 
-import java.io.File;
-import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-import static dk.easv.ticketmanager.gui.FXMLPath.EDIT_USER_POPUP;
-import static dk.easv.ticketmanager.gui.FXMLPath.USER_FORM_POPUP;
+import static dk.easv.ticketmanager.gui.FXMLPath.USER_EDITOR_POPUP;
+import static dk.easv.ticketmanager.gui.FXMLPath.USER_CREATOR_POPUP;
 
 
 public class UserListDashboardController implements Initializable {
@@ -49,22 +37,22 @@ public class UserListDashboardController implements Initializable {
 
   @FXML
   public void addNewCoordinator() {
-    Pair<Parent, UserFormPopupController> p = fxmlManager.loadFXML(USER_FORM_POPUP);
+    Pair<Parent, UserFormPopupController> p = fxmlManager.loadFXML(USER_CREATOR_POPUP);
     Stage popupStage = new Stage();
     popupStage.setTitle("Add New User");
 
-    Scene scene = new Scene(p.getKey(), 550, 550);
+    Scene scene = new Scene(p.getKey());
     popupStage.setScene(scene);
     popupStage.show();
   }
 
   @FXML
   public void onClickEditUser() {
-    Pair<Parent, EditUserPopupController> p = fxmlManager.loadFXML(EDIT_USER_POPUP);
+    Pair<Parent, EditUserPopupController> p = fxmlManager.loadFXML(USER_EDITOR_POPUP);
     Stage popupStage = new Stage();
     popupStage.setTitle("Edit User");
 
-    Scene scene = new Scene(p.getKey(), 550, 550);
+    Scene scene = new Scene(p.getKey());
     popupStage.setScene(scene);
     popupStage.show();
   }
