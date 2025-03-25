@@ -10,9 +10,9 @@
 <?import javafx.scene.shape.Rectangle?>
 <?import javafx.scene.text.Font?>
 
-<VBox alignment="TOP_CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="275.0" spacing="4.0" style="-fx-background-radius: 10px; -fx-border-radius: 10px; -fx-background-color: #F0F0F0; -fx-border-color: gray;" styleClass="event-card" stylesheets="@../../style/components/event_card.css" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="dk.easv.ticketmanager.gui.controllers.components.EventCardComponentController">
+<VBox alignment="TOP_CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="409.0" prefWidth="275.0" spacing="4.0" style="-fx-background-radius: 10px; -fx-border-radius: 10px; -fx-background-color: #F0F0F0; -fx-border-color: gray;" styleClass="event-card" stylesheets="@../../style/components/event_card.css" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="dk.easv.ticketmanager.gui.controllers.components.EventCardComponentController">
    <Rectangle fx:id="eventImageContainer" arcHeight="15.0" arcWidth="15.0" fill="#e4c931" height="125.0" stroke="#727272" strokeLineJoin="ROUND" strokeType="INSIDE" width="273.0" y="-2.0" VBox.vgrow="NEVER" />
-   <Label fx:id="eventNameLbl" contentDisplay="CENTER" ellipsisString="" graphicTextGap="5.0" text="Event name" textAlignment="CENTER">
+   <Label fx:id="eventNameLbl" alignment="CENTER" contentDisplay="CENTER" ellipsisString="" graphicTextGap="5.0" prefHeight="20.0" prefWidth="321.0" text="Event name" textAlignment="CENTER">
       <VBox.margin>
          <Insets bottom="10.0" top="10.0" />
       </VBox.margin>
@@ -20,33 +20,47 @@
          <Font name="System Bold" size="16.0" />
       </font>
    </Label>
-   <HBox alignment="CENTER" prefHeight="36.0" prefWidth="275.0" spacing="7.0">
+   <HBox alignment="CENTER_LEFT" prefHeight="16.0" prefWidth="273.0" spacing="25.0">
+      <children>
+         <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true" style="-fx-opacity: 0.8;">
+            <HBox.margin>
+               <Insets left="40.0" />
+            </HBox.margin>
+            <Image url="@../../images/icons/clock-icon.png" />
+         </ImageView>
+         <Label fx:id="eventTimeLbl" alignment="CENTER" prefHeight="17.0" text="00:00">
+            <padding>
+               <Insets left="10.0" />
+            </padding>
+         </Label>
+      </children>
+   </HBox>
+   <HBox alignment="CENTER_LEFT" prefHeight="36.0" prefWidth="275.0" spacing="7.0">
       <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true" style="-fx-opacity: 0.8;">
          <Image url="@../../images/icons/calendar-icon.png" />
-      </ImageView>
-      <Label fx:id="eventDateLbl" text="00.00.0000" />
-      <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true" style="-fx-opacity: 0.8;">
          <HBox.margin>
-            <Insets left="10.0" />
+            <Insets left="40.0" />
          </HBox.margin>
-         <Image url="@../../images/icons/clock-icon.png" />
       </ImageView>
-      <Label fx:id="eventTimeLbl" text="00:00" />
-      <padding>
-         <Insets left="40.0" right="40.0" />
-      </padding>
-   </HBox>
-   <HBox alignment="CENTER" prefHeight="40.0" prefWidth="275.0" spacing="7.0">
+      <Label fx:id="eventDateLbl" alignment="CENTER" prefHeight="17.0" prefWidth="125.0" text="00.00.0000" />
       <VBox.margin>
-         <Insets bottom="10.0" top="10.0" />
+         <Insets />
+      </VBox.margin>
+   </HBox>
+   <HBox alignment="CENTER" prefHeight="69.0" prefWidth="273.0" spacing="7.0">
+      <VBox.margin>
+         <Insets />
       </VBox.margin>
       <ImageView fitHeight="30.0" fitWidth="27.0" pickOnBounds="true" preserveRatio="true" style="-fx-opacity: 0.8;">
          <Image url="@../../images/icons/pin-icon.png" />
+         <HBox.margin>
+            <Insets left="35.0" />
+         </HBox.margin>
       </ImageView>
-      <Label fx:id="eventLocationLbl" alignment="CENTER" prefHeight="34.0" text="123 Main Street, Anytown, USA, 12345" wrapText="true" HBox.hgrow="NEVER" />
-      <padding>
-         <Insets left="46.0" right="46.0" />
-      </padding>
+      <Label fx:id="eventLocationLbl" alignment="CENTER" prefHeight="68.0" prefWidth="199.0" text="123 Main Street, Anytown, USA, 12345, mock data, mock data, mock data " wrapText="true" HBox.hgrow="NEVER">
+         <HBox.margin>
+            <Insets left="5.0" right="20.0" />
+         </HBox.margin></Label>
    </HBox>
    <HBox alignment="CENTER" prefHeight="28.0" prefWidth="119.0" spacing="7.0" VBox.vgrow="NEVER">
       <VBox.margin>
@@ -69,7 +83,7 @@
    </HBox>
    <Button mnemonicParsing="false" onAction="#openEvent" prefHeight="40.0" prefWidth="100.0" styleClass="read-more-event-btn" text="Read More">
       <VBox.margin>
-         <Insets top="25.0" />
+         <Insets top="10.0" />
       </VBox.margin>
    </Button>
 </VBox>
