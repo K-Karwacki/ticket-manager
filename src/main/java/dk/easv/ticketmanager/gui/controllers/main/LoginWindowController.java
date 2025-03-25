@@ -1,6 +1,7 @@
 package dk.easv.ticketmanager.gui.controllers.main;
 
 
+import dk.easv.ticketmanager.Main;
 import dk.easv.ticketmanager.be.User;
 import dk.easv.ticketmanager.bll.AuthenticationService;
 import dk.easv.ticketmanager.gui.models.UserDataModel;
@@ -8,6 +9,7 @@ import dk.easv.ticketmanager.gui.models.UserSession;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.AccessibleRole;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
@@ -15,6 +17,8 @@ import javafx.scene.control.Alert;
 import javafx.scene.control.Hyperlink;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyCode;
 import javafx.stage.Stage;
 
@@ -23,13 +27,16 @@ import java.io.IOException;
 
 public class LoginWindowController
 {
-    private final UserDataModel userDataModel = new UserDataModel();
+    private final String SHOW_ICON = "images/icons/show.png";
+    private final String HIDE_ICON = "images/icons/hide.png";
+    private String currentIcon = SHOW_ICON;
     private final UserSession userSession = UserSession.getInstance();
 
   @FXML private Label errorLabel;
   @FXML private TextField textFieldUsername;
   @FXML private TextField textFieldPassword;
   @FXML private Hyperlink forgotPasswordLink;
+  @FXML private ImageView imgShowPasswordIndicator;
 
   AuthenticationService authenticationService = AuthenticationService.getInstance();
 
@@ -104,5 +111,18 @@ public class LoginWindowController
         alert.setHeaderText(null);
         alert.setContentText("Please check your email for instructions to reset your password.");
         alert.showAndWait();
+    }
+    @FXML
+    private void toggleShowPassword(){
+        if(currentIcon.equals(HIDE_ICON)) {
+            currentIcon = SHOW_ICON;
+            imgShowPasswordIndicator.setImage(new Image(String.valueOf(Main.class.getResource(SHOW_ICON))));
+            textFieldPassword.setAccessibleRole(AccessibleRole.TEXT_FIELD);
+        }
+        else {
+            currentIcon = HIDE_ICON;
+            imgShowPasswordIndicator.setImage(new Image(String.valueOf(Main.class.getResource(HIDE_ICON))));
+            textFieldPassword.setAccessibleRole(AccessibleRole.PASSWORD_FIELD);
+        }
     }
 }
