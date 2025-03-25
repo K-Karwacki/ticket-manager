@@ -9,7 +9,7 @@
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.VBox?>
 
-<VBox prefHeight="543.0" prefWidth="384.0" style="-fx-padding: 20px;" styleClass="container" stylesheets="@../../style/components/form.css" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="dk.easv.ticketmanager.gui.controllers.popups.EditUserPopupController">
+<VBox prefHeight="543.0" prefWidth="384.0" style="-fx-padding: 20px;" styleClass="container" stylesheets="@../../style/components/form.css" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="dk.easv.ticketmanager.gui.controllers.popups.UserEditorPopupController">
    <ImageView fitHeight="59.0" fitWidth="255.0" pickOnBounds="true" preserveRatio="true">
       <image>
          <Image url="@../../images/easv_logo.png" />

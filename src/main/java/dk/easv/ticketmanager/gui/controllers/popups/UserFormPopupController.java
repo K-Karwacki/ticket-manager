@@ -24,7 +24,6 @@ public class UserFormPopupController implements Initializable {
     @FXML private Label resultLabel;
 
     private final UserDataModel userDataModel = new UserDataModel();
-    private final AuthenticationService authenticationService = AuthenticationService.getInstance();
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
@@ -75,8 +74,6 @@ public class UserFormPopupController implements Initializable {
             resultLabel.setStyle("-fx-text-fill: red;");  // Set error text color to red
             return;
         }
-
-        password = authenticationService.hashPassword(password);
         User user = new User(firstName, lastName, email, password, phone, "default.jpg", role);
 
         try {

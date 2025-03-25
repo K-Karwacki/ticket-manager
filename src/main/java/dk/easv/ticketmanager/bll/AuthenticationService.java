@@ -35,7 +35,7 @@ public class AuthenticationService {
     }
   }
 
-  public String hashPassword(String password) {
+  public static String hashPassword(String password) {
     if (password == null) {
       throw new IllegalArgumentException("Password cannot be null");
     }

@@ -1,8 +1,5 @@
 package dk.easv.ticketmanager.gui.controllers.dashboards;
 
-import dk.easv.ticketmanager.Main;
-import dk.easv.ticketmanager.be.Event;
-import dk.easv.ticketmanager.bll.AuthenticationService;
 import dk.easv.ticketmanager.gui.FXMLManager;
 import dk.easv.ticketmanager.gui.controllers.components.EventCardComponentController;
 import dk.easv.ticketmanager.gui.controllers.popups.EventCreatorPopupController;

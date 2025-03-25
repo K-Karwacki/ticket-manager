@@ -1,9 +1,8 @@
 package dk.easv.ticketmanager.gui.controllers.dashboards;
 
 import dk.easv.ticketmanager.be.User;
-import dk.easv.ticketmanager.bll.AuthenticationService;
 import dk.easv.ticketmanager.gui.FXMLManager;
-import dk.easv.ticketmanager.gui.controllers.popups.EditUserPopupController;
+import dk.easv.ticketmanager.gui.controllers.popups.UserEditorPopupController;
 import dk.easv.ticketmanager.gui.controllers.popups.UserFormPopupController;
 import dk.easv.ticketmanager.gui.models.UserDataModel;
 import javafx.fxml.FXML;
@@ -28,8 +27,6 @@ public class UserListDashboardController implements Initializable {
   private ListView<User> usersListView;
   private final UserDataModel userDataModel = new UserDataModel();
   private final FXMLManager fxmlManager = FXMLManager.getInstance();
-  private final AuthenticationService authenticationService = AuthenticationService.getInstance();
-
   @Override
   public void initialize(URL location, ResourceBundle resources) {
     usersListView.setItems(userDataModel.getUsers());
@@ -51,11 +48,12 @@ public class UserListDashboardController implements Initializable {
     User selectedUser = usersListView.getSelectionModel().getSelectedItem();
 
     if (selectedUser == null) {
-      showAlert(Alert.AlertType.WARNING, "No Selection", "Please select a user to delete.");
+      showAlert(Alert.AlertType.WARNING, "No Selection", "Please select a user to edit.");
       return;
     }
 
-    Pair<Parent, EditUserPopupController> p = fxmlManager.loadFXML(USER_EDITOR_POPUP);
+    Pair<Parent, UserEditorPopupController> p = fxmlManager.loadFXML(USER_EDITOR_POPUP);
+    p.getValue().setUser(selectedUser);
     Stage popupStage = new Stage();
     popupStage.setTitle("Edit User");
 
