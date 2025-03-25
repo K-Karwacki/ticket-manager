@@ -30,7 +30,7 @@
      <TextField fx:id="textFieldImagePath" />
    <Label text="Role" />
      <TextField fx:id="textFieldRole" />
-      <Button prefHeight="37.0" prefWidth="76.0" style="-fx-background-color: #9CE2FF; -fx-padding: 10;" styleClass="btn" text="Save">
+      <Button fx:id="saveEditedUser" onAction="#onSave" prefHeight="37.0" prefWidth="76.0" style="-fx-background-color: #9CE2FF; -fx-padding: 10;" styleClass="btn" text="Save">
       <VBox.margin>
          <Insets top="20.0" />
       </VBox.margin>
