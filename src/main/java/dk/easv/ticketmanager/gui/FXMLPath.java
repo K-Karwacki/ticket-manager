@@ -27,4 +27,5 @@ public class FXMLPath
   public final static String TICKET_TYPE_CREATOR_POPUP = "fxml/popups/ticket_type_creator_popup.fxml";
   public final static String USER_CREATOR_POPUP = "fxml/popups/user_creator_popup.fxml";
   public final static String USER_EDITOR_POPUP = "fxml/popups/user_editor_popup.fxml";
+  public final static String PROFILE_SETTINGS_POPUP = "fxml/popups/profile_settings_popup.fxml";
 }
