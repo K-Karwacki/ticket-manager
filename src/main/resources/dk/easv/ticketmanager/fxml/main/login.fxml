@@ -27,7 +27,7 @@
                   <Insets bottom="10.0" left="10.0" />
                </VBox.margin>
             </Label>
-            <TextField fx:id="textFieldUsername" styleClass="text-field">
+            <TextField fx:id="textFieldUsername" styleClass="textField">
                <effect>
                   <InnerShadow />
                </effect>
@@ -47,8 +47,20 @@
                   <Insets bottom="10.0" left="10.0" />
                </VBox.margin>
             </Label>
-            <PasswordField fx:id="textFieldPassword" />
-            <Hyperlink text="Forgot your password?" fx:id="forgotPasswordLink" onAction="#onClickForgotPassword">
+            <HBox alignment="CENTER_LEFT" prefHeight="100.0" prefWidth="200.0" style="-fx-background-color: white;" styleClass="textField">
+               <children>
+                  <PasswordField fx:id="textFieldPassword" prefWidth="346.0" style="-fx-border-color: transparent; -fx-background-color: transparent;" />
+                  <ImageView fx:id="imgShowPasswordIndicator" fitHeight="29.0" fitWidth="33.0" onMousePressed="#toggleShowPassword" pickOnBounds="true" preserveRatio="true">
+                     <HBox.margin>
+                        <Insets right="15.0" />
+                     </HBox.margin>
+                     <image>
+                        <Image url="@../../images/icons/show.png" />
+                     </image>
+                  </ImageView>
+               </children>
+            </HBox>
+            <Hyperlink fx:id="forgotPasswordLink" onAction="#onClickForgotPassword" text="Forgot your password?">
                <VBox.margin>
                   <Insets top="10.0" />
                </VBox.margin>
