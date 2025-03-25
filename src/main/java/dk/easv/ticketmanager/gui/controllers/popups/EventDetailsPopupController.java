@@ -1,11 +1,9 @@
 package dk.easv.ticketmanager.gui.controllers.popups;
 
-import com.sun.jdi.PrimitiveValue;
 import dk.easv.ticketmanager.be.Event;
+import dk.easv.ticketmanager.dal.implementations.EventRepository;
 import dk.easv.ticketmanager.gui.FXMLManager;
-import dk.easv.ticketmanager.gui.controllers.components.CoordinatorCardController;
 import dk.easv.ticketmanager.gui.models.EventDataModel;
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.Parent;
@@ -15,7 +13,6 @@ import javafx.scene.control.Button;
 import javafx.scene.control.ButtonType;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
-import javafx.scene.paint.ImagePattern;
 import javafx.scene.shape.Rectangle;
 import javafx.stage.Stage;
 import javafx.util.Pair;
@@ -23,19 +20,14 @@ import javafx.util.Pair;
 import java.net.URL;
 import java.util.Objects;
 import java.util.ResourceBundle;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
-import static dk.easv.ticketmanager.gui.FXMLPath.COORDINATOR_CARD_COMPONENT;
-import static dk.easv.ticketmanager.gui.FXMLPath.COORDINATOR_LIST_POPUP;
+import static dk.easv.ticketmanager.gui.FXMLPath.*;
 
 public class EventDetailsPopupController implements Initializable {
     private final FXMLManager fxmlManager = FXMLManager.getInstance();
     private final EventDataModel eventDataModel = new EventDataModel();
     private final TicketGeneratorPopupController ticketGeneratorPopupController = new TicketGeneratorPopupController();
     private final TicketTypeCreatorPopupController ticketTypeCreatorPopupController = new TicketTypeCreatorPopupController();
-    private final int IMAGE_WIDTH = 875;
-    private final int IMAGE_HEIGHT = 220;
     private Event event;
 
     @FXML
@@ -65,6 +57,9 @@ public class EventDetailsPopupController implements Initializable {
     @FXML
     private Button deleteButton;
 
+    @FXML
+    private Button saveEditedEvent;
+
     @Override
     public void initialize(URL location, ResourceBundle resources) {
 //        setEventDetails();
@@ -81,7 +76,7 @@ public class EventDetailsPopupController implements Initializable {
         p.getValue().setEvent(event);
         p.getValue().displayAssignedCoordinatorsToTheEventList();
     }
-    
+
     @FXML private void showTicketGeneratorForm(){
         ticketGeneratorPopupController.load(event);
     }
@@ -104,6 +99,17 @@ public class EventDetailsPopupController implements Initializable {
 
     public Event getEvent() {
         return event;
+    }
+
+    @FXML
+    public void onClickEditEvent() {
+        Pair<Parent, EventEditorPopupController> p = fxmlManager.loadFXML(EVENT_EDITOR_POPUP);
+        Stage popupStage = new Stage();
+        popupStage.setTitle("Edit Event");
+        p.getValue().setEvent(event);
+        Scene scene = new Scene(p.getKey());
+        popupStage.setScene(scene);
+        popupStage.show();
     }
 
     @FXML

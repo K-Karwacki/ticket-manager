@@ -100,17 +100,17 @@
             <String fx:value="btn" />
          </styleClass>
       </Label>
-      <Button layoutX="718.0" layoutY="412.0" mnemonicParsing="false" onAction="#showCoordinatorsListPopup" prefHeight="60.0" prefWidth="150.0" style="-fx-background-radius: 10; -fx-background-color: #7BD4F9;" styleClass="btn" text="Assign to">
+      <Button layoutX="718.0" layoutY="384.0" mnemonicParsing="false" onAction="#showCoordinatorsListPopup" prefHeight="52.0" prefWidth="150.0" style="-fx-background-radius: 10; -fx-background-color: #7BD4F9;" styleClass="btn" text="Assign to">
          <font>
             <Font name="Verdana" size="18.0" />
          </font>
       </Button>
-      <Button layoutX="718.0" layoutY="342.0" mnemonicParsing="false" onAction="#showTicketGeneratorForm" prefHeight="60.0" prefWidth="150.0" style="-fx-background-radius: 10; -fx-background-color: #FFDF99;" styleClass="btn" text="Print ticket">
+      <Button layoutX="718.0" layoutY="322.0" mnemonicParsing="false" onAction="#showTicketGeneratorForm" prefHeight="52.0" prefWidth="150.0" style="-fx-background-radius: 10; -fx-background-color: #FFDF99;" styleClass="btn" text="Print ticket">
          <font>
             <Font name="Verdana" size="18.0" />
          </font>
       </Button>
-      <Button layoutX="718.0" layoutY="273.0" mnemonicParsing="false" onAction="#showTicketTypeCreatorForm" prefHeight="60.0" prefWidth="150.0" style="-fx-background-radius: 10; -fx-background-color: #FFDF99;" styleClass="btn" text="Add ticket">
+      <Button layoutX="718.0" layoutY="261.0" mnemonicParsing="false" onAction="#showTicketTypeCreatorForm" prefHeight="52.0" prefWidth="150.0" style="-fx-background-radius: 10; -fx-background-color: #FFDF99;" styleClass="btn" text="Add ticket">
          <font>
             <Font name="Verdana" size="18.0" />
          </font>
@@ -121,7 +121,12 @@
             <Font size="24.0" />
          </font>
       </Label>
-      <Button fx:id="deleteButton" layoutX="718.0" layoutY="481.0" mnemonicParsing="false" onAction="#onClickDelete" prefHeight="60.0" prefWidth="150.0" style="-fx-background-radius: 10; -fx-background-color: #F77;" styleClass="btn" text="Delete Event">
+      <Button fx:id="deleteButton" layoutX="777.0" layoutY="510.0" mnemonicParsing="false" onAction="#onClickDelete" prefHeight="6.0" prefWidth="150.0" style="-fx-background-radius: 10; -fx-background-color: #F77;" styleClass="btn" text="Delete Event">
+         <font>
+            <Font name="Verdana" size="18.0" />
+         </font>
+      </Button>
+      <Button fx:id="editButton" layoutX="718.0" layoutY="444.0" mnemonicParsing="false" onAction="#onClickEditEvent" prefHeight="52.0" prefWidth="150.0" style="-fx-background-radius: 10; -fx-background-color: #7BD4F9;" styleClass="btn" text="Edit event">
          <font>
             <Font name="Verdana" size="18.0" />
          </font>

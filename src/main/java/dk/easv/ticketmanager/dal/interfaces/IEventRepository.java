@@ -10,6 +10,7 @@ public interface IEventRepository {
     List<Event> getAll();
     Event getById(long id);
     void save(Event event);
+    void edit(Event event);
     void delete(Event event);
     List<Location> getAllLocations();
     void assignCoordinatorToEvent(Event event, User user);

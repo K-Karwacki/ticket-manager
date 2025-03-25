@@ -20,6 +20,7 @@ public class EventService {
     public void addEvent(Event event) {
         eventRepository.save(event);
     }
+    public void editEvent(Event event) { eventRepository.edit(event);}
     public void deleteEvent(Event event) {eventRepository.delete(event);}
 
     public List<String> getAllUniqueCities(){

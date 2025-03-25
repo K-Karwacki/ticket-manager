@@ -19,7 +19,6 @@ import java.net.URL;
 import java.util.ResourceBundle;
 
 import static dk.easv.ticketmanager.gui.FXMLPath.COORDINATOR_LIST_POPUP;
-import static dk.easv.ticketmanager.gui.FXMLPath.EVENT_DETAILS_POPUP;
 
 public class CoordinatorCardController implements Initializable
 {

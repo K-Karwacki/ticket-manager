@@ -45,4 +45,7 @@ public class Location
   public String getCity() {
     return city;
   }
+  public String getPostCode() { return postCode; }
+  public String getAddress() { return address; }
+  public String getLocationName() { return name; }
 }

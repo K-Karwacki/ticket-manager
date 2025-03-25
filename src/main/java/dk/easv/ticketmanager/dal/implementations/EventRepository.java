@@ -46,6 +46,24 @@ public class EventRepository implements IEventRepository
   }
 
   @Override
+  public void edit(Event event){
+    EntityManager em = JPAUtil.getEntityManager();
+    try {
+      em.getTransaction().begin();
+      em.merge(event);
+      em.getTransaction().commit();
+
+    } catch (Exception e) {
+      if (em.getTransaction().isActive()) {
+        em.getTransaction().rollback();
+      }
+      throw new RuntimeException(e);
+    } finally {
+      em.close();
+    }
+  }
+
+  @Override
   public void delete(Event event) {
     EntityManager em = JPAUtil.getEntityManager();
     EntityTransaction tx = em.getTransaction();
@@ -78,8 +96,8 @@ public class EventRepository implements IEventRepository
         event.assignCoordinatorToEvent(user);
         em.merge(event);
       if (event != null) {
-      }
       tx.commit();
+      }
     } catch (Exception e) {
       if (tx.isActive()) {
         tx.rollback();

@@ -33,8 +33,9 @@ public class TicketRepository implements ITicketRepository {
             em.persist(ticket);
             tx.commit();
         } catch (Exception e) {
-            if (tx.isActive()) tx.rollback();
-            e.printStackTrace();
+            if (tx.isActive()) {
+                tx.rollback();
+            }
         } finally {
             em.close();
         }
@@ -54,7 +55,6 @@ public class TicketRepository implements ITicketRepository {
 
     public void addTicketType(TicketType ticketType) {
         EntityManager em = JPAUtil.getEntityManager();
-        EntityTransaction tx = em.getTransaction();
         em.getTransaction().begin();
         Event event = em.merge(ticketType.getEvent());
         ticketType.setEvent(event);

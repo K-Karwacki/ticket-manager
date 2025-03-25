@@ -1,6 +1,5 @@
 package dk.easv.ticketmanager.bll;
 
-import java.io.File;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -12,7 +11,6 @@ import com.google.zxing.MultiFormatWriter;
 import com.google.zxing.WriterException;
 import com.google.zxing.common.BitMatrix;
 import com.google.zxing.qrcode.QRCodeWriter;
-import dk.easv.ticketmanager.be.Event;
 import dk.easv.ticketmanager.be.Ticket;
 import dk.easv.ticketmanager.be.TicketType;
 import javafx.scene.image.Image;

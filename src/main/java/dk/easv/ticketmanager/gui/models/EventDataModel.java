@@ -25,6 +25,9 @@ public class EventDataModel {
     public void addEvent(Event event) {
         eventService.addEvent(event);
     }
+    public void editEvent(Event event) {
+        eventService.editEvent(event);
+    }
     public void deleteEvent(Event event) {
         eventService.deleteEvent(event);
         events.remove(event);

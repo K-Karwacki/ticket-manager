@@ -5,10 +5,10 @@ import dk.easv.ticketmanager.be.User;
 import dk.easv.ticketmanager.dal.interfaces.IUserRepository;
 import dk.easv.ticketmanager.utils.JPAUtil;
 import jakarta.persistence.EntityManager;
-import jakarta.persistence.EntityTransaction;
+
 
 import java.util.List;
-import java.util.logging.Level;
+
 
 public class UserRepository implements IUserRepository {
     private final EntityManager em = JPAUtil.getEntityManager();
