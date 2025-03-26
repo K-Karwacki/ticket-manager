@@ -108,10 +108,12 @@ public class EventDetailsPopupController implements Initializable {
         Stage popupStage = new Stage();
         popupStage.setTitle("Edit Event");
         p.getValue().setEvent(event);
+        p.getValue().setEventDetailsPopupController(this);
         Scene scene = new Scene(p.getKey());
         popupStage.setScene(scene);
         popupStage.show();
     }
+
 
     @FXML
     public void onClickDelete() {

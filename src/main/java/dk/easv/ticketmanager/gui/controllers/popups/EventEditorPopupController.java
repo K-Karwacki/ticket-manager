@@ -3,10 +3,16 @@ package dk.easv.ticketmanager.gui.controllers.popups;
 import dk.easv.ticketmanager.be.Event;
 import dk.easv.ticketmanager.be.Location;
 import dk.easv.ticketmanager.dal.implementations.EventRepository;
+import dk.easv.ticketmanager.gui.FXMLManager;
+import dk.easv.ticketmanager.gui.controllers.dashboards.EventListDashboardController;
 import dk.easv.ticketmanager.gui.models.EventDataModel;
 import javafx.fxml.FXML;
+import javafx.scene.Parent;
 import javafx.scene.control.*;
 import javafx.stage.Stage;
+import javafx.util.Pair;
+
+import static dk.easv.ticketmanager.gui.FXMLPath.EVENTS_DASHBOARD;
 
 public class EventEditorPopupController {
 
@@ -32,6 +38,7 @@ public class EventEditorPopupController {
     private Button saveEditedEvent;
 
     private Event event;
+    private EventDetailsPopupController eventDetailsPopupController;
     private final EventRepository eventRepository = new EventRepository();
     private final EventDataModel eventDataModel = new EventDataModel();
 
@@ -79,6 +86,9 @@ public class EventEditorPopupController {
 
         try {
             eventDataModel.editEvent(event);
+            eventDetailsPopupController.setEventDetails(event);
+            Pair<Parent, EventListDashboardController> p = FXMLManager.getInstance().getFXML(EVENTS_DASHBOARD);
+            p.getValue().load();
 
             new Thread(() -> {
                 try {
@@ -96,5 +106,8 @@ public class EventEditorPopupController {
             errorLabel.setText("Error saving event: " + ex.getMessage());
             ex.printStackTrace();
         }
+    }
+    public void setEventDetailsPopupController(EventDetailsPopupController eventDetailsPopupController) {
+        this.eventDetailsPopupController = eventDetailsPopupController;
     }
 }
