@@ -33,6 +33,8 @@ public class TicketController {
     @FXML
     private Label lblTicketType;
     @FXML
+    private Label lblFullName;
+    @FXML
     private ImageView imgQR;
     @FXML
     private ImageView imgBarcode;
@@ -43,6 +45,7 @@ public class TicketController {
         lblEventDate.setText(ticket.getEvent().getDate().toString());
         lblEventPrice.setText(ticket.getType().getPrice() + " DKK");
         lblTicketType.setText(ticket.getType().getName());
+        lblFullName.setText(ticket.getCustomer().getFirstName() + " " + ticket.getCustomer().getLastName());
         lblEventAddress.setText(String.valueOf(ticket.getEvent().getLocation()));
         Image QRCode = ticketDataModel.generateQRCode(ticket.getTicketCode());
         Image Barcode = ticketDataModel.generateBarcode(ticket.getTicketCode());

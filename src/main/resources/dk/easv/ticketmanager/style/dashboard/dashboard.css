@@ -1,11 +1,17 @@
 .dashboard-root{
   -fx-background-color: #c8c8c8;
+    -fx-border-color: #616161;
+    -fx-border-width: 2 0 0 0;
 }
 .checkBox .box{
     -fx-pref-width: 25;
     -fx-pref-height: 25;
     -fx-background-color: #FFDF99;
     -fx-effect: dropshadow(gaussian, #555, 0, 0, -2, 2);
+}
+
+.container{
+    -fx-background-color: #c8c8c8;
 }
 
 .btn{

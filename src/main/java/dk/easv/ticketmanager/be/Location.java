@@ -26,7 +26,7 @@ public class Location
 
   @Override
   public String toString() {
-      return name + ", " + address + ", " + city + ", " + postCode;
+      return name + ", " + address  + ", " + postCode + " " + city;
   }
   public void setAddress(String address){
     this.address = address;

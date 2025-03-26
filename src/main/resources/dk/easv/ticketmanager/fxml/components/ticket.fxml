@@ -15,7 +15,7 @@
          <children>
             <VBox alignment="TOP_CENTER" prefHeight="50.0" prefWidth="100.0" styleClass="backdrop3">
                <children>
-                  <HBox alignment="CENTER_LEFT">
+                  <HBox alignment="CENTER_LEFT" prefHeight="21.0" prefWidth="370.0">
                      <children>
                         <ImageView fitHeight="25.0" fitWidth="75.0" pickOnBounds="true" preserveRatio="true">
                            <image>
@@ -25,16 +25,19 @@
                               <Insets left="5.0" />
                            </HBox.margin>
                         </ImageView>
-                        <Label alignment="CENTER" prefHeight="29.0" prefWidth="226.0" styleClass="test" text="Event Ticket" textFill="WHITE">
+                        <Label fx:id="lblEventName" text="Event Name" textFill="WHITE">
                            <font>
-                              <Font name="System Bold" size="24.0" />
+                              <Font name="System Bold" size="16.0" />
                            </font>
+                           <HBox.margin>
+                              <Insets left="65.0" />
+                           </HBox.margin>
                         </Label>
                      </children>
                   </HBox>
-                  <Label fx:id="lblEventName" text="Event Name" textFill="WHITE">
+                  <Label fx:id="lblFullName" text="Igor Piernikarz" textFill="WHITE">
                      <font>
-                        <Font name="System Bold" size="16.0" />
+                        <Font size="14.0" />
                      </font>
                   </Label>
                </children>

@@ -30,6 +30,6 @@
             <Insets bottom="10.0" left="20.0" top="10.0" />
          </padding>
         </HBox>
-        <ListView fx:id="usersListView" prefHeight="400.0" prefWidth="616.0" styleClass="dashboard-root" />
+        <ListView fx:id="usersListView" prefHeight="400.0" prefWidth="616.0" styleClass="container" />
     </children>
 </VBox>
