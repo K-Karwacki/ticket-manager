@@ -33,7 +33,7 @@ public class UserListDashboardController implements Initializable {
 
   @FXML
   public void addNewCoordinator() {
-    Pair<Parent, UserFormPopupController> p = fxmlManager.  loadFXML(USER_CREATOR_POPUP);
+    Pair<Parent, UserFormPopupController> p = fxmlManager.loadFXML(USER_CREATOR_POPUP);
     Stage popupStage = new Stage();
     popupStage.setTitle("Add New User");
 

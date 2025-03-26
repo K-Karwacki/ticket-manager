@@ -3,6 +3,7 @@ package dk.easv.ticketmanager.gui.controllers.popups;
 import dk.easv.ticketmanager.be.Event;
 import dk.easv.ticketmanager.dal.implementations.EventRepository;
 import dk.easv.ticketmanager.gui.FXMLManager;
+import dk.easv.ticketmanager.gui.controllers.dashboards.EventListDashboardController;
 import dk.easv.ticketmanager.gui.models.EventDataModel;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -122,9 +123,9 @@ public class EventDetailsPopupController implements Initializable {
         confirmation.showAndWait().ifPresent(response -> {
             if (response == ButtonType.OK) {
                 try {
+                    Pair<Parent, EventListDashboardController> p = FXMLManager.getInstance().getFXML(EVENTS_DASHBOARD);
                     eventDataModel.deleteEvent(event);
-
-
+                    p.getValue().load();
                     Alert successAlert = new Alert(Alert.AlertType.INFORMATION);
                     successAlert.setTitle("Success");
                     successAlert.setHeaderText(null);
