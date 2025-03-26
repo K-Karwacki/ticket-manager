@@ -49,7 +49,7 @@
                 </ImageView>
             </children>
         </HBox>
-        <Button mnemonicParsing="false" onAction="#updateUser" style="-fx-background-color: #9CE2FF; -fx-border-radius: 5; -fx-background-radius: 5;" styleClass="btn" text="Save Settings">
+        <Button fx:id="btnSaveSettings" mnemonicParsing="false" onAction="#updateUser" style="-fx-background-color: #9CE2FF; -fx-border-radius: 5; -fx-background-radius: 5;" styleClass="btn" text="Save Settings">
             <VBox.margin>
                 <Insets top="10.0" />
             </VBox.margin>

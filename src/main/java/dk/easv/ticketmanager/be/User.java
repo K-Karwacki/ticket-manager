@@ -121,7 +121,6 @@ public class User {
     public String getPhoneNumber() { return phoneNumber;}
     public void setPhoneNumber(String phoneNumber) {this.phoneNumber = phoneNumber;}
 
-
     public void assignEventToCoordinator(Event event) {
         this.coordinatedEvents.add(event);
     }
