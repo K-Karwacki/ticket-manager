@@ -13,6 +13,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.paint.ImagePattern;
 import javafx.scene.shape.Circle;
 import javafx.stage.Stage;
@@ -27,13 +28,15 @@ import static dk.easv.ticketmanager.gui.FXMLPath.PROFILE_SETTINGS_POPUP;
 public class ProfileDashboardController implements Initializable
 {
     @FXML
+    private ImageView profileImage;
+    @FXML
     private TextField txtFieldCurrentPassword;
     @FXML
     private TextField txtFieldNewPassword;
     @FXML
     private Button saveNewPasswordButton;
     @FXML
-    private Circle profileImage;
+    private Circle profileCircle;
     @FXML
     private Label profileFullName;
     @FXML
@@ -49,8 +52,16 @@ public class ProfileDashboardController implements Initializable
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-//        ImagePattern img = new ImagePattern(user.getUserImage());
-//        profileImage.setFill(img);
+        // Load the image from the file path stored in the database
+//        if (user.getImagePath() != null && !user.getImagePath().isEmpty()) {
+//            try {
+//                Image img = new Image("file:" + user.getImagePath(), false);
+//                ImagePattern pattern = new ImagePattern(img);
+//                profileCircle.setFill(pattern); // `profileImage` should be a `Circle`
+//            } catch (Exception e) {
+//                System.out.println("Error loading image: " + e.getMessage());
+//            }
+//        }
         profileFullName.setText(user.getFirst_name() + " " + user.getLast_name());
         profileEmail.setText(user.getEmail());
         profilePhoneNumber.setText(user.getPhoneNumber());

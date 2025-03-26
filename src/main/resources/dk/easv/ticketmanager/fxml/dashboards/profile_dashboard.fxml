@@ -19,8 +19,8 @@
       <AnchorPane prefHeight="486.0" prefWidth="334.0" styleClass="dashboard-root" stylesheets="@../../style/dashboard/dashboard.css">
          <children>
             <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#555555" height="515.0" layoutX="17.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="300.0" />
-            <Circle fx:id="profileImage" fill="DODGERBLUE" layoutX="167.0" layoutY="292.0" radius="167.0" smooth="false" stroke="#c8c8c8" strokeLineJoin="ROUND" strokeType="INSIDE" strokeWidth="10.0" />
-            <ImageView fitHeight="150.0" fitWidth="200.0" layoutX="67.0" layoutY="217.0" pickOnBounds="true" preserveRatio="true" />
+            <Circle fx:id="profileCircle" fill="DODGERBLUE" layoutX="167.0" layoutY="292.0" radius="167.0" smooth="false" stroke="#c8c8c8" strokeLineJoin="ROUND" strokeType="INSIDE" strokeWidth="10.0" />
+            <ImageView fx:id="profileImage" fitHeight="150.0" fitWidth="200.0" layoutX="67.0" layoutY="217.0" pickOnBounds="true" preserveRatio="true" />
          </children>
       </AnchorPane>
       <VBox prefHeight="515.0" prefWidth="499.0">
