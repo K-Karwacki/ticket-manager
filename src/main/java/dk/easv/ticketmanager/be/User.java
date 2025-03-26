@@ -49,7 +49,7 @@ public class User {
         this.lastName = lastName;
         this.email = email;
         this.password = AuthenticationService.hashPassword(password);
-        this.phoneNumber = phone;
+         this.phoneNumber = phone;
         this.imagePath = imagePath;
         this.role = role;
     }

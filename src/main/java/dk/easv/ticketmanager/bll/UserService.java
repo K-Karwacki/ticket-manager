@@ -21,7 +21,7 @@ public class UserService {
         try {
             userRepository.save(user);
         } catch (Exception e) {
-            throw new RuntimeException("you miserably failed", e);
+            throw new RuntimeException("Failed to save the User", e);
         }
 
     }
@@ -30,7 +30,7 @@ public class UserService {
         try {
             userRepository.edit(user);
         } catch (Exception e) {
-            throw new RuntimeException("you miserably failed", e);
+            throw new RuntimeException("Failed to edit the User", e);
         }
     }
 
@@ -38,7 +38,7 @@ public class UserService {
         try{
         userRepository.delete(user);
         } catch (Exception e) {
-            throw new RuntimeException("you miserably failed", e);
+            throw new RuntimeException("Failed to delete the User", e);
         }
     }
 
