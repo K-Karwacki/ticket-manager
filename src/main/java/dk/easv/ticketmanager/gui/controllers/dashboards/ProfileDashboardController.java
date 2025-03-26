@@ -76,4 +76,22 @@ public class ProfileDashboardController implements Initializable
 
     public void updatePassword(ActionEvent actionEvent) {
     }
+
+    public void refreshUserProfile() {
+        User updatedUser = UserSession.getInstance().getUser();
+        profileFullName.setText(updatedUser.getFirstName() + " " + updatedUser.getLastName());
+        profileEmail.setText(updatedUser.getEmail());
+        profilePhoneNumber.setText(updatedUser.getPhoneNumber());
+        // Reload profile image if changed
+        if (updatedUser.getImagePath() != null && !updatedUser.getImagePath().isEmpty()) {
+            try {
+                Image img = new Image("file:" + updatedUser.getImagePath(), false);
+                ImagePattern pattern = new ImagePattern(img);
+                profileCircle.setFill(pattern);
+            } catch (Exception e) {
+                System.out.println("Error loading image: " + e.getMessage());
+            }
+        }
+    }
+
 }
