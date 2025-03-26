@@ -63,7 +63,7 @@ public class TicketGeneratorPopupController {
     @FXML
     private void changePrice(){
         double price = comboBoxTicketTypes.getValue().getPrice();
-        String formattedPrice  = String.format("%.2f", price);
+        String formattedPrice  = String.format("%.2f", price).replace(".", ",");
         lblTicketPrice.setText("Price: " + formattedPrice + "DKK");
     }
     public void load(Event event) {
