@@ -33,4 +33,5 @@ public class FXMLPath
   public final static String SPECIAL_TICKET_TYPE_CREATOR_POPUP = "fxml/popups/special_ticket_type_creator_popup.fxml";
   public final static String USER_CREATOR_POPUP = "fxml/popups/user_creator_popup.fxml";
   public final static String USER_EDITOR_POPUP = "fxml/popups/user_editor_popup.fxml";
+  public final static String TICKET_OPTIONS_POPUP = "fxml/popups/ticket_options_popup.fxml";
 }

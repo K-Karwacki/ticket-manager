@@ -19,6 +19,7 @@
 }
 .button{
     -fx-effect: dropshadow(gaussian, #555, 0, 0, -3, 3);
+    -fx-cursor: HAND;
 }
 .date-picker{
     -fx-effect: dropshadow(gaussian, #555, 0, 0, -3, 3);
@@ -36,4 +37,8 @@
 }
 .image{
     -fx-effect: dropshadow(gaussian, #555, 25, 0, 0, 0);
+}
+.blueBtn{
+    -fx-padding: 10;
+    -fx-background-color: #9CE2FF;
 }

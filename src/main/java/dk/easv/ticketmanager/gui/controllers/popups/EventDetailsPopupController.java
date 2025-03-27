@@ -28,7 +28,6 @@ import static dk.easv.ticketmanager.gui.FXMLPath.*;
 public class EventDetailsPopupController implements Initializable {
     private final FXMLManager fxmlManager = FXMLManager.getInstance();
     private final EventDataModel eventDataModel = new EventDataModel();
-    private final TicketGeneratorPopupController ticketGeneratorPopupController = new TicketGeneratorPopupController();
     private final TicketTypeCreatorPopupController ticketTypeCreatorPopupController = new TicketTypeCreatorPopupController();
     private Event event;
 
@@ -80,7 +79,12 @@ public class EventDetailsPopupController implements Initializable {
     }
 
     @FXML private void showTicketGeneratorForm(){
-        ticketGeneratorPopupController.load(event);
+        Pair<Parent, TicketGeneratorPopupController> p = fxmlManager.getFXML(TICKET_GENERATOR_POPUP);
+        p.getValue().addTicketTypes(event);
+        Stage stage = new Stage();
+        stage.setTitle("Ticket");
+        stage.setScene(new Scene(p.getKey()));
+        stage.show();
     }
     @FXML private void showTicketTypeCreatorForm(){
         ticketTypeCreatorPopupController.load(event);

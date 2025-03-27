@@ -7,6 +7,7 @@ import dk.easv.ticketmanager.gui.models.DataModelFactory;
 import dk.easv.ticketmanager.gui.models.TicketDataModel;
 import javafx.embed.swing.SwingFXUtils;
 import javafx.fxml.FXML;
+import javafx.print.Printer;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Label;
@@ -59,21 +60,6 @@ public class TicketController {
         imgQR.setImage(QRCode);
         imgBarcode.setImage(Barcode);
 
-    }
-    public void displayTicket(Ticket ticket) throws IOException {
-        Pair<Parent, TicketController> p = fxmlManager.loadFXML(TICKET_COMPONENT);
-        p.getValue().setTicket(ticket);
-        p.getValue().setTicketDetails(ticket);
-        Stage stage = new Stage();
-        stage.setTitle("Ticket");
-        Scene scene = new Scene(p.getKey());
-        stage.setScene(scene);
-        Image fxmlImage = scene.snapshot(null);
-        BufferedImage bufferedImage = SwingFXUtils.fromFXImage(fxmlImage, null);
-        File outputFile = new File("src/main/resources/dk/easv/ticketmanager/images/output.png");
-        ImageIO.write(bufferedImage, "png", outputFile);
-        emailSender.sendEmail(ticket.getCustomer().getEmail(), outputFile, "Ticket");
-        stage.show();
     }
     public void setTicket(Ticket ticket) {
         this.ticket = ticket;
