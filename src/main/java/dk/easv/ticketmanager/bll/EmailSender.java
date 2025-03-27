@@ -1,58 +1,62 @@
 package dk.easv.ticketmanager.bll;
 
-import jakarta.mail.*;
-import jakarta.mail.internet.*;
-
 import java.io.File;
-import java.util.Properties;
+import java.io.IOException;
+import java.nio.file.Files;
+import java.util.Base64;
+
+import dk.easv.ticketmanager.utils.Env;
+import org.json.JSONObject;
+import java.net.HttpURLConnection;
+import java.net.URL;
+import java.io.OutputStream;
+
 
 public class EmailSender {
-    public static void sendEmail(String recipient, String subject, File attachment) {
-        final String senderEmail = "ticketmanagerpaki@gmail.com";
-        final String senderPassword = "neua mutj wypy jsbu";
 
-        Properties properties = new Properties();
-        properties.put("mail.smtp.auth", "true");
-        properties.put("mail.smtp.starttls.enable", "true");
-        properties.put("mail.smtp.host", "smtp.gmail.com");
-        properties.put("mail.smtp.port", "465");
+    private static final String API_KEY =  Env.get("API_KEY");
+    private static final String FROM_EMAIL = Env.get("FROM_EMAIL");
 
-        Session session = Session.getInstance(properties, new Authenticator() {
-            @Override
-            protected PasswordAuthentication getPasswordAuthentication() {
-                return new PasswordAuthentication(senderEmail, senderPassword);
-            }
-        });
+    public void sendEmail(String recipient, File file, String subject) throws IOException {
+        String url = "https://api.sendgrid.com/v3/mail/send";
 
-        try {
-            Message message = new MimeMessage(session);
-            message.setFrom(new InternetAddress(senderEmail));
-            message.setRecipient(Message.RecipientType.TO, new InternetAddress(recipient));
-            message.setSubject(subject);
+        byte[] fileContent = Files.readAllBytes(file.toPath());
+        String encodedFile = Base64.getEncoder().encodeToString(fileContent);
 
-            // Email body
-            MimeBodyPart textPart = new MimeBodyPart();
+        JSONObject emailJson = new JSONObject();
+        emailJson.put("from", new JSONObject().put("email", FROM_EMAIL));
+        emailJson.put("subject", subject);
 
-            // Attachment
-            MimeBodyPart attachmentPart = new MimeBodyPart();
-//            attachmentPart.attachFile(attachment);
+        JSONObject to = new JSONObject();
+        to.put("email", recipient);
+        emailJson.append("personalizations", new JSONObject().append("to", to));
 
-            // Combine both parts
-            Multipart multipart = new MimeMultipart();
-            multipart.addBodyPart(textPart);
-            multipart.addBodyPart(attachmentPart);
+        emailJson.append("content", new JSONObject()
+                .put("type", "text/plain")
+                .put("value", "Please find the attached file."));
 
-            message.setContent(multipart);
+        JSONObject attachment = new JSONObject();
+        attachment.put("content", encodedFile);
+        attachment.put("filename", file.getName());
+        attachment.put("type", Files.probeContentType(file.toPath()));
+        emailJson.append("attachments", attachment);
 
-            // Send email
-            Transport.send(message);
-            System.out.println("Email sent successfully!");
+        HttpURLConnection connection = (HttpURLConnection) new URL(url).openConnection();
+        connection.setRequestMethod("POST");
+        connection.setRequestProperty("Authorization", "Bearer " + API_KEY);
+        connection.setRequestProperty("Content-Type", "application/json");
+        connection.setDoOutput(true);
 
-        } catch (Exception e) {
-            e.printStackTrace();
+        try (OutputStream os = connection.getOutputStream()) {
+            os.write(emailJson.toString().getBytes());
+            os.flush();
         }
-    }
-    public static void main(String[] args) {
-        sendEmail("pawelchrostek22@gmail.com", "Test", null);
+
+        int responseCode = connection.getResponseCode();
+        if (responseCode == 202) {
+            System.out.println("Email sent successfully!");
+        } else {
+            System.out.println("Failed to send email. Response code: " + responseCode);
+        }
     }
 }

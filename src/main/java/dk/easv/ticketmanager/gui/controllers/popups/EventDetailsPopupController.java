@@ -14,6 +14,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.ButtonType;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
+import javafx.scene.paint.ImagePattern;
 import javafx.scene.shape.Rectangle;
 import javafx.stage.Stage;
 import javafx.util.Pair;
@@ -95,6 +96,7 @@ public class EventDetailsPopupController implements Initializable {
         lblEventDescription.setText(event.getDescription());
         lblEventName.setText(event.getName());
         Image image = new Image(Objects.requireNonNull(getClass().getResource(event.getImagePath())).toExternalForm());
+        rectangleImageContainer.setFill(new ImagePattern(image));
 
     }
 

@@ -9,6 +9,7 @@ public class FXMLPath
   public final static String COORDINATOR_CARD_COMPONENT = "fxml/components/coordinator_card.fxml";
   public final static String USER_CARD_COMPONENT = "fxml/components/user_card.fxml";
   public final static String TICKET_COMPONENT = "fxml/components/ticket.fxml";
+  public final static String TEST_CONTROLLER = "fxml/components/test.fxml";
 
 
 

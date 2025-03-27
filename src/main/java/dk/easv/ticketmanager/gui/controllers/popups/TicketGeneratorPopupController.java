@@ -21,6 +21,7 @@ import javafx.util.Pair;
 
 import javax.xml.crypto.Data;
 
+import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
@@ -47,7 +48,7 @@ public class TicketGeneratorPopupController {
     private Label lblTicketPrice;
 
     @FXML
-    private void generateTicket() {
+    private void generateTicket() throws IOException {
         String ticketCode = ticketDataModel.generateTicketNumber();
         Ticket ticket = new Ticket();
         ticket.setType(comboBoxTicketTypes.getValue());
