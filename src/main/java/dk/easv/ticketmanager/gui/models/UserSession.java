@@ -1,11 +1,10 @@
 package dk.easv.ticketmanager.gui.models;
 
-
 import dk.easv.ticketmanager.be.User;
 
 public class UserSession {
     private static UserSession instance;
-    private User user;
+    private static User user;
 
     private UserSession() {}
 
@@ -18,13 +17,13 @@ public class UserSession {
     public void setUser(User user) {
         this.user = user;
     }
+
     public User getUser() {
         return user;
     }
+
     public String getRoleName() {
-        return user.getRole().getName();
+        return user != null ? user.getRole().getName() : null; // Add null check
     }
-    public void clearSession() {
-        instance = null;
-    }
+
 }

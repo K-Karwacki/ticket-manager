@@ -30,7 +30,7 @@ public class LoginWindowController
     private final String SHOW_ICON = "images/icons/show.png";
     private final String HIDE_ICON = "images/icons/hide.png";
     private String currentIcon = SHOW_ICON;
-    private final UserSession userSession = UserSession.getInstance();
+    private UserSession userSession = UserSession.getInstance();
 
   @FXML private Label errorLabel;
   @FXML private TextField textFieldUsername;
@@ -64,6 +64,7 @@ public class LoginWindowController
             User authenticatedUser = authenticationService.authenticateUser(inputUsername, inputPassword);
             if (authenticatedUser != null) {
                 userSession.setUser(authenticatedUser);
+                System.out.println(userSession.getUser());
                 goToMainPage();
             } else {
                 errorLabel.setText("Invalid username or password");

@@ -70,7 +70,7 @@ public class CoordinatorCardController implements Initializable
         hboxContainer.getChildren().add(deleteButton);
 
         deleteButton.setOnMouseClicked(event -> {
-            Pair<Parent, CoordinatorListPopupController> parent = fxmlManager.getFXML(COORDINATOR_LIST_POPUP);
+            Pair<Parent, CoordinatorListPopupController> parent = fxmlManager.loadFXML(COORDINATOR_LIST_POPUP);
             if (parent != null && parent.getValue() != null) {
                 parent.getValue().getFlowPaneCoordinatorContainer().getChildren().remove(hboxContainer);
             }

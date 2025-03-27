@@ -68,7 +68,7 @@ public class TicketGeneratorPopupController {
         lblTicketPrice.setText("Price: " + formattedPrice + "DKK");
     }
     public void load(Event event) {
-        Pair<Parent, TicketGeneratorPopupController> p = fxmlManager.loadFXML(TICKET_GENERATOR_POPUP);
+        Pair<Parent, TicketGeneratorPopupController> p = fxmlManager.getFXML(TICKET_GENERATOR_POPUP);
         p.getValue().setDetails(event);
         Stage stage = new Stage();
         stage.setTitle("Ticket");

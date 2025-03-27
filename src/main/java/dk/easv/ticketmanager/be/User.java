@@ -1,6 +1,7 @@
 package dk.easv.ticketmanager.be;
 
 import dk.easv.ticketmanager.bll.AuthenticationService;
+import dk.easv.ticketmanager.bll.ImageConverter;
 import jakarta.persistence.*;
 import javafx.scene.image.Image;
 
@@ -33,8 +34,9 @@ public class User {
     @Column(name = "phone_number")
     private String phoneNumber;
 
-    @Column(name = "image_path")
-    private String imagePath;
+    @Lob
+    @Column(name = "image")
+    private byte[] imageData;
 
     @ManyToMany(mappedBy = "coordinators")
     private Set<Event> coordinatedEvents = new HashSet<>();
@@ -43,14 +45,14 @@ public class User {
     public User() {
         // Minimal defaults
     }
-    public User(String firstName, String lastName, String email, String password, String phone, String imagePath, Role role)
+    public User(String firstName, String lastName, String email, String password, String phone, byte[] imageData, Role role)
     {
         this.firstName = firstName;
         this.lastName = lastName;
         this.email = email;
         this.password = AuthenticationService.hashPassword(password);
          this.phoneNumber = phone;
-        this.imagePath = imagePath;
+        this.imageData = imageData;
         this.role = role;
     }
 
@@ -81,8 +83,8 @@ public class User {
     }
     public void setPassword(String password) {this.password = AuthenticationService.hashPassword(password);}
 
-    public String getImagePath() {return imagePath;}
-    public void setImagePath(String imagePath) {this.imagePath = imagePath;}
+    public byte[] getImagePath() {return imageData;}
+    public void setImagePath(byte[] imageData) {this.imageData = imageData;}
 
     public String getEmail() {
         return email;
@@ -102,7 +104,7 @@ public class User {
 
     public Image getUserImage() {
         try {
-            return new Image(imagePath);
+            return ImageConverter.convertToImage(imageData);
         } catch (Exception e) {
             return new Image("images/event-template.jpg"); // Fallback image
         }

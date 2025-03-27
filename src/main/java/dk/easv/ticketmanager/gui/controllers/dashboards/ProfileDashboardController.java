@@ -13,7 +13,6 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
 import javafx.scene.paint.ImagePattern;
 import javafx.scene.shape.Circle;
 import javafx.stage.Stage;
@@ -34,9 +33,7 @@ public class ProfileDashboardController implements Initializable
     @FXML
     private Button saveNewPasswordButton;
     @FXML
-    private Circle profileCircle;
-    @FXML
-    private ImageView profileImage;
+    private Circle profileImage;
     @FXML
     private Label profileFullName;
     @FXML
@@ -52,15 +49,8 @@ public class ProfileDashboardController implements Initializable
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        if (user.getImagePath() != null && !user.getImagePath().isEmpty()) {
-            try {
-                Image img = new Image("file:" + user.getImagePath(), false);
-                ImagePattern pattern = new ImagePattern(img);
-                profileCircle.setFill(pattern); // `profileImage` should be a `Circle`
-            } catch (Exception e) {
-                System.out.println("Error loading image: " + e.getMessage());
-            }
-        }
+        ImagePattern img = new ImagePattern(user.getUserImage());
+        profileImage.setFill(img);
         profileFullName.setText(user.getFirst_name() + " " + user.getLast_name());
         profileEmail.setText(user.getEmail());
         profilePhoneNumber.setText(user.getPhoneNumber());

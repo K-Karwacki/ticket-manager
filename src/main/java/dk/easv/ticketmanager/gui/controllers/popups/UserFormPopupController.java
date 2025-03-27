@@ -3,6 +3,7 @@ package dk.easv.ticketmanager.gui.controllers.popups;
 import dk.easv.ticketmanager.be.Role;
 import dk.easv.ticketmanager.be.User;
 import dk.easv.ticketmanager.bll.AuthenticationService;
+import dk.easv.ticketmanager.bll.ImageConverter;
 import dk.easv.ticketmanager.gui.models.UserDataModel;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -12,6 +13,7 @@ import javafx.scene.image.ImageView;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 import java.io.File;
+import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
@@ -30,7 +32,13 @@ public class UserFormPopupController implements Initializable {
         roleComboBox.getItems().addAll(userDataModel.getRoles());
 
         browseButton.setOnAction(e -> handleBrowseImage());
-        submitButton.setOnAction(e -> handleSubmit());
+        submitButton.setOnAction(e -> {
+            try {
+                handleSubmit();
+            } catch (IOException ex) {
+                throw new RuntimeException(ex);
+            }
+        });
     }
 
     private void handleBrowseImage() {
@@ -44,13 +52,14 @@ public class UserFormPopupController implements Initializable {
         }
     }
 
-    private void handleSubmit() {
+    private void handleSubmit() throws IOException {
         String firstName = firstNameField.getText().trim();
         String lastName = lastNameField.getText().trim();
         String phone = phoneField.getText().trim();
         String email = emailField.getText().trim();
         Role role = roleComboBox.getValue();
         String password = passwordField.getText().trim();
+        Image profilePicture = profilePictureView.getImage();
 
         resetFieldStyles();
         resultLabel.setText("");
@@ -74,7 +83,7 @@ public class UserFormPopupController implements Initializable {
             resultLabel.setStyle("-fx-text-fill: red;");  // Set error text color to red
             return;
         }
-        User user = new User(firstName, lastName, email, password, phone, "default.jpg", role);
+        User user = new User(firstName, lastName, email, password, phone, ImageConverter.convertToByteArray(profilePicture), role);
 
         try {
             userDataModel.addNewUser(user);
