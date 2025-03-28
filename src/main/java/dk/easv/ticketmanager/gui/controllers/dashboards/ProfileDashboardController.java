@@ -2,6 +2,7 @@ package dk.easv.ticketmanager.gui.controllers.dashboards;
 
 import dk.easv.ticketmanager.be.User;
 import dk.easv.ticketmanager.gui.FXMLManager;
+import dk.easv.ticketmanager.gui.ProfileImageService;
 import dk.easv.ticketmanager.gui.controllers.popups.ProfileSettingPopupController;
 import dk.easv.ticketmanager.gui.models.UserSession;
 import javafx.event.ActionEvent;
@@ -48,19 +49,11 @@ public class ProfileDashboardController implements Initializable
     private final FXMLManager fxmlManager= FXMLManager.getInstance();
 
    User user = UserSession.getInstance().getUser();
-
+   ProfileImageService profileImageService = new ProfileImageService();
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        if (user.getImagePath() != null && !user.getImagePath().isEmpty()) {
-            try {
-                Image img = new Image("file:" + user.getImagePath(), false);
-                ImagePattern pattern = new ImagePattern(img);
-                profileCircle.setFill(pattern); // `profileImage` should be a `Circle`
-            } catch (Exception e) {
-                System.out.println("Error loading image: " + e.getMessage());
-            }
-        }
+        profileImageService.setProfileImage(profileImage, profileCircle);
         profileFullName.setText(user.getFirst_name() + " " + user.getLast_name());
         profileEmail.setText(user.getEmail());
         profilePhoneNumber.setText(user.getPhoneNumber());
@@ -83,15 +76,7 @@ public class ProfileDashboardController implements Initializable
         profileEmail.setText(updatedUser.getEmail());
         profilePhoneNumber.setText(updatedUser.getPhoneNumber());
         // Reload profile image if changed
-        if (updatedUser.getImagePath() != null && !updatedUser.getImagePath().isEmpty()) {
-            try {
-                Image img = new Image("file:" + updatedUser.getImagePath(), false);
-                ImagePattern pattern = new ImagePattern(img);
-                profileCircle.setFill(pattern);
-            } catch (Exception e) {
-                System.out.println("Error loading image: " + e.getMessage());
-            }
-        }
+        profileImageService.setProfileImage(profileImage, profileCircle);
     }
 
 }
