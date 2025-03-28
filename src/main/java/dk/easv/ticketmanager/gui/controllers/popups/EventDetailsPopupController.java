@@ -79,7 +79,7 @@ public class EventDetailsPopupController implements Initializable {
     }
 
     @FXML private void showTicketGeneratorForm(){
-        Pair<Parent, TicketGeneratorPopupController> p = fxmlManager.getFXML(TICKET_GENERATOR_POPUP);
+        Pair<Parent, TicketGeneratorPopupController> p = fxmlManager.loadFXML(TICKET_GENERATOR_POPUP);
         p.getValue().addTicketTypes(event);
         Stage stage = new Stage();
         stage.setTitle("Ticket");

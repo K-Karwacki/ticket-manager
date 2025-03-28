@@ -6,6 +6,7 @@ import javafx.embed.swing.SwingFXUtils;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.print.PrinterJob;
+import javafx.scene.control.Button;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 
@@ -35,7 +36,8 @@ public class TicketOptionsPopupController {
         }
     }
     @FXML
-    private void sendEmail() throws IOException {
+    private void sendEmail(ActionEvent event) throws IOException {
+        Button btn = (Button) event.getSource();
         String recipient = ticket.getCustomer().getEmail();
         String ticketName = ticket.getEvent().getName() + " Ticket";
         Image ticketImage = imgViewTicket.getImage();
@@ -43,6 +45,10 @@ public class TicketOptionsPopupController {
         File ticketFile = new File("src/main/resources/dk/easv/ticketmanager/images/ticket.png");
         ImageIO.write(bufferedImage, "png", ticketFile);
         emailSender.sendEmail(recipient, ticketFile, ticketName);
+        btn.setDisable(true);
+        btn.getStyleClass().remove("blueBtn");
+        btn.getStyleClass().add("orangeBtn");
+        btn.setText("Email sent!");
     }
 
     public void setTicketImage(Image image) {
