@@ -1,18 +1,22 @@
 package dk.easv.ticketmanager.be;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 
 @Entity
 @Table(name = "Role")
 public class Role {
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     @Column(name = "name")
     private String name;
+
+    public Role(){}
+
+    public Role(String name){
+        this.name = name;
+    }
 
     public void setId(Long id) {
         this.id = id;
@@ -31,4 +35,5 @@ public class Role {
     {
         return "Role{" + "id=" + id + ", name='" + name + '\'' + '}';
     }
+
 }

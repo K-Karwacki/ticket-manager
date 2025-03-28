@@ -2,12 +2,15 @@ package dk.easv.ticketmanager.gui;
 
 public class FXMLPath
 {
+  public static final String LOGIN =  "/dk/easv/ticketmanager/fxml/main/login.fxml";
+
   // Components file paths
   public final static String EVENT_CARD_COMPONENT = "fxml/components/event_card.fxml";
   public final static String HEADER_COMPONENT = "fxml/components/header.fxml";
   public final static String MENU_COMPONENT = "fxml/components/menu.fxml";
   public final static String COORDINATOR_CARD_COMPONENT = "fxml/components/coordinator_card.fxml";
   public final static String USER_CARD_COMPONENT = "fxml/components/user_card.fxml";
+  public final static String MAIN = "/dk/easv/ticketmanager/fxml/main/main.fxml";
 
 
 

@@ -2,9 +2,6 @@ package dk.easv.ticketmanager.gui.controllers.dashboards;
 
 import dk.easv.ticketmanager.be.Role;
 import dk.easv.ticketmanager.be.User;
-import dk.easv.ticketmanager.bll.AuthenticationService;
-import dk.easv.ticketmanager.bll.UserService;
-import dk.easv.ticketmanager.gui.models.UserDataModel;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.geometry.Insets;
@@ -26,13 +23,11 @@ public class UserListDashboardController implements Initializable
 {
   @FXML
   private ListView<User> usersListView;
-  private final UserDataModel userDataModel = new UserDataModel();
-  private final AuthenticationService authenticationService = AuthenticationService.getInstance();
+//  private final AuthenticationServiceImpl authenticationService = AuthenticationServiceImpl.INSTANCE;
 
 
   @Override public void initialize(URL location, ResourceBundle resources)
   {
-    usersListView.setItems(userDataModel.getUsers());
   }
 
   @FXML
@@ -45,7 +40,7 @@ public class UserListDashboardController implements Initializable
 
     Label roleLabel = new Label("Select Role:");
     ComboBox<Role> roleComboBox = new ComboBox<>();
-    roleComboBox.getItems().addAll(userDataModel.getRoles());
+    roleComboBox.getItems().addAll();
 
     GridPane gridPane = new GridPane();
     gridPane.setHgap(10);
@@ -153,11 +148,13 @@ public class UserListDashboardController implements Initializable
         return;
       }
 
-      password = authenticationService.hashPassword(password);
-      User user = new User(firstName, lastName, email, password, phone, "default.jpg", role);
+//      User user = new User(firstName, lastName, email, password, phone, "default.jpg", role);
 
       try {
-        userDataModel.addNewUser(user);
+//        AuthenticationService.INSTANCE.registerUser();
+//        userDataModel.addNewUser(user);
+//        AuthenticationService.INSTANCE
+        //        .registerUser(new User(firstName, lastName, email, password, phone, "default.jpg", role));
         resultLabel.setStyle("-fx-text-fill: green;");
         resultLabel.setText("User successfully added.");
 

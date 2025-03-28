@@ -10,16 +10,12 @@ import java.net.URL;
 import java.util.HashMap;
 import java.util.Map;
 
-public class FXMLManager
+public enum FXMLManager
 {
-  private static final FXMLManager INSTANCE = new FXMLManager();
+  INSTANCE;
   private final Map<String, Pair<Parent, Object>> loadedFXMLs = new HashMap<>();
 
-  private FXMLManager() {}
-
-  public static FXMLManager getInstance() {
-    return INSTANCE;
-  }
+  FXMLManager() {}
 
   // Loads FXML document and put it into the cache memory, returns a pair of a root element and controller of the document
   public <T> Pair<Parent, T> loadFXML(String fxmlPath) {
@@ -35,6 +31,7 @@ public class FXMLManager
     }
   }
 
+
   // Gets fxml document from the cache, if fxml is not in the cache load document
   public <T> Pair<Parent, T> getFXML(String fxmlPath) {
     if (!loadedFXMLs.containsKey(fxmlPath)) {
@@ -42,6 +39,10 @@ public class FXMLManager
     }
     Pair<Parent, Object> cached = loadedFXMLs.get(fxmlPath);
     return new Pair<>(cached.getKey(), (T) cached.getValue());
+  }
+
+  public Object getFXMLController(String fxmlPath){
+    return getFXML(fxmlPath).getValue();
   }
 
   // returns FXML document path

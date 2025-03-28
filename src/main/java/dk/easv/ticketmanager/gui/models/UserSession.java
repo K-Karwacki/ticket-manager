@@ -5,7 +5,7 @@ import dk.easv.ticketmanager.be.User;
 
 public class UserSession {
     private static UserSession instance;
-    private User user;
+    private UserModel loggedUserModel;
 
     private UserSession() {}
 
@@ -15,16 +15,17 @@ public class UserSession {
         return instance;
     }
 
-    public void setUser(User user) {
-        this.user = user;
+    public void setLoggedUserModel(UserModel userModel) {
+        this.loggedUserModel = userModel;
     }
-    public User getUser() {
-        return user;
+    public UserModel getLoggedUserModel() {
+        return loggedUserModel;
     }
-    public String getRoleName() {
-        return user.getRole().getName();
-    }
+//    public String getRoleName() {
+//        return user.getRole().getName();
+//    }
     public void clearSession() {
         instance = null;
+        loggedUserModel = null;
     }
 }

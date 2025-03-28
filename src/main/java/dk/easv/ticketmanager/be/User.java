@@ -27,44 +27,51 @@ public class User {
     private String email;
 
     @Column(name = "password")
-    private String password;
-
-    @Column(name = "phone_number")
-    private String phoneNumber;
+    private String hashedPassword;
 
     @Column(name = "image_path")
     private String imagePath;
 
-    @ManyToMany(mappedBy = "coordinators")
-    private Set<Event> coordinatedEvents = new HashSet<>();
+    @ManyToMany
+    @JoinTable(
+        name = "EventCoordinator",
+        joinColumns = @JoinColumn(name = "coordinator_id"),
+        inverseJoinColumns = @JoinColumn(name = "event_id")
+    )
+    private final Set<Event> coordinatingEvents = new HashSet<>();
 
     // Default constructor
     public User() {
+        this.firstName = null;
+        this.lastName = null;
+        this.role = null;
+        this.email = null;
+        this.hashedPassword = null;
         // Minimal defaults
     }
 
-    // Parameterized constructor
-    public User(long id, String firstName, String lastName, String email, String password, String phoneNumber, String imagePath, Role role) {
-        this.id = id;
-        this.firstName = firstName;
-        this.lastName = lastName;
-        this.email = email;
-        this.password = password;
-        this.phoneNumber = phoneNumber;
-        this.imagePath = imagePath;
-        this.role = role;
-    }
-
-    public User(String firstName, String lastName, String email, String password, String phone, String imagePath, Role role)
-    {
-        this.firstName = firstName;
-        this.lastName = lastName;
-        this.email = email;
-        this.password = password;
-        this.phoneNumber = phone;
-        this.imagePath = imagePath;
-        this.role = role;
-    }
+//    // Parameterized constructor
+//    public User(long id, String firstName, String lastName, String email, String hashedPassword, String phoneNumber, String imagePath, Role role) {
+//        this.id = id;
+//        this.firstName = firstName;
+//        this.lastName = lastName;
+//        this.email = email;
+//        this.hashedPassword = hashedPassword;
+//        this.phoneNumber = phoneNumber;
+//        this.imagePath = imagePath;
+//        this.role = role;
+//    }
+//
+//    public User(String firstName, String lastName, String email, String hashedPassword, String phone, String imagePath, Role role)
+//    {
+//        this.firstName = firstName;
+//        this.lastName = lastName;
+//        this.email = email;
+//        this.hashedPassword = hashedPassword;
+//        this.phoneNumber = phone;
+//        this.imagePath = imagePath;
+//        this.role = role;
+//    }
 
     // Getters and setters (updated naming)
     public String getFirstName() {
@@ -93,12 +100,8 @@ public class User {
 
     // Other getters/setters unchanged
 
-    public Set<Event> getCoordinatedEvents() {
-        return coordinatedEvents;
-    }
-
-    public void setCoordinatedEvents(Set<Event> coordinatedEvents) {
-        this.coordinatedEvents = coordinatedEvents;
+    public Set<Event> getCoordinatingEvents() {
+        return coordinatingEvents;
     }
 
     public Image getUserImage() {
@@ -113,31 +116,31 @@ public class User {
         return id;
     }
 
-    public String getFirst_name() {
-        return firstName;
-    }
-    public String getLast_name() {
-        return lastName;
-    }
 
     public void assignEventToCoordinator(Event event) {
-        this.coordinatedEvents.add(event);
+        this.coordinatingEvents.add(event);
     }
 
-    @Override public String toString()
+    public void setHashedPassword(String hashedPassword)
     {
-        return "User{" + "firstName='" + firstName + '\'' + ", lastName='"
-            + lastName + '\'' + ", role=" + role + ", email='" + email + '\''
-            + ", password='" + password + '\'' + ", phoneNumber='" + phoneNumber
-            + '\'' + ", imagePath='" + imagePath + '\'' + ", coordinatedEvents="
-            + coordinatedEvents + '}';
+        this.hashedPassword = hashedPassword;
     }
 
-    public String getPassword() {
-        return password;
+    public String getHashedPassword() {
+        return hashedPassword;
     }
 
     public String getEmail() {
         return email;
+    }
+
+  public String getFullName()
+  {
+      return firstName + " " + lastName;
+  }
+
+    public void setEmail(String email)
+    {
+        this.email = email;
     }
 }

@@ -14,7 +14,7 @@ import java.util.Set;
 public class Event {
   @Id
   @GeneratedValue(strategy = GenerationType.IDENTITY)
-  private long id;
+  private long ID;
 
   @Column(name = "name")
   private String name;
@@ -35,110 +35,94 @@ public class Event {
   @JoinColumn(name = "location_id")
   private Location location;
 
-  @Column(name = "normal_ticket_amount")
-  private int normalTicketAmount;
+  @ManyToMany(mappedBy = "coordinatingEvents")
+  private Set<User> coordinators;
 
-  @Column(name = "vip_ticket_amount")
-  private int vipTicketAmount;
 
-  @ManyToMany
-  @JoinTable(
-          name = "EventCoordinator",
-          joinColumns = @JoinColumn(name = "event_id"),
-          inverseJoinColumns = @JoinColumn(name = "coordinator_id")
-  )
-  private List<User> coordinators = new ArrayList<>();
+  public Event(){};
 
-  // Constructors, getters, setters (unchanged except for normalTicketAmount and vipTicketAmount)
-  public int getNormalTicketAmount() {
-    return normalTicketAmount;
+  public long getID()
+  {
+    return ID;
   }
 
-  public void setNormalTicketAmount(int normalTicketAmount) {
-    this.normalTicketAmount = normalTicketAmount;
-  }
-
-  public int getVipTicketAmount() {
-    return vipTicketAmount;
-  }
-
-  public void setVipTicketAmount(int vipTicketAmount) {
-    this.vipTicketAmount = vipTicketAmount;
-  }
-
-  public List<User> getCoordinators() {
-    return coordinators;
-  }
-
-  public void setCoordinators(List<User> coordinators) {
-    this.coordinators = coordinators;
-  }
-
-  public Image getImage() {
-    try {
-      return new Image(imagePath);
-    } catch (Exception e) {
-      return new Image("images/event-template.jpg"); // Fallback image
-    }
-  }
-
-  public Location getLocation() {
-    return location;
-  }
-  public void setLocation(Location location) {
-    this.location = location;
-  }
-  public LocalDate getDate() {
-    return date;
-  }
-  public void setDate(LocalDate date) {
-    this.date = date;
-  }
-  public LocalTime getTime() {
-    return time;
-  }
-  public void setTime(LocalTime time) {
-    this.time = time;
-  }
-  public long getId() {
-    return this.id;
-  }
-
-  public int getNormal_ticket_amount() {
-    return normalTicketAmount;
-  }
-  public void setNormal_ticket_amount(int normal_ticket_amount) {
-    this.normalTicketAmount = normal_ticket_amount;
-  }
-  public String getName() {
+  public String getName()
+  {
     return name;
   }
-  public void setName(String name) {
+
+  public void setName(String name)
+  {
     this.name = name;
   }
-  public String getDescription() {
+
+  public String getDescription()
+  {
     return description;
   }
-  public void setDescription(String description) {
+
+  public void setDescription(String description)
+  {
     this.description = description;
   }
-  public String getImagePath() {
+
+  public String getImagePath()
+  {
     return imagePath;
   }
-  public void setImagePath(String imagePath) {
+
+  public void setImagePath(String imagePath)
+  {
     this.imagePath = imagePath;
   }
 
-  public int getVip_ticket_amount() {
-    return vipTicketAmount;
+  public LocalDate getDate()
+  {
+    return date;
   }
-  public void assignCoordinatorToEvent(User user) {
+
+  public void setDate(LocalDate date)
+  {
+    this.date = date;
+  }
+
+  public LocalTime getTime()
+  {
+    return time;
+  }
+
+  public void setTime(LocalTime time)
+  {
+    this.time = time;
+  }
+
+  public Location getLocation()
+  {
+    return location;
+  }
+
+  public void setLocation(Location location)
+  {
+    this.location = location;
+  }
+
+  public Set<User> getCoordinators()
+  {
+    return coordinators;
+  }
+
+  public void setCoordinators(Set<User> coordinators)
+  {
+    this.coordinators = coordinators;
+  }
+
+  public void assignCoordinatorToEvent(User user)
+  {
     coordinators.add(user);
   }
-  public void removeCoordinatorFromEvent(User user) {
+
+  public void removeCoordinatorFromEvent(User user)
+  {
     coordinators.remove(user);
-  }
-  public List<User> getAssignedCoordinators() {
-    return coordinators;
   }
 }

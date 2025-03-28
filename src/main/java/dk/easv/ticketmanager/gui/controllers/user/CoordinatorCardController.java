@@ -1,10 +1,9 @@
-package dk.easv.ticketmanager.gui.controllers.components;
+package dk.easv.ticketmanager.gui.controllers.user;
 
 import dk.easv.ticketmanager.be.Event;
 import dk.easv.ticketmanager.be.User;
 import dk.easv.ticketmanager.gui.FXMLManager;
-import dk.easv.ticketmanager.gui.controllers.popups.CoordinatorListPopupController;
-import dk.easv.ticketmanager.gui.models.EventDataModel;
+//import dk.easv.ticketmanager.gui.models.EventDataModel;
 import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -19,12 +18,11 @@ import java.net.URL;
 import java.util.ResourceBundle;
 
 import static dk.easv.ticketmanager.gui.FXMLPath.COORDINATOR_LIST_POPUP;
-import static dk.easv.ticketmanager.gui.FXMLPath.EVENT_DETAILS_POPUP;
 
 public class CoordinatorCardController implements Initializable
 {
-    private final EventDataModel eventDataModel = new EventDataModel();
-    private final FXMLManager fxmlManager = FXMLManager.getInstance();
+//    private final EventDataModel eventDataModel = new EventDataModel();
+    private final FXMLManager fxmlManager = FXMLManager.INSTANCE;
 
     private User user;
     private Event event;
@@ -47,7 +45,7 @@ public class CoordinatorCardController implements Initializable
 
     @FXML
     private void assign(ActionEvent event) {
-        eventDataModel.assignCoordinatorToEvent(this.event, this.user);
+//        eventDataModel.assignCoordinatorToEvent(this.event, this.user);
     }
 
     @FXML
@@ -77,10 +75,10 @@ public class CoordinatorCardController implements Initializable
             }
             Thread dbThread = new Thread(() -> {
                 try {
-                    eventDataModel.dissociateEventFromCoordinator(this.event, user);
+//                    eventDataModel.dissociateEventFromCoordinator(this.event, user);
                     Platform.runLater(() -> {
                         if (this.event.getCoordinators() != null) {
-                            this.event.getAssignedCoordinators().remove(user);
+//                            this.event.getAssignedCoordinators().remove(user);
                         }
                     });
                 } catch (Exception e) {
@@ -95,20 +93,20 @@ public class CoordinatorCardController implements Initializable
     public void setDependencies(User user, Event event){
         this.user = user;
         this.event = event;
-        lblCoordinatorFirstName.setText(user.getFirst_name());
-        lblCoordinatorLastName.setText(user.getLast_name());
+        lblCoordinatorFirstName.setText(user.getFullName());
+        lblCoordinatorLastName.setText(user.getFullName());
 
-        if(user.getCoordinatedEvents().contains(event)){
-            hboxContainer.getChildren().remove(btnAssignButton);
-            if(!hboxContainer.getChildren().contains(btnDeleteButton)){
-                hboxContainer.getChildren().add(btnDeleteButton);
-            }
-        }else{
-            hboxContainer.getChildren().remove(btnDeleteButton);
-            if(!hboxContainer.getChildren().contains(btnAssignButton)){
-                hboxContainer.getChildren().add(btnAssignButton);
-            }
-        }
+//        if(user.getCoordinatedEvents().contains(event)){
+//            hboxContainer.getChildren().remove(btnAssignButton);
+//            if(!hboxContainer.getChildren().contains(btnDeleteButton)){
+//                hboxContainer.getChildren().add(btnDeleteButton);
+//            }
+//        }else{
+//            hboxContainer.getChildren().remove(btnDeleteButton);
+//            if(!hboxContainer.getChildren().contains(btnAssignButton)){
+//                hboxContainer.getChildren().add(btnAssignButton);
+//            }
+//        }
     }
 
     @Override public void initialize(URL location, ResourceBundle resources)

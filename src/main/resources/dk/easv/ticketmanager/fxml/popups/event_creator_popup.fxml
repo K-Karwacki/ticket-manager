@@ -3,66 +3,124 @@
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.Cursor?>
 <?import javafx.scene.control.Button?>
+<?import javafx.scene.control.CheckBox?>
 <?import javafx.scene.control.DatePicker?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ScrollPane?>
 <?import javafx.scene.control.TextArea?>
 <?import javafx.scene.control.TextField?>
-<?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
 
-<VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="578.0" prefWidth="438.0" spacing="5.0" styleClass="dashboard-root" stylesheets="@../../style/dashboard/dashboard.css" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="dk.easv.ticketmanager.gui.controllers.popups.EventCreatorPopupController">
-   <children>
-      <ImageView fitHeight="59.0" fitWidth="255.0" pickOnBounds="true" preserveRatio="true">
-         <image>
-            <Image url="@../../images/easv_logo.png" />
-         </image>
-         <VBox.margin>
-            <Insets bottom="10.0" top="10.0" />
-         </VBox.margin>
-      </ImageView>
-      <TextField fx:id="txtFieldEventName" promptText="Event name" />
-      <TextArea fx:id="txtAreaEventDescription" prefHeight="200.0" prefWidth="200.0" promptText="Description" />
-      <TextField fx:id="txtFieldEventTime" promptText="Time ( e.g. 21:00 )" />
-      <DatePicker fx:id="datePickerEventDate" promptText="Date" />
-      <TextField fx:id="txtFieldEventLocationName" promptText="Location's name" />
-      <TextField fx:id="txtFieldEventAddress1" promptText="Address 1" />
-      <TextField fx:id="txtFieldEventAddress2" promptText="Address 2" />
-      <TextField fx:id="txtFieldEventAddress3" promptText="Address 3" />
-      <TextField fx:id="txtFieldEventCity" promptText="City" />
-      <TextField fx:id="txtFieldEventPostalCode" promptText="Postal code" />
-      <HBox prefHeight="100.0" prefWidth="200.0">
+
+<ScrollPane styleClass="dashboard-root" stylesheets="@../../style/dashboard/dashboard.css" vbarPolicy="NEVER" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="dk.easv.ticketmanager.gui.controllers.event.dashboards.EventCreatorController">
+   <content>
+      <VBox alignment="CENTER" spacing="10.0" styleClass="dashboard-root" stylesheets="@../../style/dashboard/dashboard.css">
          <children>
-            <Button mnemonicParsing="false" onAction="#chooseImage" style="-fx-background-color: #FFE7B1;" text="Choose image">
-               <cursor>
-                  <Cursor fx:constant="HAND" />
-               </cursor>
-            </Button>
-            <ImageView fx:id="imageViewSelectedImage" fitHeight="70.0" fitWidth="140.0" pickOnBounds="true" preserveRatio="true">
-               <HBox.margin>
-                  <Insets left="30.0" />
-               </HBox.margin>
-            </ImageView>
+            <HBox alignment="CENTER">
+               <children>
+                  <Label text="Add new event" textAlignment="CENTER">
+                     <font>
+                        <Font size="20.0" />
+                     </font>
+                     <HBox.margin>
+                        <Insets bottom="6.0" top="6.0" />
+                     </HBox.margin>
+                  </Label>
+               </children>
+            </HBox>
+            <HBox alignment="CENTER" layoutX="160.0" layoutY="10.0">
+               <children>
+                  <TextField fx:id="txtFieldEventName" promptText="Event title">
+                     <font>
+                        <Font size="17.0" />
+                     </font>
+                  </TextField>
+                  <DatePicker fx:id="datePickerEventDate" prefHeight="34.0" prefWidth="209.0" promptText="Date">
+                     <HBox.margin>
+                        <Insets left="30.0" right="30.0" />
+                     </HBox.margin>
+                  </DatePicker>
+                  <TextField fx:id="txtFieldEventTime" promptText="Time ( e.g. 21:00 )">
+                     <font>
+                        <Font size="17.0" />
+                     </font>
+                  </TextField>
+               </children>
+            </HBox>
+            <HBox alignment="CENTER" layoutX="40.0" layoutY="58.0">
+               <children>
+                  <TextArea fx:id="txtAreaEventDescription" prefWidth="500.0" promptText="Description">
+                     <font>
+                        <Font size="19.0" />
+                     </font>
+                  </TextArea>
+                  <VBox spacing="10.0">
+                     <children>
+                        <TextField fx:id="txtFieldEventLocationName" prefWidth="209.0" promptText="Location's name">
+                           <font>
+                              <Font size="17.0" />
+                           </font>
+                        </TextField>
+                        <TextField fx:id="txtFieldEventAddress" prefWidth="209.0" promptText="Address">
+                           <font>
+                              <Font size="17.0" />
+                           </font>
+                        </TextField>
+                        <HBox alignment="CENTER">
+                           <children>
+                              <TextField fx:id="txtFieldEventCity" promptText="City">
+                                 <font>
+                                    <Font size="17.0" />
+                                 </font>
+                              </TextField>
+                              <TextField fx:id="txtFieldEventPostalCode" prefWidth="209.0" promptText="Postal code">
+                                 <font>
+                                    <Font size="17.0" />
+                                 </font>
+                              </TextField>
+                           </children>
+                        </HBox>
+                        <Button mnemonicParsing="false" onAction="#chooseImage" style="-fx-background-color: #FFE7B1;" text="Choose image">
+                           <cursor>
+                              <Cursor fx:constant="HAND" />
+                           </cursor>
+                        </Button>
+                        <Button mnemonicParsing="false" style="-fx-background-color: #FFE7B1;" text="Assign coordinators">
+                           <cursor>
+                              <Cursor fx:constant="HAND" />
+                           </cursor>
+                           <VBox.margin>
+                              <Insets bottom="10.0" />
+                           </VBox.margin>
+                        </Button>
+                        <CheckBox mnemonicParsing="false" text="Data consent, policy, lawsuit etc.">
+                           <VBox.margin>
+                              <Insets bottom="10.0" left="10.0" />
+                           </VBox.margin>
+                        </CheckBox>
+                        <ImageView fx:id="imageViewSelectedImage" fitHeight="70.0" fitWidth="140.0" pickOnBounds="true" preserveRatio="true" />
+                        <Button mnemonicParsing="false" onAction="#onClickAddNewEvent" prefHeight="30.0" prefWidth="100.0" style="-fx-background-color: #9CE2FF; -fx-border-color: black; -fx-border-radius: 5; -fx-background-radius: 5;" text="Sumbit">
+                           <VBox.margin>
+                              <Insets />
+                           </VBox.margin>
+                           <cursor>
+                              <Cursor fx:constant="HAND" />
+                           </cursor>
+                        </Button>
+                     </children>
+                     <HBox.margin>
+                        <Insets left="50.0" />
+                     </HBox.margin>
+                  </VBox>
+               </children>
+            </HBox>
          </children>
-      </HBox>
-      <Button mnemonicParsing="false" style="-fx-background-color: #FFE7B1;" text="Assign to coordinators">
-         <cursor>
-            <Cursor fx:constant="HAND" />
-         </cursor>
-      </Button>
-      <Button mnemonicParsing="false" onAction="#addEvent" style="-fx-background-color: #9CE2FF; -fx-border-color: black; -fx-border-radius: 5; -fx-background-radius: 5;" text="Sumbit">
-         <VBox.margin>
-            <Insets top="10.0" />
-         </VBox.margin>
          <padding>
-            <Insets bottom="10.0" left="15.0" right="15.0" top="10.0" />
+            <Insets left="20.0" right="20.0" />
          </padding>
-         <cursor>
-            <Cursor fx:constant="HAND" />
-         </cursor>
-      </Button>
-   </children>
-   <padding>
-      <Insets bottom="100.0" left="35.0" right="35.0" />
-   </padding>
-</VBox>
+      </VBox>
+   </content>
+</ScrollPane>

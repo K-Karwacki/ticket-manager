@@ -10,7 +10,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<VBox fx:id="menuRoot" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="550.0" prefWidth="300.0" spacing="22.0" styleClass="root" stylesheets="@../../style/components/menu.css" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="dk.easv.ticketmanager.gui.controllers.components.MenuComponentController">
+<VBox fx:id="menuRoot" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="657.0" prefWidth="300.0" spacing="22.0" styleClass="root" stylesheets="@../../style/components/menu.css" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="dk.easv.ticketmanager.gui.controllers.components.MenuComponentController">
    <HBox alignment="CENTER_LEFT" prefHeight="40.0" prefWidth="360.0" VBox.vgrow="NEVER">
       <padding>
          <Insets bottom="10.0" left="20.0" top="17.0" />
@@ -116,6 +116,9 @@
          <String fx:value="menu-btn" />
          <String fx:value="logout-btn" />
       </styleClass>
+      <VBox.margin>
+         <Insets top="120.0" />
+      </VBox.margin>
    </HBox>
    <rotationAxis>
       <Point3D />

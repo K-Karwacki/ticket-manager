@@ -1,16 +1,12 @@
 package dk.easv.ticketmanager.gui.controllers.main;
 
 
-import dk.easv.ticketmanager.be.User;
-import dk.easv.ticketmanager.bll.AuthenticationService;
-import dk.easv.ticketmanager.gui.models.UserDataModel;
+import dk.easv.ticketmanager.bll.services.AuthenticationService;
+import dk.easv.ticketmanager.gui.FXMLPath;
+import dk.easv.ticketmanager.gui.ViewManager;
 import dk.easv.ticketmanager.gui.models.UserSession;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
-import javafx.scene.Node;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
@@ -20,16 +16,27 @@ import java.io.IOException;
 
 public class LoginWindowController
 {
-    private final UserDataModel userDataModel = new UserDataModel();
-    private final UserSession userSession = UserSession.getInstance();
+    private final ViewManager viewManager;
+    private final UserSession userSession;
+    private AuthenticationService authenticationService;
 
   @FXML private Label errorLabel;
   @FXML private TextField textFieldUsername;
   @FXML private TextField textFieldPassword;
 
-  AuthenticationService authenticationService = AuthenticationService.getInstance();
+  public LoginWindowController(){
+    viewManager = ViewManager.INSTANCE;
+    userSession = UserSession.getInstance();
 
-    @FXML
+  }
+
+  public void setAuthenticationService(
+      AuthenticationService authenticationService)
+  {
+    this.authenticationService = authenticationService;
+  }
+
+  @FXML
     private void onClickLogin(ActionEvent actionEvent) {
         try {
             String inputUsername = textFieldUsername.getText().trim();
@@ -40,13 +47,11 @@ public class LoginWindowController
                 return;
             }
 
-            User authenticatedUser = authenticationService.authenticateUser(inputUsername, inputPassword);
-            if (authenticatedUser != null) {
-                userSession.setUser(authenticatedUser);
-                goToMainPage(actionEvent);
-            } else {
-                errorLabel.setText("Invalid username or password");
+            if (!authenticationService.authenticateUser(inputUsername, inputPassword)) {
+              errorLabel.setText("Invalid email or password");
+              return;
             }
+            goToMainPage(actionEvent);
         } catch (Exception e) {
             errorLabel.setText("An error occurred during login");
             e.printStackTrace();
@@ -64,16 +69,8 @@ public class LoginWindowController
 
   private void goToMainPage(ActionEvent event) throws IOException {
 
-      FXMLLoader loader = new FXMLLoader(getClass().getResource("/dk/easv/ticketmanager/fxml/main/main.fxml"));
-      Parent root = loader.load();
-      Stage stage = new Stage();
-      stage.setScene(new Scene(root));
-      stage.setTitle("Main Page");
-      stage.setResizable(false);
-      stage.setMaximized(false);
-      stage.show();
+    viewManager.showStage(FXMLPath.MAIN, "Main stage", true);
 
-      Stage currentStage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-      currentStage.close();
+
   }
 }

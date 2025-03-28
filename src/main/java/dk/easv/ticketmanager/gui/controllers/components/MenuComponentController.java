@@ -1,60 +1,62 @@
 package dk.easv.ticketmanager.gui.controllers.components;
 
-import dk.easv.ticketmanager.Main;
 import dk.easv.ticketmanager.gui.FXMLManager;
 import dk.easv.ticketmanager.gui.FXMLPath;
-import javafx.event.EventTarget;
+import dk.easv.ticketmanager.gui.ViewManager;
+import dk.easv.ticketmanager.gui.models.UserSession;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
-import javafx.scene.AccessibleRole;
 import javafx.scene.Node;
 import javafx.scene.Parent;
-import javafx.scene.Scene;
 import javafx.scene.control.Label;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
-import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
-import javafx.stage.Stage;
-
-import java.io.IOException;
 
 public class MenuComponentController
 {
-  private final FXMLManager fxmlManager = FXMLManager.getInstance();
-//  public VBox menuRoot;
-  private BorderPane parentContainer;
+  private BorderPane parentRoot;
+  private final ViewManager viewManager = ViewManager.INSTANCE;
   @FXML private Parent menuRoot;
 
-  public void setParentContainer(BorderPane parentContainer){
-      this.parentContainer = parentContainer;
+  public MenuComponentController(){
+  }
+
+  @FXML
+  private void initialize(){
+//    this.viewManager = new ViewManager(parentContainer);
+  }
+
+  public void setParentContainer(BorderPane parentRoot){
+      this.parentRoot = parentRoot;
   }
 
   public void onClickOpenHome(MouseEvent event)
   {
-    parentContainer.setCenter(fxmlManager.getFXML(FXMLPath.HOME_DASHBOARD).getKey());
+    viewManager.switchDashboard(FXMLPath.HOME_DASHBOARD, "Home");
+//    parentRoot.setCenter(FXMLManager.getInstance().getFXML(FXMLPath.HOME_DASHBOARD).getKey());
     switchButtonsHighlight(event);
 
   }
 
   public void onClickOpenUsers(MouseEvent event)
   {
-    parentContainer.setCenter(fxmlManager.getFXML(FXMLPath.USERS_DASHBOARD).getKey());
+//    parentRoot.setCenter(FXMLManager.getInstance().getFXML(FXMLPath.USERS_DASHBOARD).getKey());
+    viewManager.switchDashboard(FXMLPath.USERS_DASHBOARD, "User management");
     switchButtonsHighlight(event);
   }
 
 
   public void onClickOpenEvents(MouseEvent event)
   {
-    parentContainer.setCenter(fxmlManager.getFXML(FXMLPath.EVENTS_DASHBOARD).getKey());
+    viewManager.switchDashboard(FXMLPath.EVENTS_DASHBOARD, "Event management");
     switchButtonsHighlight(event);
 
   }
 
   public void onClickOpenSettings(MouseEvent event)
   {
-    parentContainer.setCenter(fxmlManager.getFXML(FXMLPath.SETTINGS_DASHBOARD).getKey());
+    viewManager.switchDashboard(FXMLPath.EVENTS_DASHBOARD, "Settings");
     switchButtonsHighlight(event);
 
   }
@@ -76,17 +78,8 @@ public class MenuComponentController
   }
 
   public void onClickLogout(MouseEvent event) {
-    try {
-
-      FXMLLoader loader = new FXMLLoader(getClass().getResource("/dk/easv/ticketmanager/fxml/main/login.fxml"));
-      Parent root = loader.load();
-
-      Stage currentStage = (Stage) parentContainer.getScene().getWindow();
-      currentStage.setScene(new Scene(root));
-
-    } catch (IOException e) {
-      e.printStackTrace();
-    }
+    viewManager.showStage(FXMLPath.LOGIN, "Login", false);
+    UserSession.getInstance().clearSession();
   }
 
 //  public void addNewMenuButton()

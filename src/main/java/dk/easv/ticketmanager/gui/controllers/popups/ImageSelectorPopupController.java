@@ -1,6 +1,7 @@
 package dk.easv.ticketmanager.gui.controllers.popups;
 
 import dk.easv.ticketmanager.gui.FXMLManager;
+import dk.easv.ticketmanager.gui.controllers.event.dashboards.EventCreatorController;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.Cursor;
@@ -23,7 +24,7 @@ import java.util.stream.Stream;
 import static dk.easv.ticketmanager.gui.FXMLPath.EVENT_CREATOR_POPUP;
 
 public class ImageSelectorPopupController implements Initializable {
-    private final FXMLManager fxmlManager = FXMLManager.getInstance();
+    private final FXMLManager fxmlManager = FXMLManager.INSTANCE;
     private static final String IMAGES_DIRECTORY = "/dk/easv/ticketmanager/images/eventImages"; // Rooted at resources/
 
     @FXML
@@ -66,7 +67,7 @@ public class ImageSelectorPopupController implements Initializable {
             flowPaneImageContainer.getChildren().add(imageView);
 
             imageView.setOnMouseClicked(event -> {
-                Pair<Parent, EventCreatorPopupController> p = fxmlManager.getFXML(EVENT_CREATOR_POPUP);
+                Pair<Parent, EventCreatorController> p = fxmlManager.getFXML(EVENT_CREATOR_POPUP);
                 p.getValue().setImage(imagePath);
                 Stage stage = (Stage) flowPaneImageContainer.getScene().getWindow();
                 stage.close();

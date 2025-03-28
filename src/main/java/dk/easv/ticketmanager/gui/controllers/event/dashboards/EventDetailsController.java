@@ -1,31 +1,29 @@
-package dk.easv.ticketmanager.gui.controllers.popups;
+package dk.easv.ticketmanager.gui.controllers.event.dashboards;
 
 import dk.easv.ticketmanager.be.Event;
+import dk.easv.ticketmanager.bll.services.DatabaseService;
 import dk.easv.ticketmanager.gui.FXMLManager;
-import dk.easv.ticketmanager.gui.controllers.components.CoordinatorCardController;
-import dk.easv.ticketmanager.gui.models.EventDataModel;
-import javafx.event.ActionEvent;
+//import dk.easv.ticketmanager.gui.models.EventDataModel;
+import dk.easv.ticketmanager.gui.controllers.user.CoordinatorListPopupController;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.Parent;
-import javafx.scene.Scene;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.paint.ImagePattern;
 import javafx.scene.shape.Rectangle;
-import javafx.stage.Stage;
 import javafx.util.Pair;
 
 import java.net.URL;
 import java.util.Objects;
 import java.util.ResourceBundle;
 
-import static dk.easv.ticketmanager.gui.FXMLPath.COORDINATOR_CARD_COMPONENT;
 import static dk.easv.ticketmanager.gui.FXMLPath.COORDINATOR_LIST_POPUP;
 
-public class EventDetailsPopupController implements Initializable {
-    private final FXMLManager fxmlManager = FXMLManager.getInstance();
-    private final EventDataModel eventDataModel = new EventDataModel();
+public class EventDetailsController implements Initializable {
+    private final FXMLManager fxmlManager = FXMLManager.INSTANCE;
+    private DatabaseService databaseService;
+//    private final EventDataModel eventDataModel = new EventDataModel();
     private Event event;
 
     @FXML
@@ -76,8 +74,8 @@ public class EventDetailsPopupController implements Initializable {
         lblEventDate.setText(event.getDate().toString());
         lblEventTime.setText(event.getTime().toString());
         lblEventLocation.setText(event.getLocation().toString());
-        lblNormalEventTickets.setText(String.valueOf(event.getNormal_ticket_amount()));
-        lblSpecialEventTickets.setText(String.valueOf(event.getVip_ticket_amount()));
+//        lblNormalEventTickets.setText(String.valueOf(event.getNormal_ticket_amount()));
+//        lblSpecialEventTickets.setText(String.valueOf(event.getVip_ticket_amount()));
         lblEventDescription.setText(event.getDescription());
         lblEventName.setText(event.getName());
         Image image = new Image(Objects.requireNonNull(getClass().getResource(event.getImagePath())).toExternalForm());
@@ -89,5 +87,8 @@ public class EventDetailsPopupController implements Initializable {
         return event;
     }
 
-
+  public void setDatabaseService(DatabaseService databaseService)
+  {
+      this.databaseService = databaseService;
+  }
 }
