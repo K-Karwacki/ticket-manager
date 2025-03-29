@@ -1,5 +1,6 @@
 package dk.easv.ticketmanager.gui;
 
+import dk.easv.ticketmanager.gui.controllers.event.components.EventCardController;
 import javafx.geometry.Pos;
 import javafx.scene.Node;
 import javafx.scene.Parent;
@@ -27,6 +28,10 @@ public class SceneManager
     this.currentStage = currentStage;
   }
 
+  public void setCurrentStage(Stage stage){
+    this.currentStage = stage;
+  }
+
   public Scene loadScene(String fxmlPath){
     if(!sceneCache.containsKey(fxmlPath)){
       Parent root = FXMLManager.INSTANCE.getFXML(fxmlPath).getKey();
@@ -39,17 +44,9 @@ public class SceneManager
   }
 
   public void switchScene(String fxmlPath){
-
     if(currentStage != null){
-      if(stageRoot != null){
-        stageRoot.setCenter(loadScene(fxmlPath).getRoot());
-      }
+     currentStage.setScene(loadScene(fxmlPath));
     }
-  }
-
-  public void setCurrentStage(Stage stage)
-  {
-    this.currentStage = stage;
   }
 
   public void switchDashboard(String fxmlPath, String title)

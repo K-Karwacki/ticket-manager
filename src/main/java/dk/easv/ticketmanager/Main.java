@@ -26,7 +26,6 @@ public class Main extends Application
   private final ViewManager viewManager = ViewManager.INSTANCE;
   private final FXMLManager fxmlManager = FXMLManager.INSTANCE;
   private final StageManager stageManager = new StageManager();
-  private final SceneManager sceneManager = new SceneManager();
 
   protected final RepositoryServiceFactory repositoryServiceFactory = new RepositoryServiceFactory();
   protected final RepositoryService repositoryService = repositoryServiceFactory.getRepositoryService();
@@ -37,6 +36,7 @@ public class Main extends Application
       AuthRepository.class), repositoryService.getRepository(UserRepository.class));
 
   protected final AuthorizationService authorizationService = new AuthorizationServiceImpl(repositoryService.getRepository(AuthRepository.class));
+
 
 
   private void setControllersDependencies(){
@@ -51,14 +51,15 @@ public class Main extends Application
 
   }
 
-  @Override public void start(Stage stage)
+
+  @Override public void start(Stage primaryStage)
   {
     Locale.setDefault(Locale.ENGLISH);
 
     UserSession userSession = UserSession.getInstance();
     userSession.clearSession();
 
-    stageManager.setSceneManager(sceneManager);
+    stageManager.setCurrentStage(primaryStage);
     viewManager.setStageManager(stageManager);
 
     setControllersDependencies();

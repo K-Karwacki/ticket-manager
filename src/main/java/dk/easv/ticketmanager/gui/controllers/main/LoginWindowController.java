@@ -73,4 +73,8 @@ public class LoginWindowController
 
 
   }
+
+  public void onClickOpenRegister(){
+    viewManager.showScene(FXMLPath.COORDINATOR_LIST_POPUP);
+  }
 }

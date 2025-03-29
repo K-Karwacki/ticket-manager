@@ -13,14 +13,20 @@ import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.text.Text;
 
+import java.lang.reflect.Constructor;
+
 public class MenuComponentController
 {
   private BorderPane parentRoot;
   private final ViewManager viewManager = ViewManager.INSTANCE;
   @FXML private Parent menuRoot;
 
-  public MenuComponentController(){
+  public MenuComponentController() {
+    parentRoot = null;
+    menuRoot = null;
+
   }
+
 
   @FXML
   private void initialize(){
@@ -56,7 +62,7 @@ public class MenuComponentController
 
   public void onClickOpenSettings(MouseEvent event)
   {
-    viewManager.switchDashboard(FXMLPath.EVENTS_DASHBOARD, "Settings");
+    viewManager.switchDashboard(FXMLPath.SETTINGS_DASHBOARD, "Settings");
     switchButtonsHighlight(event);
 
   }

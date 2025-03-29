@@ -46,10 +46,12 @@ public class AuthenticationServiceImpl implements AuthenticationService
     if(password.isEmpty()){
       throw new AuthenticationException("Password cannot be empty");
     }
+
     Optional<Role> roleOptional = authRepository.findRoleByName(roleName);
     if(roleOptional.isEmpty()){
       throw new AuthenticationException("Not a single role with given name.");
     }
+
 
     User newUser = new User();
     newUser.setFirstName(firstName);
@@ -101,7 +103,7 @@ public class AuthenticationServiceImpl implements AuthenticationService
     return false;
   }
 
-  public boolean verifyPassword(String plainPassword, String hashedPassword) {
+  boolean verifyPassword(String plainPassword, String hashedPassword) {
     try {
       if (plainPassword == null || hashedPassword == null) {
         return false;

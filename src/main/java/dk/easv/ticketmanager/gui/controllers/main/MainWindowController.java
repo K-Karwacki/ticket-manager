@@ -11,23 +11,14 @@ import javafx.util.Pair;
 
 public class MainWindowController
 {
+  private final ViewManager viewManager = ViewManager.INSTANCE;
   @FXML private BorderPane root;
 
   public MainWindowController(){
   }
   @FXML
   private void initialize(){
-    FXMLManager fxmlManager = FXMLManager.INSTANCE;
-    ViewManager viewManager = ViewManager.INSTANCE;
-//
-//
-    Pair<Parent, MenuComponentController> menuComponentFxmlResult = fxmlManager.getFXML(
-        FXMLPath.MENU_COMPONENT);
-    Parent menuRoot = menuComponentFxmlResult.getKey();
-    MenuComponentController menuComponentController = menuComponentFxmlResult.getValue();
-    menuComponentController.setParentContainer(root);
-//    menuComponentController.setViewManager(viewManager);
-//    root.setLeft(menuRoot);
-    ViewManager.INSTANCE.setStageRoot(root);
+
+    viewManager.setStageRoot(root);
   }
 }
