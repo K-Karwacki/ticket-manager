@@ -11,6 +11,7 @@ import dk.easv.ticketmanager.bll.services.implementations.DatabaseServiceImpl;
 import dk.easv.ticketmanager.dal.repositories.AuthRepository;
 import dk.easv.ticketmanager.dal.repositories.UserRepository;
 import dk.easv.ticketmanager.gui.*;
+import dk.easv.ticketmanager.gui.controllers.event.dashboards.EventHomeController;
 import dk.easv.ticketmanager.gui.controllers.main.LoginWindowController;
 import dk.easv.ticketmanager.gui.controllers.event.dashboards.EventCreatorController;
 import dk.easv.ticketmanager.gui.controllers.event.dashboards.EventDetailsController;
@@ -43,11 +44,13 @@ public class Main extends Application
     LoginWindowController loginWindowController = (LoginWindowController) fxmlManager.getFXMLController(FXMLPath.LOGIN);
     EventDetailsController eventDetailsController = (EventDetailsController)  fxmlManager.getFXMLController(FXMLPath.EVENT_DETAILS_POPUP);
     EventCreatorController eventCreatorPopupController = (EventCreatorController)   fxmlManager.getFXMLController(FXMLPath.EVENT_CREATOR_POPUP);
+    EventHomeController eventHomeController = (EventHomeController) fxmlManager.getFXMLController(FXMLPath.EVENTS_DASHBOARD);
 
     loginWindowController.setAuthenticationService(authenticationService);
 
     eventDetailsController.setDatabaseService(databaseService);
     eventCreatorPopupController.setDatabaseService(databaseService);
+    eventHomeController.setDatabaseService(databaseService);
 
   }
 

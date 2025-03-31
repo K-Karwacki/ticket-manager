@@ -72,7 +72,7 @@ public class EventCreatorController
         newEvent.setName(txtFieldEventName.getText());
         newEvent.setDescription(txtAreaEventDescription.getText());
         newEvent.setDate(datePickerEventDate.getValue());
-        newEvent.setTime(LocalTime.parse(txtFieldEventTime.getText(), DateTimeFormatter.ofPattern("HH:mm")));
+        newEvent.setTime(txtFieldEventTime.getText());
 
         Stage stage = (Stage) txtFieldEventName.getScene().getWindow();
         stage.close();

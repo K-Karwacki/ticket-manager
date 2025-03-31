@@ -43,15 +43,15 @@ public class EventCardController
     this.eventModel = eventModel;
     eventNameLbl.textProperty().bind(eventModel.getSimpleStringProperty());
 
-//    eventNameLbl.setText(eventModel.getName());
-//    eventDateLbl.setText(event.getDate().toString());
-//    eventTimeLbl.setText(event.getTime().toString());
-//    normalTicketsAmountLbl.setText(String.valueOf(event.getNormal_ticket_amount()));
-//    vipTicketsAmountLbl.setText(String.valueOf(event.getVip_ticket_amount()));
-//    eventLocationLbl.setText(event.getLocation().toString());
-//    Image image = new Image(event.getImagePath());
-//    ImagePattern pattern = new ImagePattern(image);
-//    eventImageContainer.setFill(pattern);
+    eventNameLbl.setText(eventModel.getName());
+    eventDateLbl.setText(event.getDate().toString());
+    eventTimeLbl.setText(event.getTime().toString());
+    normalTicketsAmountLbl.setText(String.valueOf(event.getNormal_ticket_amount()));
+    vipTicketsAmountLbl.setText(String.valueOf(event.getVip_ticket_amount()));
+    eventLocationLbl.setText(event.getLocation().toString());
+    Image image = new Image(event.getImagePath());
+    ImagePattern pattern = new ImagePattern(image);
+    eventImageContainer.setFill(pattern);
   }
 
 

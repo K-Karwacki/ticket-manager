@@ -14,4 +14,9 @@ public class DatabaseServiceImpl implements DatabaseService
   public DatabaseServiceImpl(RepositoryService repositoryService){
     this.repositoryService = repositoryService;
   }
+
+  @Override
+  public RepositoryService getRepositoryService() {
+    return repositoryService;
+  }
 }
