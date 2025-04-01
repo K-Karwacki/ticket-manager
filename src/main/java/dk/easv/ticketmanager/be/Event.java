@@ -125,4 +125,5 @@ public class Event {
   {
     coordinators.remove(user);
   }
+
 }

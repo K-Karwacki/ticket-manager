@@ -67,7 +67,7 @@ public class AuthenticationServiceImpl implements AuthenticationService
       throw new AuthenticationException("User couldn't be created");
     }
 
-    return new UserModel(savedUser.getId(), savedUser.getRole(), savedUser.getFullName());
+    return new UserModel(savedUser.getId(), savedUser.getRole(), savedUser.getFirstName(), savedUser.getLastName(), savedUser.getEmail(), savedUser.getPhoneNumber());
   }
 
   @Override public UserModel findUserByEmail(String email)
@@ -77,7 +77,7 @@ public class AuthenticationServiceImpl implements AuthenticationService
     }
     Optional<User> userOptional = userRepository.findUserByEmail(email);
     return userOptional.map(
-            user -> new UserModel(user.getId(), user.getRole(), user.getFullName()))
+            user -> new UserModel(user.getId(), user.getRole(), user.getFirstName(), user.getLastName(), user.getEmail(), user.getPhoneNumber()))
         .orElse(null);
   }
 
@@ -96,7 +96,7 @@ public class AuthenticationServiceImpl implements AuthenticationService
     User userFound = user.get();
 
     if(verifyPassword(password, userFound.getHashedPassword())){
-      this.authenticatedUserModel = new UserModel(userFound.getId(), userFound.getRole(), userFound.getFullName());
+      this.authenticatedUserModel = new UserModel(userFound.getId(), userFound.getRole(), userFound.getFirstName(), userFound.getLastName(), userFound.getEmail(), userFound.getPhoneNumber());
       UserSession.getInstance().setLoggedUserModel(this.authenticatedUserModel);
       return true;
     }

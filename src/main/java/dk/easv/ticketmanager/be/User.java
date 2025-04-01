@@ -29,6 +29,9 @@ public class User {
     @Column(name = "password")
     private String hashedPassword;
 
+    @Column(name = "phone_number")
+    private String phoneNumber;
+
     @Column(name = "image_path")
     private String imagePath;
 
@@ -142,5 +145,13 @@ public class User {
     public void setEmail(String email)
     {
         this.email = email;
+    }
+
+    public long getID() {
+        return id;
+    }
+
+    public String getPhoneNumber() {
+        return phoneNumber;
     }
 }

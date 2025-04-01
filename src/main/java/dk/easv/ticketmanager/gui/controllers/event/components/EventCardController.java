@@ -2,8 +2,11 @@ package dk.easv.ticketmanager.gui.controllers.event.components;
 
 import dk.easv.ticketmanager.gui.FXMLManager;
 import dk.easv.ticketmanager.gui.models.EventModel;
+import javafx.beans.property.SimpleObjectProperty;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
+import javafx.scene.image.Image;
+import javafx.scene.paint.ImagePattern;
 import javafx.scene.shape.Rectangle;
 
 public class EventCardController
@@ -18,6 +21,7 @@ public class EventCardController
   @FXML private Label eventLocationLbl;
   @FXML private Label normalTicketsAmountLbl;
   @FXML private Label vipTicketsAmountLbl;
+
 
   public EventCardController(){
     eventModel = null;
@@ -41,17 +45,15 @@ public class EventCardController
 
   public void setEventModel(EventModel eventModel){
     this.eventModel = eventModel;
-    eventNameLbl.textProperty().bind(eventModel.getSimpleStringProperty());
-
-    eventNameLbl.setText(eventModel.getName());
-    eventDateLbl.setText(event.getDate().toString());
-    eventTimeLbl.setText(event.getTime().toString());
-    normalTicketsAmountLbl.setText(String.valueOf(event.getNormal_ticket_amount()));
-    vipTicketsAmountLbl.setText(String.valueOf(event.getVip_ticket_amount()));
-    eventLocationLbl.setText(event.getLocation().toString());
-    Image image = new Image(event.getImagePath());
-    ImagePattern pattern = new ImagePattern(image);
+    eventNameLbl.textProperty().bind(eventModel.nameProperty());
+    eventDateLbl.textProperty().bind(eventModel.dateProperty());
+    eventTimeLbl.textProperty().bind(eventModel.timeProperty());
+    normalTicketsAmountLbl.textProperty().bind(eventModel.normalTicketAmountProperty());
+    vipTicketsAmountLbl.textProperty().bind(eventModel.vipTicketAmountProperty());
+    eventLocationLbl.textProperty().bind(eventModel.getLocation().nameProperty());
+    ImagePattern pattern = new ImagePattern(eventModel.getImage());
     eventImageContainer.setFill(pattern);
+
   }
 
 

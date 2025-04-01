@@ -3,6 +3,7 @@ package dk.easv.ticketmanager.gui.controllers.components;
 import dk.easv.ticketmanager.gui.FXMLManager;
 import dk.easv.ticketmanager.gui.FXMLPath;
 import dk.easv.ticketmanager.gui.ViewManager;
+import dk.easv.ticketmanager.gui.controllers.event.dashboards.EventHomeController;
 import dk.easv.ticketmanager.gui.models.UserSession;
 import javafx.fxml.FXML;
 import javafx.scene.Node;
@@ -12,6 +13,7 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.text.Text;
+import javafx.util.Pair;
 
 import java.lang.reflect.Constructor;
 
@@ -55,6 +57,8 @@ public class MenuComponentController
 
   public void onClickOpenEvents(MouseEvent event)
   {
+    Pair<Parent, EventHomeController> p = FXMLManager.INSTANCE.getFXML(FXMLPath.EVENTS_DASHBOARD);
+    p.getValue().loadEventCards();
     viewManager.switchDashboard(FXMLPath.EVENTS_DASHBOARD, "Event management");
     switchButtonsHighlight(event);
 
