@@ -12,7 +12,7 @@ import java.net.URL;
 import java.io.OutputStream;
 
 
-public class EmailSender {
+public class EmailSenderService {
 
     private static final String API_KEY =  Env.get("API_KEY");
     private static final String FROM_EMAIL = Env.get("FROM_EMAIL");

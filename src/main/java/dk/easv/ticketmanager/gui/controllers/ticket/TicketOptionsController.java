@@ -1,7 +1,6 @@
 package dk.easv.ticketmanager.gui.controllers.ticket;
 
 import dk.easv.ticketmanager.be.Ticket;
-import dk.easv.ticketmanager.bll.EmailSender;
 import dk.easv.ticketmanager.bll.services.EmailSenderService;
 import javafx.embed.swing.SwingFXUtils;
 import javafx.event.ActionEvent;
@@ -16,7 +15,7 @@ import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
 
-public class TicketOptionsPopupController {
+public class TicketOptionsController {
 
     private final EmailSenderService emailSenderService = new EmailSenderService();
     private Ticket ticket;

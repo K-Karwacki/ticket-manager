@@ -5,9 +5,6 @@ import dk.easv.ticketmanager.be.Event;
 import dk.easv.ticketmanager.be.Ticket;
 import dk.easv.ticketmanager.be.TicketType;
 import dk.easv.ticketmanager.gui.FXMLManager;
-import dk.easv.ticketmanager.gui.controllers.components.TicketController;
-import dk.easv.ticketmanager.gui.models.DataModelFactory;
-import dk.easv.ticketmanager.gui.models.TicketDataModel;
 import javafx.fxml.FXML;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
@@ -79,7 +76,7 @@ public class TicketGeneratorController {
     }
 
     public void loadTicketOptions(Image image){
-        Pair<Parent, TicketOptionsPopupController> p = fxmlManager.getFXML(TICKET_OPTIONS_POPUP);
+        Pair<Parent, TicketOptionsController> p = fxmlManager.getFXML(TICKET_OPTIONS_POPUP);
         p.getValue().setTicketImage(image);
         p.getValue().setTicket(ticket);
         Stage stage = new Stage();
