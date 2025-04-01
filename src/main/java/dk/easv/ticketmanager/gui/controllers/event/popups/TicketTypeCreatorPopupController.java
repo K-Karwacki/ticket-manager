@@ -2,6 +2,7 @@ package dk.easv.ticketmanager.gui.controllers.event.popups;
 
 
 import dk.easv.ticketmanager.be.Event;
+import dk.easv.ticketmanager.be.TicketType;
 import dk.easv.ticketmanager.gui.FXMLManager;
 import javafx.fxml.FXML;
 import javafx.scene.Parent;
@@ -12,7 +13,7 @@ import javafx.util.Pair;
 
 
 public class TicketTypeCreatorPopupController {
-    private final FXMLManager fxmlManager = FXMLManager.getInstance();
+    private final FXMLManager fxmlManager = FXMLManager.INSTANCE;
 
     private Event event;
 
