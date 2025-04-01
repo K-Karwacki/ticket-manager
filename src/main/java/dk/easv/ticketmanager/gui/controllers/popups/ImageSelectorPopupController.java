@@ -1,5 +1,6 @@
 package dk.easv.ticketmanager.gui.controllers.popups;
 
+import dk.easv.ticketmanager.gui.FXMLController;
 import dk.easv.ticketmanager.gui.FXMLManager;
 import dk.easv.ticketmanager.gui.controllers.event.dashboards.EventCreatorController;
 import javafx.fxml.FXML;
@@ -23,15 +24,18 @@ import java.util.stream.Stream;
 
 import static dk.easv.ticketmanager.gui.FXMLPath.EVENT_CREATOR_POPUP;
 
-public class ImageSelectorPopupController implements Initializable {
+public class ImageSelectorPopupController
+{
     private final FXMLManager fxmlManager = FXMLManager.INSTANCE;
     private static final String IMAGES_DIRECTORY = "/dk/easv/ticketmanager/images/eventImages"; // Rooted at resources/
 
     @FXML
     private FlowPane flowPaneImageContainer;
 
-    @Override
-    public void initialize(URL location, ResourceBundle resources) {
+
+
+    @FXML
+    private void initialize(){
         int imagesCount = countImages();
         addImages(imagesCount);
     }

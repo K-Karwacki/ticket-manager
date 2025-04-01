@@ -29,20 +29,16 @@ public class EventRepositoryImpl implements EventRepository
 
   @Override
   public Event save(Event event) {
-    EntityManager em = JPAUtil.getEntityManager();
-    try {
+    try (EntityManager em = JPAUtil.getEntityManager())
+    {
       em.getTransaction().begin();
-      Event saved = em.merge(event);
+      Event e = em.merge(event);
       em.getTransaction().commit();
-      return saved;
-    }  catch (Exception e) {
-      if (em.getTransaction().isActive()){
-        em.getTransaction().rollback();
-      }
-      throw new RuntimeException(e);
+      return e;
     }
-    finally {
-      em.close();
+    catch (Exception e)
+    {
+      return null;
     }
   }
 //  public Event save(Event event){
@@ -97,7 +93,7 @@ public class EventRepositoryImpl implements EventRepository
     return false;
   }
 
-  @Override public Event update(Event oldEntity, Event newEntity)
+  @Override public Event update(Event oldEntity)
   {
     return null;
   }

@@ -4,6 +4,7 @@ import dk.easv.ticketmanager.be.Permission;
 import dk.easv.ticketmanager.be.Role;
 import dk.easv.ticketmanager.be.User;
 import dk.easv.ticketmanager.dal.repositories.AuthRepository;
+import dk.easv.ticketmanager.utils.CustomHashSet;
 import dk.easv.ticketmanager.utils.JPAUtil;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.TypedQuery;
@@ -13,7 +14,6 @@ import java.util.Optional;
 
 public class AuthRepositoryImpl implements AuthRepository
 {
-
   @Override public List<Permission> getPermissionsForRole(Role role)
   {
     return null;
@@ -87,7 +87,7 @@ public class AuthRepositoryImpl implements AuthRepository
     return false;
   }
 
-  @Override public Role update(Role oldEntity, Role newEntity)
+  @Override public Role update(Role oldEntity)
   {
     return null;
   }

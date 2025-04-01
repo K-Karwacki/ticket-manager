@@ -1,13 +1,9 @@
 package dk.easv.ticketmanager.gui.controllers.main;
 
-import dk.easv.ticketmanager.gui.FXMLManager;
-import dk.easv.ticketmanager.gui.FXMLPath;
+import dk.easv.ticketmanager.gui.FXMLController;
 import dk.easv.ticketmanager.gui.ViewManager;
-import dk.easv.ticketmanager.gui.controllers.components.MenuComponentController;
 import javafx.fxml.FXML;
-import javafx.scene.Parent;
 import javafx.scene.layout.BorderPane;
-import javafx.util.Pair;
 
 public class MainWindowController
 {

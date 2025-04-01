@@ -4,6 +4,8 @@ import dk.easv.ticketmanager.be.Role;
 import dk.easv.ticketmanager.be.User;
 import javafx.beans.property.SimpleStringProperty;
 
+import java.util.Objects;
+
 public class UserModel
 {
   private final long ID;
@@ -55,5 +57,20 @@ public class UserModel
   }
   public String getPhoneNumber(){
     return phoneNumber.get();
+  }
+
+  @Override public boolean equals(Object o)
+  {
+    if (this == o)
+      return true;
+    if (!(o instanceof UserModel userModel))
+      return false;
+    return getID() == userModel.getID() && role.equals(userModel.role)
+        && Objects.equals(getFullName(), userModel.getFullName());
+  }
+
+  @Override public int hashCode()
+  {
+    return Objects.hash(getID());
   }
 }

@@ -1,13 +1,14 @@
 package dk.easv.ticketmanager.gui.controllers.user;
 
 import dk.easv.ticketmanager.be.Event;
+import dk.easv.ticketmanager.gui.FXMLController;
 import dk.easv.ticketmanager.gui.FXMLManager;
 import javafx.fxml.FXML;
 import javafx.scene.Scene;
 import javafx.scene.layout.FlowPane;
 import javafx.stage.Stage;
 
-public class CoordinatorListPopupController
+public class CoordinatorListPopupController extends FXMLController
 {
     private final FXMLManager fxmlManager = FXMLManager.INSTANCE;
     private Event event;

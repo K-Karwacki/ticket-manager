@@ -1,6 +1,7 @@
 package dk.easv.ticketmanager.gui;
 
 import dk.easv.ticketmanager.Main;
+import dk.easv.ticketmanager.exceptions.ViewException;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.util.Pair;
@@ -8,42 +9,45 @@ import javafx.util.Pair;
 import java.io.IOException;
 import java.net.URL;
 import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.Map;
 
 public enum FXMLManager
 {
   INSTANCE;
   private final Map<String, Pair<Parent, Object>> loadedFXMLs = new HashMap<>();
+  private final Map<String, Class<?>> classMap = new LinkedHashMap<>();
 
   FXMLManager() {}
 
   // Loads FXML document and put it into the cache memory, returns a pair of a root element and controller of the document
-  public <T> Pair<Parent, T> loadFXML(String fxmlPath) {
+  public <T> Pair<Parent, Object> loadFXML(String fxmlPath) {
     try {
       FXMLLoader loader = new FXMLLoader(getFXMLPath(fxmlPath));
       Parent root = loader.load();
       T controller = loader.getController();
-      loadedFXMLs.put(fxmlPath, new Pair<>(root, controller));
-      return new Pair<>(root, controller);
+      Pair<Parent, Object> parentFXMLControllerPair = new Pair<>(root, controller);
+      loadedFXMLs.put(fxmlPath, parentFXMLControllerPair);
+      return new Pair<>(parentFXMLControllerPair.getKey(), parentFXMLControllerPair.getValue());
     } catch (IOException e) {
       e.printStackTrace();
       throw new RuntimeException("Failed to load FXML: " + fxmlPath, e);
     }
+
   }
 
 
   // Gets fxml document from the cache, if fxml is not in the cache load document
   public <T> Pair<Parent, T> getFXML(String fxmlPath) {
-    if (!loadedFXMLs.containsKey(fxmlPath)) {
-      return loadFXML(fxmlPath); // Load if not cached
+    if(!loadedFXMLs.containsKey(fxmlPath)){
+//      return loadFXML(fxmlPath, controllerClass);
+      throw new RuntimeException("FXML wasn't loaded: " + fxmlPath);
     }
-    Pair<Parent, Object> cached = loadedFXMLs.get(fxmlPath);
-    return new Pair<>(cached.getKey(), (T) cached.getValue());
+
+    Pair<Parent, Object> fxmlParentControllerPair = loadedFXMLs.get(fxmlPath);
+    return new Pair<>(fxmlParentControllerPair.getKey(), (T) fxmlParentControllerPair.getValue());
   }
 
-  public Object getFXMLController(String fxmlPath){
-    return getFXML(fxmlPath).getValue();
-  }
 
   // returns FXML document path
   private static URL getFXMLPath(String fxmlPath) {

@@ -2,6 +2,7 @@ package dk.easv.ticketmanager.gui.controllers.main;
 
 
 import dk.easv.ticketmanager.bll.services.AuthenticationService;
+import dk.easv.ticketmanager.gui.FXMLController;
 import dk.easv.ticketmanager.gui.FXMLPath;
 import dk.easv.ticketmanager.gui.ViewManager;
 import dk.easv.ticketmanager.gui.models.UserSession;

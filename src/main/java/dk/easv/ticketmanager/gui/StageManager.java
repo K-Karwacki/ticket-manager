@@ -64,7 +64,7 @@ public class StageManager
   // Show a cached stage
   public void showStage(String fxmlFile) {
     if(stageSettings.currentStage != null){
-      stageSettings.currentStage.hide();
+      hideCurrentStage();
     }
 
     try{
@@ -77,10 +77,9 @@ public class StageManager
   }
 
   // Hide a stage instead of closing it
-  public void hideStage(String fxmlFile) {
-    Stage stage = stageCache.get(fxmlFile);
-    if (stage != null) {
-      stage.hide(); // Keeps it in memory, ready for reopening
+  public void hideCurrentStage() {
+    if (stageSettings.currentStage != null) {
+      stageSettings.currentStage.hide(); // Keeps it in memory, ready for reopening
     }
   }
 

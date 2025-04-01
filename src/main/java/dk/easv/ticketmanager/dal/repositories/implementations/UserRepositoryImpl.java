@@ -2,50 +2,69 @@ package dk.easv.ticketmanager.dal.repositories.implementations;
 
 import dk.easv.ticketmanager.be.User;
 import dk.easv.ticketmanager.dal.repositories.UserRepository;
+import dk.easv.ticketmanager.utils.CustomHashSet;
 import dk.easv.ticketmanager.utils.JPAUtil;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.TypedQuery;
 
-import java.util.List;
-import java.util.Optional;
+import java.util.*;
 
 public class UserRepositoryImpl implements UserRepository
 {
+    protected final Map<Long, User> userMap;
+
+    public UserRepositoryImpl(){
+        userMap = new HashMap<>();
+
+        updateCache();
+    }
+
+    private void updateCache() {
+        for (User user : getAll()) {
+            userMap.put(user.getId(), user);
+        }
+    }
+
+
     @Override
     public List<User> getAll() {
-        EntityManager em = JPAUtil.getEntityManager();
-        return em.createQuery("select u from User u", User.class).getResultList();
+        try(EntityManager entityManager = JPAUtil.getEntityManager()){
+            return entityManager.createQuery("select u from User u", User.class).getResultList();
+        }
     }
 
     @Override public User getById(long id)
     {
-        return null;
+        return userMap.get(id);
     }
 
     @Override
     public List<User> getUsersByRoleName(String name) {
-        EntityManager em = JPAUtil.getEntityManager();
-        return em.createQuery("SELECT u FROM User u WHERE u.role = :roleId", User.class)
-                .setParameter("roleName", name)
-                .getResultList();
+        if(userMap.isEmpty()){
+            return null;
+        }
+        List<User> newColl = new ArrayList<>();
+        for (User user : userMap.values())
+        {
+            if(user.getRole().getName().equals(name)){
+                newColl.add(user);
+            }
+        }
+        return newColl;
     }
 
     @Override
     public User save(User user) {
-        EntityManager em = JPAUtil.getEntityManager();
-        try {
+        try (EntityManager em = JPAUtil.getEntityManager())
+        {
             em.getTransaction().begin();
-            User saved = em.merge(user);
+            User u = em.merge(user);
             em.getTransaction().commit();
-            return saved;
-        }  catch (Exception e) {
-            if (em.getTransaction().isActive()){
-                em.getTransaction().rollback();
-            }
-            throw new RuntimeException(e);
+            return u;
         }
-        finally {
-            em.close();
+        catch (Exception e)
+        {
+            return null;
         }
     }
 
@@ -73,7 +92,7 @@ public class UserRepositoryImpl implements UserRepository
         return delete(getById(id));
     }
 
-    @Override public User update(User oldEntity, User newEntity)
+    @Override public User update(User updatedUser)
     {
         return null;
     }
@@ -81,13 +100,15 @@ public class UserRepositoryImpl implements UserRepository
 
     @Override public Optional<User> findUserByEmail(String email)
     {
-        EntityManager em = JPAUtil.getEntityManager();
-        TypedQuery<User> query = em.createQuery(
-            "SELECT u FROM User u WHERE u.email = :email", User.class);
-        query.setParameter("email", email);
-
-        return query.getResultStream().findFirst();
+        try(EntityManager em = JPAUtil.getEntityManager()){
+            TypedQuery<User> query = em.createQuery(
+                "SELECT u FROM User u WHERE u.email = :email", User.class);
+            query.setParameter("email", email);
+            return query.getResultStream().findFirst();
+        }
     }
+
+
 
 
 }
