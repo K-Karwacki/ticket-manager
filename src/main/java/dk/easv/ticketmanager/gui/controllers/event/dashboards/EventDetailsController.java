@@ -5,6 +5,7 @@ import dk.easv.ticketmanager.bll.services.DatabaseService;
 import dk.easv.ticketmanager.gui.FXMLManager;
 //import dk.easv.ticketmanager.gui.models.EventDataModel;
 import dk.easv.ticketmanager.gui.controllers.user.CoordinatorListPopupController;
+import dk.easv.ticketmanager.gui.models.EventModel;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.Parent;
@@ -22,9 +23,9 @@ import static dk.easv.ticketmanager.gui.FXMLPath.COORDINATOR_LIST_POPUP;
 
 public class EventDetailsController implements Initializable {
     private final FXMLManager fxmlManager = FXMLManager.INSTANCE;
-    private DatabaseService databaseService;
+    private static DatabaseService databaseService;
 //    private final EventDataModel eventDataModel = new EventDataModel();
-    private Event event;
+    private EventModel eventModel;
 
     @FXML
     private Rectangle rectangleImageContainer;
@@ -55,36 +56,36 @@ public class EventDetailsController implements Initializable {
 //        setEventDetails();
     }
     @FXML private void showCoordinatorsListPopup(){
-        Pair<Parent, CoordinatorListPopupController> p = fxmlManager.loadFXML(COORDINATOR_LIST_POPUP);
-        p.getValue().setEvent(event);
-        p.getValue().displayNotAssignedCoordinatorsToEventList();
+//        Pair<Parent, CoordinatorListPopupController> p = fxmlManager.loadFXML(COORDINATOR_LIST_POPUP);
+//        p.getValue().setEvent(eventModel);
+//        p.getValue().displayNotAssignedCoordinatorsToEventList();
 
     }
 
 
 
     @FXML private void showAssignedCoordinatorsToEventPopup(){
-        Pair<Parent, CoordinatorListPopupController> p = fxmlManager.loadFXML(COORDINATOR_LIST_POPUP);
-        p.getValue().setEvent(event);
-        p.getValue().displayAssignedCoordinatorsToTheEventList();
+//        Pair<Parent, CoordinatorListPopupController> p = fxmlManager.loadFXML(COORDINATOR_LIST_POPUP);
+//        p.getValue().setEvent(eventModel);
+//        p.getValue().displayAssignedCoordinatorsToTheEventList();
     }
 
-    public void setEventDetails(Event event) {
-        this.event = event;
-        lblEventDate.setText(event.getDate().toString());
-        lblEventTime.setText(event.getTime().toString());
-        lblEventLocation.setText(event.getLocation().toString());
+    public void setEventDetails(EventModel event) {
+        this.eventModel = event;
+        lblEventDate.textProperty().bind(event.dateProperty());
+        lblEventTime.textProperty().bind(event.timeProperty());
+        lblEventLocation.textProperty().bind(event.getLocation().addressProperty());
 //        lblNormalEventTickets.setText(String.valueOf(event.getNormal_ticket_amount()));
 //        lblSpecialEventTickets.setText(String.valueOf(event.getVip_ticket_amount()));
-        lblEventDescription.setText(event.getDescription());
-        lblEventName.setText(event.getName());
-        Image image = new Image(Objects.requireNonNull(getClass().getResource(event.getImagePath())).toExternalForm());
+        lblEventDescription.textProperty().bind(event.descriptionProperty());
+        lblEventName.textProperty().bind(event.nameProperty());
+        Image image = new Image(Objects.requireNonNull(getClass().getResource(event.imagePathProperty().get())).toExternalForm());
         ImagePattern imagePattern = new ImagePattern(image);
         rectangleImageContainer.setFill(imagePattern);
     }
 
-    public Event getEvent() {
-        return event;
+    public EventModel getEvent() {
+        return eventModel;
     }
 
   public void setDatabaseService(DatabaseService databaseService)

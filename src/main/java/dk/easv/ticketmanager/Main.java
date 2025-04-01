@@ -44,7 +44,7 @@ public class Main extends Application
 
   private void setControllersDependencies(){
     LoginWindowController loginWindowController = (LoginWindowController) fxmlManager.getFXMLController(FXMLPath.LOGIN);
-    EventDetailsController eventDetailsController = (EventDetailsController)  fxmlManager.getFXMLController(FXMLPath.EVENT_DETAILS_POPUP);
+    EventDetailsController eventDetailsController = (EventDetailsController)  fxmlManager.getFXMLController(FXMLPath.EVENT_DETAILS);
     EventCreatorController eventCreatorPopupController = (EventCreatorController)   fxmlManager.getFXMLController(FXMLPath.EVENT_CREATOR_POPUP);
     EventHomeController eventHomeController = (EventHomeController) fxmlManager.getFXMLController(FXMLPath.EVENTS_DASHBOARD);
 
@@ -53,6 +53,7 @@ public class Main extends Application
     eventDetailsController.setDatabaseService(databaseService);
     eventCreatorPopupController.setDatabaseService(databaseService);
     eventHomeController.setDatabaseService(databaseService);
+
 
   }
 

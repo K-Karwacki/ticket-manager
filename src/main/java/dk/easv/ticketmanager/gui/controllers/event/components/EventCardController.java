@@ -1,16 +1,20 @@
 package dk.easv.ticketmanager.gui.controllers.event.components;
 
 import dk.easv.ticketmanager.gui.FXMLManager;
+import dk.easv.ticketmanager.gui.FXMLPath;
+import dk.easv.ticketmanager.gui.ViewManager;
+import dk.easv.ticketmanager.gui.controllers.event.dashboards.EventDetailsController;
 import dk.easv.ticketmanager.gui.models.EventModel;
-import javafx.beans.property.SimpleObjectProperty;
 import javafx.fxml.FXML;
+import javafx.scene.Parent;
 import javafx.scene.control.Label;
-import javafx.scene.image.Image;
 import javafx.scene.paint.ImagePattern;
 import javafx.scene.shape.Rectangle;
+import javafx.util.Pair;
 
 public class EventCardController
 {
+  private final ViewManager viewManager = ViewManager.INSTANCE;
   private final FXMLManager fxmlManager = FXMLManager.INSTANCE;
   private EventModel eventModel;
 
@@ -31,12 +35,9 @@ public class EventCardController
 
   @FXML
   private void openEvent(){
-//    Pair<Parent, EventDetailsPopupController> eventDetailsPopupControllerPair = fxmlManager.loadFXML(EVENT_DETAILS_POPUP);
-////    eventDetailsPopupControllerPair.getValue().setEventDetails(event);
-//    Stage stage = new Stage();
-//    stage.setTitle("Event Details");
-//    stage.setScene(new Scene(eventDetailsPopupControllerPair.getKey()));
-//    stage.show();
+    Pair<Parent, EventDetailsController> p = fxmlManager.getFXML(FXMLPath.EVENT_DETAILS);
+    p.getValue().setEventDetails(eventModel);
+    viewManager.switchDashboard(FXMLPath.EVENT_DETAILS, "Event details");
   }
 
   @FXML
