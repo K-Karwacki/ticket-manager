@@ -57,4 +57,9 @@ public class LocationModel {
     public void setPost_code(String newPost_code) {
         post_code.set(newPost_code);
     }
+
+    @Override
+    public String toString() {
+        return this.getName() + " " + this.getAddress() + " " + this.getPost_code() + " " + this.getCity();
+    }
 }

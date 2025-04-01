@@ -113,4 +113,5 @@ public class EventModel
   public Image getImage() {
     return new Image(this.imagePath.get());
   }
+
 }

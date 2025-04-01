@@ -6,6 +6,7 @@ import dk.easv.ticketmanager.gui.FXMLManager;
 //import dk.easv.ticketmanager.gui.models.EventDataModel;
 import dk.easv.ticketmanager.gui.controllers.user.CoordinatorListPopupController;
 import dk.easv.ticketmanager.gui.models.EventModel;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.Parent;
@@ -74,7 +75,7 @@ public class EventDetailsController implements Initializable {
         this.eventModel = event;
         lblEventDate.textProperty().bind(event.dateProperty());
         lblEventTime.textProperty().bind(event.timeProperty());
-        lblEventLocation.textProperty().bind(event.getLocation().addressProperty());
+        lblEventLocation.setText(event.getLocation().toString());
 //        lblNormalEventTickets.setText(String.valueOf(event.getNormal_ticket_amount()));
 //        lblSpecialEventTickets.setText(String.valueOf(event.getVip_ticket_amount()));
         lblEventDescription.textProperty().bind(event.descriptionProperty());
@@ -92,4 +93,17 @@ public class EventDetailsController implements Initializable {
   {
       this.databaseService = databaseService;
   }
+
+    @FXML
+    private void showTicketTypeCreatorForm(ActionEvent actionEvent) {}
+
+    @FXML
+    private void showTicketGeneratorForm(ActionEvent actionEvent) {}
+
+    @FXML
+    private void onClickDelete(ActionEvent actionEvent) {}
+
+    @FXML
+    private void onClickEdit(ActionEvent actionEvent) {}
+
 }
