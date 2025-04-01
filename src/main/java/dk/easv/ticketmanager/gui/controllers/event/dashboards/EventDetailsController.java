@@ -104,8 +104,7 @@ public class EventDetailsController implements Initializable {
     private void showTicketTypeCreatorForm() {
         Pair<Parent, TicketTypeCreatorPopupController> p = fxmlManager.getFXML(TICKET_TYPE_CREATOR_POPUP);
         p.getValue().setEvent(eventModel);
-        viewManager.showStage(TICKET_TYPE_CREATOR_POPUP, "Ticket creator", false);
-        //todo implement and use showPopup instead of showStage
+        viewManager.showPopup(TICKET_TYPE_CREATOR_POPUP, "Ticket creator");
     }
 
     @FXML

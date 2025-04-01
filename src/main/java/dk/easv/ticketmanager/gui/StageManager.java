@@ -5,6 +5,7 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
+import javafx.util.Pair;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -44,7 +45,6 @@ public class StageManager
       stage.setScene(new Scene(root));
       stage.setTitle(title);
 
-      stage.initModality(Modality.NONE);
       if (isModal) {
         stage.initModality(Modality.APPLICATION_MODAL);
       }
@@ -92,15 +92,14 @@ public class StageManager
     }
   }
 
-  public void showPopup(String fxml){
-    if(stageSettings.currentStage != null){
-      try{
-        Stage stage = getStage(fxml);
-        stage.showAndWait();
-      }catch (Exception e){
-        e.printStackTrace();
-      }
-    }
+  public <T> void showPopup(String fxmlFile, String title) {
+    Stage popupStage = new Stage();
+    Pair<Parent, T> fxmlPair = fxmlManager.loadFXML(fxmlFile);
+    Scene scene = new Scene(fxmlPair.getKey());
+    popupStage.setScene(scene);
+    popupStage.initModality(Modality.APPLICATION_MODAL);
+    popupStage.setTitle(title);
+    popupStage.showAndWait();
   }
 
   public SceneManager getSceneManager()
