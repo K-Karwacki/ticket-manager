@@ -1,11 +1,13 @@
 package dk.easv.ticketmanager.bll.services.implementations;
 
 import dk.easv.ticketmanager.be.Event;
+import dk.easv.ticketmanager.be.TicketType;
 import dk.easv.ticketmanager.be.User;
 import dk.easv.ticketmanager.bll.services.AuthorizationService;
 import dk.easv.ticketmanager.bll.services.DatabaseService;
 import dk.easv.ticketmanager.bll.services.factories.RepositoryService;
 import dk.easv.ticketmanager.dal.repositories.EventRepository;
+import dk.easv.ticketmanager.dal.repositories.TicketRepository;
 import dk.easv.ticketmanager.dal.repositories.UserRepository;
 import dk.easv.ticketmanager.gui.models.*;
 
@@ -75,7 +77,9 @@ public class DatabaseServiceImpl implements DatabaseService
   }
 
 
-
+  public void addTicketType(TicketType ticketType){
+    this.repositoryService.getRepository(TicketRepository.class).addTicketType(ticketType);
+  }
 
 
   private void setUserListModel(){
@@ -93,6 +97,8 @@ public class DatabaseServiceImpl implements DatabaseService
     });
     userListModel.setUsers(userModels);
   }
-
+  public Event getEventById(long ID){
+    return this.repositoryService.getRepository(EventRepository.class).getById(ID);
+  };
 
 }

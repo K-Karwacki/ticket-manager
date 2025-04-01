@@ -4,6 +4,8 @@ import dk.easv.ticketmanager.be.Event;
 import dk.easv.ticketmanager.bll.services.DatabaseService;
 import dk.easv.ticketmanager.gui.FXMLManager;
 //import dk.easv.ticketmanager.gui.models.EventDataModel;
+import dk.easv.ticketmanager.gui.ViewManager;
+import dk.easv.ticketmanager.gui.controllers.event.popups.TicketTypeCreatorPopupController;
 import dk.easv.ticketmanager.gui.controllers.user.CoordinatorListPopupController;
 import dk.easv.ticketmanager.gui.models.EventModel;
 import javafx.event.ActionEvent;
@@ -13,6 +15,7 @@ import javafx.scene.Parent;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.paint.ImagePattern;
+import javafx.scene.shape.Path;
 import javafx.scene.shape.Rectangle;
 import javafx.util.Pair;
 
@@ -21,9 +24,11 @@ import java.util.Objects;
 import java.util.ResourceBundle;
 
 import static dk.easv.ticketmanager.gui.FXMLPath.COORDINATOR_LIST_POPUP;
+import static dk.easv.ticketmanager.gui.FXMLPath.TICKET_TYPE_CREATOR_POPUP;
 
 public class EventDetailsController implements Initializable {
     private final FXMLManager fxmlManager = FXMLManager.INSTANCE;
+    private final ViewManager viewManager = ViewManager.INSTANCE;
     private static DatabaseService databaseService;
 //    private final EventDataModel eventDataModel = new EventDataModel();
     private EventModel eventModel;
@@ -96,7 +101,10 @@ public class EventDetailsController implements Initializable {
 
     @FXML
     private void showTicketTypeCreatorForm() {
-
+        Pair<Parent, TicketTypeCreatorPopupController> p = fxmlManager.getFXML(TICKET_TYPE_CREATOR_POPUP);
+        p.getValue().setEvent(eventModel);
+        viewManager.showStage(TICKET_TYPE_CREATOR_POPUP, "Ticket creator", false);
+        //todo implement and use showPopup instead of showStage
     }
 
     @FXML
