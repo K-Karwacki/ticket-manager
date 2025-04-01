@@ -57,8 +57,6 @@ public class MenuComponentController
 
   public void onClickOpenEvents(MouseEvent event)
   {
-    Pair<Parent, EventHomeController> p = FXMLManager.INSTANCE.getFXML(FXMLPath.EVENTS_DASHBOARD);
-    p.getValue().loadEventCards();
     viewManager.switchDashboard(FXMLPath.EVENTS_DASHBOARD, "Event management");
     switchButtonsHighlight(event);
 

@@ -3,7 +3,7 @@ package dk.easv.ticketmanager;
 import dk.easv.ticketmanager.bll.services.AuthenticationService;
 import dk.easv.ticketmanager.bll.services.AuthorizationService;
 import dk.easv.ticketmanager.bll.services.DatabaseService;
-import dk.easv.ticketmanager.bll.services.RepositoryService;
+import dk.easv.ticketmanager.bll.services.factories.RepositoryService;
 import dk.easv.ticketmanager.bll.services.implementations.AuthenticationServiceImpl;
 import dk.easv.ticketmanager.bll.services.factories.RepositoryServiceFactory;
 import dk.easv.ticketmanager.bll.services.implementations.AuthorizationServiceImpl;
@@ -31,12 +31,14 @@ public class Main extends Application
   protected final RepositoryServiceFactory repositoryServiceFactory = new RepositoryServiceFactory();
   protected final RepositoryService repositoryService = repositoryServiceFactory.getRepositoryService();
 
-  protected final DatabaseService databaseService = new DatabaseServiceImpl(repositoryService);
-
   protected final AuthenticationService authenticationService = new AuthenticationServiceImpl(repositoryService.getRepository(
-      AuthRepository.class), repositoryService.getRepository(UserRepository.class));
-
+          AuthRepository.class), repositoryService.getRepository(UserRepository.class));
   protected final AuthorizationService authorizationService = new AuthorizationServiceImpl(repositoryService.getRepository(AuthRepository.class));
+
+  protected final DatabaseService databaseService = new DatabaseServiceImpl(repositoryService, authorizationService);
+
+
+
 
 
 

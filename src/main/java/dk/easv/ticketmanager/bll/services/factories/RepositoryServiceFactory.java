@@ -1,8 +1,5 @@
 package dk.easv.ticketmanager.bll.services.factories;
 
-import dk.easv.ticketmanager.be.User;
-import dk.easv.ticketmanager.bll.services.RepositoryService;
-import dk.easv.ticketmanager.bll.services.implementations.RepositoryServiceImpl;
 import dk.easv.ticketmanager.dal.repositories.AuthRepository;
 import dk.easv.ticketmanager.dal.repositories.BaseRepository;
 import dk.easv.ticketmanager.dal.repositories.EventRepository;
@@ -40,5 +37,18 @@ public class RepositoryServiceFactory
     return repositoryService;
   }
 
+
+  private static class RepositoryServiceImpl implements RepositoryService{
+
+    private final Map<Class<? extends BaseRepository<?>>, BaseRepository<?>> repositoryMap;
+    public RepositoryServiceImpl(Map<Class<? extends BaseRepository<?>>, BaseRepository<?>> repositoryMap){
+      this.repositoryMap = repositoryMap;
+    }
+    @Override
+    public <T extends BaseRepository<?>> T getRepository(Class<T> repositoryInterfaceClass) {
+      return repositoryInterfaceClass.cast(repositoryMap.get(repositoryInterfaceClass));
+    }
+
+  }
 
 }

@@ -21,6 +21,7 @@ import static dk.easv.ticketmanager.gui.FXMLPath.EVENT_CREATOR_POPUP;
 public class EventHomeController
 {
   private final FXMLManager fxmlManager = FXMLManager.INSTANCE;
+  private final ViewManager viewManager = ViewManager.INSTANCE;
   private DatabaseService databaseService;
 
   @FXML
@@ -35,14 +36,9 @@ public class EventHomeController
 
   }
   @FXML private void openEventCreator(){
-    ViewManager.INSTANCE.switchDashboard(EVENT_CREATOR_POPUP, "Create Event");
+    viewManager.switchDashboard(EVENT_CREATOR_POPUP, "Create Event");
   }
 
-//  @FXML
-//  private void initialize()
-//  {
-//    loadEventCards();
-//  }
 
 
   public void loadEventCards() {
@@ -50,7 +46,7 @@ public class EventHomeController
     eventListRoot.getChildren().clear();
     List<EventModel> events = databaseService.getEventListModel().getEvents();
     events.forEach(event -> {
-      Pair<Parent, EventCardController> p = FXMLManager.INSTANCE.loadFXML(EVENT_CARD_COMPONENT);
+      Pair<Parent, EventCardController> p = fxmlManager.loadFXML(EVENT_CARD_COMPONENT);
       p.getValue().setEventModel(event);
       eventListRoot.getChildren().add(p.getKey());
     });
@@ -59,5 +55,6 @@ public class EventHomeController
 
   public void setDatabaseService(DatabaseService databaseService) {
     this.databaseService = databaseService;
+    loadEventCards();
   }
 }

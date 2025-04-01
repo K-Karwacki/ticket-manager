@@ -44,6 +44,13 @@ public enum ViewManager
     }
   }
 
+  public void openPopup(String fxml, String title){
+    if(stageManager != null){
+
+      stageManager.showStage(fxml);
+    }
+  }
+
 
   public void setStageRoot(BorderPane borderPane)
   {
