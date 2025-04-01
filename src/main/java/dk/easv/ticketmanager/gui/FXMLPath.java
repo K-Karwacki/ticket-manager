@@ -26,4 +26,5 @@ public class FXMLPath
   public final static String IMAGE_SELECTOR_POPUP = "fxml/popups/image_selector_popup.fxml";
   public final static String COORDINATOR_LIST_POPUP = "fxml/popups/coordinator_list_popup.fxml";
   public final static String TICKET_TYPE_CREATOR_POPUP = "fxml/popups/ticket_type_creator_popup.fxml";
+  public static final String TICKET_COMPONENT = "fxml/components/ticket_component.fxml";
 }

@@ -18,6 +18,7 @@ import dk.easv.ticketmanager.gui.controllers.event.popups.TicketTypeCreatorPopup
 import dk.easv.ticketmanager.gui.controllers.main.LoginWindowController;
 import dk.easv.ticketmanager.gui.controllers.event.dashboards.EventCreatorController;
 import dk.easv.ticketmanager.gui.controllers.event.dashboards.EventDetailsController;
+import dk.easv.ticketmanager.gui.controllers.ticket.TicketController;
 import dk.easv.ticketmanager.gui.models.UserSession;
 import dk.easv.ticketmanager.utils.RoleType;
 import javafx.application.Application;
