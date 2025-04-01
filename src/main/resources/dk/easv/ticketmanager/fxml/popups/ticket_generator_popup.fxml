@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.Cursor?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+
+<VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="383.0" prefWidth="350.0" spacing="5.0" styleClass="container" stylesheets="@../../style/components/form.css" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="dk.easv.ticketmanager.gui.controllers.ticket.TicketGeneratorController">
+    <children>
+        <ImageView fitHeight="59.0" fitWidth="255.0" pickOnBounds="true" preserveRatio="true">
+            <image>
+                <Image url="@../../images/easv_logo.png" />
+            </image>
+            <VBox.margin>
+                <Insets bottom="10.0" top="10.0" />
+            </VBox.margin>
+        </ImageView>
+        <Label text="First name" />
+        <TextField fx:id="txtFieldCustomerFirstName" prefHeight="26.0" prefWidth="254.0" />
+        <Label text="Last name" />
+        <TextField fx:id="txtFieldCustomerLastName" />
+        <Label text="Email" />
+        <TextField fx:id="txtFieldCustomerEmail" />
+        <Label text="Ticket type" />
+        <HBox alignment="CENTER_LEFT" prefHeight="100.0" prefWidth="200.0" spacing="25.0">
+            <children>
+                <ComboBox fx:id="comboBoxTicketTypes" onAction="#changePrice" prefWidth="150.0" style="-fx-background-color: white;" />
+                <Label fx:id="lblTicketPrice" text="Price: " />
+            </children>
+        </HBox>
+        <Button mnemonicParsing="false" onAction="#displayTicketOptions" style="-fx-background-color: #9CE2FF; -fx-border-radius: 5; -fx-background-radius: 5;" text="Generate">
+            <VBox.margin>
+                <Insets top="10.0" />
+            </VBox.margin>
+            <padding>
+                <Insets bottom="10.0" left="15.0" right="15.0" top="10.0" />
+            </padding>
+            <cursor>
+                <Cursor fx:constant="HAND" />
+            </cursor>
+        </Button>
+    </children>
+    <padding>
+        <Insets bottom="100.0" left="35.0" right="35.0" />
+    </padding>
+</VBox>
+

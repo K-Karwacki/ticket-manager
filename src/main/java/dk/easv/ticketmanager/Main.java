@@ -57,6 +57,7 @@ public class Main extends Application
     eventCreatorPopupController.setDatabaseService(databaseService);
     eventHomeController.setDatabaseService(databaseService);
     ticketTypeCreatorPopupController.setDatabaseService(databaseService);
+    ticketGeneratorController.setDatabaseService(databaseService);
 
 
   }

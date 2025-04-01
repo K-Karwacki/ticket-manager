@@ -4,6 +4,7 @@ import dk.easv.ticketmanager.be.Customer;
 import dk.easv.ticketmanager.be.Event;
 import dk.easv.ticketmanager.be.Ticket;
 import dk.easv.ticketmanager.be.TicketType;
+import dk.easv.ticketmanager.bll.services.DatabaseService;
 import dk.easv.ticketmanager.gui.FXMLManager;
 import javafx.fxml.FXML;
 import javafx.scene.Parent;
@@ -21,6 +22,7 @@ import static dk.easv.ticketmanager.gui.FXMLPath.*;
 
 public class TicketGeneratorController {
     private final FXMLManager fxmlManager = FXMLManager.INSTANCE;
+    private DatabaseService databaseService;
     private Ticket ticket;
     @FXML
     private TextField txtFieldCustomerFirstName;
@@ -52,7 +54,7 @@ public class TicketGeneratorController {
 
     public void addTicketTypes(Event event) {
         comboBoxTicketTypes.getItems().clear();
-        comboBoxTicketTypes.setItems(ticketDataModel.getTicketTypesForEvent(event));
+        comboBoxTicketTypes.setItems(databaseService.getTicketTypesForEvent(event));
     }
 
     private Image getTicketImage() {
@@ -72,7 +74,7 @@ public class TicketGeneratorController {
         customer.setLastName(txtFieldCustomerLastName.getText());
         customer.setEmail(txtFieldCustomerEmail.getText());
         ticket.setCustomer(customer);
-        ticketDataModel.addTicket(ticket);
+        databaseService.addTicket(ticket);
     }
 
     public void loadTicketOptions(Image image){
@@ -83,6 +85,9 @@ public class TicketGeneratorController {
         stage.setTitle("Ticket Options");
         stage.setScene(new Scene(p.getKey()));
         stage.show();
+    }
+    public void setDatabaseService(DatabaseService databaseService) {
+        this.databaseService = databaseService;
     }
 }
 
