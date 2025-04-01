@@ -5,7 +5,7 @@
 <?import javafx.scene.layout.VBox?>
 
 
-<VBox alignment="TOP_CENTER" styleClass="dashboard-root" stylesheets="@../../style/dashboard/dashboard.css" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="dk.easv.ticketmanager.gui.controllers.dashboards.UserListDashboardController">
+<VBox alignment="TOP_CENTER" styleClass="dashboard-root" stylesheets="@../../style/dashboard/dashboard.css" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="dk.easv.ticketmanager.gui.controllers.menu.UserListDashboardController">
    <children>
        <Button alignment="CENTER" contentDisplay="BOTTOM" mnemonicParsing="false" onAction="#addNewCoordinator" prefHeight="26.0" prefWidth="68.0" text="Button">
        </Button>

@@ -95,7 +95,9 @@ public class EventDetailsController implements Initializable {
   }
 
     @FXML
-    private void showTicketTypeCreatorForm(ActionEvent actionEvent) {}
+    private void showTicketTypeCreatorForm() {
+
+    }
 
     @FXML
     private void showTicketGeneratorForm(ActionEvent actionEvent) {}

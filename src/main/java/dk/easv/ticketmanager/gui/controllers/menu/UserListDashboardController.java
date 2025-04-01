@@ -1,4 +1,4 @@
-package dk.easv.ticketmanager.gui.controllers.dashboards;
+package dk.easv.ticketmanager.gui.controllers.menu;
 
 import dk.easv.ticketmanager.be.Role;
 import dk.easv.ticketmanager.be.User;

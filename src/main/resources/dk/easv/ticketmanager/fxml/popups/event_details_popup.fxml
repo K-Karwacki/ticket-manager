@@ -13,10 +13,10 @@
 <?import javafx.scene.shape.Rectangle?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="558.0" prefWidth="940.0" style="-fx-background-color: D1D1D1;" stylesheets="@../../style/dashboard/dashboard.css" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="dk.easv.ticketmanager.gui.controllers.event.dashboards.EventDetailsController">
+<AnchorPane prefHeight="650.0" prefWidth="1000.0" style="-fx-background-color: D1D1D1;" stylesheets="@../../style/dashboard/dashboard.css" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="dk.easv.ticketmanager.gui.controllers.event.dashboards.EventDetailsController">
    <children>
       <Rectangle fx:id="rectangleImageContainer" arcHeight="20.0" arcWidth="20.0" fill="DODGERBLUE" height="220.0" layoutX="35.0" layoutY="21.0" stroke="BLACK" strokeType="INSIDE" width="600.0" />
-      <VBox layoutX="36.0" layoutY="272.0" prefHeight="270.0" prefWidth="191.0" spacing="15.0" style="-fx-background-color: F0F0F0; -fx-background-radius: 20;" styleClass="drop-shadow">
+      <VBox layoutX="36.0" layoutY="272.0" prefHeight="344.0" prefWidth="191.0" spacing="25.0" style="-fx-background-color: F0F0F0; -fx-background-radius: 20;" styleClass="drop-shadow">
          <children>
             <HBox alignment="CENTER" prefHeight="26.0" prefWidth="204.0" spacing="12.0">
                <children>
@@ -49,14 +49,17 @@
                   <Label fx:id="lblEventTime" text="00:00" />
                </children>
             </HBox>
-            <HBox alignment="CENTER_LEFT" prefHeight="52.0" prefWidth="160.0" spacing="12.0">
+            <HBox alignment="CENTER_LEFT" spacing="12.0">
                <children>
                   <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true" style="-fx-opacity: 80%;">
                      <image>
                         <Image url="@../../images/icons/pin-icon.png" />
                      </image>
                   </ImageView>
-                  <Label fx:id="lblEventLocation" prefHeight="80.0" prefWidth="112.0" text="123 Main Street, Anytown, USA, 12345" wrapText="true" />
+                  <Label fx:id="lblEventLocation" text="123 Main Street, Anytown, USA, 12345" wrapText="true">
+                     <padding>
+                        <Insets right="35.0" />
+                     </padding></Label>
                </children>
             </HBox>
             <HBox alignment="CENTER_LEFT" prefHeight="22.0" prefWidth="160.0" spacing="12.0">
@@ -92,7 +95,7 @@
             <Font name="Verdana Bold" size="13.0" />
          </font>
       </Label>
-      <Label fx:id="lblEventDescription" alignment="TOP_LEFT" layoutX="255.0" layoutY="321.0" prefHeight="220.0" prefWidth="377.0" style="-fx-background-color: F0F0F0; -fx-background-radius: 20;" text="As midnight arrives, lanterns light up the sky, carrying wishes into the night. Music, fire performers, and delicious street food fill the riverside park with life. Friends and strangers gather around bonfires, sharing stories until a grand fireworks display closes the magical evening." wrapText="true">
+      <Label fx:id="lblEventDescription" alignment="TOP_LEFT" layoutX="255.0" layoutY="321.0" prefHeight="293.0" prefWidth="377.0" style="-fx-background-color: F0F0F0; -fx-background-radius: 20;" text="As midnight arrives, lanterns light up the sky, carrying wishes into the night. Music, fire performers, and delicious street food fill the riverside park with life. Friends and strangers gather around bonfires, sharing stories until a grand fireworks display closes the magical evening." wrapText="true">
          <padding>
             <Insets left="30.0" right="50.0" top="25.0" />
          </padding>
@@ -104,37 +107,40 @@
             <String fx:value="btn" />
          </styleClass>
       </Label>
-      <Button layoutX="718.0" layoutY="384.0" mnemonicParsing="false" onAction="#showCoordinatorsListPopup" prefHeight="52.0" prefWidth="150.0" style="-fx-background-radius: 10; -fx-background-color: #7BD4F9;" styleClass="btn" text="Assign to">
-         <font>
-            <Font name="Verdana" size="18.0" />
-         </font>
-      </Button>
-      <Button layoutX="718.0" layoutY="322.0" mnemonicParsing="false" onAction="#showTicketGeneratorForm" prefHeight="52.0" prefWidth="150.0" style="-fx-background-radius: 10; -fx-background-color: #FFDF99;" styleClass="btn" text="Print ticket">
-         <font>
-            <Font name="Verdana" size="18.0" />
-         </font>
-      </Button>
-      <Button layoutX="718.0" layoutY="261.0" mnemonicParsing="false" onAction="#showTicketTypeCreatorForm" prefHeight="52.0" prefWidth="150.0" style="-fx-background-radius: 10; -fx-background-color: #FFDF99;" styleClass="btn" text="Add ticket">
-         <font>
-            <Font name="Verdana" size="18.0" />
-         </font>
-      </Button>
       <Rectangle arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="220.0" layoutX="693.0" layoutY="21.0" stroke="BLACK" strokeType="INSIDE" width="217.0" />
       <Label layoutX="710.0" layoutY="47.0" prefHeight="156.0" prefWidth="184.0" text="PLACE FOR COORDINATORS ASSIGNED TO THIS EVENT" textAlignment="CENTER" textFill="#863d3d" wrapText="true">
          <font>
             <Font size="24.0" />
          </font>
       </Label>
-      <Button fx:id="deleteButton" layoutX="777.0" layoutY="510.0" mnemonicParsing="false" onAction="#onClickDelete" prefHeight="6.0" prefWidth="150.0" style="-fx-background-radius: 10; -fx-background-color: #F77;" styleClass="btn" text="Delete Event">
-         <font>
-            <Font name="Verdana" size="18.0" />
-         </font>
-      </Button>
-      <Button fx:id="editButton" layoutX="718.0" layoutY="444.0" mnemonicParsing="false" onAction="#onClickEdit" prefHeight="52.0" prefWidth="150.0" style="-fx-background-radius: 10; -fx-background-color: #7BD4F9;" styleClass="btn" text="Edit event">
-         <font>
-            <Font name="Verdana" size="18.0" />
-         </font>
-      </Button>
+      <VBox alignment="TOP_CENTER" layoutX="693.0" layoutY="272.0" prefHeight="344.0" prefWidth="184.0" spacing="25.0">
+         <children>
+            <Button mnemonicParsing="false" onAction="#showTicketTypeCreatorForm" prefHeight="52.0" prefWidth="150.0" style="-fx-background-radius: 10; -fx-background-color: #FFDF99;" styleClass="btn" text="Add ticket">
+               <font>
+                  <Font name="Verdana" size="18.0" />
+               </font>
+            </Button>
+            <Button mnemonicParsing="false" onAction="#showTicketGeneratorForm" prefHeight="52.0" prefWidth="150.0" style="-fx-background-radius: 10; -fx-background-color: #FFDF99;" styleClass="btn" text="Print ticket">
+               <font>
+                  <Font name="Verdana" size="18.0" />
+               </font>
+            </Button>
+            <Button mnemonicParsing="false" onAction="#showCoordinatorsListPopup" prefHeight="52.0" prefWidth="150.0" style="-fx-background-radius: 10; -fx-background-color: #7BD4F9;" styleClass="btn" text="Assign to">
+               <font>
+                  <Font name="Verdana" size="18.0" />
+               </font>
+            </Button>
+            <Button fx:id="editButton" mnemonicParsing="false" onAction="#onClickEdit" prefHeight="52.0" prefWidth="150.0" style="-fx-background-radius: 10; -fx-background-color: #7BD4F9;" styleClass="btn" text="Edit event">
+               <font>
+                  <Font name="Verdana" size="18.0" />
+               </font>
+            </Button>
+            <Button fx:id="deleteButton" mnemonicParsing="false" onAction="#onClickDelete" prefHeight="6.0" prefWidth="150.0" style="-fx-background-radius: 10; -fx-background-color: #F77;" styleClass="btn" text="Delete Event">
+               <font>
+                  <Font name="Verdana" size="18.0" />
+               </font>
+            </Button>
+         </children>
+      </VBox>
    </children>
 </AnchorPane>
-

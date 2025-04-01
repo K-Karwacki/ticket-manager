@@ -13,7 +13,7 @@
 <?import javafx.scene.shape.Rectangle?>
 <?import javafx.scene.text.Font?>
 
-<HBox alignment="CENTER" prefHeight="556.0" prefWidth="1069.0" spacing="200.0" styleClass="dashboard-root" stylesheets="@../../style/dashboard/dashboard.css" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="dk.easv.ticketmanager.gui.controllers.dashboards.HomeDashboardController">
+<HBox alignment="CENTER" prefHeight="556.0" prefWidth="1069.0" spacing="200.0" styleClass="dashboard-root" stylesheets="@../../style/dashboard/dashboard.css" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="dk.easv.ticketmanager.gui.controllers.menu.HomeDashboardController">
    <children>
       <VBox>
          <children>

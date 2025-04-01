@@ -15,7 +15,7 @@
 <?import javafx.scene.text.Font?>
 
 
-<AnchorPane styleClass="dashboard-root"  prefHeight="550.0" prefWidth="940.0" style="-fx-background-color: D1D1D1;" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="dk.easv.ticketmanager.gui.controllers.dashboards.ProfileDashboardController">
+<AnchorPane styleClass="dashboard-root"  prefHeight="550.0" prefWidth="940.0" style="-fx-background-color: D1D1D1;" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="dk.easv.ticketmanager.gui.controllers.menu.ProfileDashboardController">
    <children>
       <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#555555" height="550.0" layoutX="59.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="300.0" />
       <Circle fill="DODGERBLUE" layoutX="212.0" layoutY="287.0" radius="167.0" stroke="#d1d1d1" strokeType="INSIDE" strokeWidth="10.0" />
