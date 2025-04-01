@@ -11,6 +11,9 @@ import dk.easv.ticketmanager.dal.repositories.EventRepository;
 import dk.easv.ticketmanager.dal.repositories.TicketRepository;
 import dk.easv.ticketmanager.dal.repositories.UserRepository;
 import dk.easv.ticketmanager.gui.models.*;
+import dk.easv.ticketmanager.utils.JPAUtil;
+import jakarta.persistence.EntityManager;
+import javafx.collections.ObservableList;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -107,7 +110,10 @@ public class DatabaseServiceImpl implements DatabaseService
   }
 
   @Override
-  public List<TicketType> getTicketTypesForEvent(Event event) {
-    return List.of();
+  public ObservableList<TicketType> getTicketTypesForEvent(Event event) {
+    EntityManager em = JPAUtil.getEntityManager();
+    List<TicketType> ticketTypes = em.createQuery("select e from TicketType e", TicketType.class).getResultList();
+    ticketTypes = ticketTypes.stream().filter(ticketType -> ticketType.getEvent() == event).toList();
+    return (ObservableList<TicketType>) ticketTypes;
   }
 }

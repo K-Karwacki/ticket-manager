@@ -3,8 +3,6 @@ package dk.easv.ticketmanager.gui.controllers.ticket;
 import dk.easv.ticketmanager.be.Ticket;
 import dk.easv.ticketmanager.bll.services.EmailSenderService;
 import dk.easv.ticketmanager.gui.FXMLManager;
-import dk.easv.ticketmanager.gui.models.DataModelFactory;
-import dk.easv.ticketmanager.gui.models.TicketDataModel;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
@@ -43,10 +41,10 @@ public class TicketController {
         lblTicketType.setText(ticket.getType().getName());
         lblFullName.setText(ticket.getCustomer().getFirstName() + " " + ticket.getCustomer().getLastName());
         lblEventAddress.setText(String.valueOf(ticket.getEvent().getLocation()));
-        Image QRCode = ticketDataModel.generateQRCode(ticket.getTicketCode());
-        Image Barcode = ticketDataModel.generateBarcode(ticket.getTicketCode());
-        imgQR.setImage(QRCode);
-        imgBarcode.setImage(Barcode);
+//        Image QRCode = ticketDataModel.generateQRCode(ticket.getTicketCode());
+//        Image Barcode = ticketDataModel.generateBarcode(ticket.getTicketCode());
+//        imgQR.setImage(QRCode);
+//        imgBarcode.setImage(Barcode);
 
     }
     public void setTicket(Ticket ticket) {

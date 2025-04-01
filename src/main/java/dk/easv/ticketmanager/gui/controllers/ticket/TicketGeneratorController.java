@@ -6,6 +6,7 @@ import dk.easv.ticketmanager.be.Ticket;
 import dk.easv.ticketmanager.be.TicketType;
 import dk.easv.ticketmanager.bll.services.DatabaseService;
 import dk.easv.ticketmanager.gui.FXMLManager;
+import dk.easv.ticketmanager.gui.ViewManager;
 import javafx.fxml.FXML;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
@@ -66,7 +67,7 @@ public class TicketGeneratorController {
     }
     private void setTicketData(){
         ticket = new Ticket();
-        String ticketCode = ticketDataModel.generateTicketNumber();
+        String ticketCode = "SOME TEMPORARY SHIT - TO CHANGE LATER"; // todo no idea where to generate this stuff
         ticket.setType(comboBoxTicketTypes.getValue());
         ticket.setTicketCode(ticketCode);
         Customer customer = new Customer();
@@ -80,11 +81,7 @@ public class TicketGeneratorController {
     public void loadTicketOptions(Image image){
         Pair<Parent, TicketOptionsController> p = fxmlManager.getFXML(TICKET_OPTIONS_POPUP);
         p.getValue().setTicketImage(image);
-        p.getValue().setTicket(ticket);
-        Stage stage = new Stage();
-        stage.setTitle("Ticket Options");
-        stage.setScene(new Scene(p.getKey()));
-        stage.show();
+        ViewManager.INSTANCE.showPopup(TICKET_OPTIONS_POPUP, "Ticket Options");
     }
     public void setDatabaseService(DatabaseService databaseService) {
         this.databaseService = databaseService;
