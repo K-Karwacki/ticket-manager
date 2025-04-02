@@ -1,13 +1,11 @@
 package dk.easv.ticketmanager.gui.controllers.event.dashboards;
 
-import dk.easv.ticketmanager.be.Event;
-import dk.easv.ticketmanager.bll.services.EventManagementService;
-import dk.easv.ticketmanager.dal.repositories.EventRepository;
+import dk.easv.ticketmanager.bll.services.DatabaseService;
 import dk.easv.ticketmanager.gui.FXMLManager;
 //import dk.easv.ticketmanager.gui.models.EventDataModel;
 import dk.easv.ticketmanager.gui.ViewManager;
-import dk.easv.ticketmanager.gui.controllers.event.popups.TicketTypeCreatorPopupController;
-import dk.easv.ticketmanager.gui.controllers.user.CoordinatorListPopupController;
+import dk.easv.ticketmanager.gui.controllers.ticket.TicketTypeCreatorController;
+import dk.easv.ticketmanager.gui.controllers.ticket.TicketGeneratorController;
 import dk.easv.ticketmanager.gui.models.EventModel;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -16,7 +14,6 @@ import javafx.scene.Parent;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.paint.ImagePattern;
-import javafx.scene.shape.Path;
 import javafx.scene.shape.Rectangle;
 import javafx.util.Pair;
 
@@ -24,13 +21,12 @@ import java.net.URL;
 import java.util.Objects;
 import java.util.ResourceBundle;
 
-import static dk.easv.ticketmanager.gui.FXMLPath.COORDINATOR_LIST_POPUP;
-import static dk.easv.ticketmanager.gui.FXMLPath.TICKET_TYPE_CREATOR_POPUP;
+import static dk.easv.ticketmanager.gui.FXMLPath.*;
 
 public class EventDetailsController implements Initializable {
     private final FXMLManager fxmlManager = FXMLManager.INSTANCE;
     private final ViewManager viewManager = ViewManager.INSTANCE;
-    private EventManagementService eventManagementService;
+    private static DatabaseService databaseService;
 //    private final EventDataModel eventDataModel = new EventDataModel();
     private EventModel eventModel;
 
@@ -95,20 +91,22 @@ public class EventDetailsController implements Initializable {
         return eventModel;
     }
 
-  public void setServices(EventManagementService eventManagementService)
+  public void setDatabaseService(DatabaseService databaseService)
   {
-    this.eventManagementService = eventManagementService;
+      this.databaseService = databaseService;
   }
 
     @FXML
     private void showTicketTypeCreatorForm() {
-        Pair<Parent, TicketTypeCreatorPopupController> p = fxmlManager.getFXML(TICKET_TYPE_CREATOR_POPUP);
-        p.getValue().setEvent(eventModel);
-        viewManager.showPopup(TICKET_TYPE_CREATOR_POPUP, "Ticket creator");
+        TicketTypeCreatorController ticketTypeCreatorController = viewManager.showPopup(TICKET_TYPE_CREATOR_POPUP, "Ticket creator");
+        ticketTypeCreatorController.setEvent(eventModel);
     }
 
     @FXML
-    private void showTicketGeneratorForm(ActionEvent actionEvent) {}
+    private void showTicketGeneratorForm() {
+       TicketGeneratorController ticketGeneratorController= viewManager.showPopup(TICKET_GENERATOR_POPUP, "Ticket generator");
+       ticketGeneratorController.addTicketTypes(eventModel);
+    }
 
     @FXML
     private void onClickDelete(ActionEvent actionEvent) {}

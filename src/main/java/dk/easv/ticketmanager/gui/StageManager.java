@@ -92,14 +92,15 @@ public class StageManager
     }
   }
 
-  public <T> void showPopup(String fxmlFile, String title) {
+  public <T> T showPopup(String fxmlFile, String title) {
     Stage popupStage = new Stage();
     Pair<Parent, T> fxmlPair = fxmlManager.loadFXML(fxmlFile);
     Scene scene = new Scene(fxmlPair.getKey());
     popupStage.setScene(scene);
     popupStage.initModality(Modality.APPLICATION_MODAL);
     popupStage.setTitle(title);
-    popupStage.showAndWait();
+    popupStage.show();
+    return fxmlPair.getValue();
   }
 
   public SceneManager getSceneManager()

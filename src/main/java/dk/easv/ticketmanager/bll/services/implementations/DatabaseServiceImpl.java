@@ -110,10 +110,10 @@ public class DatabaseServiceImpl implements DatabaseService
   }
 
   @Override
-  public ObservableList<TicketType> getTicketTypesForEvent(Event event) {
+  public List<TicketType> getTicketTypesForEvent(EventModel eventModel) {
     EntityManager em = JPAUtil.getEntityManager();
     List<TicketType> ticketTypes = em.createQuery("select e from TicketType e", TicketType.class).getResultList();
-    ticketTypes = ticketTypes.stream().filter(ticketType -> ticketType.getEvent() == event).toList();
-    return (ObservableList<TicketType>) ticketTypes;
+    ticketTypes = ticketTypes.stream().filter(ticketType -> ticketType.getEvent().getID() == eventModel.getID()).toList();
+    return  ticketTypes;
   }
 }

@@ -12,7 +12,7 @@ import dk.easv.ticketmanager.dal.repositories.AuthRepository;
 import dk.easv.ticketmanager.dal.repositories.UserRepository;
 import dk.easv.ticketmanager.gui.*;
 import dk.easv.ticketmanager.gui.controllers.event.dashboards.EventHomeController;
-import dk.easv.ticketmanager.gui.controllers.event.popups.TicketTypeCreatorPopupController;
+import dk.easv.ticketmanager.gui.controllers.ticket.TicketTypeCreatorController;
 import dk.easv.ticketmanager.gui.controllers.main.LoginWindowController;
 import dk.easv.ticketmanager.gui.controllers.event.dashboards.EventCreatorController;
 import dk.easv.ticketmanager.gui.controllers.event.dashboards.EventDetailsController;
@@ -39,24 +39,19 @@ public class Main extends Application
 
   protected final DatabaseService databaseService = new DatabaseServiceImpl(repositoryService, authorizationService);
 
-
-
-
-
-
   private void setControllersDependencies(){
     LoginWindowController loginWindowController = (LoginWindowController) fxmlManager.getFXMLController(FXMLPath.LOGIN);
     EventDetailsController eventDetailsController = (EventDetailsController)  fxmlManager.getFXMLController(FXMLPath.EVENT_DETAILS);
     EventCreatorController eventCreatorPopupController = (EventCreatorController)   fxmlManager.getFXMLController(FXMLPath.EVENT_CREATOR_POPUP);
     EventHomeController eventHomeController = (EventHomeController) fxmlManager.getFXMLController(FXMLPath.EVENTS_DASHBOARD);
-    TicketTypeCreatorPopupController ticketTypeCreatorPopupController = (TicketTypeCreatorPopupController) fxmlManager.getFXMLController(FXMLPath.TICKET_TYPE_CREATOR_POPUP);
+    TicketTypeCreatorController ticketTypeCreatorController = (TicketTypeCreatorController) fxmlManager.getFXMLController(FXMLPath.TICKET_TYPE_CREATOR_POPUP);
     TicketGeneratorController ticketGeneratorController = (TicketGeneratorController) fxmlManager.getFXMLController(FXMLPath.TICKET_GENERATOR_POPUP);
     loginWindowController.setAuthenticationService(authenticationService);
 
     eventDetailsController.setDatabaseService(databaseService);
     eventCreatorPopupController.setDatabaseService(databaseService);
     eventHomeController.setDatabaseService(databaseService);
-    ticketTypeCreatorPopupController.setDatabaseService(databaseService);
+    ticketTypeCreatorController.setDatabaseService(databaseService);
     ticketGeneratorController.setDatabaseService(databaseService);
 
 

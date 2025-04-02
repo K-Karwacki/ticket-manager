@@ -7,6 +7,7 @@ import dk.easv.ticketmanager.be.TicketType;
 import dk.easv.ticketmanager.bll.services.DatabaseService;
 import dk.easv.ticketmanager.gui.FXMLManager;
 import dk.easv.ticketmanager.gui.ViewManager;
+import dk.easv.ticketmanager.gui.models.EventModel;
 import javafx.fxml.FXML;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
@@ -18,12 +19,13 @@ import javafx.stage.Stage;
 import javafx.util.Pair;
 
 import java.io.IOException;
+import java.util.List;
 
 import static dk.easv.ticketmanager.gui.FXMLPath.*;
 
 public class TicketGeneratorController {
     private final FXMLManager fxmlManager = FXMLManager.INSTANCE;
-    private DatabaseService databaseService;
+    private static DatabaseService databaseService;
     private Ticket ticket;
     @FXML
     private TextField txtFieldCustomerFirstName;
@@ -53,9 +55,10 @@ public class TicketGeneratorController {
         lblTicketPrice.setText("Price: " + formattedPrice + "DKK");
     }
 
-    public void addTicketTypes(Event event) {
+    public void addTicketTypes(EventModel eventModel) {
         comboBoxTicketTypes.getItems().clear();
-        comboBoxTicketTypes.setItems(databaseService.getTicketTypesForEvent(event));
+        List<TicketType> ticketTypes = databaseService.getTicketTypesForEvent(eventModel);
+        comboBoxTicketTypes.getItems().addAll(ticketTypes);
     }
 
     private Image getTicketImage() {
