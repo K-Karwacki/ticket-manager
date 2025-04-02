@@ -91,16 +91,34 @@ public class StageManager
       stage.close();
     }
   }
-
   public <T> T showPopup(String fxmlFile, String title) {
-    Stage popupStage = new Stage();
-    Pair<Parent, T> fxmlPair = fxmlManager.loadFXML(fxmlFile);
-    Scene scene = new Scene(fxmlPair.getKey());
-    popupStage.setScene(scene);
-    popupStage.initModality(Modality.APPLICATION_MODAL);
-    popupStage.setTitle(title);
-    popupStage.show();
-    return fxmlPair.getValue();
+    try {
+      Pair<Parent, ?> fxmlData = fxmlManager.getFXML(fxmlFile);
+      Parent root = fxmlData.getKey();
+      T controller = (T) fxmlData.getValue();
+
+      Stage popupStage = stageCache.get(fxmlFile);
+      if (popupStage == null) {
+        popupStage = new Stage();
+        popupStage.setScene(new Scene(root));
+        popupStage.setTitle(title);
+
+        popupStage.initModality(Modality.APPLICATION_MODAL);
+
+        stageCache.put(fxmlFile, popupStage);
+      }
+
+      if (popupStage.getOwner() != null) {
+        popupStage.centerOnScreen();
+      }
+
+      popupStage.show();
+
+      return controller;
+    } catch (Exception e) {
+      e.printStackTrace();
+      return null;
+    }
   }
 
   public SceneManager getSceneManager()
