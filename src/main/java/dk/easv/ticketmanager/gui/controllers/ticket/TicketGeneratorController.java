@@ -84,7 +84,7 @@ public class TicketGeneratorController {
         ticketOptionsController.setTicketImage(image);
         ticketOptionsController.setTicket(ticket);
     }
-    public void setDatabaseService(TicketManagementService ticketManagementService) {
+    public void setServices(TicketManagementService ticketManagementService) {
         this.ticketManagementService = ticketManagementService;
     }
 }

@@ -5,12 +5,15 @@ import dk.easv.ticketmanager.gui.FXMLPath;
 import dk.easv.ticketmanager.gui.ViewManager;
 import dk.easv.ticketmanager.gui.controllers.event.dashboards.EventDetailsController;
 import dk.easv.ticketmanager.gui.models.EventModel;
+import javafx.beans.binding.Bindings;
 import javafx.fxml.FXML;
 import javafx.scene.Parent;
 import javafx.scene.control.Label;
 import javafx.scene.paint.ImagePattern;
 import javafx.scene.shape.Rectangle;
 import javafx.util.Pair;
+
+import java.time.format.DateTimeFormatter;
 
 public class EventCardController
 {
@@ -46,12 +49,30 @@ public class EventCardController
 
   public void setEventModel(EventModel eventModel){
     this.eventModel = eventModel;
+
+
     eventNameLbl.textProperty().bind(eventModel.nameProperty());
-    eventDateLbl.textProperty().bind(eventModel.dateProperty());
-    eventTimeLbl.textProperty().bind(eventModel.timeProperty());
-    eventLocationLbl.setText(eventModel.getLocation().toString());
-    ImagePattern pattern = new ImagePattern(eventModel.getImage().get());
-    eventImageContainer.setFill(pattern);
+
+    eventDateLbl.textProperty().bind(
+        Bindings.createStringBinding(() ->
+            eventModel.dateProperty().get().format(DateTimeFormatter.ISO_LOCAL_DATE), eventModel.dateProperty())
+    );
+
+    eventTimeLbl.textProperty().bind(
+        Bindings.createStringBinding(() ->
+            eventModel.dateProperty().get().format(DateTimeFormatter.ISO_LOCAL_TIME), eventModel.timeProperty())
+    );
+
+
+    eventLocationLbl.textProperty().bind(
+        Bindings.createStringBinding(() ->
+            eventModel.locationProperty().get().toString(), eventModel.locationProperty())
+    );
+
+    eventImageContainer.fillProperty().bind(eventModel.imageProperty());
+
+//    ImagePattern pattern = new ImagePattern(eventModel.getImage().get());
+//    eventImageContainer.setFill(pattern);
 
   }
 

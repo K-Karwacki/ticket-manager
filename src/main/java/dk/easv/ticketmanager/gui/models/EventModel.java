@@ -1,77 +1,159 @@
 package dk.easv.ticketmanager.gui.models;
 
 import dk.easv.ticketmanager.be.Event;
+import dk.easv.ticketmanager.be.Location;
+import javafx.beans.property.SimpleLongProperty;
 import javafx.beans.property.SimpleObjectProperty;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.scene.image.Image;
+import javafx.scene.paint.ImagePattern;
 
 import java.time.LocalDate;
+import java.time.LocalTime;
 
 public class EventModel
 {
-  private final long ID;
+  private final SimpleLongProperty ID = new SimpleLongProperty();
   private final SimpleStringProperty name = new SimpleStringProperty();
   private final SimpleStringProperty description = new SimpleStringProperty();
-  private final SimpleStringProperty time = new SimpleStringProperty();
-  private final SimpleStringProperty date = new SimpleStringProperty();
-  private final SimpleObjectProperty<Image> image = new SimpleObjectProperty<>();
-  private LocationModel location;
+  private final SimpleObjectProperty<LocalTime> time = new SimpleObjectProperty<>();
+  private final SimpleObjectProperty<LocalDate> date = new SimpleObjectProperty<>();
+  private final SimpleObjectProperty<ImagePattern> image = new SimpleObjectProperty<>();
+  private final SimpleObjectProperty<Location> location = new SimpleObjectProperty<>();
 
+  public EventModel(){
+    this.ID.set(-1);
+    this.name.set(null);
+    this.description.set(null);
+    this.time.set(null);
+    this.date.set(null);
+    this.image.set(null);
+    this.location.set(null);
+  }
+
+  // Mapping constructor from Event
   public EventModel(Event event){
-    this.ID = event.getID();
+    this.ID.set(event.getID());
     this.name.set(event.getName());
     this.description.set(event.getDescription());
-    this.time.set(event.getTime());
-    this.date.set(String.valueOf(event.getDate()));
-    this.image.set(new Image(event.getImagePath()));
-    this.location = new LocationModel(event.getLocation());
+    this.time.set(LocalTime.parse(event.getTime()));
+    this.date.set(event.getDate());
+//    this.image.set(new ImagePattern(event.getImage()));
+    this.location.set(event.getLocation());
+  }
+
+  // GUI constructor for creating event f.e
+  public EventModel(String name, String description, LocalTime time, LocalDate date, Image image, Location location){
+    this.name.set(name);
+    this.description.set(description);
+    this.time.set(time);
+    this.date.set(date);
+    this.image.set(new ImagePattern(image));
+    this.location.set(location);
   }
 
   public long getID()
   {
-    return this.ID;
+    return ID.get();
   }
-  public void setName(String name){
+
+  public SimpleLongProperty IDProperty()
+  {
+    return ID;
+  }
+
+  public void setID(long ID)
+  {
+    this.ID.set(ID);
+  }
+
+  public String getName()
+  {
+    return name.get();
+  }
+
+  public SimpleStringProperty nameProperty()
+  {
+    return name;
+  }
+
+  public void setName(String name)
+  {
     this.name.set(name);
   }
-  public void setDescription(String description){
+
+  public String getDescription()
+  {
+    return description.get();
+  }
+
+  public SimpleStringProperty descriptionProperty()
+  {
+    return description;
+  }
+
+  public void setDescription(String description)
+  {
     this.description.set(description);
   }
-  public void setTime(String time){
+
+  public LocalTime getTime()
+  {
+    return time.get();
+  }
+
+  public SimpleObjectProperty<LocalTime> timeProperty()
+  {
+    return time;
+  }
+
+  public void setTime(LocalTime time)
+  {
     this.time.set(time);
   }
-  public void setDate(LocalDate date){
-    this.date.set(String.valueOf(date));
-  }
-  public void setImage(String imagePath){
-    this.image.set(new Image(imagePath));
+
+  public LocalDate getDate()
+  {
+    return date.get();
   }
 
-  public SimpleStringProperty nameProperty(){
-    return this.name;
-  }
-  public SimpleStringProperty descriptionProperty(){
-    return this.description;
-  }
-  public SimpleStringProperty timeProperty(){
-    return this.time;
-  }
-  public SimpleStringProperty dateProperty(){
-    return this.date;
-  }
-  public SimpleObjectProperty<Image> imageProperty(){
-    return this.image;
-  }
-  public void setLocation(LocationModel location){
-    this.location = location;
+  public SimpleObjectProperty<LocalDate> dateProperty()
+  {
+    return date;
   }
 
-  public LocationModel getLocation() {
-    return location;
+  public void setDate(LocalDate date)
+  {
+    this.date.set(date);
   }
 
-  public SimpleObjectProperty<Image> getImage() {
+  public Image getImage()
+  {
+    return image.get().getImage();
+  }
+
+  public SimpleObjectProperty<ImagePattern> imageProperty()
+  {
     return image;
   }
 
+  public void setImage(Image image)
+  {
+    this.image.set(new ImagePattern(image));
+  }
+
+  public Location getLocation()
+  {
+    return location.get();
+  }
+
+  public SimpleObjectProperty<Location> locationProperty()
+  {
+    return location;
+  }
+
+  public void setLocation(Location location)
+  {
+    this.location.set(location);
+  }
 }

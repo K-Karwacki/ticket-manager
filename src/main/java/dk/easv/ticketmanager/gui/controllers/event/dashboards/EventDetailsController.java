@@ -70,14 +70,15 @@ public class EventDetailsController implements Initializable {
 
     public void setEventDetails(EventModel event) {
         this.eventModel = event;
-        lblEventDate.textProperty().bind(event.dateProperty());
-        lblEventTime.textProperty().bind(event.timeProperty());
+        // will bind it in a sec
+//        lblEventDate.textProperty().bind(event.dateProperty());
+//        lblEventTime.textProperty().bind(event.timeProperty());
         lblEventLocation.setText(event.getLocation().toString());
         lblEventDescription.textProperty().bind(event.descriptionProperty());
         lblEventName.textProperty().bind(event.nameProperty());
-        Image image = event.getImage().get();
-        ImagePattern imagePattern = new ImagePattern(image);
-        rectangleImageContainer.setFill(imagePattern);
+//        Image image = event.getImage().get();
+//        ImagePattern imagePattern = new ImagePattern(image);
+//        rectangleImageContainer.setFill(imagePattern);
     }
 
     public EventModel getEvent() {

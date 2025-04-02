@@ -51,7 +51,7 @@ public class TicketController {
         this.ticket = ticket;
     }
 
-    public void setDatabaseService(TicketManagementService ticketManagementService) {
+    public void setServices(TicketManagementService ticketManagementService) {
         this.ticketManagementService = ticketManagementService;
     }
 }

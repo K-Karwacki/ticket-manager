@@ -40,7 +40,7 @@ public class TicketTypeCreatorController {
     }
 
 
-    public void setDatabaseService(TicketManagementService ticketManagementService, EventManagementService eventManagementService) {
+    public void setServices(TicketManagementService ticketManagementService, EventManagementService eventManagementService) {
         this.ticketManagementService = ticketManagementService;
         this.eventManagementService = eventManagementService;
     }

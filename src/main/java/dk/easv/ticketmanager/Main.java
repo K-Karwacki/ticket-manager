@@ -48,11 +48,11 @@ public class Main extends Application
     TicketController ticketController = (TicketController) fxmlManager.getFXML(FXMLPath.TICKET_COMPONENT).getValue();
     loginWindowController.setAuthenticationService(authenticationService);
 
-    eventCreatorPopupController.setDatabaseService(eventManagementService);
-    eventHomeController.setDatabaseService(eventManagementService);
-    ticketTypeCreatorController.setDatabaseService(ticketManagementService, eventManagementService);
-    ticketGeneratorController.setDatabaseService(ticketManagementService);
-    ticketController.setDatabaseService(ticketManagementService);
+    eventCreatorPopupController.setServices(eventManagementService);
+    eventHomeController.setServices(eventManagementService);
+    ticketTypeCreatorController.setServices(ticketManagementService, eventManagementService);
+    ticketGeneratorController.setServices(ticketManagementService);
+    ticketController.setServices(ticketManagementService);
 
   }
 

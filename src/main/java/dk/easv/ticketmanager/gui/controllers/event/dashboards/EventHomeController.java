@@ -56,7 +56,7 @@ public class EventHomeController
     }
   }
 
-  public void setDatabaseService(EventManagementService eventManagementService) {
+  public void setServices(EventManagementService eventManagementService) {
     this.eventManagementService = eventManagementService;
     loadEventCards();
   }
