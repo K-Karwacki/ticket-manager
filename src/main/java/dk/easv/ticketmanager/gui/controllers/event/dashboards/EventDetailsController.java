@@ -77,11 +77,9 @@ public class EventDetailsController implements Initializable {
         lblEventDate.textProperty().bind(event.dateProperty());
         lblEventTime.textProperty().bind(event.timeProperty());
         lblEventLocation.setText(event.getLocation().toString());
-//        lblNormalEventTickets.setText(String.valueOf(event.getNormal_ticket_amount()));
-//        lblSpecialEventTickets.setText(String.valueOf(event.getVip_ticket_amount()));
         lblEventDescription.textProperty().bind(event.descriptionProperty());
         lblEventName.textProperty().bind(event.nameProperty());
-        Image image = new Image(Objects.requireNonNull(getClass().getResource(event.imagePathProperty().get())).toExternalForm());
+        Image image = event.getImage().get();
         ImagePattern imagePattern = new ImagePattern(image);
         rectangleImageContainer.setFill(imagePattern);
     }

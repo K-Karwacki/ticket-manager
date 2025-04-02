@@ -81,9 +81,8 @@ public class TicketGeneratorController {
     }
 
     public void loadTicketOptions(Image image){
-        Pair<Parent, TicketOptionsController> p = fxmlManager.getFXML(TICKET_OPTIONS_POPUP);
-        p.getValue().setTicketImage(image);
-        ViewManager.INSTANCE.showPopup(TICKET_OPTIONS_POPUP, "Ticket Options");
+        TicketOptionsController ticketOptionsController = ViewManager.INSTANCE.showPopup(TICKET_OPTIONS_POPUP, "Ticket Options");
+        ticketOptionsController.setTicketImage(image);
     }
     public void setDatabaseService(TicketManagmentService ticketManagmentService) {
         this.ticketManagmentService = ticketManagmentService;

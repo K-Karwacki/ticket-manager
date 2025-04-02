@@ -53,7 +53,7 @@ public class EventManagmentServiceImpl implements EventManagmentService {
     @Override
     public void setEventListModel(){
         List<Event> events = repositoryService.getRepository(EventRepository.class).getAll();
-        List<EventModel> eventModels = new ArrayList<>(events.stream().map(event -> new EventModel(event)).toList());
+        List<EventModel> eventModels = new ArrayList<>(events.stream().map(EventModel::new).toList());
         eventListModel.setEvents(eventModels);
     }
 
