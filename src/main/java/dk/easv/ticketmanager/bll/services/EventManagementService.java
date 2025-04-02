@@ -16,6 +16,6 @@ public interface EventManagementService
   List<EventModel> getEventModelList();
   ObservableSet<EventModel> getEventModelObservableSet();
   void addEvent(Event event);
-
   boolean addTicketTypeForEventByID(TicketType ticketType, long id);
+  void updateEvent(EventModel eventModel);
 }

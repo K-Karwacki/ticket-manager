@@ -46,6 +46,12 @@ public class EventManagementServiceImpl implements EventManagementService {
         return false;
     }
 
+
+    @Override
+    public boolean updateEvent(EventModel event) {
+        return false;
+    }
+
     @Override
     public boolean deleteEvent(Event event) {
         return false;

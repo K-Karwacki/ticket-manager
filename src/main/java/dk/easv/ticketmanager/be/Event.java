@@ -1,5 +1,6 @@
 package dk.easv.ticketmanager.be;
 
+import dk.easv.ticketmanager.gui.models.EventModel;
 import jakarta.persistence.*;
 import javafx.scene.image.Image;
 import java.time.LocalDate;
@@ -22,8 +23,8 @@ public class Event {
   @Column(name = "description")
   private String description;
 
-  @Column(name = "image_path")
-  private String imagePath;
+  @Column(name = "image_data")
+  private byte[] imageData;
 
   @Column(name = "date")
   private LocalDate date;
@@ -41,9 +42,22 @@ public class Event {
 
   public Event(){};
 
+  public Event(EventModel eventModel){
+    setID(eventModel.getID());
+    setName(eventModel.nameProperty().get());
+    setDate(LocalDate.parse(eventModel.dateProperty().get()));
+    setDescription(eventModel.descriptionProperty().get());
+    setTime(eventModel.timeProperty().get());
+    setImageData(eventModel.getImage().get());
+
+  }
+
   public long getID()
   {
     return ID;
+  }
+  public void setID(long ID){
+    this.ID = ID;
   }
 
   public String getName()

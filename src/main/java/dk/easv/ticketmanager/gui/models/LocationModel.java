@@ -4,12 +4,14 @@ import dk.easv.ticketmanager.be.Location;
 import javafx.beans.property.SimpleStringProperty;
 
 public class LocationModel {
-    private final long ID;
+    private long ID;
     private final SimpleStringProperty name = new SimpleStringProperty();
     private final SimpleStringProperty address = new SimpleStringProperty();
     private final SimpleStringProperty city = new SimpleStringProperty();
     private final SimpleStringProperty post_code = new SimpleStringProperty();
 
+    public LocationModel() {
+    }
     public LocationModel(Location location) {
         ID = location.getID();
         name.set(location.getName());
@@ -54,7 +56,7 @@ public class LocationModel {
     public void setCity(String newCity) {
         city.set(newCity);
     }
-    public void setPost_code(String newPost_code) {
+    public void setPostCode(String newPost_code) {
         post_code.set(newPost_code);
     }
 
