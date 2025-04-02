@@ -8,6 +8,7 @@ import dk.easv.ticketmanager.dal.repositories.AuthRepository;
 import dk.easv.ticketmanager.dal.repositories.UserRepository;
 import dk.easv.ticketmanager.gui.*;
 import dk.easv.ticketmanager.gui.controllers.event.dashboards.EventHomeController;
+import dk.easv.ticketmanager.gui.controllers.ticket.TicketController;
 import dk.easv.ticketmanager.gui.controllers.ticket.TicketTypeCreatorController;
 import dk.easv.ticketmanager.gui.controllers.main.LoginWindowController;
 import dk.easv.ticketmanager.gui.controllers.event.dashboards.EventCreatorController;
@@ -44,13 +45,14 @@ public class Main extends Application
     EventHomeController eventHomeController = (EventHomeController) fxmlManager.getFXMLController(FXMLPath.EVENTS_DASHBOARD);
     TicketTypeCreatorController ticketTypeCreatorController = (TicketTypeCreatorController) fxmlManager.getFXMLController(FXMLPath.TICKET_TYPE_CREATOR_POPUP);
     TicketGeneratorController ticketGeneratorController = (TicketGeneratorController) fxmlManager.getFXMLController(FXMLPath.TICKET_GENERATOR_POPUP);
+    TicketController ticketController = (TicketController) fxmlManager.getFXMLController(FXMLPath.TICKET_COMPONENT);
     loginWindowController.setAuthenticationService(authenticationService);
 
     eventCreatorPopupController.setDatabaseService(eventManagmentService);
     eventHomeController.setDatabaseService(eventManagmentService);
     ticketTypeCreatorController.setDatabaseService(ticketManagmentService, eventManagmentService);
     ticketGeneratorController.setDatabaseService(ticketManagmentService);
-
+    ticketController.setDatabaseService(ticketManagmentService);
 
   }
 

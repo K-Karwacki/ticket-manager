@@ -2,6 +2,7 @@ package dk.easv.ticketmanager.gui.controllers.ticket;
 
 import dk.easv.ticketmanager.be.Ticket;
 import dk.easv.ticketmanager.bll.services.EmailSenderService;
+import dk.easv.ticketmanager.bll.services.interfaces.TicketManagmentService;
 import dk.easv.ticketmanager.gui.FXMLManager;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
@@ -13,6 +14,7 @@ import static dk.easv.ticketmanager.gui.FXMLPath.TICKET_COMPONENT;
 public class TicketController {
     private final FXMLManager fxmlManager = FXMLManager.INSTANCE;
     private final EmailSenderService emailSenderService = new EmailSenderService();
+    private TicketManagmentService ticketManagmentService;
     private Ticket ticket;
     @FXML
     private Label lblEventName;
@@ -49,6 +51,10 @@ public class TicketController {
     }
     public void setTicket(Ticket ticket) {
         this.ticket = ticket;
+    }
+
+    public void setDatabaseService(TicketManagmentService ticketManagmentService) {
+        this.ticketManagmentService = ticketManagmentService;
     }
 }
 
