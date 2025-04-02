@@ -1,7 +1,6 @@
 package dk.easv.ticketmanager.gui;
 
 import dk.easv.ticketmanager.Main;
-import dk.easv.ticketmanager.exceptions.ViewException;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.util.Pair;
@@ -57,4 +56,5 @@ public enum FXMLManager
     }
     return resource;
   }
+
 }

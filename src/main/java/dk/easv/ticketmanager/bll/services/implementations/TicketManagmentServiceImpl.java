@@ -39,7 +39,7 @@ public class TicketManagmentServiceImpl implements TicketManagmentService {
     }
     @Override
     public void addTicketType(TicketType ticketType){
-        this.repositoryService.getRepository(TicketRepository.class).addTicketType(ticketType);
+        this.repositoryService.getRepository(TicketRepository.class).saveTicketType(ticketType);
     }
 
 

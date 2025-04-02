@@ -39,13 +39,13 @@ public class Main extends Application
   protected final UserManagmentService userManagmentService = new UserManagmentServiceImpl(repositoryService, authorizationService);
 
   private void setControllersDependencies(){
-    LoginWindowController loginWindowController = (LoginWindowController) fxmlManager.getFXMLController(FXMLPath.LOGIN);
-    EventDetailsController eventDetailsController = (EventDetailsController)  fxmlManager.getFXMLController(FXMLPath.EVENT_DETAILS);
-    EventCreatorController eventCreatorPopupController = (EventCreatorController)   fxmlManager.getFXMLController(FXMLPath.EVENT_CREATOR_POPUP);
-    EventHomeController eventHomeController = (EventHomeController) fxmlManager.getFXMLController(FXMLPath.EVENTS_DASHBOARD);
-    TicketTypeCreatorController ticketTypeCreatorController = (TicketTypeCreatorController) fxmlManager.getFXMLController(FXMLPath.TICKET_TYPE_CREATOR_POPUP);
-    TicketGeneratorController ticketGeneratorController = (TicketGeneratorController) fxmlManager.getFXMLController(FXMLPath.TICKET_GENERATOR_POPUP);
-    TicketController ticketController = (TicketController) fxmlManager.getFXMLController(FXMLPath.TICKET_COMPONENT);
+    LoginWindowController loginWindowController = (LoginWindowController) fxmlManager.getFXML(FXMLPath.LOGIN).getValue();
+    EventDetailsController eventDetailsController = (EventDetailsController)  fxmlManager.getFXML(FXMLPath.EVENT_DETAILS).getValue();
+    EventCreatorController eventCreatorPopupController = (EventCreatorController)   fxmlManager.getFXML(FXMLPath.EVENT_CREATOR_POPUP).getValue();
+    EventHomeController eventHomeController = (EventHomeController) fxmlManager.getFXML(FXMLPath.EVENTS_DASHBOARD).getValue();
+    TicketTypeCreatorController ticketTypeCreatorController = (TicketTypeCreatorController) fxmlManager.getFXML(FXMLPath.TICKET_TYPE_CREATOR_POPUP).getValue();
+    TicketGeneratorController ticketGeneratorController = (TicketGeneratorController) fxmlManager.getFXML(FXMLPath.TICKET_GENERATOR_POPUP).getValue();
+    TicketController ticketController = (TicketController) fxmlManager.getFXML(FXMLPath.TICKET_COMPONENT).getValue();
     loginWindowController.setAuthenticationService(authenticationService);
 
     eventCreatorPopupController.setDatabaseService(eventManagmentService);

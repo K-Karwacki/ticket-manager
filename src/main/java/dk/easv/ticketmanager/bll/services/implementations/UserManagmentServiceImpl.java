@@ -36,11 +36,11 @@ public class UserManagmentServiceImpl implements UserManagmentService {
 
     @Override
     public void setUserListModel(){
-        List<User> users = repositoryService.getRepository(UserRepository.class).getAll();
+        List<User> users = repositoryService.getRepository(UserRepository.class).getAll().stream().toList();
         List<UserModel> userModels = new ArrayList<>();
         users.forEach(user ->
         {
-            UserModel userModel = new UserModel(user.getID(), user.getRole());
+            UserModel userModel = new UserModel(user);
             userModel.setFirstName(user.getFirstName());
             userModel.setLastName(user.getLastName());
             userModel.setEmail(user.getEmail());

@@ -29,7 +29,7 @@ public class TicketTypeCreatorController {
         String ticketTypeName = txtFieldTicketTypeName.getText();
         String ticketPrice = txtFieldTicketPrice.getText();
         TicketType ticketType = new TicketType();
-        ticketType.setEvent(eventManagmentService.getEventById(eventModel.getID()));
+        ticketType.setEvent(eventManagmentService.getEventById(eventModel.getID()).get());
         ticketType.setPrice(Double.parseDouble(ticketPrice));
         ticketType.setName(ticketTypeName);
         ticketManagmentService.addTicketType(ticketType);

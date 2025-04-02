@@ -51,4 +51,19 @@ public class UserModel
     return phoneNumber;
   }
 
+    public void setFirstName(String firstName) {
+    fullName.set(firstName);
+    }
+
+  public void setLastName(String lastName) {
+    fullName.set(lastName);
+  }
+
+  public void setEmail(String email) {
+    this.email.set(email);
+  }
+
+  public void setPhoneNumber(String phoneNumber) {
+    this.phoneNumber.set(phoneNumber);
+  }
 }

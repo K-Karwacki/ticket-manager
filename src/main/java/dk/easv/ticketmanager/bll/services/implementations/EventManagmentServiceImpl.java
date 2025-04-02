@@ -10,6 +10,7 @@ import dk.easv.ticketmanager.gui.models.EventModel;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 public class EventManagmentServiceImpl implements EventManagmentService {
     private final RepositoryService repositoryService;
@@ -52,13 +53,13 @@ public class EventManagmentServiceImpl implements EventManagmentService {
 
     @Override
     public void setEventListModel(){
-        List<Event> events = repositoryService.getRepository(EventRepository.class).getAll();
+        List<Event> events = repositoryService.getRepository(EventRepository.class).getAll().stream().toList();
         List<EventModel> eventModels = new ArrayList<>(events.stream().map(EventModel::new).toList());
         eventListModel.setEvents(eventModels);
     }
 
     @Override
-    public Event getEventById(long ID){
+    public Optional<Event> getEventById(long ID){
         return this.repositoryService.getRepository(EventRepository.class).getById(ID);
     };
 

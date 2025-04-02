@@ -1,9 +1,9 @@
 package dk.easv.ticketmanager.bll.services.implementations;
 
 import dk.easv.ticketmanager.be.User;
-import dk.easv.ticketmanager.bll.services.AuthorizationService;
 import dk.easv.ticketmanager.bll.services.UserManagementService;
 import dk.easv.ticketmanager.bll.services.factories.RepositoryService;
+import dk.easv.ticketmanager.bll.services.interfaces.AuthorizationService;
 import dk.easv.ticketmanager.dal.repositories.UserRepository;
 import dk.easv.ticketmanager.gui.models.UserModel;
 import javafx.collections.FXCollections;
