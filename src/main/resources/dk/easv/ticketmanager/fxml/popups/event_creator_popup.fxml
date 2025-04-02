@@ -11,11 +11,11 @@
 <?import javafx.scene.control.ScrollPane?>
 <?import javafx.scene.control.TextArea?>
 <?import javafx.scene.control.TextField?>
+<?import javafx.scene.effect.DropShadow?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
-
 
 <VBox maxHeight="669.0" stylesheets="@../../style/dashboard/dashboard.css" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="dk.easv.ticketmanager.gui.controllers.event.dashboards.EventCreatorController">
    <children>
@@ -32,8 +32,11 @@
             <String fx:value="dashboard-menu" />
          </styleClass>
          <padding>
-            <Insets bottom="15.0" left="66.0" top="33.0" />
+            <Insets bottom="20.0" left="66.0" top="33.0" />
          </padding>
+         <effect>
+            <DropShadow blurType="GAUSSIAN" />
+         </effect>
       </HBox>
       <ScrollPane fitToWidth="true" focusTraversable="false" hbarPolicy="NEVER" maxHeight="-Infinity" pannable="true" prefHeight="669.0" styleClass="dashboard-root" stylesheets="@../../style/dashboard/dashboard.css" vbarPolicy="ALWAYS">
          <content>
@@ -41,7 +44,7 @@
                <children>
                   <HBox alignment="CENTER" layoutY="10.0">
                      <children>
-                        <VBox HBox.hgrow="ALWAYS">
+                        <VBox fx:id="formContainer" HBox.hgrow="ALWAYS">
                            <children>
                               <Label prefWidth="420.0" style="-fx-background-color: #9CE2FF #9CE2FF;" text="Details about event" textFill="#323232">
                                  <font>

@@ -93,7 +93,7 @@ public class Event {
     this.time = time;
   }
 
-  public LocationModel getLocation()
+  public Location getLocation()
   {
     return location;
   }

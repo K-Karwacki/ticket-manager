@@ -39,7 +39,7 @@ public class EventModel
     this.time.set(LocalTime.parse(event.getTime()));
     this.date.set(event.getDate());
 //    this.image.set(new ImagePattern(event.getImage()));
-    this.location.set(event.getLocation());
+    this.location.set(new LocationModel(event.getLocation()));
   }
 
   // GUI constructor for creating event f.e

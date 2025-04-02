@@ -8,6 +8,7 @@ import dk.easv.ticketmanager.gui.FXMLManager;
 import dk.easv.ticketmanager.gui.ViewManager;
 import dk.easv.ticketmanager.gui.controllers.popups.ImageSelectorPopupController;
 import dk.easv.ticketmanager.gui.models.EventModel;
+import dk.easv.ticketmanager.utils.FieldValidator;
 import javafx.beans.binding.Bindings;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -17,6 +18,7 @@ import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 import javafx.util.Pair;
 import javafx.util.converter.LocalTimeStringConverter;
@@ -31,6 +33,8 @@ public class EventCreatorController {
     private final EventModel eventModel = new EventModel();
     private EventManagementService eventManagementService;
 
+    @FXML
+    private VBox formContainer;
     @FXML
     private ImageView imageViewSelectedImage;
     @FXML
@@ -67,12 +71,26 @@ public class EventCreatorController {
             .cityProperty());
         Bindings.bindBidirectional(txtFieldEventPostalCode.textProperty(), eventModel.locationProperty().get()
             .post_codeProperty());
+
     }
 
     // Method on click submit
 
     public void onClickSubmit(ActionEvent actionEvent) {
+        boolean fieldsFilled = FieldValidator.areAllFieldsFilled(formContainer);
+        if(!fieldsFilled){
+            System.out.println("ERROR fill all fields");
+            return;
+        }
+        if(!FieldValidator.isValidTime(txtFieldEventTime.getText())){
+            System.out.println("time is not valid");
+            return;
+        }
+        if(eventModel.getImage() == null){
+            System.out.println("image not selected");
+        }
 
+        eventManagementService.createNewEvent(eventModel);
     }
 
 

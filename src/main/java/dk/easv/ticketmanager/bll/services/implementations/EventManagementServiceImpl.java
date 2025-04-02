@@ -32,8 +32,8 @@ public class EventManagementServiceImpl implements EventManagementService {
     }
 
     @Override
-    public boolean createNewEvent(Event event) {
-        Event newEvent = repositoryService.getRepository(EventRepository.class).save(event);
+    public boolean createNewEvent(EventModel event) {
+        Event newEvent = repositoryService.getRepository(EventRepository.class).save(new Event());
         if(newEvent == null){
             throw new RuntimeException("Error creating new event");
         }
@@ -42,12 +42,12 @@ public class EventManagementServiceImpl implements EventManagementService {
     }
 
     @Override
-    public boolean updateEvent(Event event) {
+    public boolean updateEvent(EventModel event) {
         return false;
     }
 
     @Override
-    public boolean deleteEvent(Event event) {
+    public boolean deleteEvent(EventModel event) {
         return false;
     }
 
