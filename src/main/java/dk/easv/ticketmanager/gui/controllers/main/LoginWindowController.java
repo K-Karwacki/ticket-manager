@@ -1,8 +1,7 @@
 package dk.easv.ticketmanager.gui.controllers.main;
 
 
-import dk.easv.ticketmanager.bll.services.AuthenticationService;
-import dk.easv.ticketmanager.gui.FXMLController;
+import dk.easv.ticketmanager.bll.services.interfaces.AuthenticationService;
 import dk.easv.ticketmanager.gui.FXMLPath;
 import dk.easv.ticketmanager.gui.ViewManager;
 import dk.easv.ticketmanager.gui.models.UserSession;
@@ -10,7 +9,6 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
-import javafx.stage.Stage;
 
 import java.io.IOException;
 
@@ -31,7 +29,7 @@ public class LoginWindowController
 
   }
 
-  public void setServices(
+  public void setAuthenticationService(
       AuthenticationService authenticationService)
   {
     this.authenticationService = authenticationService;

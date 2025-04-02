@@ -1,7 +1,5 @@
-package dk.easv.ticketmanager.bll.services;
+package dk.easv.ticketmanager.bll.services.interfaces;
 
-import dk.easv.ticketmanager.be.Role;
-import dk.easv.ticketmanager.be.User;
 import dk.easv.ticketmanager.exceptions.AuthenticationException;
 import dk.easv.ticketmanager.gui.models.UserModel;
 

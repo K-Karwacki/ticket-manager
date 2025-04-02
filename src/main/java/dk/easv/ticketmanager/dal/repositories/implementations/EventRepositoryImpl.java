@@ -14,7 +14,7 @@ import java.util.Optional;
 
 public class EventRepositoryImpl implements EventRepository
 {
-
+  private List<Event> cachedEvents = new ArrayList<>();
 
   @Override
   public List<Event> getAll() {
@@ -135,6 +135,10 @@ public class EventRepositoryImpl implements EventRepository
     } catch (Exception e) {
       e.printStackTrace();
     }
+    }
+    public void loadEventsToCache(){
+    cachedEvents.clear();
+    cachedEvents.addAll(getAll());
     }
   }
 

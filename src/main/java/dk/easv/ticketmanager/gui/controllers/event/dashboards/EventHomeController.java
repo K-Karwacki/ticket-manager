@@ -1,6 +1,6 @@
 package dk.easv.ticketmanager.gui.controllers.event.dashboards;
 
-import dk.easv.ticketmanager.bll.services.EventManagementService;
+import dk.easv.ticketmanager.bll.services.interfaces.EventManagmentService;
 import dk.easv.ticketmanager.gui.FXMLManager;
 import dk.easv.ticketmanager.gui.ViewManager;
 import dk.easv.ticketmanager.gui.controllers.event.components.EventCardController;
@@ -21,7 +21,7 @@ public class EventHomeController
 {
   private final FXMLManager fxmlManager = FXMLManager.INSTANCE;
   private final ViewManager viewManager = ViewManager.INSTANCE;
-  private EventManagementService eventManagementService;
+  private EventManagmentService eventManagmentService;
 
   @FXML
   private FlowPane eventListRoot;
@@ -43,17 +43,17 @@ public class EventHomeController
   public void loadEventCards() {
     eventListRoot.getChildren().removeAll();
     eventListRoot.getChildren().clear();
-    List<EventModel> events = eventManagementService.getEventModelList();
+    List<EventModel> events = eventManagmentService.getEventListModel().getEvents();
     events.forEach(event -> {
-      Pair<Parent, EventCardController> p = fxmlManager.getFXML(EVENT_CARD_COMPONENT);
+      Pair<Parent, EventCardController> p = fxmlManager.loadFXML(EVENT_CARD_COMPONENT);
       p.getValue().setEventModel(event);
       eventListRoot.getChildren().add(p.getKey());
     });
 
   }
 
-  public void setServices(EventManagementService eventManagementService) {
-    this.eventManagementService = eventManagementService;
+  public void setDatabaseService(EventManagmentService eventManagmentService) {
+    this.eventManagmentService = eventManagmentService;
     loadEventCards();
   }
 }

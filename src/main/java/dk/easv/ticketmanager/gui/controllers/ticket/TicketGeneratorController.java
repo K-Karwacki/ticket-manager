@@ -1,10 +1,9 @@
 package dk.easv.ticketmanager.gui.controllers.ticket;
 
 import dk.easv.ticketmanager.be.Customer;
-import dk.easv.ticketmanager.be.Event;
 import dk.easv.ticketmanager.be.Ticket;
 import dk.easv.ticketmanager.be.TicketType;
-import dk.easv.ticketmanager.bll.services.DatabaseService;
+import dk.easv.ticketmanager.bll.services.interfaces.TicketManagmentService;
 import dk.easv.ticketmanager.gui.FXMLManager;
 import dk.easv.ticketmanager.gui.ViewManager;
 import dk.easv.ticketmanager.gui.models.EventModel;
@@ -25,7 +24,7 @@ import static dk.easv.ticketmanager.gui.FXMLPath.*;
 
 public class TicketGeneratorController {
     private final FXMLManager fxmlManager = FXMLManager.INSTANCE;
-    private static DatabaseService databaseService;
+    private static TicketManagmentService ticketManagmentService;
     private Ticket ticket;
     @FXML
     private TextField txtFieldCustomerFirstName;
@@ -57,7 +56,7 @@ public class TicketGeneratorController {
 
     public void addTicketTypes(EventModel eventModel) {
         comboBoxTicketTypes.getItems().clear();
-        List<TicketType> ticketTypes = databaseService.getTicketTypesForEvent(eventModel);
+        List<TicketType> ticketTypes = ticketManagmentService.getTicketTypesForEvent(eventModel);
         comboBoxTicketTypes.getItems().addAll(ticketTypes);
     }
 
@@ -78,7 +77,7 @@ public class TicketGeneratorController {
         customer.setLastName(txtFieldCustomerLastName.getText());
         customer.setEmail(txtFieldCustomerEmail.getText());
         ticket.setCustomer(customer);
-        databaseService.addTicket(ticket);
+        ticketManagmentService.addTicket(ticket);
     }
 
     public void loadTicketOptions(Image image){
@@ -86,8 +85,8 @@ public class TicketGeneratorController {
         p.getValue().setTicketImage(image);
         ViewManager.INSTANCE.showPopup(TICKET_OPTIONS_POPUP, "Ticket Options");
     }
-    public void setDatabaseService(DatabaseService databaseService) {
-        this.databaseService = databaseService;
+    public void setDatabaseService(TicketManagmentService ticketManagmentService) {
+        this.ticketManagmentService = ticketManagmentService;
     }
 }
 

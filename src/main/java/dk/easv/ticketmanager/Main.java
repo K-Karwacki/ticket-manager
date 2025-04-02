@@ -1,13 +1,9 @@
 package dk.easv.ticketmanager;
 
-import dk.easv.ticketmanager.bll.services.AuthenticationService;
-import dk.easv.ticketmanager.bll.services.AuthorizationService;
-import dk.easv.ticketmanager.bll.services.DatabaseService;
+import dk.easv.ticketmanager.bll.services.implementations.*;
+import dk.easv.ticketmanager.bll.services.interfaces.*;
 import dk.easv.ticketmanager.bll.services.factories.RepositoryService;
-import dk.easv.ticketmanager.bll.services.implementations.AuthenticationServiceImpl;
 import dk.easv.ticketmanager.bll.services.factories.RepositoryServiceFactory;
-import dk.easv.ticketmanager.bll.services.implementations.AuthorizationServiceImpl;
-import dk.easv.ticketmanager.bll.services.implementations.DatabaseServiceImpl;
 import dk.easv.ticketmanager.dal.repositories.AuthRepository;
 import dk.easv.ticketmanager.dal.repositories.UserRepository;
 import dk.easv.ticketmanager.gui.*;
@@ -37,7 +33,9 @@ public class Main extends Application
           AuthRepository.class), repositoryService.getRepository(UserRepository.class));
   protected final AuthorizationService authorizationService = new AuthorizationServiceImpl(repositoryService.getRepository(AuthRepository.class));
 
-  protected final DatabaseService databaseService = new DatabaseServiceImpl(repositoryService, authorizationService);
+  protected final TicketManagmentService ticketManagmentService = new TicketManagmentServiceImpl(repositoryService, authorizationService);
+  protected final EventManagmentService eventManagmentService = new EventManagmentServiceImpl(repositoryService, authorizationService);
+  protected final UserManagmentService userManagmentService = new UserManagmentServiceImpl(repositoryService, authorizationService);
 
   private void setControllersDependencies(){
     LoginWindowController loginWindowController = (LoginWindowController) fxmlManager.getFXMLController(FXMLPath.LOGIN);
@@ -48,11 +46,10 @@ public class Main extends Application
     TicketGeneratorController ticketGeneratorController = (TicketGeneratorController) fxmlManager.getFXMLController(FXMLPath.TICKET_GENERATOR_POPUP);
     loginWindowController.setAuthenticationService(authenticationService);
 
-    eventDetailsController.setDatabaseService(databaseService);
-    eventCreatorPopupController.setDatabaseService(databaseService);
-    eventHomeController.setDatabaseService(databaseService);
-    ticketTypeCreatorController.setDatabaseService(databaseService);
-    ticketGeneratorController.setDatabaseService(databaseService);
+    eventCreatorPopupController.setDatabaseService(eventManagmentService);
+    eventHomeController.setDatabaseService(eventManagmentService);
+    ticketTypeCreatorController.setDatabaseService(ticketManagmentService, eventManagmentService);
+    ticketGeneratorController.setDatabaseService(ticketManagmentService);
 
 
   }

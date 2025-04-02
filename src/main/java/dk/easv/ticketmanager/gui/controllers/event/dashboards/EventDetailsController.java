@@ -1,6 +1,6 @@
 package dk.easv.ticketmanager.gui.controllers.event.dashboards;
 
-import dk.easv.ticketmanager.bll.services.DatabaseService;
+import dk.easv.ticketmanager.bll.services.interfaces.EventManagmentService;
 import dk.easv.ticketmanager.gui.FXMLManager;
 //import dk.easv.ticketmanager.gui.models.EventDataModel;
 import dk.easv.ticketmanager.gui.ViewManager;
@@ -26,7 +26,6 @@ import static dk.easv.ticketmanager.gui.FXMLPath.*;
 public class EventDetailsController implements Initializable {
     private final FXMLManager fxmlManager = FXMLManager.INSTANCE;
     private final ViewManager viewManager = ViewManager.INSTANCE;
-    private static DatabaseService databaseService;
 //    private final EventDataModel eventDataModel = new EventDataModel();
     private EventModel eventModel;
 
@@ -90,11 +89,6 @@ public class EventDetailsController implements Initializable {
     public EventModel getEvent() {
         return eventModel;
     }
-
-  public void setDatabaseService(DatabaseService databaseService)
-  {
-      this.databaseService = databaseService;
-  }
 
     @FXML
     private void showTicketTypeCreatorForm() {

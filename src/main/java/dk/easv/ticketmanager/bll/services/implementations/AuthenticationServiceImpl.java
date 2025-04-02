@@ -2,8 +2,7 @@ package dk.easv.ticketmanager.bll.services.implementations;
 
 import dk.easv.ticketmanager.be.Role;
 import dk.easv.ticketmanager.be.User;
-import dk.easv.ticketmanager.bll.services.AuthenticationService;
-import dk.easv.ticketmanager.bll.services.AuthorizationService;
+import dk.easv.ticketmanager.bll.services.interfaces.AuthenticationService;
 import dk.easv.ticketmanager.dal.repositories.AuthRepository;
 import dk.easv.ticketmanager.dal.repositories.UserRepository;
 import dk.easv.ticketmanager.exceptions.AuthenticationException;
