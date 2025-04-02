@@ -19,7 +19,7 @@ public class EventModel
   private final SimpleObjectProperty<LocalTime> time = new SimpleObjectProperty<>();
   private final SimpleObjectProperty<LocalDate> date = new SimpleObjectProperty<>();
   private final SimpleObjectProperty<ImagePattern> image = new SimpleObjectProperty<>();
-  private final SimpleObjectProperty<Location> location = new SimpleObjectProperty<>();
+  private final SimpleObjectProperty<LocationModel> location = new SimpleObjectProperty<>();
 
   public EventModel(){
     this.ID.set(-1);
@@ -28,7 +28,7 @@ public class EventModel
     this.time.set(null);
     this.date.set(null);
     this.image.set(null);
-    this.location.set(null);
+    this.location.set(new LocationModel());
   }
 
   // Mapping constructor from Event
@@ -43,13 +43,13 @@ public class EventModel
   }
 
   // GUI constructor for creating event f.e
-  public EventModel(String name, String description, LocalTime time, LocalDate date, Image image, Location location){
+  public EventModel(String name, String description, LocalTime time, LocalDate date, Image image, LocationModel locationModel){
     this.name.set(name);
     this.description.set(description);
     this.time.set(time);
     this.date.set(date);
     this.image.set(new ImagePattern(image));
-    this.location.set(location);
+    this.location.set(locationModel);
   }
 
   public long getID()
@@ -142,18 +142,18 @@ public class EventModel
     this.image.set(new ImagePattern(image));
   }
 
-  public Location getLocation()
+  public LocationModel getLocation()
   {
     return location.get();
   }
 
-  public SimpleObjectProperty<Location> locationProperty()
+  public SimpleObjectProperty<LocationModel> locationProperty()
   {
     return location;
   }
 
-  public void setLocation(Location location)
+  public void setLocation(LocationModel locationModel)
   {
-    this.location.set(location);
+    this.location.set(locationModel);
   }
 }

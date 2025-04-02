@@ -1,12 +1,9 @@
 package dk.easv.ticketmanager.be;
 
+import dk.easv.ticketmanager.gui.models.LocationModel;
 import jakarta.persistence.*;
-import javafx.scene.image.Image;
+
 import java.time.LocalDate;
-import java.time.LocalTime;
-import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.List;
 import java.util.Set;
 
 @Entity
@@ -96,7 +93,7 @@ public class Event {
     this.time = time;
   }
 
-  public Location getLocation()
+  public LocationModel getLocation()
   {
     return location;
   }
