@@ -38,6 +38,10 @@ public class TicketOptionsController {
     @FXML
     private void sendEmail(ActionEvent event) throws IOException {
         Button btn = (Button) event.getSource();
+        btn.setDisable(true);
+        btn.getStyleClass().remove("blueBtn");
+        btn.getStyleClass().add("orangeBtn");
+        btn.setText("Email sent!");
         String recipient = ticket.getCustomer().getEmail();
         String ticketName = ticket.getEvent().getName() + " Ticket";
         Image ticketImage = imgViewTicket.getImage();
@@ -45,10 +49,7 @@ public class TicketOptionsController {
         File ticketFile = new File("src/main/resources/dk/easv/ticketmanager/images/ticket.png");
         ImageIO.write(bufferedImage, "png", ticketFile);
         emailSenderService.sendEmail(recipient, ticketFile, ticketName);
-        btn.setDisable(true);
-        btn.getStyleClass().remove("blueBtn");
-        btn.getStyleClass().add("orangeBtn");
-        btn.setText("Email sent!");
+
     }
 
     public void setTicketImage(Image image) {

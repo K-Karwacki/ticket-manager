@@ -35,7 +35,7 @@ public class EventHomeController
 
   }
   @FXML private void openEventCreator(){
-    viewManager.switchDashboard(EVENT_CREATOR_POPUP, "Create Event");
+    viewManager.showPopup(EVENT_CREATOR_POPUP, "Create Event");
   }
 
 

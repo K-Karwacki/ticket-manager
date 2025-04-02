@@ -14,7 +14,7 @@ import static dk.easv.ticketmanager.gui.FXMLPath.TICKET_COMPONENT;
 public class TicketController {
     private final FXMLManager fxmlManager = FXMLManager.INSTANCE;
     private final EmailSenderService emailSenderService = new EmailSenderService();
-    private TicketManagmentService ticketManagmentService;
+    private static TicketManagmentService ticketManagmentService;
     private Ticket ticket;
     @FXML
     private Label lblEventName;
@@ -43,10 +43,10 @@ public class TicketController {
         lblTicketType.setText(ticket.getType().getName());
         lblFullName.setText(ticket.getCustomer().getFirstName() + " " + ticket.getCustomer().getLastName());
         lblEventAddress.setText(String.valueOf(ticket.getEvent().getLocation()));
-//        Image QRCode = ticketDataModel.generateQRCode(ticket.getTicketCode());
-//        Image Barcode = ticketDataModel.generateBarcode(ticket.getTicketCode());
-//        imgQR.setImage(QRCode);
-//        imgBarcode.setImage(Barcode);
+        Image QRCode = ticketManagmentService.generateQRCode(ticket.getTicketCode());
+        Image Barcode = ticketManagmentService.generateBarcode(ticket.getTicketCode());
+        imgQR.setImage(QRCode);
+        imgBarcode.setImage(Barcode);
 
     }
     public void setTicket(Ticket ticket) {

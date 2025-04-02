@@ -69,7 +69,7 @@ public class TicketGeneratorController {
     }
     private void setTicketData(){
         ticket = new Ticket();
-        String ticketCode = "SOME TEMPORARY SHIT - TO CHANGE LATER"; // todo no idea where to generate this stuff
+        String ticketCode = ticketManagmentService.generateTicketNumber();
         ticket.setType(comboBoxTicketTypes.getValue());
         ticket.setTicketCode(ticketCode);
         Customer customer = new Customer();
@@ -83,6 +83,7 @@ public class TicketGeneratorController {
     public void loadTicketOptions(Image image){
         TicketOptionsController ticketOptionsController = ViewManager.INSTANCE.showPopup(TICKET_OPTIONS_POPUP, "Ticket Options");
         ticketOptionsController.setTicketImage(image);
+        ticketOptionsController.setTicket(ticket);
     }
     public void setDatabaseService(TicketManagmentService ticketManagmentService) {
         this.ticketManagmentService = ticketManagmentService;
