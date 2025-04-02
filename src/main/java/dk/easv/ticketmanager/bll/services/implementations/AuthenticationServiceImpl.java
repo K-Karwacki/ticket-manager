@@ -9,6 +9,7 @@ import dk.easv.ticketmanager.dal.repositories.UserRepository;
 import dk.easv.ticketmanager.exceptions.AuthenticationException;
 import dk.easv.ticketmanager.gui.models.UserModel;
 import dk.easv.ticketmanager.gui.models.UserSession;
+import dk.easv.ticketmanager.utils.TokenGenerator;
 import org.mindrot.jbcrypt.BCrypt;
 
 import java.util.Optional;
@@ -67,7 +68,7 @@ public class AuthenticationServiceImpl implements AuthenticationService
       throw new AuthenticationException("User couldn't be created");
     }
 
-    return new UserModel(savedUser.getId(), savedUser.getRole(), savedUser.getFirstName(), savedUser.getLastName(), savedUser.getEmail(), savedUser.getPhoneNumber());
+    return new UserModel(savedUser);
   }
 
   @Override public UserModel findUserByEmail(String email)
@@ -76,8 +77,7 @@ public class AuthenticationServiceImpl implements AuthenticationService
       return null;
     }
     Optional<User> userOptional = userRepository.findUserByEmail(email);
-    return userOptional.map(
-            user -> new UserModel(user.getId(), user.getRole(), user.getFirstName(), user.getLastName(), user.getEmail(), user.getPhoneNumber()))
+    return userOptional.map(UserModel::new)
         .orElse(null);
   }
 
@@ -90,13 +90,16 @@ public class AuthenticationServiceImpl implements AuthenticationService
     }
 
     Optional<User> user = userRepository.findUserByEmail(email);
+
     if(user.isEmpty()){
       throw new AuthenticationException("Couldn't find user with given email.");
     }
+
     User userFound = user.get();
 
     if(verifyPassword(password, userFound.getHashedPassword())){
-      this.authenticatedUserModel = new UserModel(userFound.getId(), userFound.getRole(), userFound.getFirstName(), userFound.getLastName(), userFound.getEmail(), userFound.getPhoneNumber());
+      this.authenticatedUserModel = new UserModel(userFound);
+      this.authenticatedUserModel.setLoggedSessionToken(TokenGenerator.generateSessionToken());
       UserSession.getInstance().setLoggedUserModel(this.authenticatedUserModel);
       return true;
     }

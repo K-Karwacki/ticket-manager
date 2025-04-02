@@ -2,10 +2,12 @@ package dk.easv.ticketmanager.bll.services.implementations;
 
 import dk.easv.ticketmanager.be.Permission;
 import dk.easv.ticketmanager.be.Role;
+import dk.easv.ticketmanager.be.User;
 import dk.easv.ticketmanager.bll.services.AuthorizationService;
 import dk.easv.ticketmanager.dal.repositories.AuthRepository;
 import dk.easv.ticketmanager.dal.repositories.UserRepository;
 import dk.easv.ticketmanager.gui.models.UserSession;
+import dk.easv.ticketmanager.utils.RoleType;
 
 import java.util.List;
 import java.util.Optional;
@@ -46,6 +48,14 @@ public class AuthorizationServiceImpl implements AuthorizationService
     }
     Optional<Role> optionalRole = authRepository.findRoleByName(name);
     return optionalRole.orElse(null);
+  }
+
+  @Override public boolean canAddUser(User user)
+  {
+//    if(user.getRole().getName().equals(RoleType.ADMIN.name())){
+////      if(userSession.getLoggedUserModel().getRoleProperty().get().get)
+//    }
+    return false;
   }
 
 }

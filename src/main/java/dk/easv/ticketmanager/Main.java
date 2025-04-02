@@ -2,12 +2,14 @@ package dk.easv.ticketmanager;
 
 import dk.easv.ticketmanager.bll.services.AuthenticationService;
 import dk.easv.ticketmanager.bll.services.AuthorizationService;
-import dk.easv.ticketmanager.bll.services.DatabaseService;
+import dk.easv.ticketmanager.bll.services.EventManagementService;
+import dk.easv.ticketmanager.bll.services.UserManagementService;
 import dk.easv.ticketmanager.bll.services.factories.RepositoryService;
 import dk.easv.ticketmanager.bll.services.implementations.AuthenticationServiceImpl;
 import dk.easv.ticketmanager.bll.services.factories.RepositoryServiceFactory;
 import dk.easv.ticketmanager.bll.services.implementations.AuthorizationServiceImpl;
-import dk.easv.ticketmanager.bll.services.implementations.DatabaseServiceImpl;
+import dk.easv.ticketmanager.bll.services.implementations.EventManagementServiceImpl;
+import dk.easv.ticketmanager.bll.services.implementations.UserManagementServiceImpl;
 import dk.easv.ticketmanager.dal.repositories.AuthRepository;
 import dk.easv.ticketmanager.dal.repositories.UserRepository;
 import dk.easv.ticketmanager.gui.*;
@@ -36,7 +38,10 @@ public class Main extends Application
           AuthRepository.class), repositoryService.getRepository(UserRepository.class));
   protected final AuthorizationService authorizationService = new AuthorizationServiceImpl(repositoryService.getRepository(AuthRepository.class));
 
-  protected final DatabaseService databaseService = new DatabaseServiceImpl(repositoryService, authorizationService);
+  protected final EventManagementService eventManagementService = new EventManagementServiceImpl(repositoryService);
+
+  protected final UserManagementService userManagementService = new UserManagementServiceImpl(repositoryService, authorizationService);
+//  protected final DatabaseService databaseService = new DatabaseServiceImpl(repositoryService, authorizationService);
 
 
 
@@ -44,17 +49,18 @@ public class Main extends Application
 
 
   private void setControllersDependencies(){
-    LoginWindowController loginWindowController = (LoginWindowController) fxmlManager.getFXMLController(FXMLPath.LOGIN);
-    EventDetailsController eventDetailsController = (EventDetailsController)  fxmlManager.getFXMLController(FXMLPath.EVENT_DETAILS);
-    EventCreatorController eventCreatorPopupController = (EventCreatorController)   fxmlManager.getFXMLController(FXMLPath.EVENT_CREATOR_POPUP);
-    EventHomeController eventHomeController = (EventHomeController) fxmlManager.getFXMLController(FXMLPath.EVENTS_DASHBOARD);
-    TicketTypeCreatorPopupController ticketTypeCreatorPopupController = (TicketTypeCreatorPopupController) fxmlManager.getFXMLController(FXMLPath.TICKET_TYPE_CREATOR_POPUP);
-    loginWindowController.setAuthenticationService(authenticationService);
+    LoginWindowController loginWindowController = (LoginWindowController) fxmlManager.getFXML(FXMLPath.LOGIN).getValue();
+    EventDetailsController eventDetailsController = (EventDetailsController)  fxmlManager.getFXML(FXMLPath.EVENT_DETAILS).getValue();
+    EventCreatorController eventCreatorPopupController = (EventCreatorController)   fxmlManager.getFXML(FXMLPath.EVENT_CREATOR_POPUP).getValue();
+    EventHomeController eventHomeController = (EventHomeController) fxmlManager.getFXML(FXMLPath.EVENTS_DASHBOARD).getValue();
+    TicketTypeCreatorPopupController ticketTypeCreatorPopupController = (TicketTypeCreatorPopupController) fxmlManager.getFXML(FXMLPath.TICKET_TYPE_CREATOR_POPUP).getValue();
 
-    eventDetailsController.setDatabaseService(databaseService);
-    eventCreatorPopupController.setDatabaseService(databaseService);
-    eventHomeController.setDatabaseService(databaseService);
-    ticketTypeCreatorPopupController.setDatabaseService(databaseService);
+    loginWindowController.setServices(authenticationService);
+
+    eventDetailsController.setServices(eventManagementService);
+    eventCreatorPopupController.setServices(eventManagementService);
+    eventHomeController.setServices(eventManagementService);
+    ticketTypeCreatorPopupController.setServices(eventManagementService);
 
 
   }

@@ -44,6 +44,7 @@ public class StageManager
       stage.setScene(new Scene(root));
       stage.setTitle(title);
 
+      stage.initModality(Modality.NONE);
       if (isModal) {
         stage.initModality(Modality.APPLICATION_MODAL);
       }
@@ -88,6 +89,17 @@ public class StageManager
     Stage stage = stageCache.remove(fxmlFile);
     if (stage != null) {
       stage.close();
+    }
+  }
+
+  public void showPopup(String fxml){
+    if(stageSettings.currentStage != null){
+      try{
+        Stage stage = getStage(fxml);
+        stage.showAndWait();
+      }catch (Exception e){
+        e.printStackTrace();
+      }
     }
   }
 

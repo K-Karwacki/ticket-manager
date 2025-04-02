@@ -10,6 +10,7 @@ import jakarta.persistence.EntityTransaction;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 public class EventRepositoryImpl implements EventRepository
 {
@@ -22,9 +23,9 @@ public class EventRepositoryImpl implements EventRepository
   }
 
   @Override
-  public Event getById(long id) {
+  public Optional<Event> getById(long id) {
     EntityManager em = JPAUtil.getEntityManager();
-    return em.find(Event.class, id);
+    return Optional.of(em.find(Event.class, id));
   }
 
   @Override

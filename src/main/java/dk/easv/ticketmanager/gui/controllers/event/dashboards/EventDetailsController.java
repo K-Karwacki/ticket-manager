@@ -1,7 +1,8 @@
 package dk.easv.ticketmanager.gui.controllers.event.dashboards;
 
 import dk.easv.ticketmanager.be.Event;
-import dk.easv.ticketmanager.bll.services.DatabaseService;
+import dk.easv.ticketmanager.bll.services.EventManagementService;
+import dk.easv.ticketmanager.dal.repositories.EventRepository;
 import dk.easv.ticketmanager.gui.FXMLManager;
 //import dk.easv.ticketmanager.gui.models.EventDataModel;
 import dk.easv.ticketmanager.gui.ViewManager;
@@ -29,7 +30,7 @@ import static dk.easv.ticketmanager.gui.FXMLPath.TICKET_TYPE_CREATOR_POPUP;
 public class EventDetailsController implements Initializable {
     private final FXMLManager fxmlManager = FXMLManager.INSTANCE;
     private final ViewManager viewManager = ViewManager.INSTANCE;
-    private static DatabaseService databaseService;
+    private EventManagementService eventManagementService;
 //    private final EventDataModel eventDataModel = new EventDataModel();
     private EventModel eventModel;
 
@@ -94,9 +95,9 @@ public class EventDetailsController implements Initializable {
         return eventModel;
     }
 
-  public void setDatabaseService(DatabaseService databaseService)
+  public void setServices(EventManagementService eventManagementService)
   {
-      this.databaseService = databaseService;
+    this.eventManagementService = eventManagementService;
   }
 
     @FXML

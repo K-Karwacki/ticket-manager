@@ -7,20 +7,29 @@ import dk.easv.ticketmanager.utils.JPAUtil;
 import jakarta.persistence.EntityManager;
 
 import java.util.List;
+import java.util.Optional;
 
 public class TicketRepositoryImpl implements TicketRepository {
+
+
     @Override
-    public void addTicketType(TicketType ticketType) {
-        EntityManager em = JPAUtil.getEntityManager();
-        em.getTransaction().begin();
-        em.merge(ticketType);
-        em.getTransaction().commit();
-        em.close();
+    public boolean saveTicketType(TicketType ticketType) {
+        try(EntityManager em = JPAUtil.getEntityManager()){
+            em.getTransaction().begin();
+            em.merge(ticketType);
+            em.getTransaction().commit();
+            return true;
+        }
     }
 
     @Override
-    public void deleteTicketType(TicketType ticketType) {
-
+    public boolean deleteTicketType(TicketType ticketType) {
+        try(EntityManager em = JPAUtil.getEntityManager()){
+            em.getTransaction().begin();
+            em.remove(ticketType);
+            em.getTransaction().commit();
+            return true;
+        }
     }
 
     @Override
@@ -34,7 +43,7 @@ public class TicketRepositoryImpl implements TicketRepository {
     }
 
     @Override
-    public Ticket getById(long id) {
+    public Optional<Ticket> getById(long id) {
         return null;
     }
 
@@ -53,8 +62,8 @@ public class TicketRepositoryImpl implements TicketRepository {
         return false;
     }
 
-    @Override
-    public Ticket update(Ticket oldEntity, Ticket newEntity) {
+    @Override public Ticket update(Ticket newEntity)
+    {
         return null;
     }
 }

@@ -3,6 +3,7 @@ package dk.easv.ticketmanager.gui;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.layout.BorderPane;
+import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
 
 public enum ViewManager
@@ -44,18 +45,21 @@ public enum ViewManager
     }
   }
 
-  public void openPopup(String fxml, String title){
-    if(stageManager != null){
-
-      stageManager.showStage(fxml);
-    }
-  }
-
 
   public void setStageRoot(BorderPane borderPane)
   {
     if(stageManager != null){
       sceneManager.setStageRoot(borderPane);
     }
+  }
+
+  public void showPopup(String fxml, String title){
+    if(stageManager != null){
+      stageManager.loadStage(fxml, title, false);
+      stageManager.showPopup(fxml);
+    }
+  }
+  public void hideCurrentStage(){
+    stageManager.hideCurrentStage();
   }
 }

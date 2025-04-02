@@ -40,14 +40,14 @@ public class RepositoryServiceFactory
   private static class RepositoryServiceImpl implements RepositoryService{
 
     private final Map<Class<? extends BaseRepository<?>>, BaseRepository<?>> repositoryMap;
+
     public RepositoryServiceImpl(Map<Class<? extends BaseRepository<?>>, BaseRepository<?>> repositoryMap){
       this.repositoryMap = repositoryMap;
     }
-    @Override
-    public <T extends BaseRepository<?>> T getRepository(Class<T> repositoryInterfaceClass) {
-      return repositoryInterfaceClass.cast(repositoryMap.get(repositoryInterfaceClass));
-    }
 
+    @Override public <R extends BaseRepository<T>, T> R getRepository(Class<R> repositoryClass) {
+      return (R) repositoryMap.get(repositoryClass);
+    }
   }
 
 }

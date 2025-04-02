@@ -6,6 +6,7 @@ import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.layout.BorderPane;
+import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
@@ -32,10 +33,16 @@ public class SceneManager
     this.currentStage = stage;
   }
 
+  public void setStageRoot(BorderPane stageRoot)
+  {
+    this.stageRoot = stageRoot;
+  }
+
   public Scene loadScene(String fxmlPath){
     if(!sceneCache.containsKey(fxmlPath)){
       Parent root = FXMLManager.INSTANCE.getFXML(fxmlPath).getKey();
       if(root != null){
+        root.setFocusTraversable(false);
         sceneCache.put(fxmlPath, new Scene(root));
         return sceneCache.get(fxmlPath);
       }
@@ -59,8 +66,4 @@ public class SceneManager
     }
   }
 
-  public void setStageRoot(BorderPane stageRoot)
-  {
-    this.stageRoot = stageRoot;
-  }
 }

@@ -3,9 +3,9 @@ package dk.easv.ticketmanager.gui.controllers.event.popups;
 
 import dk.easv.ticketmanager.be.Event;
 import dk.easv.ticketmanager.be.TicketType;
-import dk.easv.ticketmanager.bll.services.DatabaseService;
-import dk.easv.ticketmanager.bll.services.implementations.DatabaseServiceImpl;
+import dk.easv.ticketmanager.bll.services.EventManagementService;
 import dk.easv.ticketmanager.gui.FXMLManager;
+import dk.easv.ticketmanager.gui.ViewManager;
 import dk.easv.ticketmanager.gui.models.EventModel;
 import javafx.fxml.FXML;
 import javafx.scene.Parent;
@@ -19,7 +19,7 @@ import static dk.easv.ticketmanager.gui.FXMLPath.TICKET_TYPE_CREATOR_POPUP;
 
 public class TicketTypeCreatorPopupController {
     private final FXMLManager fxmlManager = FXMLManager.INSTANCE;
-    private DatabaseService databaseService;
+    private EventManagementService eventManagementService;
 
     private EventModel eventModel;
 
@@ -31,22 +31,20 @@ public class TicketTypeCreatorPopupController {
 
     @FXML
     private void addTicketType(){
-        String ticketTypeName = txtFieldTicketTypeName.getText();
-        String ticketPrice = txtFieldTicketPrice.getText();
         TicketType ticketType = new TicketType();
-        ticketType.setEvent(databaseService.getEventById(eventModel.getID()));
-        ticketType.setPrice(Double.parseDouble(ticketPrice));
-        ticketType.setName(ticketTypeName);
-        databaseService.addTicketType(ticketType);
-        Stage stage = (Stage) txtFieldTicketPrice.getScene().getWindow();
-        stage.close();
+        ticketType.setPrice(Double.parseDouble(txtFieldTicketPrice.getText()));
+        ticketType.setName(txtFieldTicketTypeName.getText());
+        if(eventManagementService.addTicketTypeForEventByID(ticketType, eventModel.getID())){
+            ViewManager.INSTANCE.hideCurrentStage();
+        }
+
     }
     public void setEvent(EventModel eventModel) {
         this.eventModel = eventModel;
     }
 
 
-    public void setDatabaseService(DatabaseService databaseService) {
-        this.databaseService = databaseService;
+    public void setServices(EventManagementService eventManagementService) {
+        this.eventManagementService = eventManagementService;
     }
 }

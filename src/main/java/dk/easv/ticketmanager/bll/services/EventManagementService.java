@@ -1,6 +1,7 @@
 package dk.easv.ticketmanager.bll.services;
 
 import dk.easv.ticketmanager.be.Event;
+import dk.easv.ticketmanager.be.TicketType;
 import dk.easv.ticketmanager.gui.models.EventModel;
 import dk.easv.ticketmanager.gui.models.UserModel;
 import javafx.collections.ObservableSet;
@@ -13,8 +14,8 @@ public interface EventManagementService
 {
 
   List<EventModel> getEventModelList();
-  ObservableSet<EventModel> getEventModelObservable();
+  ObservableSet<EventModel> getEventModelObservableSet();
   void addEvent(Event event);
 
-
+  boolean addTicketTypeForEventByID(TicketType ticketType, long id);
 }

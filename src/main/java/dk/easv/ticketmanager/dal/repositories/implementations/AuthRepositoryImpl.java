@@ -56,9 +56,16 @@ public class AuthRepositoryImpl implements AuthRepository
     return null;
   }
 
-  @Override public Role getById(long id)
+  @Override public Optional<Role> getById(long id)
   {
-    return null;
+    try(EntityManager em = JPAUtil.getEntityManager()) {
+      TypedQuery<Role> query = em.createQuery("Select r from Role r where id = :id", Role.class);
+      query.setParameter("id", id);
+      if(query.getResultStream().findFirst().isEmpty()){
+        throw new RuntimeException("No role with given id.");
+      }
+      return query.getResultStream().findFirst();
+    }
   }
 
   @Override public Role save(Role newRole)

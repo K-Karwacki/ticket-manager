@@ -7,7 +7,7 @@ import java.util.*;
 public class CustomHashSet<T> implements Set<T>
 {
   private final static Object PRESENT = new Object();
-  private final HashMap<long,T> map = new HashMap<>();
+  private final HashMap<T,Object> map = new HashMap<>();
 
   @Override public int size()
   {

@@ -1,10 +1,14 @@
 package dk.easv.ticketmanager.bll.services.implementations;
 
 import dk.easv.ticketmanager.be.Event;
+import dk.easv.ticketmanager.be.TicketType;
+import dk.easv.ticketmanager.be.User;
 import dk.easv.ticketmanager.bll.services.EventManagementService;
 import dk.easv.ticketmanager.bll.services.factories.RepositoryService;
 import dk.easv.ticketmanager.dal.repositories.EventRepository;
+import dk.easv.ticketmanager.dal.repositories.TicketRepository;
 import dk.easv.ticketmanager.dal.repositories.UserRepository;
+import dk.easv.ticketmanager.gui.models.EventListModel;
 import dk.easv.ticketmanager.gui.models.EventModel;
 import dk.easv.ticketmanager.gui.models.UserModel;
 import javafx.collections.FXCollections;
@@ -13,6 +17,7 @@ import javafx.collections.ObservableSet;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 public class EventManagementServiceImpl implements EventManagementService
@@ -44,7 +49,7 @@ public class EventManagementServiceImpl implements EventManagementService
   }
 
   private EventModel mapEvent(Event event){
-    return new EventModel(event.getID(), event.getName());
+    return new EventModel(event);
   }
 
 
@@ -54,7 +59,7 @@ public class EventManagementServiceImpl implements EventManagementService
         this::mapEvent).toList();
   }
 
-  @Override public ObservableSet<EventModel> getEventModelObservable()
+  @Override public ObservableSet<EventModel> getEventModelObservableSet()
   {
     return eventModelObservableSet;
   }
@@ -64,5 +69,16 @@ public class EventManagementServiceImpl implements EventManagementService
     eventRepository.save(event);
   }
 
+  @Override public boolean addTicketTypeForEventByID(TicketType ticketType,
+      long id)
+  {
+    Optional<Event> event = eventRepository.getById(id);
+    event.ifPresent(ticketType::setEvent);
+
+    if(repositoryService.getRepository(TicketRepository.class).saveTicketType(ticketType)){
+      return true;
+    }
+    throw new RuntimeException("Something went wrong");
+  }
 
 }

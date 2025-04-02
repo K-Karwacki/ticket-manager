@@ -49,11 +49,11 @@ public class EventCardController
     eventNameLbl.textProperty().bind(eventModel.nameProperty());
     eventDateLbl.textProperty().bind(eventModel.dateProperty());
     eventTimeLbl.textProperty().bind(eventModel.timeProperty());
-    normalTicketsAmountLbl.textProperty().bind(eventModel.normalTicketAmountProperty());
-    vipTicketsAmountLbl.textProperty().bind(eventModel.vipTicketAmountProperty());
+    normalTicketsAmountLbl.textProperty().bind(eventModel.normal_ticket_amountProperty());
+    vipTicketsAmountLbl.textProperty().bind(eventModel.vip_ticket_amountProperty());
     eventLocationLbl.setText(eventModel.getLocation().toString());
-    ImagePattern pattern = new ImagePattern(eventModel.getImage());
-    eventImageContainer.setFill(pattern);
+//    ImagePattern pattern = new ImagePattern(eventModel.getImage());
+//    eventImageContainer.setFill(pattern);
 
   }
 

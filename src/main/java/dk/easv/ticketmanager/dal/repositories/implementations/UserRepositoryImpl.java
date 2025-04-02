@@ -33,9 +33,9 @@ public class UserRepositoryImpl implements UserRepository
         }
     }
 
-    @Override public User getById(long id)
+    @Override public Optional<User> getById(long id)
     {
-        return userMap.get(id);
+        return Optional.of(userMap.get(id));
     }
 
     @Override
@@ -89,7 +89,13 @@ public class UserRepositoryImpl implements UserRepository
 
     @Override public boolean deleteById(long id)
     {
-        return delete(getById(id));
+        Optional<User> optionalUser = getById(id);
+
+        if(optionalUser.isPresent()){
+            delete(optionalUser.get());
+            return true;
+        }
+        return false;
     }
 
     @Override public User update(User updatedUser)

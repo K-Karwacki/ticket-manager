@@ -16,8 +16,12 @@ public class UserSession {
     }
 
     public void setLoggedUserModel(UserModel userModel) {
+        if(userModel == null || userModel.getLoggedSessionToken().isEmpty()){
+            throw new RuntimeException("Not authorized to do that.");
+        }
         this.loggedUserModel = userModel;
     }
+
     public UserModel getLoggedUserModel() {
         return loggedUserModel;
     }

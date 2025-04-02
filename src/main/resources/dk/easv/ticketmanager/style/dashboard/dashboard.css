@@ -1,6 +1,24 @@
+
+.border-pane .dashboard-root:focused {
+    -fx-focus-color: black;
+    -fx-faint-focus-color: transparent;
+    -fx-background-insets: 0;
+    -fx-background-radius: 0;
+}
+.stack-pane:focused,
+.scroll-pane:focused,
+.vbox:focused,
+.hbox:focused {
+    -fx-focus-color: transparent;
+    -fx-faint-focus-color: transparent;
+        -fx-background-insets: 0;
+        -fx-background-radius: 0;
+}
+
 .dashboard-root{
     -fx-background-color: #c8c8c8;
-    -fx-border-color: #616161;
+    -fx-focus-color: transparent;
+    -fx-faint-focus-color: transparent;
 }
 .checkBox .box{
     -fx-pref-width: 25;
@@ -17,40 +35,7 @@
     -fx-effect: dropshadow(gaussian, #555, 0, 0, -3, 3);
     -fx-cursor: hand;
 }
-.coordinators-window{
-    -fx-effect: dropshadow(gaussian, #50505040, 5, 0, -3, 7);
-    -fx-background-radius: 10px;
-    -fx-border-radius: 10px;
-}
-.scroll-pane:focused{
-    -fx-border-width: 0px;
-    -fx-focus-color: #c8c8c8;
-    -fx-faint-focus-color: transparent;
-}
 
-.scroll-pane .viewport {
-    -fx-background-color: transparent;
-
-}
-.scroll-pane .scroll-bar:vertical {
-    -fx-background-color: rgba(200,200,200,.3);
-    -fx-padding: 2;
-    -fx-background-radius: 10;
-}
-.scroll-pane scroll-bar:vertical .track {
-    -fx-background-color: transparent;
-}
-.scroll-pane .scroll-bar:vertical .thumb {
-    -fx-background-color: rgba(170, 170, 170);
-    -fx-background-radius: 10;
-}
-.scroll-pane .scroll-bar .increment-button,
-.scroll-pane .scroll-bar .decrement-button {
-    -fx-opacity: 0;
-    -fx-padding: 0;
-    -fx-min-width: 0;
-    -fx-min-height: 0;
-}
 .coordinator{
     -fx-background-radius: 10px;
     -fx-border-radius: 10px;
