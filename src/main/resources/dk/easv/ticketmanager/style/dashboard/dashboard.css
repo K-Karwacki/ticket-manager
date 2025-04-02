@@ -47,3 +47,16 @@
 .drop-shadow{
     -fx-effect: dropshadow(gaussian, #50505040, 5, 0, -3, 7);
 }
+
+.dashboard-menu Button{
+  -fx-background-color: #9CE2FF;
+      -fx-effect: dropshadow(gaussian, #555, 0, 0, -2, 2);
+}
+
+.dashboard-menu CheckBox Box{
+  -fx-pref-width: 25;
+  -fx-pref-height: 25;
+  -fx-background-color: #FFDF99;
+  -fx-effect: dropshadow(gaussian, #555, 0, 0, -2, 2);
+}
+

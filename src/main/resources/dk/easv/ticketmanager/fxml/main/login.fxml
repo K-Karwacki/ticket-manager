@@ -2,16 +2,19 @@
 
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
+<?import javafx.scene.control.CheckBox?>
+<?import javafx.scene.control.Hyperlink?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.PasswordField?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.effect.InnerShadow?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.Pane?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<VBox alignment="TOP_CENTER" prefHeight="505.0" prefWidth="450.0" styleClass="root" stylesheets="@../../style/main/login.css" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="dk.easv.ticketmanager.gui.controllers.main.LoginWindowController">
+<VBox alignment="TOP_CENTER" prefWidth="400.0" styleClass="root" stylesheets="@../../style/main/login.css" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="dk.easv.ticketmanager.gui.controllers.main.LoginWindowController">
    <children>
       <ImageView fitHeight="94.0" fitWidth="247.0" pickOnBounds="true" preserveRatio="true">
          <image>
@@ -45,13 +48,31 @@
                   <Insets bottom="10.0" left="10.0" />
                </VBox.margin>
             </Label>
-            <PasswordField fx:id="textFieldPassword" />
+            <Pane prefWidth="370.0">
+               <children>
+                  <TextField fx:id="textFieldPassword" prefWidth="320.0" styleClass="text-field">
+                     <effect>
+                        <InnerShadow />
+                     </effect>
+                  </TextField>
+                  <PasswordField fx:id="passwordFieldPassword" prefWidth="320.0" />
+                  <CheckBox fx:id="showPasswordCheckBox" alignment="CENTER" contentDisplay="CENTER" layoutX="280.0" layoutY="6.0" mnemonicParsing="false">
+                     <font>
+                        <Font size="21.0" />
+                     </font>
+                  </CheckBox>
+               </children>
+            </Pane>
+            <Hyperlink text="Forgot password?">
+               <VBox.margin>
+                  <Insets left="10.0" top="10.0" />
+               </VBox.margin>
+            </Hyperlink>
          </children>
          <VBox.margin>
             <Insets top="35.0" />
          </VBox.margin>
       </VBox>
-      <Button mnemonicParsing="false" onAction="#onClickOpenRegister" text="Register" />
       <Button mnemonicParsing="false" onAction="#onClickLogin" text="Login">
          <VBox.margin>
             <Insets top="60.0" />

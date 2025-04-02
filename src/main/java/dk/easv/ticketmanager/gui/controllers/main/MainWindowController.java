@@ -21,3 +21,4 @@ public class MainWindowController
     viewManager.setStageRoot(root);
   }
 }
+

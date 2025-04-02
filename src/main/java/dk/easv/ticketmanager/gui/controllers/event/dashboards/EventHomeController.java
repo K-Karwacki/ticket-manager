@@ -8,6 +8,7 @@ import dk.easv.ticketmanager.gui.models.EventModel;
 import javafx.fxml.FXML;
 import javafx.scene.Parent;
 import javafx.scene.control.ComboBox;
+import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.layout.FlowPane;
 import javafx.util.Pair;
@@ -35,7 +36,7 @@ public class EventHomeController
 
   }
   @FXML private void openEventCreator(){
-    viewManager.showPopup(EVENT_CREATOR_POPUP, "Create Event");
+    viewManager.switchDashboard(EVENT_CREATOR_POPUP, "Create Event");
   }
 
 
@@ -50,6 +51,9 @@ public class EventHomeController
       eventListRoot.getChildren().add(p.getKey());
     });
 
+    if(events.isEmpty()){
+      eventListRoot.getChildren().add(new Label("No events to show"));
+    }
   }
 
   public void setDatabaseService(EventManagementService eventManagementService) {

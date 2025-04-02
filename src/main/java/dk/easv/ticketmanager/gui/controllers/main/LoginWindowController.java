@@ -7,7 +7,9 @@ import dk.easv.ticketmanager.gui.ViewManager;
 import dk.easv.ticketmanager.gui.models.UserSession;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.scene.control.CheckBox;
 import javafx.scene.control.Label;
+import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 
 import java.io.IOException;
@@ -19,9 +21,13 @@ public class LoginWindowController
     private final UserSession userSession;
     private AuthenticationService authenticationService;
 
+
+  @FXML private CheckBox showPasswordCheckBox;
   @FXML private Label errorLabel;
   @FXML private TextField textFieldUsername;
+  @FXML private PasswordField passwordFieldPassword;
   @FXML private TextField textFieldPassword;
+
 
   public LoginWindowController(){
     viewManager = ViewManager.INSTANCE;
@@ -35,6 +41,14 @@ public class LoginWindowController
     this.authenticationService = authenticationService;
   }
 
+  @FXML private void initialize(){
+    textFieldPassword.setManaged(false);
+
+    showPasswordCheckBox.setOnAction(actionEvent -> togglePasswordVisibility());
+
+    // Sync values between PasswordField and TextField
+    passwordFieldPassword.textProperty().bindBidirectional(textFieldPassword.textProperty());
+  }
   @FXML
     private void onClickLogin(ActionEvent actionEvent) {
         try {
@@ -73,7 +87,20 @@ public class LoginWindowController
 
   }
 
-  public void onClickOpenRegister(){
-    viewManager.showScene(FXMLPath.COORDINATOR_LIST_POPUP);
+
+  private void togglePasswordVisibility() {
+    if (showPasswordCheckBox.isSelected()) {
+      textFieldPassword.setText(passwordFieldPassword.getText());
+      textFieldPassword.setVisible(true);
+      textFieldPassword.setManaged(true);
+      passwordFieldPassword.setVisible(false);
+      passwordFieldPassword.setManaged(false);
+    } else {
+      passwordFieldPassword.setText(textFieldPassword.getText());
+      passwordFieldPassword.setVisible(true);
+      passwordFieldPassword.setManaged(true);
+      textFieldPassword.setVisible(false);
+      textFieldPassword.setManaged(false);
+    }
   }
 }

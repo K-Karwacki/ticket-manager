@@ -6,6 +6,7 @@ import dk.easv.ticketmanager.be.Location;
 import dk.easv.ticketmanager.bll.services.interfaces.EventManagementService;
 import dk.easv.ticketmanager.gui.FXMLManager;
 import dk.easv.ticketmanager.gui.ViewManager;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.Parent;
 import javafx.scene.control.DatePicker;
@@ -81,5 +82,9 @@ public class EventCreatorController {
     }
     public void setDatabaseService(EventManagementService eventManagementService) {
         this.eventManagementService = eventManagementService;
+    }
+
+    public void onClickSubmit(ActionEvent actionEvent)
+    {
     }
 }
