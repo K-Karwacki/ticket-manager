@@ -2,19 +2,17 @@ package dk.easv.ticketmanager.gui.controllers.ticket;
 
 import dk.easv.ticketmanager.be.Ticket;
 import dk.easv.ticketmanager.bll.services.EmailSenderService;
-import dk.easv.ticketmanager.bll.services.interfaces.TicketManagmentService;
+import dk.easv.ticketmanager.bll.services.interfaces.TicketManagementService;
 import dk.easv.ticketmanager.gui.FXMLManager;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 
-import static dk.easv.ticketmanager.gui.FXMLPath.TICKET_COMPONENT;
-
 public class TicketController {
     private final FXMLManager fxmlManager = FXMLManager.INSTANCE;
     private final EmailSenderService emailSenderService = new EmailSenderService();
-    private static TicketManagmentService ticketManagmentService;
+    private static TicketManagementService ticketManagementService;
     private Ticket ticket;
     @FXML
     private Label lblEventName;
@@ -43,8 +41,8 @@ public class TicketController {
         lblTicketType.setText(ticket.getType().getName());
         lblFullName.setText(ticket.getCustomer().getFirstName() + " " + ticket.getCustomer().getLastName());
         lblEventAddress.setText(String.valueOf(ticket.getEvent().getLocation()));
-        Image QRCode = ticketManagmentService.generateQRCode(ticket.getTicketCode());
-        Image Barcode = ticketManagmentService.generateBarcode(ticket.getTicketCode());
+        Image QRCode = ticketManagementService.generateQRCode(ticket.getTicketCode());
+        Image Barcode = ticketManagementService.generateBarcode(ticket.getTicketCode());
         imgQR.setImage(QRCode);
         imgBarcode.setImage(Barcode);
 
@@ -53,8 +51,8 @@ public class TicketController {
         this.ticket = ticket;
     }
 
-    public void setDatabaseService(TicketManagmentService ticketManagmentService) {
-        this.ticketManagmentService = ticketManagmentService;
+    public void setDatabaseService(TicketManagementService ticketManagementService) {
+        this.ticketManagementService = ticketManagementService;
     }
 }
 

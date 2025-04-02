@@ -34,9 +34,9 @@ public class Main extends Application
           AuthRepository.class), repositoryService.getRepository(UserRepository.class));
   protected final AuthorizationService authorizationService = new AuthorizationServiceImpl(repositoryService.getRepository(AuthRepository.class));
 
-  protected final TicketManagmentService ticketManagmentService = new TicketManagmentServiceImpl(repositoryService, authorizationService);
-  protected final EventManagmentService eventManagmentService = new EventManagmentServiceImpl(repositoryService, authorizationService);
-  protected final UserManagmentService userManagmentService = new UserManagmentServiceImpl(repositoryService, authorizationService);
+  protected final TicketManagementService ticketManagementService = new TicketManagementServiceImpl(repositoryService, authorizationService);
+  protected final EventManagementService eventManagementService = new EventManagementServiceImpl(repositoryService, authorizationService);
+  protected final UserManagementService userManagementService = new UserManagementServiceImpl(repositoryService, authorizationService);
 
   private void setControllersDependencies(){
     LoginWindowController loginWindowController = (LoginWindowController) fxmlManager.getFXML(FXMLPath.LOGIN).getValue();
@@ -48,11 +48,11 @@ public class Main extends Application
     TicketController ticketController = (TicketController) fxmlManager.getFXML(FXMLPath.TICKET_COMPONENT).getValue();
     loginWindowController.setAuthenticationService(authenticationService);
 
-    eventCreatorPopupController.setDatabaseService(eventManagmentService);
-    eventHomeController.setDatabaseService(eventManagmentService);
-    ticketTypeCreatorController.setDatabaseService(ticketManagmentService, eventManagmentService);
-    ticketGeneratorController.setDatabaseService(ticketManagmentService);
-    ticketController.setDatabaseService(ticketManagmentService);
+    eventCreatorPopupController.setDatabaseService(eventManagementService);
+    eventHomeController.setDatabaseService(eventManagementService);
+    ticketTypeCreatorController.setDatabaseService(ticketManagementService, eventManagementService);
+    ticketGeneratorController.setDatabaseService(ticketManagementService);
+    ticketController.setDatabaseService(ticketManagementService);
 
   }
 

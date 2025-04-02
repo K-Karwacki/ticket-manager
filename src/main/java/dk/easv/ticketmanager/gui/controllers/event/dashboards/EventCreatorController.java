@@ -3,12 +3,11 @@ package dk.easv.ticketmanager.gui.controllers.event.dashboards;
 import dk.easv.ticketmanager.be.Event;
 import dk.easv.ticketmanager.be.Location;
 
-import dk.easv.ticketmanager.bll.services.interfaces.EventManagmentService;
+import dk.easv.ticketmanager.bll.services.interfaces.EventManagementService;
 import dk.easv.ticketmanager.gui.FXMLManager;
 import dk.easv.ticketmanager.gui.ViewManager;
 import javafx.fxml.FXML;
 import javafx.scene.Parent;
-import javafx.scene.Scene;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
@@ -24,7 +23,7 @@ import static dk.easv.ticketmanager.gui.FXMLPath.IMAGE_SELECTOR_POPUP;
 public class EventCreatorController {
     private Event event = new Event();
     private String imagePath;
-    private static EventManagmentService eventManagmentService;
+    private static EventManagementService eventManagementService;
 
     @FXML
     private ImageView imageViewSelectedImage;
@@ -49,7 +48,7 @@ public class EventCreatorController {
         setEventData();
         Stage stage = (Stage) txtFieldEventName.getScene().getWindow();
         stage.close();
-        eventManagmentService.createNewEvent(event);
+        eventManagementService.createNewEvent(event);
         Pair<Parent, EventHomeController> p = FXMLManager.INSTANCE.getFXML(EVENTS_DASHBOARD);
         p.getValue().loadEventCards();
     }
@@ -80,7 +79,7 @@ public class EventCreatorController {
         this.imagePath = imagePath;
         imageViewSelectedImage.setImage(new Image(Objects.requireNonNull(getClass().getResource(imagePath)).toExternalForm()));
     }
-    public void setDatabaseService(EventManagmentService eventManagmentService) {
-        this.eventManagmentService = eventManagmentService;
+    public void setDatabaseService(EventManagementService eventManagementService) {
+        this.eventManagementService = eventManagementService;
     }
 }

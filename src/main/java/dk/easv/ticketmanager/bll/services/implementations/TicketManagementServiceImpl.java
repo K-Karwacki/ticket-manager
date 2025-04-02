@@ -9,7 +9,7 @@ import com.google.zxing.qrcode.QRCodeWriter;
 import dk.easv.ticketmanager.be.Ticket;
 import dk.easv.ticketmanager.be.TicketType;
 import dk.easv.ticketmanager.bll.services.interfaces.AuthorizationService;
-import dk.easv.ticketmanager.bll.services.interfaces.TicketManagmentService;
+import dk.easv.ticketmanager.bll.services.interfaces.TicketManagementService;
 import dk.easv.ticketmanager.bll.services.factories.RepositoryService;
 import dk.easv.ticketmanager.dal.repositories.TicketRepository;
 import dk.easv.ticketmanager.gui.models.EventModel;
@@ -24,16 +24,16 @@ import java.util.List;
 import java.util.Map;
 import java.util.UUID;
 
-public class TicketManagmentServiceImpl implements TicketManagmentService {
+public class TicketManagementServiceImpl implements TicketManagementService {
     private final RepositoryService repositoryService;
     private final AuthorizationService authorizationService;
 
-    public TicketManagmentServiceImpl(){
+    public TicketManagementServiceImpl(){
         repositoryService = null;
         authorizationService = null;
     }
 
-    public TicketManagmentServiceImpl(RepositoryService repositoryService, AuthorizationService authorizationService){
+    public TicketManagementServiceImpl(RepositoryService repositoryService, AuthorizationService authorizationService){
         this.repositoryService = repositoryService;
         this.authorizationService = authorizationService;
     }

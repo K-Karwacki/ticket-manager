@@ -5,7 +5,7 @@ import dk.easv.ticketmanager.gui.models.EventListModel;
 
 import java.util.Optional;
 
-public interface EventManagmentService {
+public interface EventManagementService {
     EventListModel getEventListModel();
     boolean createNewEvent(Event event);
     boolean updateEvent(Event event);

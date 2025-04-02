@@ -3,7 +3,7 @@ package dk.easv.ticketmanager.gui.controllers.ticket;
 import dk.easv.ticketmanager.be.Customer;
 import dk.easv.ticketmanager.be.Ticket;
 import dk.easv.ticketmanager.be.TicketType;
-import dk.easv.ticketmanager.bll.services.interfaces.TicketManagmentService;
+import dk.easv.ticketmanager.bll.services.interfaces.TicketManagementService;
 import dk.easv.ticketmanager.gui.FXMLManager;
 import dk.easv.ticketmanager.gui.ViewManager;
 import dk.easv.ticketmanager.gui.models.EventModel;
@@ -14,7 +14,6 @@ import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
-import javafx.stage.Stage;
 import javafx.util.Pair;
 
 import java.io.IOException;
@@ -24,7 +23,7 @@ import static dk.easv.ticketmanager.gui.FXMLPath.*;
 
 public class TicketGeneratorController {
     private final FXMLManager fxmlManager = FXMLManager.INSTANCE;
-    private static TicketManagmentService ticketManagmentService;
+    private static TicketManagementService ticketManagementService;
     private Ticket ticket;
     @FXML
     private TextField txtFieldCustomerFirstName;
@@ -56,7 +55,7 @@ public class TicketGeneratorController {
 
     public void addTicketTypes(EventModel eventModel) {
         comboBoxTicketTypes.getItems().clear();
-        List<TicketType> ticketTypes = ticketManagmentService.getTicketTypesForEvent(eventModel);
+        List<TicketType> ticketTypes = ticketManagementService.getTicketTypesForEvent(eventModel);
         comboBoxTicketTypes.getItems().addAll(ticketTypes);
     }
 
@@ -69,7 +68,7 @@ public class TicketGeneratorController {
     }
     private void setTicketData(){
         ticket = new Ticket();
-        String ticketCode = ticketManagmentService.generateTicketNumber();
+        String ticketCode = ticketManagementService.generateTicketNumber();
         ticket.setType(comboBoxTicketTypes.getValue());
         ticket.setTicketCode(ticketCode);
         Customer customer = new Customer();
@@ -77,7 +76,7 @@ public class TicketGeneratorController {
         customer.setLastName(txtFieldCustomerLastName.getText());
         customer.setEmail(txtFieldCustomerEmail.getText());
         ticket.setCustomer(customer);
-        ticketManagmentService.addTicket(ticket);
+        ticketManagementService.addTicket(ticket);
     }
 
     public void loadTicketOptions(Image image){
@@ -85,8 +84,8 @@ public class TicketGeneratorController {
         ticketOptionsController.setTicketImage(image);
         ticketOptionsController.setTicket(ticket);
     }
-    public void setDatabaseService(TicketManagmentService ticketManagmentService) {
-        this.ticketManagmentService = ticketManagmentService;
+    public void setDatabaseService(TicketManagementService ticketManagementService) {
+        this.ticketManagementService = ticketManagementService;
     }
 }
 

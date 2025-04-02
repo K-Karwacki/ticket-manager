@@ -1,6 +1,5 @@
 package dk.easv.ticketmanager.gui.controllers.event.dashboards;
 
-import dk.easv.ticketmanager.bll.services.interfaces.EventManagmentService;
 import dk.easv.ticketmanager.gui.FXMLManager;
 //import dk.easv.ticketmanager.gui.models.EventDataModel;
 import dk.easv.ticketmanager.gui.ViewManager;
@@ -10,15 +9,12 @@ import dk.easv.ticketmanager.gui.models.EventModel;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.Parent;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.paint.ImagePattern;
 import javafx.scene.shape.Rectangle;
-import javafx.util.Pair;
 
 import java.net.URL;
-import java.util.Objects;
 import java.util.ResourceBundle;
 
 import static dk.easv.ticketmanager.gui.FXMLPath.*;

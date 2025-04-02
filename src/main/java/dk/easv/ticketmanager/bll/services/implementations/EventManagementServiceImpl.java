@@ -1,84 +1,66 @@
 package dk.easv.ticketmanager.bll.services.implementations;
 
 import dk.easv.ticketmanager.be.Event;
-import dk.easv.ticketmanager.be.TicketType;
-import dk.easv.ticketmanager.be.User;
-import dk.easv.ticketmanager.bll.services.EventManagementService;
+import dk.easv.ticketmanager.bll.services.interfaces.AuthorizationService;
+import dk.easv.ticketmanager.bll.services.interfaces.EventManagementService;
 import dk.easv.ticketmanager.bll.services.factories.RepositoryService;
 import dk.easv.ticketmanager.dal.repositories.EventRepository;
-import dk.easv.ticketmanager.dal.repositories.TicketRepository;
-import dk.easv.ticketmanager.dal.repositories.UserRepository;
 import dk.easv.ticketmanager.gui.models.EventListModel;
 import dk.easv.ticketmanager.gui.models.EventModel;
-import dk.easv.ticketmanager.gui.models.UserModel;
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableSet;
 
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
-import java.util.stream.Collectors;
 
-public class EventManagementServiceImpl implements EventManagementService
-{
-  private final RepositoryService repositoryService;
-  private static EventRepository eventRepository;
-  private final ObservableSet<EventModel> eventModelObservableSet;
+public class EventManagementServiceImpl implements EventManagementService {
+    private final RepositoryService repositoryService;
 
-  public EventManagementServiceImpl(){
-    repositoryService = null;
-    eventRepository = null;
-    eventModelObservableSet = null;
+    private final EventListModel eventListModel = new EventListModel();
 
-  }
-
-
-  public EventManagementServiceImpl(RepositoryService repositoryService){
-    this.repositoryService = repositoryService;
-    eventRepository = this.repositoryService.getRepository(EventRepository.class);
-    eventModelObservableSet = FXCollections.observableSet();
-  }
-
-
-  private EventRepository getEventRepository(){
-    if(repositoryService == null || repositoryService.getRepository(UserRepository.class) == null){
-      return null;
+    public EventManagementServiceImpl(){
+        repositoryService = null;
     }
-    return repositoryService.getRepository(EventRepository.class);
-  }
 
-  private EventModel mapEvent(Event event){
-    return new EventModel(event);
-  }
+    public EventManagementServiceImpl(RepositoryService repositoryService, AuthorizationService authorizationService){
+        this.repositoryService = repositoryService;
 
-
-  @Override public List<EventModel> getEventModelList()
-  {
-    return eventRepository.getAll().stream().map(
-        this::mapEvent).toList();
-  }
-
-  @Override public ObservableSet<EventModel> getEventModelObservableSet()
-  {
-    return eventModelObservableSet;
-  }
-
-  @Override public void addEvent(Event event)
-  {
-    eventRepository.save(event);
-  }
-
-  @Override public boolean addTicketTypeForEventByID(TicketType ticketType,
-      long id)
-  {
-    Optional<Event> event = eventRepository.getById(id);
-    event.ifPresent(ticketType::setEvent);
-
-    if(repositoryService.getRepository(TicketRepository.class).saveTicketType(ticketType)){
-      return true;
+        setEventListModel();
     }
-    throw new RuntimeException("Something went wrong");
-  }
+
+    public EventListModel getEventListModel() {
+        return eventListModel;
+    }
+
+    @Override
+    public boolean createNewEvent(Event event) {
+        Event newEvent = repositoryService.getRepository(EventRepository.class).save(event);
+        if(newEvent == null){
+            throw new RuntimeException("Error creating new event");
+        }
+        eventListModel.getEvents().add(new EventModel(newEvent));
+        return true;
+    }
+
+    @Override
+    public boolean updateEvent(Event event) {
+        return false;
+    }
+
+    @Override
+    public boolean deleteEvent(Event event) {
+        return false;
+    }
+
+    @Override
+    public void setEventListModel(){
+        List<Event> events = repositoryService.getRepository(EventRepository.class).getAll().stream().toList();
+        List<EventModel> eventModels = new ArrayList<>(events.stream().map(EventModel::new).toList());
+        eventListModel.setEvents(eventModels);
+    }
+
+    @Override
+    public Optional<Event> getEventById(long ID){
+        return this.repositoryService.getRepository(EventRepository.class).getById(ID);
+    };
 
 }
