@@ -23,7 +23,7 @@ import static dk.easv.ticketmanager.gui.FXMLPath.IMAGE_SELECTOR_POPUP;
 public class EventCreatorController {
     private Event event = new Event();
     private String imagePath;
-    private static EventManagementService eventManagementService;
+    private EventManagementService eventManagementService;
 
     @FXML
     private ImageView imageViewSelectedImage;

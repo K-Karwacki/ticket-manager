@@ -11,8 +11,8 @@ import javafx.stage.Stage;
 
 
 public class TicketTypeCreatorController {
-    private static TicketManagementService ticketManagementService;
-    private static EventManagementService eventManagementService;
+    private TicketManagementService ticketManagementService;
+    private EventManagementService eventManagementService;
 
     private EventModel eventModel;
 

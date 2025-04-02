@@ -23,7 +23,7 @@ import static dk.easv.ticketmanager.gui.FXMLPath.*;
 
 public class TicketGeneratorController {
     private final FXMLManager fxmlManager = FXMLManager.INSTANCE;
-    private static TicketManagementService ticketManagementService;
+    private TicketManagementService ticketManagementService;
     private Ticket ticket;
     @FXML
     private TextField txtFieldCustomerFirstName;

@@ -12,7 +12,7 @@ import javafx.scene.image.ImageView;
 public class TicketController {
     private final FXMLManager fxmlManager = FXMLManager.INSTANCE;
     private final EmailSenderService emailSenderService = new EmailSenderService();
-    private static TicketManagementService ticketManagementService;
+    private TicketManagementService ticketManagementService;
     private Ticket ticket;
     @FXML
     private Label lblEventName;
