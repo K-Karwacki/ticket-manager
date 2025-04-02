@@ -9,6 +9,7 @@ import dk.easv.ticketmanager.dal.repositories.UserRepository;
 import dk.easv.ticketmanager.gui.*;
 import dk.easv.ticketmanager.gui.controllers.event.dashboards.EventHomeController;
 import dk.easv.ticketmanager.gui.controllers.event.popups.EventEditorController;
+import dk.easv.ticketmanager.gui.controllers.popups.ImageSelectorController;
 import dk.easv.ticketmanager.gui.controllers.ticket.TicketController;
 import dk.easv.ticketmanager.gui.controllers.ticket.TicketTypeCreatorController;
 import dk.easv.ticketmanager.gui.controllers.main.LoginWindowController;
@@ -20,6 +21,7 @@ import dk.easv.ticketmanager.utils.RoleType;
 import javafx.application.Application;
 import javafx.stage.Stage;
 
+import java.io.IOException;
 import java.util.Locale;
 
 public class Main extends Application
@@ -39,7 +41,10 @@ public class Main extends Application
   protected final EventManagementService eventManagementService = new EventManagementServiceImpl(repositoryService, authorizationService);
   protected final UserManagementService userManagementService = new UserManagementServiceImpl(repositoryService, authorizationService);
 
-  private void setControllersDependencies(){
+    public Main() throws IOException {
+    }
+
+    private void setControllersDependencies(){
     LoginWindowController loginWindowController = (LoginWindowController) fxmlManager.getFXML(FXMLPath.LOGIN).getValue();
     EventDetailsController eventDetailsController = (EventDetailsController)  fxmlManager.getFXML(FXMLPath.EVENT_DETAILS).getValue();
     EventCreatorController eventCreatorPopupController = (EventCreatorController)   fxmlManager.getFXML(FXMLPath.EVENT_CREATOR_POPUP).getValue();
@@ -47,7 +52,7 @@ public class Main extends Application
     TicketTypeCreatorController ticketTypeCreatorController = (TicketTypeCreatorController) fxmlManager.getFXML(FXMLPath.TICKET_TYPE_CREATOR_POPUP).getValue();
     TicketGeneratorController ticketGeneratorController = (TicketGeneratorController) fxmlManager.getFXML(FXMLPath.TICKET_GENERATOR_POPUP).getValue();
     TicketController ticketController = (TicketController) fxmlManager.getFXML(FXMLPath.TICKET_COMPONENT).getValue();
-    EventEditorController eventEditorController = (EventEditorController) fxmlManager.getFXML(FXMLPath.EVENT_EDITOR_POPUP).getValue();
+    ImageSelectorController imageSelectorController = (ImageSelectorController) fxmlManager.getFXML(FXMLPath.IMAGE_SELECTOR_POPUP).getValue();
     loginWindowController.setAuthenticationService(authenticationService);
 
     eventCreatorPopupController.setDatabaseService(eventManagementService);
@@ -55,6 +60,7 @@ public class Main extends Application
     ticketTypeCreatorController.setDatabaseService(ticketManagementService, eventManagementService);
     ticketGeneratorController.setDatabaseService(ticketManagementService);
     ticketController.setDatabaseService(ticketManagementService);
+    imageSelectorController.setDatabaseService(eventManagementService);
 
   }
 

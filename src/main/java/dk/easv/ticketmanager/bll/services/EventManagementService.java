@@ -5,6 +5,7 @@ import dk.easv.ticketmanager.be.TicketType;
 import dk.easv.ticketmanager.gui.models.EventModel;
 import dk.easv.ticketmanager.gui.models.UserModel;
 import javafx.collections.ObservableSet;
+import javafx.scene.image.Image;
 
 import java.util.Collection;
 import java.util.HashSet;
@@ -18,4 +19,6 @@ public interface EventManagementService
   void addEvent(Event event);
   boolean addTicketTypeForEventByID(TicketType ticketType, long id);
   void updateEvent(EventModel eventModel);
+  List<Image> getAllImages();
+  public void addEventImage(Image image);
 }

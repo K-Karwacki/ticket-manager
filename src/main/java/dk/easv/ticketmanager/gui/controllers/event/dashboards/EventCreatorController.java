@@ -6,6 +6,7 @@ import dk.easv.ticketmanager.be.Location;
 import dk.easv.ticketmanager.bll.services.interfaces.EventManagementService;
 import dk.easv.ticketmanager.gui.FXMLManager;
 import dk.easv.ticketmanager.gui.ViewManager;
+import dk.easv.ticketmanager.utils.ImageConverter;
 import javafx.fxml.FXML;
 import javafx.scene.Parent;
 import javafx.scene.control.DatePicker;
@@ -15,6 +16,8 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.stage.Stage;
 import javafx.util.Pair;
+
+import java.io.IOException;
 import java.util.Objects;
 
 import static dk.easv.ticketmanager.gui.FXMLPath.EVENTS_DASHBOARD;
@@ -22,7 +25,7 @@ import static dk.easv.ticketmanager.gui.FXMLPath.IMAGE_SELECTOR_POPUP;
 
 public class EventCreatorController {
     private Event event = new Event();
-    private String imagePath;
+    private Image image;
     private EventManagementService eventManagementService;
 
     @FXML
@@ -44,7 +47,7 @@ public class EventCreatorController {
     @FXML
     private TextField txtFieldEventPostalCode;
 
-    @FXML private void addEvent(){
+    @FXML private void addEvent() throws IOException {
         setEventData();
         Stage stage = (Stage) txtFieldEventName.getScene().getWindow();
         stage.close();
@@ -53,7 +56,7 @@ public class EventCreatorController {
         p.getValue().loadEventCards();
     }
 
-    private void setEventData(){
+    private void setEventData() throws IOException {
         Location location = new Location();
         location.setName(txtFieldEventLocationName.getText());
         location.setCity(txtFieldEventCity.getText());
@@ -62,7 +65,7 @@ public class EventCreatorController {
 
 
         event.setLocation(location);
-        event.setImagePath(imagePath);
+        event.setImageData(ImageConverter.convertToByteArray(image));
         event.setName(txtFieldEventName.getText());
         event.setDescription(txtAreaEventDescription.getText());
         event.setDate(datePickerEventDate.getValue());
@@ -75,9 +78,9 @@ public class EventCreatorController {
         ViewManager.INSTANCE.showPopup(IMAGE_SELECTOR_POPUP, "Image Selector");
     }
 
-    public void setImage(String imagePath) {
-        this.imagePath = imagePath;
-        imageViewSelectedImage.setImage(new Image(Objects.requireNonNull(getClass().getResource(imagePath)).toExternalForm()));
+    public void setImage(Image image) {
+        this.image = image;
+        imageViewSelectedImage.setImage(image);
     }
     public void setDatabaseService(EventManagementService eventManagementService) {
         this.eventManagementService = eventManagementService;

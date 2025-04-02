@@ -1,10 +1,12 @@
 package dk.easv.ticketmanager.gui.models;
 
 import dk.easv.ticketmanager.be.Event;
+import dk.easv.ticketmanager.utils.ImageConverter;
 import javafx.beans.property.SimpleObjectProperty;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.scene.image.Image;
 
+import java.io.IOException;
 import java.time.LocalDate;
 
 public class EventModel
@@ -17,13 +19,13 @@ public class EventModel
   private final SimpleObjectProperty<Image> image = new SimpleObjectProperty<>();
   private LocationModel location;
 
-  public EventModel(Event event){
+  public EventModel(Event event) throws IOException {
     this.ID = event.getID();
     this.name.set(event.getName());
     this.description.set(event.getDescription());
     this.time.set(event.getTime());
     this.date.set(String.valueOf(event.getDate()));
-    this.image.set(new Image(event.getImagePath()));
+    this.image.set(ImageConverter.convertToImage(event.getImageData()));
     this.location = new LocationModel(event.getLocation());
   }
 
@@ -43,8 +45,8 @@ public class EventModel
   public void setDate(LocalDate date){
     this.date.set(String.valueOf(date));
   }
-  public void setImage(String imagePath){
-    this.image.set(new Image(imagePath));
+  public void setImage(byte[] imageData) throws IOException {
+    this.image.set(ImageConverter.convertToImage(imageData));
   }
 
   public SimpleStringProperty nameProperty(){

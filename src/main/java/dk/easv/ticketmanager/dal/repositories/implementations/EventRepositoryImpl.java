@@ -1,13 +1,17 @@
 package dk.easv.ticketmanager.dal.repositories.implementations;
 
 import dk.easv.ticketmanager.be.Event;
+import dk.easv.ticketmanager.be.EventImage;
 import dk.easv.ticketmanager.be.Location;
 import dk.easv.ticketmanager.be.User;
 import dk.easv.ticketmanager.dal.repositories.EventRepository;
+import dk.easv.ticketmanager.utils.ImageConverter;
 import dk.easv.ticketmanager.utils.JPAUtil;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.EntityTransaction;
+import javafx.scene.image.Image;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -140,5 +144,35 @@ public class EventRepositoryImpl implements EventRepository
     cachedEvents.clear();
     cachedEvents.addAll(getAll());
     }
+    public List<Image> getAllImages(){
+    EntityManager em = JPAUtil.getEntityManager();
+    EntityTransaction tx = em.getTransaction();
+    tx.begin();
+    List<EventImage> eventDataList = em.createQuery("select e from EventImage e", EventImage.class).getResultList();
+    return eventDataList.stream().map(eventImage -> {
+        try {
+            return ImageConverter.convertToImage(eventImage.getImageData());
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+    }).toList();
+    }
+
+  @Override
+  public boolean addEventImage(EventImage eventImage) throws IOException {
+    try (EntityManager em = JPAUtil.getEntityManager())
+    {
+      em.getTransaction().begin();
+      em.persist(eventImage);
+      em.getTransaction().commit();
+      return true;
+    }
+    catch (Exception e)
+    {
+      e.printStackTrace();
+    }
+    return false;
   }
+
+}
 

@@ -102,6 +102,6 @@ public class EventDetailsController implements Initializable {
 
     @FXML
     private void onClickEdit(ActionEvent actionEvent) {}
-    EventEditorController eventEditorController = viewManager.showPopup(EVENT_EDITOR_POPUP, "Event editor");
+//    EventEditorController eventEditorController = viewManager.showPopup(EVENT_EDITOR_POPUP, "Event editor");
 //    eventEditorController.dd
 }

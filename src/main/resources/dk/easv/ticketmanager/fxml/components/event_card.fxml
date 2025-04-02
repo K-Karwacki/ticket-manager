@@ -57,7 +57,7 @@
             <Insets left="35.0" />
          </HBox.margin>
       </ImageView>
-      <Label fx:id="eventLocationLbl" alignment="CENTER" prefHeight="68.0" prefWidth="199.0" text="123 Main Street, Anytown, USA, 12345, mock data, mock data, mock data " wrapText="true" HBox.hgrow="NEVER">
+      <Label fx:id="eventLocationLbl" alignment="CENTER" prefHeight="68.0" prefWidth="199.0" text="123 Main Street, Anytown, USA, 12345, mock imageData, mock imageData, mock imageData " wrapText="true" HBox.hgrow="NEVER">
          <HBox.margin>
             <Insets left="5.0" right="20.0" />
          </HBox.margin></Label>
