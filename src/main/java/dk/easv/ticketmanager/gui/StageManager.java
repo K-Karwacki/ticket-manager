@@ -44,6 +44,7 @@ public class StageManager
       stage.setResizable(stageSettings.isResizable);
       stage.setScene(new Scene(root));
       stage.setTitle(title);
+      stage.initModality(Modality.NONE);
 
       if (isModal) {
         stage.initModality(Modality.APPLICATION_MODAL);
@@ -91,35 +92,54 @@ public class StageManager
       stage.close();
     }
   }
-  public <T> T showPopup(String fxmlFile, String title) {
-    try {
-      Pair<Parent, ?> fxmlData = fxmlManager.getFXML(fxmlFile);
-      Parent root = fxmlData.getKey();
-      T controller = (T) fxmlData.getValue();
 
-      Stage popupStage = stageCache.get(fxmlFile);
-      if (popupStage == null) {
-        popupStage = new Stage();
-        popupStage.setScene(new Scene(root));
-        popupStage.setTitle(title);
-
-        popupStage.initModality(Modality.APPLICATION_MODAL);
-
-        stageCache.put(fxmlFile, popupStage);
-      }
-
-      if (popupStage.getOwner() != null) {
-        popupStage.centerOnScreen();
-      }
-
-      popupStage.show();
-
-      return controller;
-    } catch (Exception e) {
-      e.printStackTrace();
-      return null;
+  public void showPopup(String fxmlFile, String title){
+    if(stageCache.get(fxmlFile)==null){
+      loadStage(fxmlFile, title, false);
+    }
+    try{
+      getStage(fxmlFile).show();
+    }catch (ViewException e){
+      System.out.println(e.getMessage());
     }
   }
+
+  public void hidePopup(String fxml){
+    try{
+      getStage(fxml).hide();
+    }catch (Exception e){
+      e.printStackTrace();
+    }
+  }
+//  public <T> T showPopup(String fxmlFile, String title) {
+//    try {
+//      Pair<Parent, ?> fxmlData = fxmlManager.getFXML(fxmlFile);
+//      Parent root = fxmlData.getKey();
+//      T controller = (T) fxmlData.getValue();
+//
+//      Stage popupStage = stageCache.get(fxmlFile);
+//      if (popupStage == null) {
+//        popupStage = new Stage();
+//        popupStage.setScene(new Scene(root));
+//        popupStage.setTitle(title);
+//
+//        popupStage.initModality(Modality.APPLICATION_MODAL);
+//
+//        stageCache.put(fxmlFile, popupStage);
+//      }
+//
+//      if (popupStage.getOwner() != null) {
+//        popupStage.centerOnScreen();
+//      }
+//
+//      popupStage.show();
+//
+//      return controller;
+//    } catch (Exception e) {
+//      e.printStackTrace();
+//      return null;
+//    }
+//  }
 
   public SceneManager getSceneManager()
   {

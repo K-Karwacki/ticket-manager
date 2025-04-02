@@ -1,37 +1,56 @@
 package dk.easv.ticketmanager.gui.models;
 
 import dk.easv.ticketmanager.be.Event;
+import dk.easv.ticketmanager.be.EventImage;
 import dk.easv.ticketmanager.utils.ImageConverter;
+import javafx.beans.property.SimpleLongProperty;
 import javafx.beans.property.SimpleObjectProperty;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.scene.image.Image;
+import javafx.scene.paint.ImagePattern;
 
 import java.io.IOException;
 import java.time.LocalDate;
+import java.time.LocalTime;
+import java.util.Objects;
 
 public class EventModel
 {
-  private final long ID;
+  private final SimpleLongProperty ID = new SimpleLongProperty();
   private final SimpleStringProperty name = new SimpleStringProperty();
   private final SimpleStringProperty description = new SimpleStringProperty();
-  private final SimpleStringProperty time = new SimpleStringProperty();
-  private final SimpleStringProperty date = new SimpleStringProperty();
-  private final SimpleObjectProperty<Image> image = new SimpleObjectProperty<>();
-  private LocationModel location;
+  private final SimpleObjectProperty<LocalTime> time = new SimpleObjectProperty<>(  );
+  private final SimpleObjectProperty<LocalDate> date = new SimpleObjectProperty<>();
+  private final SimpleObjectProperty<ImagePattern> image = new SimpleObjectProperty<>();
+  private final SimpleObjectProperty<LocationModel> location = new SimpleObjectProperty<>();
+  private final SimpleObjectProperty<EventImage> eventImage = new SimpleObjectProperty<>();
 
-  public EventModel(Event event) throws IOException {
-    this.ID = event.getID();
+
+  public EventModel(){
+    this.ID.set(-1);
+    this.name.set(null);
+    this.description.set(null);
+    this.time.set(null);
+    this.date.set(null);
+    this.image.set(null);
+    this.location.set(new LocationModel());
+  }
+
+  public EventModel(Event event){
+    this.ID.set(event.getID());
     this.name.set(event.getName());
     this.description.set(event.getDescription());
     this.time.set(event.getTime());
-    this.date.set(String.valueOf(event.getDate()));
-    this.image.set(ImageConverter.convertToImage(event.getImageData()));
-    this.location = new LocationModel(event.getLocation());
+    this.date.set(event.getDate());
+    this.eventImage.set(event.getEventImage());
+    this.image.set(new ImagePattern(ImageConverter.convertToImage(event.getEventImage().getImageData())));
+    this.location.set(new LocationModel(event.getLocation()));
+//    this.eventImage.set(event.getEventImage());
   }
 
   public long getID()
   {
-    return this.ID;
+    return this.ID.get();
   }
   public void setName(String name){
     this.name.set(name);
@@ -39,15 +58,16 @@ public class EventModel
   public void setDescription(String description){
     this.description.set(description);
   }
-  public void setTime(String time){
+  public void setTime(LocalTime time){
     this.time.set(time);
   }
   public void setDate(LocalDate date){
-    this.date.set(String.valueOf(date));
+    this.date.set(date);
   }
-  public void setImage(byte[] imageData) throws IOException {
-    this.image.set(ImageConverter.convertToImage(imageData));
-  }
+
+//  public void setImage(Image image) {
+//    this.image.set(image);
+//  }
 
   public SimpleStringProperty nameProperty(){
     return this.name;
@@ -55,25 +75,45 @@ public class EventModel
   public SimpleStringProperty descriptionProperty(){
     return this.description;
   }
-  public SimpleStringProperty timeProperty(){
+  public SimpleObjectProperty<LocalTime> timeProperty(){
     return this.time;
   }
-  public SimpleStringProperty dateProperty(){
+  public SimpleObjectProperty<LocalDate> dateProperty(){
     return this.date;
   }
-  public SimpleObjectProperty<Image> imageProperty(){
+  public SimpleObjectProperty<ImagePattern> imageProperty(){
     return this.image;
   }
   public void setLocation(LocationModel location){
-    this.location = location;
+    this.location.set(location);
   }
 
   public LocationModel getLocation() {
+    return location.get();
+  }
+
+  public SimpleObjectProperty<LocationModel> locationProperty()
+  {
     return location;
   }
 
-  public SimpleObjectProperty<Image> getImage() {
-    return image;
+  public EventImage getEventImage()
+  {
+    return eventImage.get();
+  }
+
+  public void setEventImage(EventImage eventImage) {
+    this.eventImage.set(eventImage);
+  }
+
+  //  public EventImage getEventImage() {
+//    return image.get();
+//  }
+
+  public ImagePattern getImage(){return image.get();}
+
+  public void setImage(Image image){
+    this.image.set(new ImagePattern(image));
   }
 
 }

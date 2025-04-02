@@ -2,6 +2,8 @@ package dk.easv.ticketmanager.bll.services.implementations;
 
 import dk.easv.ticketmanager.be.Event;
 import dk.easv.ticketmanager.be.EventImage;
+import dk.easv.ticketmanager.be.Location;
+import dk.easv.ticketmanager.be.User;
 import dk.easv.ticketmanager.bll.services.interfaces.AuthorizationService;
 import dk.easv.ticketmanager.bll.services.interfaces.EventManagementService;
 import dk.easv.ticketmanager.bll.services.factories.RepositoryService;
@@ -9,27 +11,49 @@ import dk.easv.ticketmanager.dal.repositories.EventRepository;
 import dk.easv.ticketmanager.gui.models.EventListModel;
 import dk.easv.ticketmanager.gui.models.EventModel;
 import dk.easv.ticketmanager.utils.ImageConverter;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
+import javafx.collections.ObservableSet;
 import javafx.scene.image.Image;
 
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-import java.util.Optional;
+import java.util.*;
+import java.util.stream.Collectors;
 
 public class EventManagementServiceImpl implements EventManagementService {
     private final RepositoryService repositoryService;
+    private final EventRepository eventRepository;
 
-    private final EventListModel eventListModel = new EventListModel();
+    private final EventListModel eventListModel;
+
 
     public EventManagementServiceImpl(){
         repositoryService = null;
+        eventRepository = null;
+        eventListModel = null;
     }
 
-    public EventManagementServiceImpl(RepositoryService repositoryService, AuthorizationService authorizationService) throws IOException {
+    public EventManagementServiceImpl(RepositoryService repositoryService, AuthorizationService authorizationService) {
         this.repositoryService = repositoryService;
+        this.eventRepository = this.repositoryService.getRepository(EventRepository.class);
+        eventListModel = new EventListModel();
 
-        setEventListModel();
+        initialize();
+    }
+
+    private void initialize(){
+        if(eventListModel == null || eventRepository == null || repositoryService == null){
+            throw new RuntimeException("Load dependencies for EventManagementService");
+        }
+        Collection<Event> events = eventRepository.getAll();
+        for (Event event : events)
+        {
+            EventModel eventModel = new EventModel(event);
+            eventModel.setImage(ImageConverter.convertToImage(event.getEventImage().getImageData()));
+            eventListModel.addEventModel(new EventModel(event));
+        }
+
+        eventListModel.setEventImages(eventRepository.getAllEventImages());
     }
 
     public EventListModel getEventListModel() {
@@ -37,34 +61,39 @@ public class EventManagementServiceImpl implements EventManagementService {
     }
 
     @Override
-    public boolean createNewEvent(Event event) throws IOException {
-        Event newEvent = repositoryService.getRepository(EventRepository.class).save(event);
-        if(newEvent == null){
+    public boolean createNewEvent(EventModel eventModel) {
+        Event newEvent = new Event();
+        newEvent.setLocation(new Location(eventModel.getLocation().getName(), eventModel.getLocation().getAddress(), eventModel.getLocation().getCity(), eventModel.getLocation().getPost_code()));
+        EventImage eventImage = eventRepository.getEventImageByID(eventModel.getEventImage().getId());
+        newEvent.setEventImage(eventImage);
+        newEvent.setName(eventModel.nameProperty().get());
+        newEvent.setTime(eventModel.timeProperty().get());
+        newEvent.setDate(eventModel.dateProperty().get());
+        newEvent.setDescription(eventModel.descriptionProperty().get());
+
+        Event saved = eventRepository.save(newEvent);
+        if(saved == null){
             throw new RuntimeException("Error creating new event");
         }
-        eventListModel.getEvents().add(new EventModel(newEvent));
+        EventModel savedModel = new EventModel(saved);
+
+        eventListModel.addEventModel(savedModel);
         return true;
     }
 
-    @Override
-    public boolean updateEvent(Event event) {
-        return false;
-    }
-
-
-    @Override
-    public boolean updateEvent(EventModel event) {
+    @Override public boolean updateEvent(EventModel eventModel)
+    {
         return false;
     }
 
     @Override
-    public boolean deleteEvent(Event event) {
+    public boolean deleteEvent(EventModel event) {
         return false;
     }
 
     @Override
-    public void setEventListModel() throws IOException {
-        List<Event> events = repositoryService.getRepository(EventRepository.class).getAll().stream().toList();
+    public void setEventListModel() {
+        List<Event> events = eventRepository.getAll().stream().toList();
         List<EventModel> list = new ArrayList<>();
         for (Event event : events) {
             EventModel eventModel = new EventModel(event);
@@ -81,13 +110,26 @@ public class EventManagementServiceImpl implements EventManagementService {
 
     @Override
     public List<Image> getAllImages(){
-        return repositoryService.getRepository(EventRepository.class).getAllImages();
+        List<Image> imageList = new ArrayList<>();
+        for (EventImage eventImage : eventListModel.getEventImagesObservable())
+        {
+            System.out.println(eventImage);
+            imageList.add(ImageConverter.convertToImage(eventImage.getImageData()));
+        }
+        return imageList;
     }
+
     @Override
-    public void addEventImage(Image image) throws IOException {
+    public boolean uploadEventImage(Image image, boolean saveToDB) throws IOException {
         EventImage eventImage = new EventImage();
         eventImage.setImageData(ImageConverter.convertToByteArray(image));
-        repositoryService.getRepository(EventRepository.class).addEventImage(eventImage);
+        EventImage saved = eventRepository.saveEventImage(eventImage);
+        if(saved != null){
+            eventListModel.getEventImagesObservable().add(eventImage);
+            return true;
+        }
+        return false;
     }
+
 
 }

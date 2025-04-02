@@ -2,9 +2,7 @@ package dk.easv.ticketmanager.utils;
 
 import javafx.scene.Node;
 import javafx.scene.Parent;
-import javafx.scene.control.ComboBox;
-import javafx.scene.control.DatePicker;
-import javafx.scene.control.TextInputControl;
+import javafx.scene.control.*;
 
 import javax.naming.ldap.Control;
 import java.util.regex.Pattern;
@@ -51,5 +49,27 @@ public class FieldValidator {
   public static boolean isValidTime(String time) {
     String timeRegex = "^([01]\\d|2[0-3]):[0-5]\\d$";
     return Pattern.matches(timeRegex, time);
+  }
+
+  public static void clearFields(Parent parent) {
+    for (Node node : parent.getChildrenUnmodifiable()) {
+      if (node instanceof TextField) {
+        ((TextField) node).clear();
+      } else if (node instanceof TextArea) {
+        ((TextArea) node).clear();
+      } else if (node instanceof ComboBox<?>) {
+        ((ComboBox<?>) node).getSelectionModel().clearSelection();
+        ((ComboBox<?>) node).setValue(null);
+      } else if (node instanceof CheckBox) {
+        ((CheckBox) node).setSelected(false);
+      } else if (node instanceof RadioButton) {
+        ((RadioButton) node).setSelected(false);
+      } else if (node instanceof DatePicker) {
+        ((DatePicker) node).setValue(null);
+      } else if (node instanceof Parent) {
+        // Recursively clear fields in child containers
+        clearFields((Parent) node);
+      }
+    }
   }
 }

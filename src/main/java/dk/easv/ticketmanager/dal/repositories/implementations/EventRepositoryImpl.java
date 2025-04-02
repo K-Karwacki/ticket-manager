@@ -9,6 +9,7 @@ import dk.easv.ticketmanager.utils.ImageConverter;
 import dk.easv.ticketmanager.utils.JPAUtil;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.EntityTransaction;
+import jakarta.persistence.TypedQuery;
 import javafx.scene.image.Image;
 
 import java.io.IOException;
@@ -139,39 +140,42 @@ public class EventRepositoryImpl implements EventRepository
     } catch (Exception e) {
       e.printStackTrace();
     }
-    }
-    public void loadEventsToCache(){
-    cachedEvents.clear();
-    cachedEvents.addAll(getAll());
-    }
-    public List<Image> getAllImages(){
-    EntityManager em = JPAUtil.getEntityManager();
-    EntityTransaction tx = em.getTransaction();
-    tx.begin();
-    List<EventImage> eventDataList = em.createQuery("select e from EventImage e", EventImage.class).getResultList();
-    return eventDataList.stream().map(eventImage -> {
-        try {
-            return ImageConverter.convertToImage(eventImage.getImageData());
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }
-    }).toList();
+  }
+
+
+  public List<EventImage> getAllEventImages(){
+      try(EntityManager em = JPAUtil.getEntityManager()){
+        EntityTransaction tx = em.getTransaction();
+        tx.begin();
+        return em.createQuery("select e from EventImage e", EventImage.class).getResultList();
+      }
     }
 
   @Override
-  public boolean addEventImage(EventImage eventImage) throws IOException {
+  public EventImage saveEventImage(EventImage eventImage) {
     try (EntityManager em = JPAUtil.getEntityManager())
     {
       em.getTransaction().begin();
-      em.persist(eventImage);
-      em.getTransaction().commit();
-      return true;
+      EventImage e = em.merge(eventImage);
+      if(e != null){
+       em.getTransaction().commit();
+        return e;
+      }
+
     }
     catch (Exception e)
     {
       e.printStackTrace();
     }
-    return false;
+    return null;
+  }
+
+  @Override public EventImage getEventImageByID(Long eventImageID)
+  {
+    try(EntityManager em = JPAUtil.getEntityManager()) {
+      Optional<EventImage> eventImageOptional = em.createQuery("Select i from EventImage i where id = :imageId", EventImage.class).setParameter("imageId", eventImageID).getResultList().stream().findAny();
+      return eventImageOptional.orElse(null);
+    }
   }
 
 }

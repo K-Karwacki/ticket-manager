@@ -5,6 +5,9 @@ import dk.easv.ticketmanager.gui.FXMLManager;
 import dk.easv.ticketmanager.gui.ViewManager;
 import dk.easv.ticketmanager.gui.controllers.event.components.EventCardController;
 import dk.easv.ticketmanager.gui.models.EventModel;
+import javafx.beans.InvalidationListener;
+import javafx.collections.ListChangeListener;
+import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.Parent;
 import javafx.scene.control.ComboBox;
@@ -22,6 +25,7 @@ public class EventHomeController
 {
   private final FXMLManager fxmlManager = FXMLManager.INSTANCE;
   private final ViewManager viewManager = ViewManager.INSTANCE;
+  private ObservableList<EventModel> eventModelObservableList;
   private EventManagementService eventManagementService;
 
   @FXML
@@ -35,6 +39,29 @@ public class EventHomeController
   public EventHomeController() {
 
   }
+
+
+  public void setServices(EventManagementService eventManagementService) {
+    this.eventManagementService = eventManagementService;
+    eventModelObservableList = eventManagementService.getEventListModel()
+        .getEventsObservable();
+
+    eventModelObservableList.addListener((ListChangeListener<EventModel>) change ->{
+      while (change.next()){
+        if(change.wasAdded()){
+          loadEventCards();
+        }
+      }
+    });
+
+    loadEventCards();
+  }
+
+  @FXML
+  private void initialize(){
+//    loadEventCards();
+  }
+
   @FXML private void openEventCreator(){
     viewManager.switchDashboard(EVENT_CREATOR_POPUP, "Create Event");
   }
@@ -44,7 +71,7 @@ public class EventHomeController
   public void loadEventCards() {
     eventListRoot.getChildren().removeAll();
     eventListRoot.getChildren().clear();
-    List<EventModel> events = eventManagementService.getEventListModel().getEvents();
+    List<EventModel> events = eventManagementService.getEventListModel().getEventsObservable();
     events.forEach(event -> {
       Pair<Parent, EventCardController> p = fxmlManager.loadFXML(EVENT_CARD_COMPONENT);
       p.getValue().setEventModel(event);
@@ -56,8 +83,5 @@ public class EventHomeController
     }
   }
 
-  public void setServices(EventManagementService eventManagementService) {
-    this.eventManagementService = eventManagementService;
-    loadEventCards();
-  }
+
 }

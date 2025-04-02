@@ -9,8 +9,15 @@ public class EventImage {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long ID;
 
-    @Column (name = "image_data")
+    @Lob // Use @Lob for large binary data
+    @Column(name = "image_data", columnDefinition = "VARBINARY(MAX)")
     private byte[] imageData;
+
+    public EventImage(){}
+
+    public EventImage(byte[] imageData){
+        this.imageData = imageData;
+    }
 
     public void setId(Long ID) {
         this.ID = ID;

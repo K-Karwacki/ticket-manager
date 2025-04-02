@@ -80,7 +80,8 @@ public class TicketGeneratorController {
     }
 
     public void loadTicketOptions(Image image){
-        TicketOptionsController ticketOptionsController = ViewManager.INSTANCE.showPopup(TICKET_OPTIONS_POPUP, "Ticket Options");
+        ViewManager.INSTANCE.showPopup(TICKET_OPTIONS_POPUP, "Ticket Options");
+        TicketOptionsController ticketOptionsController = (TicketOptionsController) fxmlManager.getFXML(TICKET_OPTIONS_POPUP).getValue();
         ticketOptionsController.setTicketImage(image);
         ticketOptionsController.setTicket(ticket);
     }

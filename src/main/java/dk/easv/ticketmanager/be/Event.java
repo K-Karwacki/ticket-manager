@@ -6,6 +6,7 @@ import jakarta.persistence.*;
 
 import java.io.IOException;
 import java.time.LocalDate;
+import java.time.LocalTime;
 import java.util.Set;
 
 @Entity
@@ -21,14 +22,18 @@ public class Event {
   @Column(name = "description")
   private String description;
 
-  @Column (name = "image_data")
-  private byte[] imageData;
+  @ManyToOne(cascade = CascadeType.ALL)
+  @JoinColumn(name = "event_image_id")
+  private EventImage eventImage;
+
+//  @Column (name = "image_data")
+//  private byte[] imageData;
 
   @Column(name = "date")
   private LocalDate date;
 
   @Column(name = "time")
-  private String time;
+  private LocalTime time;
 
   @OneToOne(cascade = CascadeType.ALL)
   @JoinColumn(name = "location_id")
@@ -40,13 +45,13 @@ public class Event {
 
   public Event(){};
 
-  public Event(EventModel eventModel) throws IOException {
+  public Event(EventModel eventModel) {
     setID(eventModel.getID());
     setName(eventModel.nameProperty().get());
-    setDate(LocalDate.parse(eventModel.dateProperty().get()));
+    setDate(eventModel.dateProperty().get());
     setDescription(eventModel.descriptionProperty().get());
     setTime(eventModel.timeProperty().get());
-    setImageData(ImageConverter.convertToByteArray(eventModel.getImage().get()));
+//    setEventImage(eventModel.getEventImage());
 
   }
 
@@ -78,14 +83,10 @@ public class Event {
     this.description = description;
   }
 
-  public byte[] getImageData()
-  {
-    return imageData;
-  }
 
-  public void setImageData(byte[] imageData)
+  public void setEventImage(EventImage eventImage)
   {
-    this.imageData = imageData;
+    this.eventImage = eventImage;
   }
 
   public LocalDate getDate()
@@ -98,12 +99,12 @@ public class Event {
     this.date = date;
   }
 
-  public String getTime()
+  public LocalTime getTime()
   {
     return time;
   }
 
-  public void setTime(String time)
+  public void setTime(LocalTime time)
   {
     this.time = time;
   }
@@ -138,4 +139,8 @@ public class Event {
     coordinators.remove(user);
   }
 
+  public EventImage getEventImage()
+  {
+    return eventImage;
+  }
 }

@@ -1,6 +1,7 @@
 package dk.easv.ticketmanager.gui.models;
 
 import dk.easv.ticketmanager.be.Location;
+import javafx.beans.property.SimpleLongProperty;
 import javafx.beans.property.SimpleStringProperty;
 
 public class LocationModel {
@@ -24,9 +25,9 @@ public class LocationModel {
         address.set(location.getAddress());
         city.set(location.getCity());
         post_code.set(location.getPostCode());
-
     }
     public long getID(){return ID.get();}
+
     public String getName() {
         return name.get();
     }

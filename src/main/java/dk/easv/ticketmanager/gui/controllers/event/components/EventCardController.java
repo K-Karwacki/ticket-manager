@@ -13,6 +13,7 @@ import javafx.scene.paint.ImagePattern;
 import javafx.scene.shape.Rectangle;
 import javafx.util.Pair;
 
+import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 
 public class EventCardController
@@ -60,7 +61,7 @@ public class EventCardController
 
     eventTimeLbl.textProperty().bind(
         Bindings.createStringBinding(() ->
-            eventModel.dateProperty().get().format(DateTimeFormatter.ISO_LOCAL_TIME), eventModel.timeProperty())
+            eventModel.timeProperty().get().format(DateTimeFormatter.ISO_LOCAL_TIME), eventModel.timeProperty())
     );
 
 
@@ -70,6 +71,8 @@ public class EventCardController
     );
 
     eventImageContainer.fillProperty().bind(eventModel.imageProperty());
+
+//    eventImageContainer.fillProperty().bind(eventModel.imageProperty());
 
 //    ImagePattern pattern = new ImagePattern(eventModel.getImage().get());
 //    eventImageContainer.setFill(pattern);

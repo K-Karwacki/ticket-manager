@@ -8,8 +8,7 @@ import dk.easv.ticketmanager.dal.repositories.AuthRepository;
 import dk.easv.ticketmanager.dal.repositories.UserRepository;
 import dk.easv.ticketmanager.gui.*;
 import dk.easv.ticketmanager.gui.controllers.event.dashboards.EventHomeController;
-import dk.easv.ticketmanager.gui.controllers.event.popups.EventEditorController;
-import dk.easv.ticketmanager.gui.controllers.popups.ImageSelectorController;
+import dk.easv.ticketmanager.gui.controllers.event.popups.ImageSelectorController;
 import dk.easv.ticketmanager.gui.controllers.ticket.TicketController;
 import dk.easv.ticketmanager.gui.controllers.ticket.TicketTypeCreatorController;
 import dk.easv.ticketmanager.gui.controllers.main.LoginWindowController;
@@ -21,7 +20,6 @@ import dk.easv.ticketmanager.utils.RoleType;
 import javafx.application.Application;
 import javafx.stage.Stage;
 
-import java.io.IOException;
 import java.util.Locale;
 
 public class Main extends Application
@@ -57,7 +55,7 @@ public class Main extends Application
     ticketTypeCreatorController.setServices(ticketManagementService, eventManagementService);
     ticketGeneratorController.setServices(ticketManagementService);
     ticketController.setServices(ticketManagementService);
-
+    imageSelectorController.setServices(eventManagementService);
   }
 
 

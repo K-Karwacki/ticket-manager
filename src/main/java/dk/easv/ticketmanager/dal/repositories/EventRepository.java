@@ -13,6 +13,7 @@ public interface EventRepository extends BaseRepository<Event>{
     List<Location> getAllLocations();
     void assignCoordinatorToEvent(Event event, User user);
     void dissociateEventFromCoordinator(Event event, User user);
-    List<Image> getAllImages();
-    boolean addEventImage(EventImage eventImage) throws IOException;
+    List<EventImage> getAllEventImages();
+    EventImage saveEventImage(EventImage eventImage) throws IOException;
+  EventImage getEventImageByID(Long eventImageID);
 }

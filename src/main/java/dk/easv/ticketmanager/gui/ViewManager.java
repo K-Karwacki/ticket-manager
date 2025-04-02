@@ -43,8 +43,8 @@ public enum ViewManager
       sceneManager.switchDashboard(fxml, title);
     }
   }
-  public <T> T showPopup(String fxmlFile, String title){
-      return stageManager.showPopup(fxmlFile, title);
+  public void showPopup(String fxmlFile, String title){
+    stageManager.showPopup(fxmlFile, title);
   }
 
   public void setStageRoot(BorderPane borderPane)
@@ -53,4 +53,11 @@ public enum ViewManager
       sceneManager.setStageRoot(borderPane);
     }
   }
+
+  public void hidePopup(String fxml){
+    if(stageManager != null){
+      stageManager.hidePopup(fxml);
+    }
+  }
+
 }
