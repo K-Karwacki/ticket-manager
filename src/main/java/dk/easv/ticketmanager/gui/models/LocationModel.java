@@ -1,7 +1,6 @@
 package dk.easv.ticketmanager.gui.models;
 
 import dk.easv.ticketmanager.be.Location;
-import javafx.beans.property.SimpleLongProperty;
 import javafx.beans.property.SimpleStringProperty;
 
 public class LocationModel {

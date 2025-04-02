@@ -3,6 +3,7 @@ package dk.easv.ticketmanager.gui.controllers.event.dashboards;
 import dk.easv.ticketmanager.gui.FXMLManager;
 //import dk.easv.ticketmanager.gui.models.EventDataModel;
 import dk.easv.ticketmanager.gui.ViewManager;
+import dk.easv.ticketmanager.gui.controllers.event.popups.EventEditorController;
 import dk.easv.ticketmanager.gui.controllers.ticket.TicketTypeCreatorController;
 import dk.easv.ticketmanager.gui.controllers.ticket.TicketGeneratorController;
 import dk.easv.ticketmanager.gui.models.EventModel;
@@ -102,5 +103,6 @@ public class EventDetailsController implements Initializable {
 
     @FXML
     private void onClickEdit(ActionEvent actionEvent) {}
-
+//    EventEditorController eventEditorController = viewManager.showPopup(EVENT_EDITOR_POPUP, "Event editor");
+//    eventEditorController.dd
 }

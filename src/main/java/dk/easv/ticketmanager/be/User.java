@@ -1,5 +1,6 @@
 package dk.easv.ticketmanager.be;
 
+import dk.easv.ticketmanager.utils.ImageConverter;
 import jakarta.persistence.*;
 import javafx.scene.image.Image;
 
@@ -32,8 +33,8 @@ public class User {
     @Column(name = "phone_number")
     private String phoneNumber;
 
-    @Column(name = "image_path")
-    private String imagePath;
+    @Column(name = "image_data")
+    private byte[] imageData;
 
     @ManyToMany
     @JoinTable(
@@ -109,7 +110,7 @@ public class User {
 
     public Image getUserImage() {
         try {
-            return new Image(imagePath);
+            return ImageConverter.convertToImage(imageData);
         } catch (Exception e) {
             return new Image("images/event-template.jpg"); // Fallback image
         }

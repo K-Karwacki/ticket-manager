@@ -1,8 +1,10 @@
 package dk.easv.ticketmanager.be;
 
-import dk.easv.ticketmanager.gui.models.LocationModel;
+import dk.easv.ticketmanager.gui.models.EventModel;
+import dk.easv.ticketmanager.utils.ImageConverter;
 import jakarta.persistence.*;
 
+import java.io.IOException;
 import java.time.LocalDate;
 import java.util.Set;
 
@@ -19,8 +21,8 @@ public class Event {
   @Column(name = "description")
   private String description;
 
-  @Column(name = "image_path")
-  private String imagePath;
+  @Column (name = "image_data")
+  private byte[] imageData;
 
   @Column(name = "date")
   private LocalDate date;
@@ -38,9 +40,22 @@ public class Event {
 
   public Event(){};
 
+  public Event(EventModel eventModel) throws IOException {
+    setID(eventModel.getID());
+    setName(eventModel.nameProperty().get());
+    setDate(LocalDate.parse(eventModel.dateProperty().get()));
+    setDescription(eventModel.descriptionProperty().get());
+    setTime(eventModel.timeProperty().get());
+    setImageData(ImageConverter.convertToByteArray(eventModel.getImage().get()));
+
+  }
+
   public long getID()
   {
     return ID;
+  }
+  public void setID(long ID){
+    this.ID = ID;
   }
 
   public String getName()
@@ -63,14 +78,14 @@ public class Event {
     this.description = description;
   }
 
-  public String getImagePath()
+  public byte[] getImageData()
   {
-    return imagePath;
+    return imageData;
   }
 
-  public void setImagePath(String imagePath)
+  public void setImageData(byte[] imageData)
   {
-    this.imagePath = imagePath;
+    this.imageData = imageData;
   }
 
   public LocalDate getDate()

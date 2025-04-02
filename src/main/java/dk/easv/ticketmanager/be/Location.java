@@ -68,4 +68,8 @@ public class Location
   {
     this.postCode = postCode;
   }
+
+  public String getLocationName() {
+    return name;
+  }
 }
