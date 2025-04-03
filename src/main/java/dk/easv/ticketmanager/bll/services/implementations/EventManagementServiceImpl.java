@@ -115,21 +115,11 @@ public class EventManagementServiceImpl implements EventManagementService {
     @Override
     public boolean deleteEvent(EventModel eventModel) {
         try {
-            if (eventModel == null || eventModel.getID() <= 0) {
-                return false;
-            }
-            Optional<Event> eventOptional = eventRepository.getById(eventModel.getID());
-            if (!eventOptional.isPresent()) {
-                return false;
-            }
-            // Delete using the event ID
-            boolean deleted = eventRepository.deleteById(eventOptional.get().getID());
-            if (!deleted) {
-                return false;
-            }
-            // Remove the event model from the event list based on ID
-            eventListModel.getEventsObservable().removeIf(model -> model.getID() == eventModel.getID());
-            return true;
+            Event event = new Event();
+          EventModel savedModel = new EventModel(event);
+          eventRepository.deleteById(event.getID());
+          eventListModel.deleteEventModel(savedModel);
+          return true;
         } catch (Exception e) {
             e.printStackTrace();
             return false;

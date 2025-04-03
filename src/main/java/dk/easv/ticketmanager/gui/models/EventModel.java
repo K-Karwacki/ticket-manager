@@ -14,8 +14,7 @@ import java.time.LocalDate;
 import java.time.LocalTime;
 import java.util.Objects;
 
-public class EventModel
-{
+public class EventModel {
   private final SimpleLongProperty ID = new SimpleLongProperty();
   private final SimpleStringProperty name = new SimpleStringProperty();
   private final SimpleStringProperty description = new SimpleStringProperty();

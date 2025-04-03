@@ -3,6 +3,7 @@ package dk.easv.ticketmanager.gui.controllers.event.dashboards;
 import dk.easv.ticketmanager.bll.services.implementations.EventManagementServiceImpl;
 import dk.easv.ticketmanager.bll.services.interfaces.EventManagementService;
 import dk.easv.ticketmanager.bll.services.interfaces.TicketManagementService;
+import dk.easv.ticketmanager.dal.repositories.EventRepository;
 import dk.easv.ticketmanager.gui.FXMLManager;
 //import dk.easv.ticketmanager.gui.models.EventDataModel;
 import dk.easv.ticketmanager.gui.ViewManager;
@@ -32,6 +33,7 @@ public class EventDetailsController implements Initializable {
     private final ViewManager viewManager = ViewManager.INSTANCE;
 //    private final EventDataModel eventDataModel = new EventDataModel();
     private EventModel eventModel;
+    private EventRepository eventRepository;
     private EventManagementService eventManagementService;
 
     @FXML
@@ -121,7 +123,15 @@ public class EventDetailsController implements Initializable {
         confirm.setHeaderText("Delete Event");
         confirm.setContentText("Are you sure you want to delete " + eventModel.getName() + "?");
         confirm.showAndWait();
+            if(confirm.getResult() == ButtonType.OK){
+        try {
+            eventManagementService.deleteEvent(eventModel);
+        } catch (Exception e) {
+            e.printStackTrace();
+            }
+        }
     }
+
 
     @FXML
     private void onClickEdit() {
