@@ -7,10 +7,7 @@ import dk.easv.ticketmanager.gui.ViewManager;
 import dk.easv.ticketmanager.gui.models.UserSession;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.scene.control.CheckBox;
-import javafx.scene.control.Label;
-import javafx.scene.control.PasswordField;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 
 import java.io.IOException;
 
@@ -81,12 +78,17 @@ public class LoginWindowController
   }
 
   private void goToMainPage(ActionEvent event) throws IOException {
-
-    viewManager.showStage(FXMLPath.MAIN, "Main stage", true);
-
-
+      viewManager.showStage(FXMLPath.MAIN, "Main stage", true);
   }
 
+  @FXML
+  private void onClickForgotPassword() {
+      Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+      alert.setTitle("Forgot Password");
+      alert.setHeaderText(null);
+      alert.setContentText("Please contact on of our administrators");
+      alert.showAndWait();
+  }
 
   private void togglePasswordVisibility() {
     if (showPasswordCheckBox.isSelected()) {
