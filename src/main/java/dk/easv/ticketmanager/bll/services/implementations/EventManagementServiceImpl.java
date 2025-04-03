@@ -32,6 +32,7 @@ public class EventManagementServiceImpl implements EventManagementService {
     public EventManagementServiceImpl(RepositoryService repositoryService, AuthorizationService authorizationService) {
         this.repositoryService = repositoryService;
         this.eventRepository = this.repositoryService.getRepository(EventRepository.class);
+
         eventListModel = new EventListModel();
 
         initialize();
@@ -71,7 +72,6 @@ public class EventManagementServiceImpl implements EventManagementService {
             throw new RuntimeException("Error creating new event");
         }
         EventModel savedModel = new EventModel(saved);
-
         eventListModel.addEventModel(savedModel);
         return true;
     }
@@ -80,7 +80,7 @@ public class EventManagementServiceImpl implements EventManagementService {
     public boolean updateEvent(EventModel eventModel) {
         try {
             Optional<Event> existingEvent = eventRepository.getById(eventModel.getID());
-            if (!existingEvent.isPresent()) {
+            if (existingEvent.isEmpty()) {
                 return false;
             }
             Event eventToUpdate = existingEvent.get();
@@ -92,8 +92,7 @@ public class EventManagementServiceImpl implements EventManagementService {
 
             Location location = eventToUpdate.getLocation();
             if (location == null) {
-                location = new Location();
-                eventToUpdate.setLocation(location);
+                return false;
             }
             location.setName(eventModel.getLocation().getName());
             location.setAddress(eventModel.getLocation().getAddress());
@@ -115,10 +114,8 @@ public class EventManagementServiceImpl implements EventManagementService {
     @Override
     public boolean deleteEvent(EventModel eventModel) {
         try {
-            Event event = new Event();
-          EventModel savedModel = new EventModel(event);
-          eventRepository.deleteById(event.getID());
-          eventListModel.deleteEventModel(savedModel);
+          eventRepository.deleteById(eventModel.getID());
+          eventListModel.deleteEventModel(eventModel);
           return true;
         } catch (Exception e) {
             e.printStackTrace();

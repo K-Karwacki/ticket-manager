@@ -2,17 +2,21 @@ package dk.easv.ticketmanager.gui.models;
 
 import dk.easv.ticketmanager.be.Event;
 import dk.easv.ticketmanager.be.EventImage;
+import dk.easv.ticketmanager.be.User;
 import dk.easv.ticketmanager.utils.ImageConverter;
-import javafx.beans.property.SimpleLongProperty;
-import javafx.beans.property.SimpleObjectProperty;
-import javafx.beans.property.SimpleStringProperty;
+import javafx.beans.property.*;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
+import javafx.collections.ObservableSet;
 import javafx.scene.image.Image;
 import javafx.scene.paint.ImagePattern;
 
 import java.io.IOException;
 import java.time.LocalDate;
 import java.time.LocalTime;
+import java.util.Collection;
 import java.util.Objects;
+import java.util.stream.Collectors;
 
 public class EventModel {
   private final SimpleLongProperty ID = new SimpleLongProperty();
@@ -23,6 +27,8 @@ public class EventModel {
   private final SimpleObjectProperty<ImagePattern> image = new SimpleObjectProperty<>();
   private final SimpleObjectProperty<LocationModel> location = new SimpleObjectProperty<>();
   private final SimpleObjectProperty<EventImage> eventImage = new SimpleObjectProperty<>();
+  private final SimpleSetProperty<UserModel> assignedCoordinators = new SimpleSetProperty<>();
+
 
 
   public EventModel(){
@@ -33,6 +39,7 @@ public class EventModel {
     this.date.set(null);
     this.image.set(null);
     this.location.set(new LocationModel());
+    this.assignedCoordinators.set(FXCollections.observableSet());
   }
 
   public EventModel(Event event){
@@ -42,8 +49,10 @@ public class EventModel {
     this.time.set(event.getTime());
     this.date.set(event.getDate());
     this.eventImage.set(event.getEventImage());
-    this.image.set(new ImagePattern(ImageConverter.convertToImage(event.getEventImage().getImageData())));
+    this.image.set(new ImagePattern(Objects.requireNonNull(
+        ImageConverter.convertToImage(event.getEventImage().getImageData()))));
     this.location.set(new LocationModel(event.getLocation()));
+    this.assignedCoordinators.set(FXCollections.observableSet());
 //    this.eventImage.set(event.getEventImage());
   }
 
@@ -116,4 +125,11 @@ public class EventModel {
     this.image.set(new ImagePattern(image));
   }
 
+  public ObservableSet<UserModel> getAssignedCoordinators()
+  {
+    return assignedCoordinators.get();
+  }
+
+
 }
+

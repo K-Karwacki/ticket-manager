@@ -2,34 +2,38 @@ package dk.easv.ticketmanager.gui.controllers.event.dashboards;
 
 import dk.easv.ticketmanager.bll.services.interfaces.EventManagementService;
 import dk.easv.ticketmanager.gui.FXMLManager;
+import dk.easv.ticketmanager.gui.FXMLPath;
 import dk.easv.ticketmanager.gui.ViewManager;
+import dk.easv.ticketmanager.gui.controllers.event.popups.AssignCoordinatorController;
 import dk.easv.ticketmanager.gui.controllers.event.popups.ImageSelectorController;
 import dk.easv.ticketmanager.gui.models.EventModel;
 import dk.easv.ticketmanager.gui.models.LocationModel;
+import dk.easv.ticketmanager.gui.models.UserModel;
 import dk.easv.ticketmanager.utils.FieldValidator;
 import dk.easv.ticketmanager.utils.ImageConverter;
-import javafx.beans.binding.Bindings;
+import javafx.collections.SetChangeListener;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.DatePicker;
+import javafx.scene.control.Label;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
-import javafx.util.converter.LocalTimeStringConverter;
 
 import java.time.LocalTime;
-import java.time.format.DateTimeFormatter;
 
-import static dk.easv.ticketmanager.gui.FXMLPath.EVENTS_DASHBOARD;
-import static dk.easv.ticketmanager.gui.FXMLPath.IMAGE_SELECTOR_POPUP;
+import static dk.easv.ticketmanager.gui.FXMLPath.*;
 
 public class EventCreatorController {
     private Image image;
     EventModel eventModel = new EventModel();
     private EventManagementService eventManagementService;
 
+    @FXML
+    private HBox assignedCoordinatorsContainer;
     @FXML
     private VBox formContainer;
     @FXML
@@ -53,6 +57,11 @@ public class EventCreatorController {
 
     public void setServices(EventManagementService eventManagementService) {
         this.eventManagementService = eventManagementService;
+        eventModel.getAssignedCoordinators().addListener((SetChangeListener<UserModel>) change ->{
+            if(change.wasAdded() || change.wasRemoved()){
+                loadAssignedCoordinators();
+            }
+        } );
     }
 
     @FXML
@@ -71,6 +80,17 @@ public class EventCreatorController {
 //        Bindings.bindBidirectional(txtFieldEventPostalCode.textProperty(), eventModel.locationProperty().get()
 //            .post_codeProperty());
 
+    }
+
+    private void loadAssignedCoordinators(){
+        assignedCoordinatorsContainer.getChildren().removeAll();
+        assignedCoordinatorsContainer.getChildren().clear();
+
+//        assignedCoordinatorsContainer.getChildren().addAll(eventModel.getAssignedCoordinators());
+        for (UserModel assignedCoordinator : eventModel.getAssignedCoordinators())
+        {
+            assignedCoordinatorsContainer.getChildren().add(new Label(assignedCoordinator.getName()));
+        }
     }
 
     // Method on click submit
@@ -122,6 +142,16 @@ public class EventCreatorController {
             eventModel.setEventImage(selectedImage);
         });
     }
+
+    @FXML private void onClickOpenAssignCoordinators(){
+        ViewManager.INSTANCE.showPopup(FXMLPath.COORDINATOR_LIST_POPUP, "Assign coordinators");
+
+        AssignCoordinatorController assignCoordinatorController = (AssignCoordinatorController) FXMLManager.INSTANCE.getFXML(
+            COORDINATOR_LIST_POPUP).getValue();
+
+        assignCoordinatorController.setEventModel(eventModel);
+    }
+
 
 
 }

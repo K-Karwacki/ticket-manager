@@ -31,7 +31,7 @@ public class AuthenticationServiceImpl implements AuthenticationService
   }
 
 
-  public UserModel registerNewUser(String firstName, String lastName, String roleName, String email, String password) throws AuthenticationException
+  public UserModel registerNewUser(String firstName, String lastName, long roleID, String email, String phone, String password) throws AuthenticationException
   {
     if(authRepository == null || userRepository == null){
       throw new RuntimeException("Repositories failed");
@@ -47,7 +47,7 @@ public class AuthenticationServiceImpl implements AuthenticationService
       throw new AuthenticationException("Password cannot be empty");
     }
 
-    Optional<Role> roleOptional = authRepository.findRoleByName(roleName);
+    Optional<Role> roleOptional = authRepository.getById(roleID);
     if(roleOptional.isEmpty()){
       throw new AuthenticationException("Not a single role with given name.");
     }
@@ -58,6 +58,7 @@ public class AuthenticationServiceImpl implements AuthenticationService
     newUser.setLastName(lastName);
     newUser.setRole(roleOptional.get());
     newUser.setEmail(email);
+    newUser.setPhoneNumber(phone);
     newUser.setHashedPassword(hashPassword(password));
 //    UserModel registeredUserModel = userRepository.save(newUser);
     User savedUser = userRepository.save(newUser);

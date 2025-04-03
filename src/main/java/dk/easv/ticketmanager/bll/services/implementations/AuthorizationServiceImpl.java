@@ -54,4 +54,22 @@ public class AuthorizationServiceImpl implements AuthorizationService
     return false;
   }
 
+  @Override public Role findRoleByID(long id)
+  {
+    if(authRepository == null){
+      return null;
+    }
+
+    Optional<Role> role = authRepository.getById(id);
+    return role.orElse(null);
+  }
+
+  @Override public List<Role> getRoles()
+  {
+    if(authRepository == null){
+      throw new RuntimeException("Load auth repository");
+    }
+    return authRepository.getRoles();
+  }
+
 }

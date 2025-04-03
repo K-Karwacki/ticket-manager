@@ -4,7 +4,9 @@ import dk.easv.ticketmanager.be.Permission;
 import dk.easv.ticketmanager.be.Role;
 import dk.easv.ticketmanager.be.User;
 
+import java.util.Collection;
 import java.util.List;
+import java.util.Optional;
 
 public interface AuthorizationService
 {
@@ -12,4 +14,6 @@ public interface AuthorizationService
   void createNewRole(String name);
   Role findRoleByName(String name);
   boolean canAddUser(User user);
+  Role findRoleByID(long id);
+  Collection<Role> getRoles();
 }

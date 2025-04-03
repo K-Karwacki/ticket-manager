@@ -20,7 +20,7 @@ public class User {
     @Column(name = "last_name")
     private String lastName;
 
-    @OneToOne(targetEntity = Role.class)
+    @ManyToOne(targetEntity = Role.class)
     @JoinColumn(name = "role_id")
     private Role role;
 
@@ -154,5 +154,10 @@ public class User {
 
     public String getPhoneNumber() {
         return phoneNumber;
+    }
+
+    public void setPhoneNumber(String phoneNumber)
+    {
+        this.phoneNumber = phoneNumber;
     }
 }

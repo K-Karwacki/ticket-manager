@@ -32,7 +32,7 @@ public class LoginWindowController
 
   }
 
-  public void setAuthenticationService(
+  public void setServices(
       AuthenticationService authenticationService)
   {
     this.authenticationService = authenticationService;

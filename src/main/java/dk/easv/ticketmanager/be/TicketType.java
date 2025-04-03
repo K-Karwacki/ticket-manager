@@ -22,6 +22,7 @@ public class TicketType {
     public TicketType() {
 
     }
+
     public Event getEvent() {
         return event;
     }

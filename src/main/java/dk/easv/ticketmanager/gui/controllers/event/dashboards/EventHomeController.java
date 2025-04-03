@@ -25,7 +25,6 @@ public class EventHomeController
 {
   private final FXMLManager fxmlManager = FXMLManager.INSTANCE;
   private final ViewManager viewManager = ViewManager.INSTANCE;
-  private ObservableList<EventModel> eventModelObservableList;
   private EventManagementService eventManagementService;
 
   @FXML
@@ -43,7 +42,7 @@ public class EventHomeController
 
   public void setServices(EventManagementService eventManagementService) {
     this.eventManagementService = eventManagementService;
-    eventModelObservableList = eventManagementService.getEventListModel()
+    ObservableList<EventModel> eventModelObservableList = eventManagementService.getEventListModel()
         .getEventsObservable();
 
     eventModelObservableList.addListener((ListChangeListener<EventModel>) change ->{

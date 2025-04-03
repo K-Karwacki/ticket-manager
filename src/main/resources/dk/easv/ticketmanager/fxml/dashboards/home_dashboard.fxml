@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import java.lang.String?>
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
@@ -13,7 +14,7 @@
 <?import javafx.scene.shape.Rectangle?>
 <?import javafx.scene.text.Font?>
 
-<HBox alignment="CENTER" prefHeight="556.0" prefWidth="1069.0" spacing="200.0" styleClass="dashboard-root" stylesheets="@../../style/dashboard/dashboard.css" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="dk.easv.ticketmanager.gui.controllers.menu.HomeDashboardController">
+<HBox alignment="CENTER" prefHeight="556.0" prefWidth="1069.0" spacing="200.0" stylesheets="@../../style/dashboard/dashboard.css" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="dk.easv.ticketmanager.gui.controllers.menu.HomeDashboardController">
    <children>
       <VBox>
          <children>
@@ -370,4 +371,8 @@
    <padding>
       <Insets top="50.0" />
    </padding>
+   <styleClass>
+      <String fx:value="dashboard-root" />
+      <String fx:value="dashboard-shadow" />
+   </styleClass>
 </HBox>

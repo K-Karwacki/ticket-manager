@@ -36,7 +36,7 @@
             <Insets bottom="15.0" left="30.0" right="30.0" top="15.0" />
          </padding>
         </HBox>
-        <ScrollPane fx:id="eventListScrollPane" fitToHeight="true" fitToWidth="true" hbarPolicy="NEVER" prefHeight="550.0" stylesheets="@../../style/dashboard/dashboard.css">
+        <ScrollPane fx:id="eventListScrollPane" fitToHeight="true" fitToWidth="true" hbarPolicy="NEVER" prefHeight="550.0" styleClass="container" stylesheets="@../../style/dashboard/dashboard.css">
             <content>
                 <FlowPane fx:id="eventListRoot" alignment="CENTER" columnHalignment="CENTER" hgap="26.0" prefHeight="950.0" styleClass="container" vgap="100.0">
 

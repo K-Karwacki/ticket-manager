@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import java.lang.String?>
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.Cursor?>
 <?import javafx.scene.control.Button?>
@@ -11,15 +10,14 @@
 <?import javafx.scene.control.ScrollPane?>
 <?import javafx.scene.control.TextArea?>
 <?import javafx.scene.control.TextField?>
-<?import javafx.scene.effect.DropShadow?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<VBox maxHeight="669.0" stylesheets="@../../style/dashboard/dashboard.css" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="dk.easv.ticketmanager.gui.controllers.event.dashboards.EventCreatorController">
+<VBox prefHeight="669.0" style="-fx-background-color: #c8c8c8;;" styleClass="dashboard-shadow" stylesheets="@../../style/dashboard/dashboard.css" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="dk.easv.ticketmanager.gui.controllers.event.dashboards.EventCreatorController">
    <children>
-      <HBox>
+      <HBox styleClass="dashboard-menu">
          <children>
             <Button mnemonicParsing="false" styleClass="btn" text="Go Back">
                <font>
@@ -27,16 +25,9 @@
                </font>
             </Button>
          </children>
-         <styleClass>
-            <String fx:value="dashboard-root" />
-            <String fx:value="dashboard-menu" />
-         </styleClass>
          <padding>
             <Insets bottom="20.0" left="66.0" top="33.0" />
          </padding>
-         <effect>
-            <DropShadow blurType="GAUSSIAN" />
-         </effect>
       </HBox>
       <ScrollPane fitToWidth="true" focusTraversable="false" hbarPolicy="NEVER" maxHeight="-Infinity" pannable="true" prefHeight="669.0" styleClass="dashboard-root" stylesheets="@../../style/dashboard/dashboard.css" vbarPolicy="ALWAYS">
          <content>
@@ -136,7 +127,7 @@
                                           <Font name="Geeza Pro Regular" size="14.0" />
                                        </font>
                                     </Button>
-                                    <Button mnemonicParsing="false" style="-fx-background-color: #FFE7B1; -fx-border-color: black; -fx-border-radius: 5;" text="Assign coordinators" textAlignment="CENTER">
+                                    <Button mnemonicParsing="false" onAction="#onClickOpenAssignCoordinators" style="-fx-background-color: #FFE7B1; -fx-border-color: black; -fx-border-radius: 5;" text="Assign coordinators" textAlignment="CENTER">
                                        <cursor>
                                           <Cursor fx:constant="HAND" />
                                        </cursor>
@@ -225,6 +216,7 @@
                         <Insets left="66.0" right="66.0" top="33.0" />
                      </padding>
                   </HBox>
+                  <HBox fx:id="assignedCoordinatorsContainer" prefWidth="200.0" />
                   <HBox alignment="CENTER" layoutX="40.0" layoutY="58.0">
                      <children>
                         <VBox alignment="CENTER" spacing="10.0">

@@ -15,5 +15,5 @@ public interface EventRepository extends BaseRepository<Event>{
     void dissociateEventFromCoordinator(Event event, User user);
     List<EventImage> getAllEventImages();
     EventImage saveEventImage(EventImage eventImage) throws IOException;
-  EventImage getEventImageByID(Long eventImageID);
+    EventImage getEventImageByID(Long eventImageID);
 }

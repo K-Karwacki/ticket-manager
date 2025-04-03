@@ -7,7 +7,7 @@ import jakarta.persistence.*;
 public class Ticket {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private long id;
+    private long ID;
 
     @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "customer_id")
@@ -48,8 +48,8 @@ public class Ticket {
     public void setCustomer(Customer customer) {
         this.customer = customer;
     }
-    public long getId() {
-        return id;
+    public long getID() {
+        return ID;
     }
     public void setTicketCode(String ticket_code) {
         this.ticket_code = ticket_code;
