@@ -44,7 +44,6 @@ public class Main extends Application
 
   protected final TicketManagementService ticketManagementService = new TicketManagementServiceImpl(repositoryService, authorizationService);
   protected final EventManagementService eventManagementService = new EventManagementServiceImpl(repositoryService, authorizationService);
-  protected final UserManagementService userManagementService = new UserManagementServiceImpl(repositoryService, authorizationService);
 
   private void setControllersDependencies(){
     LoginWindowController loginWindowController = (LoginWindowController) fxmlManager.getFXML(FXMLPath.LOGIN).getValue();
@@ -57,7 +56,6 @@ public class Main extends Application
     TicketController ticketController = (TicketController) fxmlManager.getFXML(FXMLPath.TICKET_COMPONENT).getValue();
     ImageSelectorController imageSelectorController = (ImageSelectorController) fxmlManager.getFXML(FXMLPath.IMAGE_SELECTOR_POPUP).getValue();
     ChartComponentController chartComponentController = (ChartComponentController) fxmlManager.getFXML(FXMLPath.CHART_COMPONENT).getValue();
-    loginWindowController.setAuthenticationService(authenticationService);
 
     loginWindowController.setServices(authenticationService);
     eventEditorController.setServices(eventManagementService);
