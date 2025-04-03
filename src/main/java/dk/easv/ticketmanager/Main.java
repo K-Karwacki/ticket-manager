@@ -10,6 +10,7 @@ import dk.easv.ticketmanager.gui.*;
 import dk.easv.ticketmanager.gui.controllers.components.ChartComponentController;
 import dk.easv.ticketmanager.gui.controllers.event.dashboards.EventHomeController;
 import dk.easv.ticketmanager.gui.controllers.event.popups.EventEditorController;
+import dk.easv.ticketmanager.gui.controllers.event.popups.AssignCoordinatorController;
 import dk.easv.ticketmanager.gui.controllers.event.popups.ImageSelectorController;
 import dk.easv.ticketmanager.gui.controllers.menu.HomeDashboardController;
 import dk.easv.ticketmanager.gui.controllers.ticket.TicketController;
@@ -18,6 +19,9 @@ import dk.easv.ticketmanager.gui.controllers.main.LoginWindowController;
 import dk.easv.ticketmanager.gui.controllers.event.dashboards.EventCreatorController;
 import dk.easv.ticketmanager.gui.controllers.event.dashboards.EventDetailsController;
 import dk.easv.ticketmanager.gui.controllers.ticket.TicketGeneratorController;
+import dk.easv.ticketmanager.gui.controllers.user.components.UserCardController;
+import dk.easv.ticketmanager.gui.controllers.user.dashboards.UserHomeController;
+import dk.easv.ticketmanager.gui.controllers.user.popup.UserCreatorController;
 import dk.easv.ticketmanager.gui.models.UserSession;
 import dk.easv.ticketmanager.utils.RoleType;
 import javafx.application.Application;
@@ -55,6 +59,7 @@ public class Main extends Application
     ChartComponentController chartComponentController = (ChartComponentController) fxmlManager.getFXML(FXMLPath.CHART_COMPONENT).getValue();
     loginWindowController.setAuthenticationService(authenticationService);
 
+    loginWindowController.setServices(authenticationService);
     eventEditorController.setServices(eventManagementService);
     eventDetailsController.setServices(eventManagementService);
     eventCreatorPopupController.setServices(eventManagementService);
@@ -84,14 +89,24 @@ public class Main extends Application
         authorizationService.createNewRole(RoleType.ADMIN.name());
         System.out.println("Admin role created");
       }
+      if(authorizationService.findRoleByName(RoleType.COORDINATOR.name()) == null){
+        authorizationService.createNewRole(RoleType.COORDINATOR.name());
+        System.out.println("Coordinator role created");
+      }
       if(authenticationService.findUserByEmail("admin") == null){
-        authenticationService.registerNewUser("Admin","Admin", RoleType.ADMIN.name(), "admin", "admin");
+        authenticationService.registerNewUser("Admin","Admin", authorizationService.findRoleByName(RoleType.ADMIN.name()).getId(), "admin", "admin phone", "admin");
         System.out.println("Admin account created");
       }
+      if(authenticationService.findUserByEmail("coordinator") == null){
+        authenticationService.registerNewUser("coordinator","coordinator", authorizationService.findRoleByName(RoleType.COORDINATOR.name()).getId(), "coordinator", "coordinator phone", "coordinator");
+        System.out.println("Coordinator account created");
+      }
+
     }catch(Exception e){
       e.printStackTrace();
     }
 
+    setControllersDependencies();
     viewManager.showStage(FXMLPath.LOGIN, "Login", false);
   }
 
