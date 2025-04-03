@@ -1,21 +1,23 @@
 package dk.easv.ticketmanager.gui.controllers.components;
 
 import dk.easv.ticketmanager.bll.services.interfaces.TicketManagementService;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.chart.BarChart;
 import javafx.scene.chart.NumberAxis;
 import javafx.scene.chart.XYChart;
+import javafx.scene.control.Button;
 import javafx.scene.layout.VBox;
 
 import java.net.URL;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
+import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.ResourceBundle;
-import java.util.TreeMap;
 
 public class ChartComponentController implements Initializable {
     private TicketManagementService ticketManagementService;
@@ -31,14 +33,17 @@ public class ChartComponentController implements Initializable {
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         barChart.setAnimated(false);
+        barChart.setVerticalGridLinesVisible(false); // Hide vertical grid lines
+        barChart.getStyleClass().add("custom-bar-chart"); // For CSS styling
         System.out.println("Initialize - Controller instance: " + this);
-        if(datesOfPurchases != null){
+        if (datesOfPurchases != null) {
             updateChart("day");
         }
     }
 
     @FXML
-    private void showDayView() {
+    private void showDayView(ActionEvent event) {
+        Button btn = (Button) event.getSource();
         updateChart("day");
     }
 
@@ -69,9 +74,9 @@ public class ChartComponentController implements Initializable {
 
     private void updateChart(String period) {
         barChart.getData().clear();
-        System.out.println("updateChart - Dates size: " + datesOfPurchases.size());
+        System.out.println("updateChart - Dates size: " + (datesOfPurchases != null ? datesOfPurchases.size() : 0));
 
-        Map<String, Integer> counts = new TreeMap<>();
+        Map<String, Integer> counts = new LinkedHashMap<>(); // Use LinkedHashMap to preserve insertion order
         LocalDateTime now = LocalDateTime.now();
         DateTimeFormatter formatter;
 
@@ -128,9 +133,10 @@ public class ChartComponentController implements Initializable {
             case "year":
                 formatter = DateTimeFormatter.ofPattern("MMM");
                 LocalDateTime startOfYear = now.withMonth(1).withDayOfMonth(1).withHour(0).withMinute(0).withSecond(0);
-                for (int i = 0; i < 12; i++) {
-                    String monthStr = startOfYear.plusMonths(i).format(formatter);
-                    counts.put(monthStr, 0);
+                // Explicitly add months in chronological order
+                String[] monthOrder = {"Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"};
+                for (String month : monthOrder) {
+                    counts.put(month, 0);
                 }
                 for (LocalDateTime date : datesOfPurchases) {
                     if (date.getYear() == now.getYear()) {

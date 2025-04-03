@@ -1,24 +1,17 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.geometry.Insets?>
-<?import javafx.scene.control.Label?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.HBox?>
-<?import javafx.scene.text.Font?>
 
-<HBox alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefWidth="1366.0" spacing="866.0" style="-fx-background-color: #F0F0F0; -fx-border-width: 0 0 1 0; -fx-border-color: #616161;" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="dk.easv.ticketmanager.gui.controllers.components.HeaderComponentController">
+<HBox alignment="CENTER_LEFT" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefWidth="1366.0" spacing="866.0" style="-fx-background-color: #F0F0F0; -fx-border-width: 0 0 1 0; -fx-border-color: #616161;" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="dk.easv.ticketmanager.gui.controllers.components.HeaderComponentController">
    <children>
       <ImageView fitHeight="59.0" fitWidth="255.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../../images/easv_logo.png" />
          </image>
       </ImageView>
-      <Label text="12:20:35">
-         <font>
-            <Font size="30.0" />
-         </font>
-      </Label>
    </children>
    <padding>
       <Insets bottom="25.0" left="65.0" right="65.0" top="25.0" />
