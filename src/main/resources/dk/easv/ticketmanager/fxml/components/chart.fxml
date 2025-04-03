@@ -19,7 +19,7 @@
          <Insets bottom="20.0" left="40.0" top="10.0" />
       </padding>
     </HBox>
-    <BarChart fx:id="barChart" barGap="10.0" prefHeight="475.0" prefWidth="550.0">
+    <BarChart fx:id="barChart" barGap="10.0" prefHeight="475.0" prefWidth="850.0">
         <xAxis>
             <CategoryAxis />
         </xAxis>
