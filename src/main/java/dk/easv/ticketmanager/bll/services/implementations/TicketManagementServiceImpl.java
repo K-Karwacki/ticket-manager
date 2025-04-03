@@ -19,6 +19,7 @@ import javafx.scene.image.Image;
 import javafx.scene.image.PixelWriter;
 import javafx.scene.image.WritableImage;
 
+import java.time.LocalDateTime;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -55,6 +56,35 @@ public class TicketManagementServiceImpl implements TicketManagementService {
         ticketTypes = ticketTypes.stream().filter(ticketType -> ticketType.getEvent().getID() == eventModel.getID()).toList();
         return  ticketTypes;
     }
+
+    @Override
+    public List<LocalDateTime> getAllDatesForPurchasedTickets() {
+        return this.repositoryService.getRepository(TicketRepository.class).getAllDatesForPurchasedTickets();
+    }
+
+    public Map<Integer, Integer> getAmountOfTicketsPurchasedDaily(LocalDateTime dateTime){
+        List<LocalDateTime> allDatesForPurchasedTickets = this.getAllDatesForPurchasedTickets();
+        Map<Integer, Integer> datesForPurchasedTicketsDaily = new HashMap();
+        for(LocalDateTime date : allDatesForPurchasedTickets){
+            if(date.getYear() == dateTime.getYear() && date.getMonth() == dateTime.getMonth() && date.getDayOfMonth() == dateTime.getDayOfMonth()){
+                int hour = date.getHour();
+                datesForPurchasedTicketsDaily.put(hour, datesForPurchasedTicketsDaily.get(hour) + 1);
+            }
+        }
+        return datesForPurchasedTicketsDaily;
+    }
+    public Map<Integer, Integer> getAmountOfTicketsPurchasedMonthly(LocalDateTime dateTime){
+        List<LocalDateTime> allDatesForPurchasedTickets = this.getAllDatesForPurchasedTickets();
+        Map<Integer, Integer> datesForPurchasedTicketsMonthly = new HashMap<>();
+        for(LocalDateTime date : allDatesForPurchasedTickets){
+            if(date.getYear() == dateTime.getYear() && date.getMonth() == dateTime.getMonth()){
+                int day = date.getDayOfMonth();
+                datesForPurchasedTicketsMonthly.put(day, datesForPurchasedTicketsMonthly.get(day) + 1);
+            }
+        }
+        return datesForPurchasedTicketsMonthly;
+    }
+
     public String generateTicketNumber() {
         return UUID.randomUUID().toString().substring(0, 8).toUpperCase();
     }

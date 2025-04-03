@@ -1,0 +1,10 @@
+.chart{
+    -fx-vertical-grid-lines-visible: false;
+
+}
+.chart-bar{
+    -fx-bar-fill: #ffbc04;
+}
+.button:focused{
+    -fx-background-color: #FFE7B1 !important;
+}

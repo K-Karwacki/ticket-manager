@@ -10,9 +10,7 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 
 public class TicketController {
-    private final FXMLManager fxmlManager = FXMLManager.INSTANCE;
-    private final EmailSenderService emailSenderService = new EmailSenderService();
-    private TicketManagementService ticketManagementService;
+    private static TicketManagementService ticketManagementService;
     private Ticket ticket;
     @FXML
     private Label lblEventName;
@@ -40,7 +38,7 @@ public class TicketController {
         lblEventPrice.setText(price + " DKK");
         lblTicketType.setText(ticket.getType().getName());
         lblFullName.setText(ticket.getCustomer().getFirstName() + " " + ticket.getCustomer().getLastName());
-        lblEventAddress.setText(String.valueOf(ticket.getEvent().getLocation()));
+        lblEventAddress.setText(ticket.getEvent().getLocation().toString());
         Image QRCode = ticketManagementService.generateQRCode(ticket.getTicketCode());
         Image Barcode = ticketManagementService.generateBarcode(ticket.getTicketCode());
         imgQR.setImage(QRCode);

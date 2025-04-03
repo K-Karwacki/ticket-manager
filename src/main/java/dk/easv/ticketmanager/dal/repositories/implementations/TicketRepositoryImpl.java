@@ -2,10 +2,13 @@ package dk.easv.ticketmanager.dal.repositories.implementations;
 
 import dk.easv.ticketmanager.be.Ticket;
 import dk.easv.ticketmanager.be.TicketType;
+import dk.easv.ticketmanager.be.User;
 import dk.easv.ticketmanager.dal.repositories.TicketRepository;
 import dk.easv.ticketmanager.utils.JPAUtil;
 import jakarta.persistence.EntityManager;
+import jakarta.persistence.TypedQuery;
 
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
 
@@ -38,6 +41,14 @@ public class TicketRepositoryImpl implements TicketRepository {
     }
 
     @Override
+    public List<LocalDateTime> getAllDatesForPurchasedTickets() {
+        try(EntityManager em = JPAUtil.getEntityManager()){
+            em.getTransaction().begin();
+            return em.createQuery("select issued_date from Ticket", LocalDateTime.class).getResultList();
+        }
+    }
+
+    @Override
     public List<Ticket> getAll() {
         return List.of();
     }
@@ -49,7 +60,12 @@ public class TicketRepositoryImpl implements TicketRepository {
 
     @Override
     public Ticket save(Ticket entity) {
-        return null;
+        try(EntityManager em = JPAUtil.getEntityManager()){
+            em.getTransaction().begin();
+            em.merge(entity);
+            em.getTransaction().commit();
+            return entity;
+        }
     }
 
     @Override

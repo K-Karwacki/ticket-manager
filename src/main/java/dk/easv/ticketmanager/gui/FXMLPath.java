@@ -11,6 +11,8 @@ public class FXMLPath
   public final static String COORDINATOR_CARD_COMPONENT = "fxml/components/coordinator_card.fxml";
   public final static String USER_CARD_COMPONENT = "fxml/components/user_card.fxml";
   public final static String MAIN = "/dk/easv/ticketmanager/fxml/main/main.fxml";
+  public final static String CHART_COMPONENT = "/dk/easv/ticketmanager/fxml/components/chart.fxml";
+
 
 
 
