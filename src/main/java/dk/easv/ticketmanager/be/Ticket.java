@@ -2,6 +2,8 @@ package dk.easv.ticketmanager.be;
 
 import jakarta.persistence.*;
 
+import java.time.LocalDateTime;
+
 @Entity
 @Table(name = "Ticket")
 public class Ticket {
@@ -20,14 +22,18 @@ public class Ticket {
     @Column(name = "ticket_code")
     private String ticket_code;
 
+    @Column(name = "issued_date")
+    private LocalDateTime issued_date;
+
     public Ticket(Event event, Customer customer, double price, TicketType type, String ticket_code) {
         this.customer = customer;
         this.type = type;
         this.ticket_code = ticket_code;
+        this.issued_date = LocalDateTime.now();
     }
 
     public Ticket() {
-
+        this.issued_date = LocalDateTime.now();
     }
 
     public Event getEvent() {
@@ -56,6 +62,9 @@ public class Ticket {
     }
     public String getTicketCode() {
         return ticket_code;
+    }
+    public LocalDateTime getIssuedDate() {
+        return issued_date;
     }
 }
 
