@@ -1,13 +1,11 @@
 package dk.easv.ticketmanager.gui.models;
 
-import dk.easv.ticketmanager.be.Event;
 import dk.easv.ticketmanager.be.EventImage;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 
+import java.time.LocalDateTime;
 import java.util.Collection;
-import java.util.Collections;
-import java.util.List;
 
 public class EventListModel {
 
@@ -44,5 +42,18 @@ public class EventListModel {
 
     public void setEventImages(Collection<EventImage> eventImages){
         this.eventImagesObservable.setAll(eventImages);
+    }
+    public EventModel findClosestUpcomingEvent() {
+        LocalDateTime now = LocalDateTime.now();
+
+        return events.stream()
+                .map(event -> new Object() {
+                    final EventModel eventModel = event;
+                    final LocalDateTime dateTime = LocalDateTime.of(event.dateProperty().get(), event.timeProperty().get());
+                })
+                .filter(event -> event.dateTime.isAfter(now))
+                .min((e1, e2) -> e1.dateTime.compareTo(e2.dateTime))
+                .map(e -> e.eventModel)
+                .orElse(null);
     }
 }

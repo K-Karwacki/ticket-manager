@@ -12,7 +12,9 @@ import dk.easv.ticketmanager.bll.services.interfaces.AuthorizationService;
 import dk.easv.ticketmanager.bll.services.interfaces.TicketManagementService;
 import dk.easv.ticketmanager.bll.services.factories.RepositoryService;
 import dk.easv.ticketmanager.dal.repositories.TicketRepository;
+import dk.easv.ticketmanager.gui.models.EventListModel;
 import dk.easv.ticketmanager.gui.models.EventModel;
+import dk.easv.ticketmanager.gui.models.TicketListModel;
 import dk.easv.ticketmanager.utils.JPAUtil;
 import jakarta.persistence.EntityManager;
 import javafx.scene.image.Image;
@@ -28,15 +30,18 @@ import java.util.UUID;
 public class TicketManagementServiceImpl implements TicketManagementService {
     private final RepositoryService repositoryService;
     private final AuthorizationService authorizationService;
+    private final TicketListModel ticketListModel;
 
     public TicketManagementServiceImpl(){
         repositoryService = null;
         authorizationService = null;
+        ticketListModel = null;
     }
 
     public TicketManagementServiceImpl(RepositoryService repositoryService, AuthorizationService authorizationService){
         this.repositoryService = repositoryService;
         this.authorizationService = authorizationService;
+        this.ticketListModel = new TicketListModel();
     }
     @Override
     public void addTicketType(TicketType ticketType){

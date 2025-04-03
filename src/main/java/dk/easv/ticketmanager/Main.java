@@ -50,6 +50,7 @@ public class Main extends Application
     EventEditorController eventEditorController = (EventEditorController) fxmlManager.getFXML(FXMLPath.EVENT_EDITOR_POPUP).getValue();
     EventDetailsController eventDetailsController = (EventDetailsController)  fxmlManager.getFXML(FXMLPath.EVENT_DETAILS).getValue();
     EventCreatorController eventCreatorPopupController = (EventCreatorController)   fxmlManager.getFXML(FXMLPath.EVENT_CREATOR_POPUP).getValue();
+    HomeDashboardController homeDashboardController = (HomeDashboardController) fxmlManager.getFXML(FXMLPath.HOME_DASHBOARD).getValue();
     EventHomeController eventHomeController = (EventHomeController) fxmlManager.getFXML(FXMLPath.EVENTS_DASHBOARD).getValue();
     TicketTypeCreatorController ticketTypeCreatorController = (TicketTypeCreatorController) fxmlManager.getFXML(FXMLPath.TICKET_TYPE_CREATOR_POPUP).getValue();
     TicketGeneratorController ticketGeneratorController = (TicketGeneratorController) fxmlManager.getFXML(FXMLPath.TICKET_GENERATOR_POPUP).getValue();
@@ -67,6 +68,7 @@ public class Main extends Application
     ticketController.setServices(ticketManagementService);
     imageSelectorController.setServices(eventManagementService);
     chartComponentController.setServices(ticketManagementService);
+    homeDashboardController.setServices(eventManagementService);
   }
 
 
