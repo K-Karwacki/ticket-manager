@@ -9,6 +9,7 @@ import dk.easv.ticketmanager.dal.repositories.UserRepository;
 import dk.easv.ticketmanager.gui.*;
 import dk.easv.ticketmanager.gui.controllers.components.ChartComponentController;
 import dk.easv.ticketmanager.gui.controllers.event.dashboards.EventHomeController;
+import dk.easv.ticketmanager.gui.controllers.event.popups.EventEditorController;
 import dk.easv.ticketmanager.gui.controllers.event.popups.ImageSelectorController;
 import dk.easv.ticketmanager.gui.controllers.menu.HomeDashboardController;
 import dk.easv.ticketmanager.gui.controllers.ticket.TicketController;
@@ -43,6 +44,7 @@ public class Main extends Application
 
   private void setControllersDependencies(){
     LoginWindowController loginWindowController = (LoginWindowController) fxmlManager.getFXML(FXMLPath.LOGIN).getValue();
+    EventEditorController eventEditorController = (EventEditorController) fxmlManager.getFXML(FXMLPath.EVENT_EDITOR_POPUP).getValue();
     EventDetailsController eventDetailsController = (EventDetailsController)  fxmlManager.getFXML(FXMLPath.EVENT_DETAILS).getValue();
     EventCreatorController eventCreatorPopupController = (EventCreatorController)   fxmlManager.getFXML(FXMLPath.EVENT_CREATOR_POPUP).getValue();
     EventHomeController eventHomeController = (EventHomeController) fxmlManager.getFXML(FXMLPath.EVENTS_DASHBOARD).getValue();
@@ -53,6 +55,8 @@ public class Main extends Application
     ChartComponentController chartComponentController = (ChartComponentController) fxmlManager.getFXML(FXMLPath.CHART_COMPONENT).getValue();
     loginWindowController.setAuthenticationService(authenticationService);
 
+    eventEditorController.setServices(eventManagementService);
+    eventDetailsController.setServices(eventManagementService);
     eventCreatorPopupController.setServices(eventManagementService);
     eventHomeController.setServices(eventManagementService);
     ticketTypeCreatorController.setServices(ticketManagementService, eventManagementService);
