@@ -1,21 +1,28 @@
 package dk.easv.ticketmanager.gui.controllers.event.dashboards;
 
+import dk.easv.ticketmanager.bll.services.implementations.EventManagementServiceImpl;
+import dk.easv.ticketmanager.bll.services.interfaces.EventManagementService;
+import dk.easv.ticketmanager.bll.services.interfaces.TicketManagementService;
 import dk.easv.ticketmanager.gui.FXMLManager;
 //import dk.easv.ticketmanager.gui.models.EventDataModel;
 import dk.easv.ticketmanager.gui.ViewManager;
 import dk.easv.ticketmanager.gui.controllers.event.popups.EventEditorController;
+import dk.easv.ticketmanager.gui.controllers.ticket.SpecialTicketGeneratorController;
 import dk.easv.ticketmanager.gui.controllers.ticket.TicketTypeCreatorController;
 import dk.easv.ticketmanager.gui.controllers.ticket.TicketGeneratorController;
 import dk.easv.ticketmanager.gui.models.EventModel;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.Alert;
+import javafx.scene.control.ButtonType;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.paint.ImagePattern;
 import javafx.scene.shape.Rectangle;
 
 import java.net.URL;
+import java.util.Optional;
 import java.util.ResourceBundle;
 
 import static dk.easv.ticketmanager.gui.FXMLPath.*;
@@ -25,6 +32,7 @@ public class EventDetailsController implements Initializable {
     private final ViewManager viewManager = ViewManager.INSTANCE;
 //    private final EventDataModel eventDataModel = new EventDataModel();
     private EventModel eventModel;
+    private EventManagementService eventManagementService;
 
     @FXML
     private Rectangle rectangleImageContainer;
@@ -96,15 +104,33 @@ public class EventDetailsController implements Initializable {
     @FXML
     private void showTicketGeneratorForm() {
         viewManager.showPopup(TICKET_GENERATOR_POPUP, "Ticket generator");
-       TicketGeneratorController ticketGeneratorController= (TicketGeneratorController) fxmlManager.getFXML(TICKET_GENERATOR_POPUP).getValue();
+       TicketGeneratorController ticketGeneratorController = (TicketGeneratorController) fxmlManager.getFXML(TICKET_GENERATOR_POPUP).getValue();
        ticketGeneratorController.addTicketTypes(eventModel);
     }
 
     @FXML
-    private void onClickDelete(ActionEvent actionEvent) {}
+    public void showSpecialTicketGeneratorForm() {
+        viewManager.showPopup(SPECIAL_TICKET_GENERATOR_POPUP, "Special ticket generator");
+        SpecialTicketGeneratorController specialTicketGeneratorController = (SpecialTicketGeneratorController) fxmlManager.getFXML(SPECIAL_TICKET_GENERATOR_POPUP).getValue();
+    }
 
     @FXML
-    private void onClickEdit(ActionEvent actionEvent) {}
-//    EventEditorController eventEditorController = viewManager.showPopup(EVENT_EDITOR_POPUP, "Event editor");
-//    eventEditorController.dd
+    private void onClickDelete() {
+        Alert confirm = new Alert(Alert.AlertType.CONFIRMATION);
+        confirm.setTitle("Confirm Delete");
+        confirm.setHeaderText("Delete Event");
+        confirm.setContentText("Are you sure you want to delete " + eventModel.getName() + "?");
+        confirm.showAndWait();
+    }
+
+    @FXML
+    private void onClickEdit() {
+        viewManager.showPopup(EVENT_EDITOR_POPUP, "Event editor");
+        EventEditorController eventEditorController = (EventEditorController) fxmlManager.getFXML(EVENT_EDITOR_POPUP).getValue();
+        eventEditorController.setEventModel(eventModel);
+    }
+
+    public void setServices(EventManagementService eventManagementService) {
+        this.eventManagementService = eventManagementService;
+    }
 }

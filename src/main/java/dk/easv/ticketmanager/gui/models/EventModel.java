@@ -52,6 +52,7 @@ public class EventModel
   {
     return this.ID.get();
   }
+  public String getName() { return this.name.get(); }
   public void setName(String name){
     this.name.set(name);
   }

@@ -59,6 +59,7 @@ public class TicketGeneratorController {
         comboBoxTicketTypes.getItems().addAll(ticketTypes);
     }
 
+
     private Image getTicketImage() {
         Pair<Parent, TicketController> p = fxmlManager.loadFXML(TICKET_COMPONENT);
         p.getValue().setTicket(ticket);

@@ -29,6 +29,14 @@ public class EventListModel {
         events.add(eventModel);
     }
 
+    public void updateEventModel(EventModel eventModel){
+        events.set(events.indexOf(eventModel), eventModel);
+    }
+
+    public void deleteEventModel(EventModel eventModel){
+        events.remove(eventModel);
+    }
+
     public ObservableList<EventImage> getEventImagesObservable()
     {
         return eventImagesObservable;

@@ -47,23 +47,6 @@ public class EventRepositoryImpl implements EventRepository
       return null;
     }
   }
-//  public Event save(Event event){
-//    EntityManager em = JPAUtil.getEntityManager();
-//
-//    try {
-//      em.getTransaction().begin();
-//      em.persist(event.getLocation());
-//      em.persist(event);
-//      em.getTransaction().commit();
-//      return event;
-//    } catch (Exception e) {
-//      if (em.getTransaction().isActive()) em.getTransaction().rollback();
-//      e.printStackTrace();
-//      em
-//    } finally {
-//      em.close();
-//    }
-//  }
 
   @Override
   public boolean delete(Event event) {
@@ -98,10 +81,25 @@ public class EventRepositoryImpl implements EventRepository
     }
     return false;
   }
+  @Override
+  public Event update(Event oldEntity) {
+    EntityManager em = JPAUtil.getEntityManager();
+    EntityTransaction tx = em.getTransaction();
 
-  @Override public Event update(Event oldEntity)
-  {
-    return null;
+    try {
+      tx.begin();
+      Event e = em.merge(oldEntity);
+      tx.commit();
+      return e;
+    } catch (Exception ex) {
+      if (tx.isActive()) {
+        tx.rollback();
+      }
+      ex.printStackTrace();
+    } finally {
+      em.close();
+    }
+    return oldEntity;
   }
 
 

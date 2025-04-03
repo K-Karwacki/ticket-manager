@@ -27,11 +27,7 @@ public class EventManagementServiceImpl implements EventManagementService {
     private final EventListModel eventListModel;
 
 
-    public EventManagementServiceImpl(){
-        repositoryService = null;
-        eventRepository = null;
-        eventListModel = null;
-    }
+
 
     public EventManagementServiceImpl(RepositoryService repositoryService, AuthorizationService authorizationService) {
         this.repositoryService = repositoryService;
@@ -41,13 +37,12 @@ public class EventManagementServiceImpl implements EventManagementService {
         initialize();
     }
 
-    private void initialize(){
-        if(eventListModel == null || eventRepository == null || repositoryService == null){
+    private void initialize() {
+        if (eventListModel == null || eventRepository == null || repositoryService == null) {
             throw new RuntimeException("Load dependencies for EventManagementService");
         }
         Collection<Event> events = eventRepository.getAll();
-        for (Event event : events)
-        {
+        for (Event event : events) {
             EventModel eventModel = new EventModel(event);
             eventModel.setImage(ImageConverter.convertToImage(event.getEventImage().getImageData()));
             eventListModel.addEventModel(new EventModel(event));
@@ -72,7 +67,7 @@ public class EventManagementServiceImpl implements EventManagementService {
         newEvent.setDescription(eventModel.descriptionProperty().get());
 
         Event saved = eventRepository.save(newEvent);
-        if(saved == null){
+        if (saved == null) {
             throw new RuntimeException("Error creating new event");
         }
         EventModel savedModel = new EventModel(saved);
@@ -81,15 +76,66 @@ public class EventManagementServiceImpl implements EventManagementService {
         return true;
     }
 
-    @Override public boolean updateEvent(EventModel eventModel)
-    {
-        return false;
+    @Override
+    public boolean updateEvent(EventModel eventModel) {
+        try {
+            Optional<Event> existingEvent = eventRepository.getById(eventModel.getID());
+            if (!existingEvent.isPresent()) {
+                return false;
+            }
+            Event eventToUpdate = existingEvent.get();
+            eventToUpdate.setName(eventModel.nameProperty().get());
+            eventToUpdate.setDescription(eventModel.descriptionProperty().get());
+            eventToUpdate.setTime(eventModel.timeProperty().get());
+            eventToUpdate.setDate(eventModel.dateProperty().get());
+
+
+            Location location = eventToUpdate.getLocation();
+            if (location == null) {
+                location = new Location();
+                eventToUpdate.setLocation(location);
+            }
+            location.setName(eventModel.getLocation().getName());
+            location.setAddress(eventModel.getLocation().getAddress());
+            location.setCity(eventModel.getLocation().getCity());
+            location.setPostCode(eventModel.getLocation().getPost_code());
+
+            Event updatedEvent = eventRepository.update(eventToUpdate);
+            if (updatedEvent == null) {
+                return false;
+            }
+
+            return true;
+        } catch (Exception e) {
+            e.printStackTrace();
+            return false;
+        }
     }
 
     @Override
-    public boolean deleteEvent(EventModel event) {
-        return false;
+    public boolean deleteEvent(EventModel eventModel) {
+        try {
+            if (eventModel == null || eventModel.getID() <= 0) {
+                return false;
+            }
+            Optional<Event> eventOptional = eventRepository.getById(eventModel.getID());
+            if (!eventOptional.isPresent()) {
+                return false;
+            }
+            // Delete using the event ID
+            boolean deleted = eventRepository.deleteById(eventOptional.get().getID());
+            if (!deleted) {
+                return false;
+            }
+            // Remove the event model from the event list based on ID
+            eventListModel.getEventsObservable().removeIf(model -> model.getID() == eventModel.getID());
+            return true;
+        } catch (Exception e) {
+            e.printStackTrace();
+            return false;
+        }
     }
+
 
     @Override
     public void setEventListModel() {

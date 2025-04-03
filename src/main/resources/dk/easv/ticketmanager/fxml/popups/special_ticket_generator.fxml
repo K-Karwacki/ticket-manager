@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.layout.*?>
+
+<VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="350.0" prefWidth="350.0" spacing="5.0" styleClass="container" stylesheets="@../../style/components/form.css" xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1" fx:controller="dk.easv.ticketmanager.gui.controllers.ticket.SpecialTicketGeneratorController">
+    <children>
+        <ImageView fitHeight="59.0" fitWidth="255.0" pickOnBounds="true" preserveRatio="true">
+            <image>
+                <Image url="@../../images/easv_logo.png" />
+            </image>
+            <VBox.margin>
+                <Insets bottom="10.0" top="10.0" />
+            </VBox.margin>
+        </ImageView>
+        <Label text="First name" />
+        <TextField fx:id="txtFieldCustomerFirstName" prefHeight="26.0" prefWidth="254.0" />
+        <Label text="Last name" />
+        <TextField fx:id="txtFieldCustomerLastName" />
+        <Label text="Ticket type" />
+        <HBox alignment="CENTER_LEFT" prefHeight="100.0" prefWidth="200.0" spacing="25.0">
+            <children>
+                <ComboBox fx:id="comboBoxTicketTypes" prefHeight="26.0" prefWidth="288.0" style="-fx-background-color: white;" />
+            </children>
+        </HBox>
+        <Button mnemonicParsing="false" style="-fx-background-color: #9CE2FF; -fx-border-radius: 5; -fx-background-radius: 5;" text="Generate">
+            <VBox.margin>
+                <Insets top="25.0" />
+            </VBox.margin>
+            <padding>
+                <Insets bottom="10.0" left="15.0" right="15.0" top="10.0" />
+            </padding>
+            <cursor>
+                <Cursor fx:constant="HAND" />
+            </cursor>
+        </Button>
+    </children>
+    <padding>
+        <Insets bottom="100.0" left="35.0" right="35.0" />
+    </padding>
+</VBox>
