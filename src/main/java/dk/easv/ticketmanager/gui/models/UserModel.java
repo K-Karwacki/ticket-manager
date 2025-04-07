@@ -5,6 +5,8 @@ import dk.easv.ticketmanager.dal.entities.User;
 import javafx.beans.property.SimpleLongProperty;
 import javafx.beans.property.SimpleObjectProperty;
 import javafx.beans.property.SimpleStringProperty;
+import javafx.scene.image.Image;
+import javafx.scene.paint.ImagePattern;
 
 public class UserModel
 {
@@ -16,6 +18,8 @@ public class UserModel
   private final SimpleStringProperty email = new SimpleStringProperty();
   private final SimpleStringProperty phoneNumber = new SimpleStringProperty();
   private final SimpleStringProperty password = new SimpleStringProperty();
+  private final SimpleObjectProperty<Image> image = new SimpleObjectProperty<>();
+
   private String loggedSessionToken;
 
   public UserModel(){
@@ -26,6 +30,7 @@ public class UserModel
     lastName.set(null);
     email.set(null);
     phoneNumber.set(null);
+    image.set(null);
     loggedSessionToken = null;
   }
 
@@ -37,6 +42,7 @@ public class UserModel
     lastName.set(user.getLastName());
     email.set(user.getEmail());
     phoneNumber.set(user.getPhoneNumber());
+    image.set(user.getUserImage());
     password.set(null);
     loggedSessionToken = null;
   }
@@ -159,5 +165,14 @@ public class UserModel
   public void setLoggedSessionToken(String loggedSessionToken)
   {
     this.loggedSessionToken = loggedSessionToken;
+  }
+
+  public Image getImage()
+  {
+    return image.get();
+  }
+
+  public SimpleObjectProperty<Image> imageProperty(){
+    return image;
   }
 }

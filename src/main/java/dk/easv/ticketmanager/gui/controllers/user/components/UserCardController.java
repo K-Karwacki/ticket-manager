@@ -31,7 +31,7 @@ public class UserCardController
 
 
 
-   private UserModel userModel;
+  private UserModel userModel;
 
 
   public void setUserModel(UserModel userModel)
