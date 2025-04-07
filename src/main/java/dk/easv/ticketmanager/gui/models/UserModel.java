@@ -5,6 +5,8 @@ import dk.easv.ticketmanager.be.User;
 import javafx.beans.property.SimpleLongProperty;
 import javafx.beans.property.SimpleObjectProperty;
 import javafx.beans.property.SimpleStringProperty;
+import javafx.beans.value.ObservableValue;
+import javafx.scene.image.Image;
 import jdk.dynalink.support.SimpleRelinkableCallSite;
 
 import java.util.Objects;
@@ -19,6 +21,7 @@ public class UserModel
   private final SimpleStringProperty email = new SimpleStringProperty();
   private final SimpleStringProperty phoneNumber = new SimpleStringProperty();
   private final SimpleStringProperty password = new SimpleStringProperty();
+  private final SimpleObjectProperty<Image> image = new SimpleObjectProperty<>();
   private String loggedSessionToken;
 
   public UserModel(){
@@ -33,6 +36,7 @@ public class UserModel
   }
 
   public UserModel(User user){
+    image.set(user.getUserImage());
     ID.set(user.getId());
     role.set(user.getRole());
     fullName.set(user.getFullName());
@@ -78,6 +82,12 @@ public class UserModel
   public SimpleStringProperty phoneNumberProperty(){
     return phoneNumber;
   }
+  public SimpleStringProperty nameProperty(){
+    return name;
+  }
+  public SimpleStringProperty lastNameProperty(){
+    return lastName;
+  }
 
     public void setFirstName(String firstName) {
     fullName.set(firstName);
@@ -103,5 +113,9 @@ public class UserModel
   public String getPassword()
   {
     return password.get();
+  }
+
+  public SimpleObjectProperty<Image> imageProperty() {
+    return image;
   }
 }

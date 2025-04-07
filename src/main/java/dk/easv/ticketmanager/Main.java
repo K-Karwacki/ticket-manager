@@ -44,11 +44,12 @@ public class Main extends Application
 
   protected final TicketManagementService ticketManagementService = new TicketManagementServiceImpl(repositoryService, authorizationService);
   protected final EventManagementService eventManagementService = new EventManagementServiceImpl(repositoryService, authorizationService);
-  protected final UserManagementService userManagementService = new UserManagementServiceImpl(repositoryService, authorizationService);
+  protected final UserManagementService userManagementService = new UserManagementServiceImpl(repositoryService, authorizationService, authenticationService);
 
   private void setControllersDependencies(){
     LoginWindowController loginWindowController = (LoginWindowController) fxmlManager.getFXML(FXMLPath.LOGIN).getValue();
     EventEditorController eventEditorController = (EventEditorController) fxmlManager.getFXML(FXMLPath.EVENT_EDITOR_POPUP).getValue();
+    UserCreatorController userCreatorController = (UserCreatorController) fxmlManager.getFXML(FXMLPath.USER_CREATOR_POPUP).getValue();
     EventDetailsController eventDetailsController = (EventDetailsController)  fxmlManager.getFXML(FXMLPath.EVENT_DETAILS).getValue();
     EventCreatorController eventCreatorPopupController = (EventCreatorController)   fxmlManager.getFXML(FXMLPath.EVENT_CREATOR_POPUP).getValue();
     EventHomeController eventHomeController = (EventHomeController) fxmlManager.getFXML(FXMLPath.EVENTS_DASHBOARD).getValue();
@@ -57,9 +58,11 @@ public class Main extends Application
     TicketController ticketController = (TicketController) fxmlManager.getFXML(FXMLPath.TICKET_COMPONENT).getValue();
     ImageSelectorController imageSelectorController = (ImageSelectorController) fxmlManager.getFXML(FXMLPath.IMAGE_SELECTOR_POPUP).getValue();
     ChartComponentController chartComponentController = (ChartComponentController) fxmlManager.getFXML(FXMLPath.CHART_COMPONENT).getValue();
-    loginWindowController.setAuthenticationService(authenticationService);
+    UserHomeController userHomeController = (UserHomeController) fxmlManager.getFXML(FXMLPath.USERS_DASHBOARD).getValue();
+    loginWindowController.setAuthenticationService(authenticationService, authenticationService, userManagementService);
 
     loginWindowController.setServices(authenticationService);
+    userHomeController.setServices(userManagementService);
     eventEditorController.setServices(eventManagementService);
     eventDetailsController.setServices(eventManagementService);
     eventCreatorPopupController.setServices(eventManagementService);
@@ -68,6 +71,7 @@ public class Main extends Application
     ticketGeneratorController.setServices(ticketManagementService);
     ticketController.setServices(ticketManagementService);
     imageSelectorController.setServices(eventManagementService);
+    userCreatorController.setServices(userManagementService, authorizationService, authenticationService);
     chartComponentController.setServices(ticketManagementService);
   }
 
