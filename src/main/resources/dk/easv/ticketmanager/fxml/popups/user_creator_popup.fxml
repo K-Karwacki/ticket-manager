@@ -11,7 +11,7 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 
-<VBox fx:id="formRoot" alignment="CENTER_LEFT" prefHeight="650.0" prefWidth="361.0" styleClass="container" stylesheets="@../../style/components/form.css" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="dk.easv.ticketmanager.gui.controllers.user.popup.UserCreatorController">
+<VBox fx:id="formRoot" alignment="CENTER_LEFT" prefHeight="650.0" prefWidth="361.0" styleClass="container" stylesheets="@../../style/components/form.css" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="dk.easv.ticketmanager.gui.controllers.user.popup.UserCreatorController">
    <ImageView fitHeight="59.0" fitWidth="255.0" pickOnBounds="true" preserveRatio="true">
       <image>
          <Image url="@../../images/easv_logo.png" />
@@ -33,7 +33,7 @@
      <PasswordField fx:id="passwordField" />
    <HBox alignment="CENTER_LEFT" prefHeight="100.0" prefWidth="200.0" spacing="75.0">
       <children>
-         <Label text="Role:" />
+         <Label prefHeight="17.0" prefWidth="47.0" text="Role:" />
       
              <ComboBox fx:id="roleComboBox" promptText="Select" style="-fx-background-color: #FFDF99;" />
       </children>

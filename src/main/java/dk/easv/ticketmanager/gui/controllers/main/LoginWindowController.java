@@ -2,6 +2,7 @@ package dk.easv.ticketmanager.gui.controllers.main;
 
 
 import dk.easv.ticketmanager.bll.services.interfaces.AuthenticationService;
+import dk.easv.ticketmanager.bll.services.interfaces.UserManagementService;
 import dk.easv.ticketmanager.gui.FXMLPath;
 import dk.easv.ticketmanager.gui.ViewManager;
 import dk.easv.ticketmanager.gui.models.UserSession;
@@ -105,4 +106,8 @@ public class LoginWindowController
       textFieldPassword.setManaged(false);
     }
   }
+
+    public void setAuthenticationService(AuthenticationService authenticationService, AuthenticationService authenticationService1, UserManagementService userManagementService) {
+      this.authenticationService = authenticationService;
+    }
 }

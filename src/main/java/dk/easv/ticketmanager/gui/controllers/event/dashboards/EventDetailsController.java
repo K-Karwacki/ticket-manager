@@ -99,7 +99,7 @@ public class EventDetailsController implements Initializable {
         lblEventLocation.setText(event.getLocation().toString());
         lblEventDescription.textProperty().bind(event.descriptionProperty());
         lblEventName.textProperty().bind(event.nameProperty());
-//        Image image = event.getImage().get();
+//        Image image = event.imageProperty().get();
 //        ImagePattern imagePattern = new ImagePattern(image);
         rectangleImageContainer.setFill(event.getImage());
     }

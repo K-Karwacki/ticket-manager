@@ -1,10 +1,12 @@
 package dk.easv.ticketmanager.dal.entities;
 
+import dk.easv.ticketmanager.Main;
 import dk.easv.ticketmanager.utils.ImageConverter;
 import jakarta.persistence.*;
 import javafx.scene.image.Image;
 
 import java.util.HashSet;
+import java.util.Objects;
 import java.util.Set;
 
 @Entity
@@ -113,7 +115,7 @@ public class User {
         try {
             return ImageConverter.convertToImage(imageData);
         } catch (Exception e) {
-            return new Image("images/event-template.jpg"); // Fallback image
+            return new Image(Objects.requireNonNull(Main.class.getResourceAsStream("images/user-template.png"))); // Fallback image
         }
     }
 
