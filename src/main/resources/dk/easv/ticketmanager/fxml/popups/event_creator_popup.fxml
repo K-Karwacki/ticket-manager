@@ -12,6 +12,7 @@
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.StackPane?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
@@ -26,8 +27,11 @@
             </Button>
          </children>
          <padding>
-            <Insets bottom="20.0" left="66.0" top="33.0" />
+            <Insets bottom="10.0" top="10.0" />
          </padding>
+         <VBox.margin>
+            <Insets bottom="33.0" left="33.0" />
+         </VBox.margin>
       </HBox>
       <ScrollPane fitToWidth="true" focusTraversable="false" hbarPolicy="NEVER" maxHeight="-Infinity" pannable="true" prefHeight="669.0" styleClass="dashboard-root" stylesheets="@../../style/dashboard/dashboard.css" vbarPolicy="ALWAYS">
          <content>
@@ -37,7 +41,7 @@
                      <children>
                         <VBox fx:id="formContainer" HBox.hgrow="ALWAYS">
                            <children>
-                              <Label prefWidth="420.0" style="-fx-background-color: #9CE2FF #9CE2FF;" text="Details about event" textFill="#323232">
+                              <Label prefHeight="62.0" prefWidth="200.0" style="-fx-background-color: #9CE2FF #9CE2FF;" text="Event info" textFill="#323232">
                                  <font>
                                     <Font name="Verdana" size="33.0" />
                                  </font>
@@ -141,29 +145,21 @@
                         </VBox>
                         <VBox layoutX="788.0" layoutY="10.0" styleClass="dashboard-root" HBox.hgrow="ALWAYS">
                            <children>
-                              <Label prefWidth="420.0" style="-fx-background-color: #9CE2FF #9CE2FF #9CE2FF #9CE2FF;" text="Details about tickets" textFill="#323232">
+                              <Label prefHeight="62.0" prefWidth="200.0" style="-fx-background-color: #9CE2FF #9CE2FF;" text="Tickets" textFill="#323232">
                                  <font>
                                     <Font name="Verdana" size="33.0" />
                                  </font>
-                                 <VBox.margin>
-                                    <Insets />
-                                 </VBox.margin>
                                  <padding>
                                     <Insets bottom="10.0" left="13.0" top="10.0" />
                                  </padding>
                               </Label>
-                              <Label layoutX="27.0" layoutY="32.0" text="Tickets for this event:">
-                                 <font>
-                                    <Font name="Geeza Pro Regular" size="24.0" />
-                                 </font>
+                              <ListView fx:id="ticketListView" prefHeight="200.0" prefWidth="420.0">
                                  <VBox.margin>
-                                    <Insets bottom="10.0" top="25.0" />
-                                 </VBox.margin>
-                              </Label>
-                              <ListView prefHeight="200.0" prefWidth="420.0" />
+                                    <Insets top="25.0" />
+                                 </VBox.margin></ListView>
                               <HBox alignment="CENTER">
                                  <children>
-                                    <Button mnemonicParsing="false" onAction="#chooseImage" prefWidth="142.0" style="-fx-background-color: #FFE7B1; -fx-border-color: black; -fx-border-radius: 5;" text="Add new ticket" textAlignment="CENTER">
+                                    <Button mnemonicParsing="false" onAction="#onClickOpenAddTicket" prefWidth="142.0" style="-fx-background-color: #FFE7B1; -fx-border-color: black; -fx-border-radius: 5;" text="Add new ticket" textAlignment="CENTER">
                                        <cursor>
                                           <Cursor fx:constant="HAND" />
                                        </cursor>
@@ -212,11 +208,15 @@
                      <VBox.margin>
                         <Insets />
                      </VBox.margin>
-                     <padding>
-                        <Insets left="66.0" right="66.0" top="33.0" />
-                     </padding>
                   </HBox>
-                  <HBox fx:id="assignedCoordinatorsContainer" prefWidth="200.0" />
+                  <StackPane fx:id="assignedCoordinatorsContainer">
+                     <VBox.margin>
+                        <Insets />
+                     </VBox.margin>
+                     <padding>
+                        <Insets bottom="33.0" top="33.0" />
+                     </padding>
+                  </StackPane>
                   <HBox alignment="CENTER" layoutX="40.0" layoutY="58.0">
                      <children>
                         <VBox alignment="CENTER" spacing="10.0">
@@ -248,6 +248,12 @@
                </children>
             </VBox>
          </content>
+         <padding>
+            <Insets left="33.0" right="33.0" />
+         </padding>
       </ScrollPane>
    </children>
+   <padding>
+      <Insets bottom="33.0" left="33.0" right="33.0" top="33.0" />
+   </padding>
 </VBox>

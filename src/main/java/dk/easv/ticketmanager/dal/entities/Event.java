@@ -1,16 +1,15 @@
-package dk.easv.ticketmanager.be;
+package dk.easv.ticketmanager.dal.entities;
 
-import dk.easv.ticketmanager.gui.models.EventModel;
-import dk.easv.ticketmanager.utils.ImageConverter;
+import dk.easv.ticketmanager.gui.models.event.EventModel;
 import jakarta.persistence.*;
 
-import java.io.IOException;
 import java.time.LocalDate;
 import java.time.LocalTime;
+import java.util.HashSet;
 import java.util.Set;
 
 @Entity
-@Table(name = "Event")
+@Table(name = "event")
 public class Event {
   @Id
   @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -39,8 +38,16 @@ public class Event {
   @JoinColumn(name = "location_id")
   private Location location;
 
-  @ManyToMany(mappedBy = "coordinatingEvents")
-  private Set<User> coordinators;
+  @ManyToMany
+  @JoinTable(
+      name = "event_coordinators",
+      joinColumns = @JoinColumn(name = "event_id"),
+      inverseJoinColumns = @JoinColumn(name = "coordinator_id")
+  )
+  private Set<User> coordinators = new HashSet<>();
+
+  @OneToMany(mappedBy = "event", cascade = CascadeType.ALL, orphanRemoval = true)
+  private final Set<Ticket> tickets = new HashSet<>();
 
 
   public Event(){};
@@ -51,6 +58,7 @@ public class Event {
     setDate(eventModel.dateProperty().get());
     setDescription(eventModel.descriptionProperty().get());
     setTime(eventModel.timeProperty().get());
+//    setCoordinators();
 //    setEventImage(eventModel.getEventImage());
 
   }
@@ -142,5 +150,14 @@ public class Event {
   public EventImage getEventImage()
   {
     return eventImage;
+  }
+
+  public void addTicket(Ticket ticket){
+    this.tickets.add(ticket);
+  }
+
+  public Set<Ticket> getTickets()
+  {
+    return tickets;
   }
 }

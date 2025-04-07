@@ -1,22 +1,18 @@
-package dk.easv.ticketmanager.gui.models;
+package dk.easv.ticketmanager.gui.models.event;
 
-import dk.easv.ticketmanager.be.Event;
-import dk.easv.ticketmanager.be.EventImage;
-import dk.easv.ticketmanager.be.User;
+import dk.easv.ticketmanager.dal.entities.Event;
+import dk.easv.ticketmanager.dal.entities.EventImage;
+import dk.easv.ticketmanager.gui.models.UserModel;
 import dk.easv.ticketmanager.utils.ImageConverter;
 import javafx.beans.property.*;
 import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
 import javafx.collections.ObservableSet;
 import javafx.scene.image.Image;
 import javafx.scene.paint.ImagePattern;
 
-import java.io.IOException;
 import java.time.LocalDate;
 import java.time.LocalTime;
-import java.util.Collection;
 import java.util.Objects;
-import java.util.stream.Collectors;
 
 public class EventModel {
   private final SimpleLongProperty ID = new SimpleLongProperty();
@@ -28,6 +24,7 @@ public class EventModel {
   private final SimpleObjectProperty<LocationModel> location = new SimpleObjectProperty<>();
   private final SimpleObjectProperty<EventImage> eventImage = new SimpleObjectProperty<>();
   private final SimpleSetProperty<UserModel> assignedCoordinators = new SimpleSetProperty<>();
+  private final SimpleSetProperty<TicketModel> tickets = new SimpleSetProperty<>();
 
 
 
@@ -40,6 +37,7 @@ public class EventModel {
     this.image.set(null);
     this.location.set(new LocationModel());
     this.assignedCoordinators.set(FXCollections.observableSet());
+    this.tickets.set(FXCollections.observableSet());
   }
 
   public EventModel(Event event){
@@ -130,6 +128,17 @@ public class EventModel {
     return assignedCoordinators.get();
   }
 
+  public ObservableSet<TicketModel> getTickets()
+  {
+    return tickets.get();
+  }
 
+  public void addTicket(TicketModel ticketModel){
+    tickets.add(ticketModel);
+  }
+
+  public void removeTicket(TicketModel ticketModel){
+    tickets.remove(ticketModel);
+  }
 }
 

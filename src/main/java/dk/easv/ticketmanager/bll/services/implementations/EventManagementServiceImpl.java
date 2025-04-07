@@ -1,24 +1,23 @@
 package dk.easv.ticketmanager.bll.services.implementations;
 
-import dk.easv.ticketmanager.be.Event;
-import dk.easv.ticketmanager.be.EventImage;
-import dk.easv.ticketmanager.be.Location;
-import dk.easv.ticketmanager.be.User;
+import dk.easv.ticketmanager.dal.entities.*;
 import dk.easv.ticketmanager.bll.services.interfaces.AuthorizationService;
 import dk.easv.ticketmanager.bll.services.interfaces.EventManagementService;
 import dk.easv.ticketmanager.bll.services.factories.RepositoryService;
 import dk.easv.ticketmanager.dal.repositories.EventRepository;
-import dk.easv.ticketmanager.gui.models.EventListModel;
-import dk.easv.ticketmanager.gui.models.EventModel;
+import dk.easv.ticketmanager.dal.repositories.TicketRepository;
+import dk.easv.ticketmanager.dal.repositories.UserRepository;
+import dk.easv.ticketmanager.gui.models.CustomerModel;
+import dk.easv.ticketmanager.gui.models.UserModel;
+import dk.easv.ticketmanager.gui.models.event.TicketModel;
+import dk.easv.ticketmanager.gui.models.lists.EventListModel;
+import dk.easv.ticketmanager.gui.models.event.EventModel;
 import dk.easv.ticketmanager.utils.ImageConverter;
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
-import javafx.collections.ObservableSet;
 import javafx.scene.image.Image;
+import javafx.util.Pair;
 
 import java.io.IOException;
 import java.util.*;
-import java.util.stream.Collectors;
 
 public class EventManagementServiceImpl implements EventManagementService {
     private final RepositoryService repositoryService;
@@ -67,6 +66,26 @@ public class EventManagementServiceImpl implements EventManagementService {
         newEvent.setDate(eventModel.dateProperty().get());
         newEvent.setDescription(eventModel.descriptionProperty().get());
 
+        for (TicketModel ticketModel : eventModel.getTickets()) {
+            Ticket newTicketForEvent = new Ticket();
+            newTicketForEvent.setInfo(ticketModel.getInfo());
+            newTicketForEvent.setPrice(ticketModel.getPrice());
+            newTicketForEvent.setType(ticketModel.getType());
+            newTicketForEvent.setEvent(newEvent);
+
+            newEvent.addTicket(newTicketForEvent);
+        }
+
+        for (UserModel assignedCoordinator : eventModel.getAssignedCoordinators())
+        {
+            Optional<User> assignedCoordinatorFetched = repositoryService.getRepository(
+                UserRepository.class).getById(assignedCoordinator.getID());
+            System.out.println("found two " + assignedCoordinatorFetched.get().getId());
+            assignedCoordinatorFetched.ifPresent(
+                newEvent::assignCoordinatorToEvent);
+        }
+
+
         Event saved = eventRepository.save(newEvent);
         if (saved == null) {
             throw new RuntimeException("Error creating new event");
@@ -111,6 +130,61 @@ public class EventManagementServiceImpl implements EventManagementService {
         }
     }
 
+    @Override public Set<TicketModel> getTicketsForEvent(EventModel eventModel)
+    {
+        Set<TicketModel> ticketModelHashSet = new HashSet<>();
+        try{
+            for (Ticket ticket : repositoryService.getRepository(
+                    TicketRepository.class)
+                .getTicketsForEventID(eventModel.getID()))
+            {
+                ticketModelHashSet.add(new TicketModel(ticket));
+            }
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+        return ticketModelHashSet;
+    }
+
+    @Override public boolean addTicketToEvent(TicketModel ticketModel,
+        EventModel eventModel)
+    {
+        try{
+            eventModel.addTicket(ticketModel);
+            Ticket ticketToSave = new Ticket();
+            Optional<Event> event = eventRepository.getById(eventModel.getID());
+
+            if(event.isEmpty()){
+                System.out.println("no event with given id");
+                return false;
+            }
+
+            ticketToSave.setEvent(event.get());
+            repositoryService.getRepository(TicketRepository.class).save(ticketToSave);
+            return true;
+        }catch (Exception e){
+            return false;
+        }
+    }
+
+    @Override public boolean removeTicketFromEvent(TicketModel ticketModel,
+        EventModel eventModel)
+    {
+        return false;
+    }
+
+    @Override public boolean generateTicketsForCustomer(TicketModel ticketModel,
+        CustomerModel customerModel)
+    {
+        return false;
+    }
+
+    @Override public boolean sendTicketsViaEmailToCustomer(
+        TicketModel ticketModel, CustomerModel customerModel)
+    {
+        return false;
+    }
+
     @Override
     public boolean deleteEvent(EventModel eventModel) {
         try {
@@ -124,29 +198,28 @@ public class EventManagementServiceImpl implements EventManagementService {
     }
 
 
-    @Override
-    public void setEventListModel() {
-        List<Event> events = eventRepository.getAll().stream().toList();
-        List<EventModel> list = new ArrayList<>();
-        for (Event event : events) {
-            EventModel eventModel = new EventModel(event);
-            list.add(eventModel);
-        }
-        List<EventModel> eventModels = new ArrayList<>(list);
-        eventListModel.setEvents(eventModels);
-    }
-
-    @Override
-    public Optional<Event> getEventById(long ID){
-        return this.repositoryService.getRepository(EventRepository.class).getById(ID);
-    };
+//    @Override
+//    public void setEventListModel() {
+//        List<Event> events = eventRepository.getAll().stream().toList();
+//        List<EventModel> list = new ArrayList<>();
+//        for (Event event : events) {
+//            EventModel eventModel = new EventModel(event);
+//            list.add(eventModel);
+//        }
+//        List<EventModel> eventModels = new ArrayList<>(list);
+//        eventListModel.setEvents(eventModels);
+//    }
+//
+//    @Override
+//    public Optional<Event> getEventById(long ID){
+//        return this.repositoryService.getRepository(EventRepository.class).getById(ID);
+//    };
 
     @Override
     public List<Image> getAllImages(){
         List<Image> imageList = new ArrayList<>();
         for (EventImage eventImage : eventListModel.getEventImagesObservable())
         {
-            System.out.println(eventImage);
             imageList.add(ImageConverter.convertToImage(eventImage.getImageData()));
         }
         return imageList;

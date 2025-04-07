@@ -1,10 +1,9 @@
 package dk.easv.ticketmanager.dal.repositories;
 
-import dk.easv.ticketmanager.be.Event;
-import dk.easv.ticketmanager.be.EventImage;
-import dk.easv.ticketmanager.be.Location;
-import dk.easv.ticketmanager.be.User;
-import javafx.scene.image.Image;
+import dk.easv.ticketmanager.dal.entities.Event;
+import dk.easv.ticketmanager.dal.entities.EventImage;
+import dk.easv.ticketmanager.dal.entities.Location;
+import dk.easv.ticketmanager.dal.entities.User;
 
 import java.io.IOException;
 import java.util.List;

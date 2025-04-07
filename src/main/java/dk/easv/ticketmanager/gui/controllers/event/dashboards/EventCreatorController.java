@@ -6,23 +6,31 @@ import dk.easv.ticketmanager.gui.FXMLPath;
 import dk.easv.ticketmanager.gui.ViewManager;
 import dk.easv.ticketmanager.gui.controllers.event.popups.AssignCoordinatorController;
 import dk.easv.ticketmanager.gui.controllers.event.popups.ImageSelectorController;
-import dk.easv.ticketmanager.gui.models.EventModel;
-import dk.easv.ticketmanager.gui.models.LocationModel;
+import dk.easv.ticketmanager.gui.controllers.event.popups.TicketCreatorController;
+import dk.easv.ticketmanager.gui.controllers.user.CoordinatorCardController;
+import dk.easv.ticketmanager.gui.models.event.EventModel;
+import dk.easv.ticketmanager.gui.models.event.LocationModel;
 import dk.easv.ticketmanager.gui.models.UserModel;
+import dk.easv.ticketmanager.gui.models.event.TicketModel;
 import dk.easv.ticketmanager.utils.FieldValidator;
 import dk.easv.ticketmanager.utils.ImageConverter;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.collections.SetChangeListener;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.scene.control.DatePicker;
-import javafx.scene.control.Label;
+import javafx.scene.Parent;
+import javafx.scene.control.*;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
+import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
+import javafx.util.Pair;
 
+import java.awt.*;
 import java.time.LocalTime;
 
 import static dk.easv.ticketmanager.gui.FXMLPath.*;
@@ -33,7 +41,7 @@ public class EventCreatorController {
     private EventManagementService eventManagementService;
 
     @FXML
-    private HBox assignedCoordinatorsContainer;
+    private StackPane assignedCoordinatorsContainer;
     @FXML
     private VBox formContainer;
     @FXML
@@ -55,33 +63,37 @@ public class EventCreatorController {
     @FXML
     private TextField txtFieldEventPostalCode;
 
+    @FXML
+    private ListView<TicketModel> ticketListView;
+
     public void setServices(EventManagementService eventManagementService) {
         this.eventManagementService = eventManagementService;
+    }
+
+    @FXML
+    private void initialize(){
+        // Listen on assigned coordinators
         eventModel.getAssignedCoordinators().addListener((SetChangeListener<UserModel>) change ->{
             if(change.wasAdded() || change.wasRemoved()){
                 loadAssignedCoordinators();
             }
         } );
+
+        // Listen on added tickets
+        eventModel.getTickets().addListener((SetChangeListener<TicketModel>) change->{
+            if(change.wasAdded() || change.wasRemoved()){
+                loadCreatedTickets();
+            }
+        });
     }
 
-    @FXML
-    private void initialize(){
-        // Bind event creation form fields with event model properties
-//        Bindings.bindBidirectional(txtFieldEventName.textProperty(), eventModel.nameProperty());
-//        Bindings.bindBidirectional(txtAreaEventDescription.textProperty(), eventModel.descriptionProperty());
-//        Bindings.bindBidirectional(txtFieldEventTime.textProperty(), eventModel.timeProperty(), new LocalTimeStringConverter(DateTimeFormatter.ISO_LOCAL_TIME, null));
-//        Bindings.bindBidirectional(datePickerEventDate.valueProperty(), eventModel.dateProperty());
-//        Bindings.bindBidirectional(txtFieldEventLocationName.textProperty(), eventModel.locationProperty().get()
-//            .nameProperty());
-//        Bindings.bindBidirectional(txtFieldEventAddress.textProperty(), eventModel.locationProperty().get()
-//            .addressProperty());
-//        Bindings.bindBidirectional(txtFieldEventCity.textProperty(), eventModel.locationProperty().getValue()
-//            .cityProperty());
-//        Bindings.bindBidirectional(txtFieldEventPostalCode.textProperty(), eventModel.locationProperty().get()
-//            .post_codeProperty());
-
+    // Method to load the tickets
+    private void loadCreatedTickets(){
+        ObservableList<TicketModel> ticketModels = FXCollections.observableArrayList(eventModel.getTickets());
+        ticketListView.setItems(ticketModels);
     }
 
+    // Method to load the coordinators
     private void loadAssignedCoordinators(){
         assignedCoordinatorsContainer.getChildren().removeAll();
         assignedCoordinatorsContainer.getChildren().clear();
@@ -89,13 +101,19 @@ public class EventCreatorController {
 //        assignedCoordinatorsContainer.getChildren().addAll(eventModel.getAssignedCoordinators());
         for (UserModel assignedCoordinator : eventModel.getAssignedCoordinators())
         {
-            assignedCoordinatorsContainer.getChildren().add(new Label(assignedCoordinator.getName()));
+            Pair<Parent, CoordinatorCardController> coordinatorCardPair = FXMLManager.INSTANCE.getFXML(
+                COORDINATOR_CARD_COMPONENT);
+            coordinatorCardPair.getValue().setModel(assignedCoordinator, this.eventModel);
+            assignedCoordinatorsContainer.getChildren().add(coordinatorCardPair.getKey());
         }
     }
 
-    // Method on click submit
+
+    // Method on click submit new event and try save data to db via event management service
     @FXML
-    private void onClickSubmit(ActionEvent actionEvent) {
+    private void onClickSubmit() {
+        System.out.println(eventModel.getTickets().size());
+
         boolean fieldsFilled = FieldValidator.areAllFieldsFilled(formContainer);
         if(!fieldsFilled){
             System.out.println("ERROR fill all fields");
@@ -111,25 +129,34 @@ public class EventCreatorController {
             return;
         }
 
+        if(eventModel.getTickets().size() < 1){
+            System.out.println("ERROR please create at least one ticket");
+            return;
+        }
+
         eventModel.setName(txtFieldEventName.getText());
         eventModel.setDescription(txtAreaEventDescription.getText());
         eventModel.setDate(datePickerEventDate.getValue());
         eventModel.setTime(LocalTime.parse(txtFieldEventTime.getText()));
+
         LocationModel locationModel = new LocationModel();
         locationModel.setCity(txtFieldEventCity.getText());
         locationModel.setAddress(txtFieldEventAddress.getText());
         locationModel.setPost_code(txtFieldEventPostalCode.getText());
         locationModel.setName(txtFieldEventLocationName.getText());
+
         eventModel.setLocation(locationModel);
 
+        // calls service. If true reset fields and switch dashboard
         if(eventManagementService.createNewEvent(eventModel)){
             //reset the model
             eventModel = new EventModel();
+            ticketListView.getItems().clear();
+            assignedCoordinatorsContainer.getChildren().clear();
             imageViewSelectedImage.setImage(null);
             FieldValidator.clearFields(formContainer);
             ViewManager.INSTANCE.switchDashboard(EVENTS_DASHBOARD, "Events");
         }
-
     }
 
 
@@ -152,6 +179,11 @@ public class EventCreatorController {
         assignCoordinatorController.setEventModel(eventModel);
     }
 
+    @FXML private void onClickOpenAddTicket(){
+        ViewManager.INSTANCE.showPopup(FXMLPath.TICKET_CREATOR_POPUP, "Add ticket");
+        TicketCreatorController ticketCreatorController = (TicketCreatorController) FXMLManager.INSTANCE.getFXML(TICKET_CREATOR_POPUP).getValue();
+        ticketCreatorController.setEvent(eventModel);
+    }
 
 
 }

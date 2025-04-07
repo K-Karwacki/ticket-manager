@@ -2,9 +2,8 @@ package dk.easv.ticketmanager.gui.controllers.event.popups;
 
 
 import dk.easv.ticketmanager.bll.services.interfaces.EventManagementService;
-import dk.easv.ticketmanager.gui.models.EventModel;
+import dk.easv.ticketmanager.gui.models.event.EventModel;
 import javafx.beans.binding.Bindings;
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.util.converter.LocalTimeStringConverter;

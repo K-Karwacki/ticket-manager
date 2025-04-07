@@ -1,4 +1,4 @@
-package dk.easv.ticketmanager.be;
+package dk.easv.ticketmanager.dal.entities;
 
 import jakarta.persistence.*;
 

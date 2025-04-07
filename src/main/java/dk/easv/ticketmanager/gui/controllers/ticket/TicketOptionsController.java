@@ -1,6 +1,6 @@
 package dk.easv.ticketmanager.gui.controllers.ticket;
 
-import dk.easv.ticketmanager.be.Ticket;
+import dk.easv.ticketmanager.dal.entities.Ticket;
 import dk.easv.ticketmanager.bll.services.EmailSenderService;
 import javafx.embed.swing.SwingFXUtils;
 import javafx.event.ActionEvent;
@@ -42,13 +42,13 @@ public class TicketOptionsController {
         btn.getStyleClass().remove("blueBtn");
         btn.getStyleClass().add("orangeBtn");
         btn.setText("Email sent!");
-        String recipient = ticket.getCustomer().getEmail();
+//        String recipient = ticket.getCustomer().getEmail();
         String ticketName = ticket.getEvent().getName() + " Ticket";
         Image ticketImage = imgViewTicket.getImage();
         BufferedImage bufferedImage = SwingFXUtils.fromFXImage(ticketImage, null);
         File ticketFile = new File("src/main/resources/dk/easv/ticketmanager/images/ticket.png");
         ImageIO.write(bufferedImage, "png", ticketFile);
-        emailSenderService.sendEmail(recipient, ticketFile, ticketName);
+//        emailSenderService.sendEmail(recipient, ticketFile, ticketName);
 
     }
 

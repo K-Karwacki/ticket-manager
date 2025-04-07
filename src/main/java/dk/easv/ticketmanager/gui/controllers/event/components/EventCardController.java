@@ -1,19 +1,18 @@
 package dk.easv.ticketmanager.gui.controllers.event.components;
 
+import dk.easv.ticketmanager.bll.services.interfaces.EventManagementService;
 import dk.easv.ticketmanager.gui.FXMLManager;
 import dk.easv.ticketmanager.gui.FXMLPath;
 import dk.easv.ticketmanager.gui.ViewManager;
 import dk.easv.ticketmanager.gui.controllers.event.dashboards.EventDetailsController;
-import dk.easv.ticketmanager.gui.models.EventModel;
+import dk.easv.ticketmanager.gui.models.event.EventModel;
 import javafx.beans.binding.Bindings;
 import javafx.fxml.FXML;
 import javafx.scene.Parent;
 import javafx.scene.control.Label;
-import javafx.scene.paint.ImagePattern;
 import javafx.scene.shape.Rectangle;
 import javafx.util.Pair;
 
-import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 
 public class EventCardController
@@ -21,6 +20,7 @@ public class EventCardController
   private final ViewManager viewManager = ViewManager.INSTANCE;
   private final FXMLManager fxmlManager = FXMLManager.INSTANCE;
   private EventModel eventModel;
+  private EventManagementService eventManagementService;
 
   @FXML private Rectangle eventImageContainer;
   @FXML private Label eventNameLbl;
@@ -35,12 +35,16 @@ public class EventCardController
     eventModel = null;
   }
 
-
+  public void setServices(EventManagementService eventManagementService)
+  {
+    this.eventManagementService = eventManagementService;
+  }
 
   @FXML
   private void openEvent(){
     Pair<Parent, EventDetailsController> p = fxmlManager.getFXML(FXMLPath.EVENT_DETAILS);
     p.getValue().setEventDetails(eventModel);
+    p.getValue().setServices(eventManagementService);
     viewManager.switchDashboard(FXMLPath.EVENT_DETAILS, "Event details");
   }
 
@@ -78,6 +82,7 @@ public class EventCardController
 //    eventImageContainer.setFill(pattern);
 
   }
+
 
 
   //  @Override public void initialize(URL location, ResourceBundle resources)

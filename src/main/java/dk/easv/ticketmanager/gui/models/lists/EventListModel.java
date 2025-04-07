@@ -1,13 +1,11 @@
-package dk.easv.ticketmanager.gui.models;
+package dk.easv.ticketmanager.gui.models.lists;
 
-import dk.easv.ticketmanager.be.Event;
-import dk.easv.ticketmanager.be.EventImage;
+import dk.easv.ticketmanager.dal.entities.EventImage;
+import dk.easv.ticketmanager.gui.models.event.EventModel;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 
 import java.util.Collection;
-import java.util.Collections;
-import java.util.List;
 
 public class EventListModel {
 

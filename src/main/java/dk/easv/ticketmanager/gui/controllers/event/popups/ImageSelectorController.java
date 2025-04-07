@@ -1,31 +1,22 @@
 package dk.easv.ticketmanager.gui.controllers.event.popups;
 
-import dk.easv.ticketmanager.be.EventImage;
+import dk.easv.ticketmanager.dal.entities.EventImage;
 import dk.easv.ticketmanager.bll.services.interfaces.EventManagementService;
 import dk.easv.ticketmanager.gui.FXMLManager;
 import dk.easv.ticketmanager.gui.ViewManager;
-import dk.easv.ticketmanager.gui.controllers.event.dashboards.EventCreatorController;
 import dk.easv.ticketmanager.utils.ImageConverter;
 import javafx.fxml.FXML;
 import javafx.scene.Cursor;
-import javafx.scene.Parent;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.FlowPane;
 import javafx.stage.FileChooser;
-import javafx.stage.Stage;
-import javafx.util.Pair;
 
-import java.awt.event.MouseEvent;
 import java.io.File;
 import java.io.FileInputStream;
-import java.io.FileNotFoundException;
 import java.io.IOException;
-import java.util.List;
-import java.util.Objects;
 import java.util.function.Consumer;
 
-import static dk.easv.ticketmanager.gui.FXMLPath.EVENT_CREATOR_POPUP;
 import static dk.easv.ticketmanager.gui.FXMLPath.IMAGE_SELECTOR_POPUP;
 
 public class ImageSelectorController

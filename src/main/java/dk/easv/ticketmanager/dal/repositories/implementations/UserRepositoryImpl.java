@@ -1,8 +1,7 @@
 package dk.easv.ticketmanager.dal.repositories.implementations;
 
-import dk.easv.ticketmanager.be.User;
+import dk.easv.ticketmanager.dal.entities.User;
 import dk.easv.ticketmanager.dal.repositories.UserRepository;
-import dk.easv.ticketmanager.utils.CustomHashSet;
 import dk.easv.ticketmanager.utils.JPAUtil;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.TypedQuery;
@@ -22,6 +21,7 @@ public class UserRepositoryImpl implements UserRepository
     private void updateCache() {
         for (User user : getAll()) {
             userMap.put(user.getId(), user);
+            System.out.println(user.getId());
         }
     }
 
@@ -35,7 +35,15 @@ public class UserRepositoryImpl implements UserRepository
 
     @Override public Optional<User> getById(long id)
     {
-        return Optional.of(userMap.get(id));
+        if(userMap.containsKey(id)){
+            return Optional.of(userMap.get(id));
+        }
+
+        try(EntityManager entityManager = JPAUtil.getEntityManager()){
+            return entityManager.createQuery("select u from User u where u.id=:userID", User.class).setParameter("userID", id).getResultStream()
+                .findFirst();
+        }
+//        return Optional.of(userMap.get(id));
     }
 
     @Override

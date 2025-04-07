@@ -1,9 +1,9 @@
-package dk.easv.ticketmanager.be;
+package dk.easv.ticketmanager.dal.entities;
 
 import jakarta.persistence.*;
 
 @Entity
-@Table(name = "EventImage")
+@Table(name = "event_image")
 public class EventImage {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

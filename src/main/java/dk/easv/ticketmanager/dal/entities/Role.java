@@ -1,9 +1,9 @@
-package dk.easv.ticketmanager.be;
+package dk.easv.ticketmanager.dal.entities;
 
 import jakarta.persistence.*;
 
 @Entity
-@Table(name = "Role")
+@Table(name = "role")
 public class Role {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

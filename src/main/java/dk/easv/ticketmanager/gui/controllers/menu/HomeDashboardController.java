@@ -1,11 +1,5 @@
 package dk.easv.ticketmanager.gui.controllers.menu;
 
-
-import dk.easv.ticketmanager.bll.services.interfaces.TicketManagementService;
-
-import dk.easv.ticketmanager.gui.controllers.components.ChartComponentController;
-import javafx.fxml.FXML;
-
 public class HomeDashboardController {
 
 //    @FXML

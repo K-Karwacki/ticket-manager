@@ -1,8 +1,7 @@
 package dk.easv.ticketmanager.dal.repositories;
 
-import dk.easv.ticketmanager.be.Permission;
-import dk.easv.ticketmanager.be.Role;
-import dk.easv.ticketmanager.be.User;
+import dk.easv.ticketmanager.dal.entities.Permission;
+import dk.easv.ticketmanager.dal.entities.Role;
 
 import java.util.List;
 import java.util.Optional;

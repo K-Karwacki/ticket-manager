@@ -1,18 +1,14 @@
 package dk.easv.ticketmanager.dal.repositories.implementations;
 
-import dk.easv.ticketmanager.be.Event;
-import dk.easv.ticketmanager.be.EventImage;
-import dk.easv.ticketmanager.be.Location;
-import dk.easv.ticketmanager.be.User;
+import dk.easv.ticketmanager.dal.entities.Event;
+import dk.easv.ticketmanager.dal.entities.EventImage;
+import dk.easv.ticketmanager.dal.entities.Location;
+import dk.easv.ticketmanager.dal.entities.User;
 import dk.easv.ticketmanager.dal.repositories.EventRepository;
-import dk.easv.ticketmanager.utils.ImageConverter;
 import dk.easv.ticketmanager.utils.JPAUtil;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.EntityTransaction;
-import jakarta.persistence.TypedQuery;
-import javafx.scene.image.Image;
 
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;

@@ -1,25 +1,21 @@
 package dk.easv.ticketmanager.gui.controllers.user.popup;
 
-import dk.easv.ticketmanager.be.Role;
-import dk.easv.ticketmanager.be.User;
+import dk.easv.ticketmanager.dal.entities.Role;
 import dk.easv.ticketmanager.bll.services.interfaces.AuthenticationService;
 import dk.easv.ticketmanager.bll.services.interfaces.UserManagementService;
 import dk.easv.ticketmanager.bll.services.interfaces.AuthorizationService;
-import dk.easv.ticketmanager.gui.models.EventModel;
+import dk.easv.ticketmanager.gui.FXMLPath;
+import dk.easv.ticketmanager.gui.ViewManager;
 import dk.easv.ticketmanager.gui.models.UserModel;
 import dk.easv.ticketmanager.utils.FieldValidator;
-import javafx.beans.property.SimpleObjectProperty;
 import javafx.fxml.FXML;
-import javafx.fxml.Initializable;
 import javafx.scene.control.*;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.VBox;
 import javafx.stage.FileChooser;
-import javafx.stage.Stage;
+
 import java.io.File;
-import java.net.URL;
-import java.util.ResourceBundle;
 
 public class UserCreatorController {
   private AuthorizationService authorizationService;
@@ -39,13 +35,12 @@ public class UserCreatorController {
   @FXML private Label resultLabel;
 
 
-  public void setServices(UserManagementService userManagementService, AuthorizationService authorizationService, AuthenticationService authenticationService){
+  public void setServices(UserManagementService userManagementService, AuthorizationService authorizationService){
     this.userManagementService = userManagementService;
     this.authorizationService = authorizationService;
-    this.authenticationService = authenticationService;
 
-    roleComboBox.getItems().setAll(authorizationService.getRoles());
-    System.out.println(authorizationService.getRoles());
+    roleComboBox.getItems().setAll(this.authorizationService.getRoles());
+    System.out.println(this.authorizationService.getRoles());
   }
 
   @FXML
@@ -66,92 +61,29 @@ public class UserCreatorController {
   }
 
 
-  @FXML
-  private void onClickSubmit(){
-
-  }
-
   private void handleSubmit() {
     if(!FieldValidator.areAllFieldsFilled(formRoot)){
+      System.out.println("fields empty ");
       return;
     }
 
     if(profilePictureView == null){
       throw new RuntimeException("Load image");
     }
-
-    userModel.setFirstName(firstNameField.getText().trim());
-    userModel.setLastName(lastNameField.getText().trim());
-    userModel.phoneNumberProperty().set(phoneField.getText().trim());
-    userModel.setEmail(emailField.getText().trim());
-    userModel.roleProperty().set(roleComboBox.getValue());
-    userModel.setPassword(passwordField.getText().trim());
-
-    try{
-      UserModel savedUser = authenticationService.registerNewUser(
-          firstNameField.getText(), lastNameField.getText(), roleComboBox.getValue().getId(), emailField.getText(), phoneField.getText(),
-          passwordField.getText());
-
-      if(savedUser != null){
-        userManagementService.addUser(savedUser);
-      }
-    }catch (Exception e ){
-      e.printStackTrace();
+//
+//    userModel.setName(firstNameField.getText().trim());
+//    userModel.setLastName(lastNameField.getText().trim());
+//    userModel.phoneNumberProperty().set(phoneField.getText().trim());
+//    userModel.setEmail(emailField.getText().trim());
+//    userModel.roleProperty().set(roleComboBox.getValue());
+//    userModel.setPassword(passwordField.getText().trim());
+//
+    if(userManagementService.registerNewUser(firstNameField.getText(), lastNameField.getText(), roleComboBox.getValue().getId(), emailField.getText(), phoneField.getText(), passwordField.getText()) != null){
+      System.out.println("user created :)");
+      ViewManager.INSTANCE.hidePopup(FXMLPath.USER_CREATOR_POPUP);
     }
 
 
-//    System.out.println(firstName + "" +lastName);
-//    resetFieldStyles();
-//    resultLabel.setText("");
-//    resetResultLabelColor();
-//
-//    if (firstName.isEmpty() || lastName.isEmpty() || email.isEmpty() || phone.isEmpty() || password.isEmpty() || role == null) {
-//      resultLabel.setText("All fields need to be used.");
-//      resultLabel.setStyle("-fx-text-fill: red;");  // Set error text color to red
-//      if (firstName.isEmpty()) showError(firstNameField);
-//      if (lastName.isEmpty()) showError(lastNameField);
-//      if (email.isEmpty()) showError(emailField);
-//      if (phone.isEmpty()) showError(phoneField);
-//      if (password.isEmpty()) showError(passwordField);
-//      if (role == null) showError(roleComboBox);
-//      return;
-//    }
-//
-//    if (!phone.matches("\\d{8,12}")) {
-//      showError(phoneField);
-//      resultLabel.setText("Phone number must be between 8 and 12 digits.");
-//      resultLabel.setStyle("-fx-text-fill: red;");  // Set error text color to red
-//      return;
-//    }
-//
-//    try {
-//      userModel.setEmail(email);
-//      userModel.setFirstName(firstName);
-//      userModel.setLastName(lastName);
-//      userModel.roleProperty().set(role);
-//      userModel.setPassword(password);
-//      userModel.setPhoneNumber(phone);
-//
-//      if(userManagementService.createNewUser(userModel)){
-//        System.out.println(userModel.getName());
-//        resultLabel.setText("User successfully added.");
-//        resultLabel.setStyle("-fx-text-fill: green;");
-//        new Thread(() -> {
-//          try {
-//            Thread.sleep(2000);
-//            javafx.application.Platform.runLater(() -> {
-//              Stage stage = (Stage) submitButton.getScene().getWindow();
-//              stage.close();
-//            });
-//          } catch (InterruptedException e) {
-//            e.printStackTrace();
-//          }
-//        }).start();
-//      }
-//    } catch (Exception ex) {
-//      resultLabel.setText("Error: " + ex.getMessage());
-//      resultLabel.setStyle("-fx-text-fill: red;");
-//    }
   }
 
   private void resetResultLabelColor() {

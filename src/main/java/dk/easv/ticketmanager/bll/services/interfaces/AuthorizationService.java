@@ -1,12 +1,11 @@
 package dk.easv.ticketmanager.bll.services.interfaces;
 
-import dk.easv.ticketmanager.be.Permission;
-import dk.easv.ticketmanager.be.Role;
-import dk.easv.ticketmanager.be.User;
+import dk.easv.ticketmanager.dal.entities.Permission;
+import dk.easv.ticketmanager.dal.entities.Role;
+import dk.easv.ticketmanager.dal.entities.User;
 
 import java.util.Collection;
 import java.util.List;
-import java.util.Optional;
 
 public interface AuthorizationService
 {

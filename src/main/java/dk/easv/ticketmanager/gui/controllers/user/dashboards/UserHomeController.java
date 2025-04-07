@@ -1,15 +1,13 @@
 package dk.easv.ticketmanager.gui.controllers.user.dashboards;
 
+import dk.easv.ticketmanager.bll.services.interfaces.AuthorizationService;
 import dk.easv.ticketmanager.bll.services.interfaces.UserManagementService;
 import dk.easv.ticketmanager.gui.FXMLManager;
 import dk.easv.ticketmanager.gui.FXMLPath;
 import dk.easv.ticketmanager.gui.ViewManager;
-import dk.easv.ticketmanager.gui.controllers.event.components.EventCardController;
 import dk.easv.ticketmanager.gui.controllers.user.components.UserCardController;
-import dk.easv.ticketmanager.gui.models.EventModel;
+import dk.easv.ticketmanager.gui.controllers.user.popup.UserCreatorController;
 import dk.easv.ticketmanager.gui.models.UserModel;
-import javafx.collections.ListChangeListener;
-import javafx.collections.ObservableList;
 import javafx.collections.ObservableSet;
 import javafx.collections.SetChangeListener;
 import javafx.fxml.FXML;
@@ -18,24 +16,25 @@ import javafx.scene.control.Label;
 import javafx.scene.layout.FlowPane;
 import javafx.util.Pair;
 
-import java.util.List;
-
-import static dk.easv.ticketmanager.gui.FXMLPath.EVENT_CARD_COMPONENT;
 import static dk.easv.ticketmanager.gui.FXMLPath.USER_CARD_COMPONENT;
 
 public class UserHomeController
 {
   private UserManagementService userManagementService;
+  private AuthorizationService authorizationService;
 
 
   @FXML private FlowPane userListRoot;
 
-  public void setServices(UserManagementService userManagementService){
+  public void setServices(UserManagementService userManagementService,
+      AuthorizationService authorizationService){
     this.userManagementService = userManagementService;
+    this.authorizationService = authorizationService;
     ObservableSet<UserModel> userModelObservableList = userManagementService.getUserListModel().getUsersObservable();
 
     userModelObservableList.addListener((SetChangeListener<UserModel>) change ->{
       if(change.wasAdded() || change.wasRemoved()){
+        System.out.println("something happend there so wtf");
           loadUserCards();
       }
     });
@@ -50,9 +49,15 @@ public class UserHomeController
   @FXML
   private void onClickOpenCreateUser(){
     ViewManager.INSTANCE.showPopup(FXMLPath.USER_CREATOR_POPUP, "Create new user");
+    UserCreatorController userCreatorController = (UserCreatorController) FXMLManager.INSTANCE.getFXML(FXMLPath.USER_CREATOR_POPUP).getValue();
+    userCreatorController.setServices(userManagementService, authorizationService);
   }
 
   private void loadUserCards(){
+    if(userManagementService.getUserListModel().getUsersObservable().isEmpty()){
+      userListRoot.getChildren().add(new Label("No users to show"));
+    }
+
     userListRoot.getChildren().removeAll();
     userListRoot.getChildren().clear();
 
@@ -62,8 +67,5 @@ public class UserHomeController
       userListRoot.getChildren().add(p.getKey());
     });
 
-    if(userManagementService.getUserListModel().getUsersObservable().isEmpty()){
-      userListRoot.getChildren().add(new Label("No users to show"));
-    }
   }
 }

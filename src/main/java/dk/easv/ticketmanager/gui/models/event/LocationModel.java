@@ -1,6 +1,6 @@
-package dk.easv.ticketmanager.gui.models;
+package dk.easv.ticketmanager.gui.models.event;
 
-import dk.easv.ticketmanager.be.Location;
+import dk.easv.ticketmanager.dal.entities.Location;
 import javafx.beans.property.SimpleLongProperty;
 import javafx.beans.property.SimpleStringProperty;
 
@@ -67,6 +67,6 @@ public class LocationModel {
 
     @Override
     public String toString() {
-        return this.getName() + " " + this.getAddress() + " " + this.getPost_code() + " " + this.getCity();
+        return this.getName() + "\n" + this.getAddress() + ", " + this.getCity() + ", " + this.getPost_code();
     }
 }

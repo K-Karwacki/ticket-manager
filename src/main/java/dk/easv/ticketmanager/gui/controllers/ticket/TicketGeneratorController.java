@@ -1,29 +1,25 @@
 package dk.easv.ticketmanager.gui.controllers.ticket;
 
-import dk.easv.ticketmanager.be.Customer;
-import dk.easv.ticketmanager.be.Ticket;
-import dk.easv.ticketmanager.be.TicketType;
-import dk.easv.ticketmanager.bll.services.interfaces.TicketManagementService;
+import dk.easv.ticketmanager.dal.entities.Customer;
+import dk.easv.ticketmanager.dal.entities.Ticket;
+//import dk.easv.ticketmanager.dal.entities.TicketType;
+import dk.easv.ticketmanager.bll.services.interfaces.TicketAnalysisService;
 import dk.easv.ticketmanager.gui.FXMLManager;
 import dk.easv.ticketmanager.gui.ViewManager;
-import dk.easv.ticketmanager.gui.models.EventModel;
 import javafx.fxml.FXML;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.ComboBox;
-import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.util.Pair;
 
 import java.io.IOException;
-import java.util.List;
 
 import static dk.easv.ticketmanager.gui.FXMLPath.*;
 
 public class TicketGeneratorController {
     private final FXMLManager fxmlManager = FXMLManager.INSTANCE;
-    private TicketManagementService ticketManagementService;
+    private TicketAnalysisService ticketAnalysisService;
     private Ticket ticket;
     @FXML
     private TextField txtFieldCustomerFirstName;
@@ -34,11 +30,11 @@ public class TicketGeneratorController {
     @FXML
     private TextField txtFieldCustomerEmail;
 
-    @FXML
-    private ComboBox<TicketType> comboBoxTicketTypes;
-
-    @FXML
-    private Label lblTicketPrice;
+//    @FXML
+////    private ComboBox<TicketType> comboBoxTicketTypes;
+//
+//    @FXML
+//    private Label lblTicketPrice;
 
     @FXML
     private void displayTicketOptions() throws IOException {
@@ -48,16 +44,16 @@ public class TicketGeneratorController {
     }
     @FXML
     private void changePrice(){
-        double price = comboBoxTicketTypes.getValue().getPrice();
-        String formattedPrice  = String.format("%.2f", price).replace(".", ",");
-        lblTicketPrice.setText("Price: " + formattedPrice + "DKK");
+//        double price = comboBoxTicketTypes.getValue().getPrice();
+//        String formattedPrice  = String.format("%.2f", price).repla/*ce(".", ",");
+//        lblTicketPrice.setText("Price: " + formattedPrice + "DKK");*/
     }
 
-    public void addTicketTypes(EventModel eventModel) {
-        comboBoxTicketTypes.getItems().clear();
-        List<TicketType> ticketTypes = ticketManagementService.getTicketTypesForEvent(eventModel);
-        comboBoxTicketTypes.getItems().addAll(ticketTypes);
-    }
+//    public void addTicketTypes(EventModel eventModel) {
+//        comboBoxTicketTypes.getItems().clear();
+//        List<TicketType> ticketTypes = ticketManagementService.getTicketTypesForEvent(eventModel);
+//        comboBoxTicketTypes.getItems().addAll(ticketTypes);
+//    }
 
 
     private Image getTicketImage() {
@@ -69,15 +65,15 @@ public class TicketGeneratorController {
     }
     private void setTicketData(){
         ticket = new Ticket();
-        String ticketCode = ticketManagementService.generateTicketNumber();
-        ticket.setType(comboBoxTicketTypes.getValue());
-        ticket.setTicketCode(ticketCode);
+        String ticketCode = ticketAnalysisService.generateTicketNumber();
+//        ticket.setType(comboBoxTicketTypes.getValue());
+//        ticket.setTicketCode(ticketCode);
         Customer customer = new Customer();
         customer.setFirstName(txtFieldCustomerFirstName.getText());
         customer.setLastName(txtFieldCustomerLastName.getText());
         customer.setEmail(txtFieldCustomerEmail.getText());
-        ticket.setCustomer(customer);
-        ticketManagementService.addTicket(ticket);
+//        ticket.setCustomer(customer);
+        ticketAnalysisService.addTicket(ticket);
     }
 
     public void loadTicketOptions(Image image){
@@ -86,8 +82,8 @@ public class TicketGeneratorController {
         ticketOptionsController.setTicketImage(image);
         ticketOptionsController.setTicket(ticket);
     }
-    public void setServices(TicketManagementService ticketManagementService) {
-        this.ticketManagementService = ticketManagementService;
+    public void setServices(TicketAnalysisService ticketAnalysisService) {
+        this.ticketAnalysisService = ticketAnalysisService;
     }
 }
 

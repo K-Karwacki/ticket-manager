@@ -1,13 +1,10 @@
 package dk.easv.ticketmanager.gui.models;
 
-import dk.easv.ticketmanager.be.Role;
-import dk.easv.ticketmanager.be.User;
+import dk.easv.ticketmanager.dal.entities.Role;
+import dk.easv.ticketmanager.dal.entities.User;
 import javafx.beans.property.SimpleLongProperty;
 import javafx.beans.property.SimpleObjectProperty;
 import javafx.beans.property.SimpleStringProperty;
-import jdk.dynalink.support.SimpleRelinkableCallSite;
-
-import java.util.Objects;
 
 public class UserModel
 {
@@ -44,9 +41,54 @@ public class UserModel
     loggedSessionToken = null;
   }
 
+  public long getID()
+  {
+    return ID.get();
+  }
+
+  public Role getRole()
+  {
+    return role.get();
+  }
+
+  public SimpleObjectProperty<Role> roleProperty()
+  {
+    return role;
+  }
+
+  public void setRole(Role role)
+  {
+    this.role.set(role);
+  }
+
+  public String getFullName()
+  {
+    return fullName.get();
+  }
+
+  public SimpleStringProperty fullNameProperty()
+  {
+    return fullName;
+  }
+
+  public void setFullName(String fullName)
+  {
+    this.fullName.set(fullName);
+  }
+
   public String getName()
   {
     return name.get();
+  }
+
+  public SimpleStringProperty nameProperty()
+  {
+    return name;
+  }
+
+  public void setName(String name)
+  {
+    this.name.set(name);
   }
 
   public String getLastName()
@@ -54,45 +96,54 @@ public class UserModel
     return lastName.get();
   }
 
-  public void setLoggedSessionToken(String sessionToken) {
-    this.loggedSessionToken = sessionToken;
-  }
-
-  public String getLoggedSessionToken() {
-    return loggedSessionToken;
-  }
-
-  public SimpleLongProperty IDProperty()
+  public SimpleStringProperty lastNameProperty()
   {
-    return ID;
+    return lastName;
   }
-  public SimpleObjectProperty<Role> roleProperty() {
-    return role;
+
+  public void setLastName(String lastName)
+  {
+    this.lastName.set(lastName);
   }
-  public SimpleStringProperty fullNameProperty(){
-    return fullName;
+
+  public String getEmail()
+  {
+    return email.get();
   }
-  public SimpleStringProperty emailProperty(){
+
+  public SimpleStringProperty emailProperty()
+  {
     return email;
   }
-  public SimpleStringProperty phoneNumberProperty(){
-    return phoneNumber;
-  }
 
-    public void setFirstName(String firstName) {
-    fullName.set(firstName);
-    }
-
-  public void setLastName(String lastName) {
-    fullName.set(lastName);
-  }
-
-  public void setEmail(String email) {
+  public void setEmail(String email)
+  {
     this.email.set(email);
   }
 
-  public void setPhoneNumber(String phoneNumber) {
+  public String getPhoneNumber()
+  {
+    return phoneNumber.get();
+  }
+
+  public SimpleStringProperty phoneNumberProperty()
+  {
+    return phoneNumber;
+  }
+
+  public void setPhoneNumber(String phoneNumber)
+  {
     this.phoneNumber.set(phoneNumber);
+  }
+
+  public String getPassword()
+  {
+    return password.get();
+  }
+
+  public SimpleStringProperty passwordProperty()
+  {
+    return password;
   }
 
   public void setPassword(String password)
@@ -100,8 +151,13 @@ public class UserModel
     this.password.set(password);
   }
 
-  public String getPassword()
+  public String getLoggedSessionToken()
   {
-    return password.get();
+    return loggedSessionToken;
+  }
+
+  public void setLoggedSessionToken(String loggedSessionToken)
+  {
+    this.loggedSessionToken = loggedSessionToken;
   }
 }

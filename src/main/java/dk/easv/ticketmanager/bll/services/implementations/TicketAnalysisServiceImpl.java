@@ -6,15 +6,12 @@ import com.google.zxing.MultiFormatWriter;
 import com.google.zxing.WriterException;
 import com.google.zxing.common.BitMatrix;
 import com.google.zxing.qrcode.QRCodeWriter;
-import dk.easv.ticketmanager.be.Ticket;
-import dk.easv.ticketmanager.be.TicketType;
+import dk.easv.ticketmanager.dal.entities.Ticket;
+//import dk.easv.ticketmanager.dal.entities.TicketType;
 import dk.easv.ticketmanager.bll.services.interfaces.AuthorizationService;
-import dk.easv.ticketmanager.bll.services.interfaces.TicketManagementService;
+import dk.easv.ticketmanager.bll.services.interfaces.TicketAnalysisService;
 import dk.easv.ticketmanager.bll.services.factories.RepositoryService;
 import dk.easv.ticketmanager.dal.repositories.TicketRepository;
-import dk.easv.ticketmanager.gui.models.EventModel;
-import dk.easv.ticketmanager.utils.JPAUtil;
-import jakarta.persistence.EntityManager;
 import javafx.scene.image.Image;
 import javafx.scene.image.PixelWriter;
 import javafx.scene.image.WritableImage;
@@ -25,23 +22,24 @@ import java.util.List;
 import java.util.Map;
 import java.util.UUID;
 
-public class TicketManagementServiceImpl implements TicketManagementService {
+public class TicketAnalysisServiceImpl implements TicketAnalysisService
+{
     private final RepositoryService repositoryService;
     private final AuthorizationService authorizationService;
 
-    public TicketManagementServiceImpl(){
+    public TicketAnalysisServiceImpl(){
         repositoryService = null;
         authorizationService = null;
     }
 
-    public TicketManagementServiceImpl(RepositoryService repositoryService, AuthorizationService authorizationService){
+    public TicketAnalysisServiceImpl(RepositoryService repositoryService, AuthorizationService authorizationService){
         this.repositoryService = repositoryService;
         this.authorizationService = authorizationService;
     }
-    @Override
-    public void addTicketType(TicketType ticketType){
-        this.repositoryService.getRepository(TicketRepository.class).saveTicketType(ticketType);
-    }
+//    @Override
+//    public void addTicketType(TicketType ticketType){
+//        this.repositoryService.getRepository(TicketRepository.class).saveTicketType(ticketType);
+//    }
 
 
     @Override
@@ -49,13 +47,13 @@ public class TicketManagementServiceImpl implements TicketManagementService {
         this.repositoryService.getRepository(TicketRepository.class).save(ticket);
     }
 
-    @Override
-    public List<TicketType> getTicketTypesForEvent(EventModel eventModel) {
-        EntityManager em = JPAUtil.getEntityManager();
-        List<TicketType> ticketTypes = em.createQuery("select e from TicketType e", TicketType.class).getResultList();
-        ticketTypes = ticketTypes.stream().filter(ticketType -> ticketType.getEvent().getID() == eventModel.getID()).toList();
-        return  ticketTypes;
-    }
+//    @Override
+//    public List<TicketType> getTicketTypesForEvent(EventModel eventModel) {
+//        EntityManager em = JPAUtil.getEntityManager();
+//        List<TicketType> ticketTypes = em.createQuery("select e from TicketType e", TicketType.class).getResultList();
+//        ticketTypes = ticketTypes.stream().filter(ticketType -> ticketType.getEvent().getID() == eventModel.getID()).toList();
+//        return  ticketTypes;
+//    }
 
     @Override
     public List<LocalDateTime> getAllDatesForPurchasedTickets() {

@@ -2,7 +2,7 @@ package dk.easv.ticketmanager.gui.controllers.user;
 
 import dk.easv.ticketmanager.gui.FXMLManager;
 //import dk.easv.ticketmanager.gui.models.EventDataModel;
-import dk.easv.ticketmanager.gui.models.EventModel;
+import dk.easv.ticketmanager.gui.models.event.EventModel;
 import dk.easv.ticketmanager.gui.models.UserModel;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -34,14 +34,14 @@ public class CoordinatorCardController
 
 
     @FXML
-    private void assign(ActionEvent event) {
+    private void assign() {
 //        eventDataModel.assignCoordinatorToEvent(this.event, this.user);
         eventModel.getAssignedCoordinators().add(this.userModel);
         setButtonVisibility();
     }
 
     @FXML
-    private void unassign(ActionEvent event){
+    private void unassign(){
         eventModel.getAssignedCoordinators().remove(this.userModel);
         setButtonVisibility();
     }

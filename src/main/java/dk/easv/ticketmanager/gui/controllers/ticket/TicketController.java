@@ -1,16 +1,13 @@
 package dk.easv.ticketmanager.gui.controllers.ticket;
 
-import dk.easv.ticketmanager.be.Ticket;
-import dk.easv.ticketmanager.bll.services.EmailSenderService;
-import dk.easv.ticketmanager.bll.services.interfaces.TicketManagementService;
-import dk.easv.ticketmanager.gui.FXMLManager;
+import dk.easv.ticketmanager.dal.entities.Ticket;
+import dk.easv.ticketmanager.bll.services.interfaces.TicketAnalysisService;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
-import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 
 public class TicketController {
-    private static TicketManagementService ticketManagementService;
+    private static TicketAnalysisService ticketAnalysisService;
     private Ticket ticket;
     @FXML
     private Label lblEventName;
@@ -32,25 +29,25 @@ public class TicketController {
     private ImageView imgBarcode;
 
     public void setTicketDetails(Ticket ticket) {
-        lblEventName.setText(ticket.getEvent().getName());
-        lblEventDate.setText(ticket.getEvent().getDate().toString());
-        String price = String.valueOf(ticket.getType().getPrice()).replace(".", ",");
-        lblEventPrice.setText(price + " DKK");
-        lblTicketType.setText(ticket.getType().getName());
-        lblFullName.setText(ticket.getCustomer().getFirstName() + " " + ticket.getCustomer().getLastName());
-        lblEventAddress.setText(ticket.getEvent().getLocation().toString());
-        Image QRCode = ticketManagementService.generateQRCode(ticket.getTicketCode());
-        Image Barcode = ticketManagementService.generateBarcode(ticket.getTicketCode());
-        imgQR.setImage(QRCode);
-        imgBarcode.setImage(Barcode);
+//        lblEventName.setText(ticket.getEvent().getName());
+//        lblEventDate.setText(ticket.getEvent().getDate().toString());
+//        String price = String.valueOf(ticket.getType().getPrice()).replace(".", ",");
+//        lblEventPrice.setText(price + " DKK");
+//        lblTicketType.setText(ticket.getType().getName());
+//        lblFullName.setText(ticket.getCustomer().getFirstName() + " " + ticket.getCustomer().getLastName());
+//        lblEventAddress.setText(ticket.getEvent().getLocation().toString());
+//        Image QRCode = ticketManagementService.generateQRCode(ticket.getTicketCode());
+//        Image Barcode = ticketManagementService.generateBarcode(ticket.getTicketCode());
+//        imgQR.setImage(QRCode);
+//        imgBarcode.setImage(Barcode);
 
     }
     public void setTicket(Ticket ticket) {
         this.ticket = ticket;
     }
 
-    public void setServices(TicketManagementService ticketManagementService) {
-        this.ticketManagementService = ticketManagementService;
+    public void setServices(TicketAnalysisService ticketAnalysisService) {
+        this.ticketAnalysisService = ticketAnalysisService;
     }
 }
 

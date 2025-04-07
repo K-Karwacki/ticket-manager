@@ -1,6 +1,6 @@
 package dk.easv.ticketmanager.gui.controllers.components;
 
-import dk.easv.ticketmanager.bll.services.interfaces.TicketManagementService;
+import dk.easv.ticketmanager.bll.services.interfaces.TicketAnalysisService;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -13,14 +13,13 @@ import javafx.scene.layout.VBox;
 import java.net.URL;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
-import java.util.ArrayList;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.ResourceBundle;
 
 public class ChartComponentController implements Initializable {
-    private TicketManagementService ticketManagementService;
+    private TicketAnalysisService ticketAnalysisService;
 
     @FXML
     private VBox chartComponent;
@@ -62,11 +61,11 @@ public class ChartComponentController implements Initializable {
         updateChart("year");
     }
 
-    public void setServices(TicketManagementService ticketManagementService) {
-        this.ticketManagementService = ticketManagementService;
+    public void setServices(TicketAnalysisService ticketAnalysisService) {
+        this.ticketAnalysisService = ticketAnalysisService;
         System.out.println("setServices - Controller instance: " + this);
-        if (ticketManagementService != null) {
-            datesOfPurchases = ticketManagementService.getAllDatesForPurchasedTickets();
+        if (ticketAnalysisService != null) {
+            datesOfPurchases = ticketAnalysisService.getAllDatesForPurchasedTickets();
             System.out.println("Dates loaded in setServices: " + datesOfPurchases.size());
             updateChart("month");
         }

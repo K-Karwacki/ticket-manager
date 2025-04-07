@@ -1,7 +1,8 @@
 package dk.easv.ticketmanager.bll.services.implementations;
 
-import dk.easv.ticketmanager.be.Role;
-import dk.easv.ticketmanager.be.User;
+import dk.easv.ticketmanager.bll.services.factories.RepositoryService;
+import dk.easv.ticketmanager.dal.entities.Role;
+import dk.easv.ticketmanager.dal.entities.User;
 import dk.easv.ticketmanager.bll.services.interfaces.AuthenticationService;
 import dk.easv.ticketmanager.dal.repositories.AuthRepository;
 import dk.easv.ticketmanager.dal.repositories.UserRepository;
@@ -25,50 +26,9 @@ public class AuthenticationServiceImpl implements AuthenticationService
     this.userRepository = null;
   }
 
-  public AuthenticationServiceImpl(AuthRepository authRepository, UserRepository userRepository){
-    this.authRepository = authRepository;
-    this.userRepository = userRepository;
-  }
-
-
-  public UserModel registerNewUser(String firstName, String lastName, long roleID, String email, String phone, String password) throws AuthenticationException
-  {
-    if(authRepository == null || userRepository == null){
-      throw new RuntimeException("Repositories failed");
-    }
-    // Validate new user data
-
-    //todo: validate fields if empty return null and throw exception
-
-    if(email.isEmpty()){
-      throw new AuthenticationException("Email cannot be empty");
-    }
-    if(password.isEmpty()){
-      throw new AuthenticationException("Password cannot be empty");
-    }
-
-    Optional<Role> roleOptional = authRepository.getById(roleID);
-    if(roleOptional.isEmpty()){
-      throw new AuthenticationException("Not a single role with given name.");
-    }
-
-
-    User newUser = new User();
-    newUser.setFirstName(firstName);
-    newUser.setLastName(lastName);
-    newUser.setRole(roleOptional.get());
-    newUser.setEmail(email);
-    newUser.setPhoneNumber(phone);
-    newUser.setHashedPassword(hashPassword(password));
-//    UserModel registeredUserModel = userRepository.save(newUser);
-    User savedUser = userRepository.save(newUser);
-
-    if(savedUser == null){
-      System.out.println("Something went wrong");
-      throw new AuthenticationException("User couldn't be created");
-    }
-
-    return new UserModel(savedUser);
+  public AuthenticationServiceImpl(RepositoryService repositoryService){
+    this.authRepository = repositoryService.getRepository(AuthRepository.class);
+    this.userRepository = repositoryService.getRepository(UserRepository.class);
   }
 
   @Override public UserModel findUserByEmail(String email)
@@ -117,12 +77,7 @@ public class AuthenticationServiceImpl implements AuthenticationService
     }
   }
 
-  public String hashPassword(String password) {
-    if (password == null) {
-      throw new IllegalArgumentException("Password cannot be null");
-    }
-    return BCrypt.hashpw(password, BCrypt.gensalt(12));
-  }
+
 
 
 }

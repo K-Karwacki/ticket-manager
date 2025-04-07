@@ -1,11 +1,9 @@
-package dk.easv.ticketmanager.gui.models;
+package dk.easv.ticketmanager.gui.models.lists;
 
-import dk.easv.ticketmanager.be.User;
+import dk.easv.ticketmanager.gui.models.UserModel;
 import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
 import javafx.collections.ObservableSet;
 
-import java.util.List;
 import java.util.Set;
 
 public class UserListModel {

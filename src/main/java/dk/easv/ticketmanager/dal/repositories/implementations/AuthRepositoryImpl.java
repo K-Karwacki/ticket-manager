@@ -1,10 +1,8 @@
 package dk.easv.ticketmanager.dal.repositories.implementations;
 
-import dk.easv.ticketmanager.be.Permission;
-import dk.easv.ticketmanager.be.Role;
-import dk.easv.ticketmanager.be.User;
+import dk.easv.ticketmanager.dal.entities.Permission;
+import dk.easv.ticketmanager.dal.entities.Role;
 import dk.easv.ticketmanager.dal.repositories.AuthRepository;
-import dk.easv.ticketmanager.utils.CustomHashSet;
 import dk.easv.ticketmanager.utils.JPAUtil;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.TypedQuery;

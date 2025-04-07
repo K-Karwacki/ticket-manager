@@ -1,4 +1,4 @@
-package dk.easv.ticketmanager.be;
+package dk.easv.ticketmanager.dal.entities;
 
 import dk.easv.ticketmanager.utils.ImageConverter;
 import jakarta.persistence.*;
@@ -8,7 +8,7 @@ import java.util.HashSet;
 import java.util.Set;
 
 @Entity
-@Table(name = "[User]")
+@Table(name = "[user]")
 public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -36,12 +36,7 @@ public class User {
     @Column(name = "image_data")
     private byte[] imageData;
 
-    @ManyToMany
-    @JoinTable(
-        name = "EventCoordinator",
-        joinColumns = @JoinColumn(name = "coordinator_id"),
-        inverseJoinColumns = @JoinColumn(name = "event_id")
-    )
+    @ManyToMany(mappedBy = "coordinators")
     private final Set<Event> coordinatingEvents = new HashSet<>();
 
     // Default constructor
@@ -78,6 +73,12 @@ public class User {
 //    }
 
     // Getters and setters (updated naming)
+
+    public long getId()
+    {
+        return id;
+    }
+
     public String getFirstName() {
         return firstName;
     }
@@ -114,10 +115,6 @@ public class User {
         } catch (Exception e) {
             return new Image("images/event-template.jpg"); // Fallback image
         }
-    }
-
-    public long getId() {
-        return id;
     }
 
 

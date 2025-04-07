@@ -1,11 +1,12 @@
 package dk.easv.ticketmanager.gui.controllers.event.dashboards;
 
+import dk.easv.ticketmanager.bll.services.interfaces.AuthorizationService;
 import dk.easv.ticketmanager.bll.services.interfaces.EventManagementService;
 import dk.easv.ticketmanager.gui.FXMLManager;
+import dk.easv.ticketmanager.gui.FXMLPath;
 import dk.easv.ticketmanager.gui.ViewManager;
 import dk.easv.ticketmanager.gui.controllers.event.components.EventCardController;
-import dk.easv.ticketmanager.gui.models.EventModel;
-import javafx.beans.InvalidationListener;
+import dk.easv.ticketmanager.gui.models.event.EventModel;
 import javafx.collections.ListChangeListener;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -40,8 +41,13 @@ public class EventHomeController
   }
 
 
-  public void setServices(EventManagementService eventManagementService) {
+  public void setServices(EventManagementService eventManagementService,
+      AuthorizationService authorizationService) {
     this.eventManagementService = eventManagementService;
+
+
+
+
     ObservableList<EventModel> eventModelObservableList = eventManagementService.getEventListModel()
         .getEventsObservable();
 
@@ -63,6 +69,11 @@ public class EventHomeController
 
   @FXML private void openEventCreator(){
     viewManager.switchDashboard(EVENT_CREATOR_POPUP, "Create Event");
+    EventCreatorController eventCreatorPopupController = (EventCreatorController)   fxmlManager.getFXML(
+        FXMLPath.EVENT_CREATOR_POPUP).getValue();
+
+    eventCreatorPopupController.setServices(eventManagementService);
+
   }
 
 
@@ -74,6 +85,7 @@ public class EventHomeController
     events.forEach(event -> {
       Pair<Parent, EventCardController> p = fxmlManager.loadFXML(EVENT_CARD_COMPONENT);
       p.getValue().setEventModel(event);
+      p.getValue().setServices(eventManagementService);
       eventListRoot.getChildren().add(p.getKey());
     });
 
