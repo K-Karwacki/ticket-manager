@@ -13,11 +13,11 @@
 <?import javafx.scene.shape.Rectangle?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="550.0" prefWidth="940.0" style="-fx-background-color: D1D1D1;" styleClass="dashboard-root" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="dk.easv.ticketmanager.gui.controllers.event.dashboards.ProfileDashBoardEditorController">
+<AnchorPane prefHeight="550.0" prefWidth="940.0" style="-fx-background-color: D1D1D1;" styleClass="dashboard-root" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="dk.easv.ticketmanager.gui.controllers.user.popup.ProfileDashboardEditorController">
     <children>
         <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#555555" height="550.0" layoutX="59.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="300.0" />
-        <Circle fill="DODGERBLUE" layoutX="212.0" layoutY="259.0" radius="167.0" smooth="false" stroke="#d1d1d1" strokeType="INSIDE" strokeWidth="10.0" />
-      <ImageView fitHeight="151.0" fitWidth="154.0" layoutX="135.0" layoutY="172.0" pickOnBounds="true" preserveRatio="true" />
+        <Circle fx:id="profileCircle" fill="DODGERBLUE" layoutX="212.0" layoutY="259.0" radius="167.0" smooth="false" stroke="#d1d1d1" strokeType="INSIDE" strokeWidth="10.0" />
+      <ImageView fx:id="profileImage" fitHeight="151.0" fitWidth="154.0" layoutX="135.0" layoutY="172.0" pickOnBounds="true" preserveRatio="true" />
         <TextField fx:id="txtFieldUserOldPassword" layoutX="450.0" layoutY="429.0" minHeight="40.0" prefWidth="200.0" style="-fx-border-radius: 10; -fx-background-radius: 10; -fx-background-color: E9E9E9; -fx-border-color: black;" />
         <TextField fx:id="txtFieldUserNewPassword" layoutX="674.0" layoutY="429.0" minHeight="40.0" prefWidth="200.0" style="-fx-border-radius: 10; -fx-background-radius: 10; -fx-background-color: E9E9E9; -fx-border-color: black;" />
         <Label layoutX="479.0" layoutY="402.0" text="Current password">
@@ -30,7 +30,7 @@
                 <Font name="Verdana" size="16.0" />
             </font>
         </Label>
-        <Button fx:id="btnSaveSettings" layoutX="674.0" layoutY="482.0" mnemonicParsing="false" onAction="#updateUser" prefHeight="40.0" prefWidth="200.0" style="-fx-background-color: #7BD4F9; -fx-border-color: black; -fx-border-radius: 10px; -fx-background-radius: 10px;" text="Change Password">
+        <Button layoutX="674.0" layoutY="482.0" mnemonicParsing="false" onAction="#updateUser" prefHeight="40.0" prefWidth="200.0" style="-fx-background-color: #7BD4F9; -fx-border-color: black; -fx-border-radius: 10px; -fx-background-radius: 10px;" text="Change Password">
             <font>
                 <Font name="Verdana" size="16.0" />
             </font>

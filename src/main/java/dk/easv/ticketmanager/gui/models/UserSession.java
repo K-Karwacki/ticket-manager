@@ -1,5 +1,8 @@
 package dk.easv.ticketmanager.gui.models;
 
+import javafx.scene.paint.ImagePattern;
+import javafx.scene.shape.Circle;
+
 public class UserSession {
     private static UserSession instance;
     private UserModel loggedUserModel;
@@ -10,6 +13,16 @@ public class UserSession {
         if (instance == null)
             instance = new UserSession();
         return instance;
+    }
+    public void setProfileImage(Circle profileCircle) {
+        if (loggedUserModel.getImage() != null) {
+            try {
+                ImagePattern pattern = new ImagePattern(loggedUserModel.getImage());
+                profileCircle.setFill(pattern); // profileImage should be a Circle
+            } catch (Exception e) {
+                System.out.println("Error loading image: " + e.getMessage());
+            }
+        }
     }
 
     public void setLoggedUserModel(UserModel userModel) {

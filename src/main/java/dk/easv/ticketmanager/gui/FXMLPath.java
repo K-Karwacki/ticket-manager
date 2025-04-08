@@ -35,5 +35,6 @@ public class FXMLPath
   public static final String TICKET_GENERATOR_POPUP = "fxml/popups/ticket_generator_popup.fxml";
   public static final String SPECIAL_TICKET_GENERATOR_POPUP = "fxml/popups/special_ticket_generator_popup.fxml";
   public static final String TICKET_EDITOR_POPUP = "fxml/popups/event_editor_popup.fxml";
+  public static final String PROFILE_DASHBOARD_EDITOR = "fxml/popups/profile_dashboard_editor_popup.fxml";
 
 }
