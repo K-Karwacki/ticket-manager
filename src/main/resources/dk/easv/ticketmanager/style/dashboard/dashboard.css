@@ -40,6 +40,14 @@
 .btn{
     -fx-effect: dropshadow(gaussian, #686868, 6, 0.1, -4, 5);
     -fx-cursor: hand;
+    -fx-background-radius: 10;
+    -fx-border-radius: 10;
+}
+.active{
+  -fx-background-color:  #FFDF99;
+}
+.disabled{
+-fx-background-color:   #F0F0F0;
 }
 
 .coordinator{
@@ -52,6 +60,21 @@
 }
 .dashboard-shadow{
     -fx-effect: dropshadow(gaussian, #50505040, 5, 0, -3, 7);
+}
+
+.rounded-content {
+    -fx-background-color:  #F0F0F0;
+    -fx-background-radius: 10;
+    -fx-border-color: #aaa;
+    -fx-border-radius: 10;
+    -fx-padding: 5;
+}
+
+.scroll-pane {
+    -fx-background-color: transparent;
+}
+.scroll-pane .viewport {
+    -fx-background-color: transparent;
 }
 
 .dashboard-menu Button{

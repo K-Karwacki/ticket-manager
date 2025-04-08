@@ -43,8 +43,8 @@ public class EventCardController
   @FXML
   private void openEvent(){
     Pair<Parent, EventDetailsController> p = fxmlManager.getFXML(FXMLPath.EVENT_DETAILS);
-    p.getValue().setEventDetails(eventModel);
     p.getValue().setServices(eventManagementService);
+    p.getValue().setEventDetails(eventModel);
     viewManager.switchDashboard(FXMLPath.EVENT_DETAILS, "Event details");
   }
 
@@ -58,15 +58,17 @@ public class EventCardController
 
     eventNameLbl.textProperty().bind(eventModel.nameProperty());
 
-    eventDateLbl.textProperty().bind(
-        Bindings.createStringBinding(() ->
-            eventModel.dateProperty().get().format(DateTimeFormatter.ISO_LOCAL_DATE), eventModel.dateProperty())
-    );
+    eventDateLbl.textProperty().bind(Bindings.createStringBinding(
+        () -> eventModel.dateProperty().get() != null ? eventModel.dateProperty().get().format(
+            DateTimeFormatter.ofPattern("dd MMM yyyy")) : "",
+        eventModel.dateProperty()));
 
-    eventTimeLbl.textProperty().bind(
-        Bindings.createStringBinding(() ->
-            eventModel.timeProperty().get().format(DateTimeFormatter.ISO_LOCAL_TIME), eventModel.timeProperty())
-    );
+    eventTimeLbl.textProperty().bind(Bindings.createStringBinding(
+        () -> eventModel.timeProperty().get() != null
+            ? eventModel.timeProperty().get().format(DateTimeFormatter.ofPattern("HH:mm"))
+            : "",
+        eventModel.timeProperty()
+    ));
 
 
     eventLocationLbl.textProperty().bind(

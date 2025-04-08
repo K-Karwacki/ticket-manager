@@ -38,7 +38,7 @@ public class Event {
   @JoinColumn(name = "location_id")
   private Location location;
 
-  @ManyToMany
+  @ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
   @JoinTable(
       name = "event_coordinators",
       joinColumns = @JoinColumn(name = "event_id"),
@@ -46,8 +46,8 @@ public class Event {
   )
   private Set<User> coordinators = new HashSet<>();
 
-  @OneToMany(mappedBy = "event", cascade = CascadeType.ALL, orphanRemoval = true)
-  private final Set<Ticket> tickets = new HashSet<>();
+  @OneToMany(mappedBy = "event", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+  private Set<Ticket> tickets = new HashSet<>();
 
 
   public Event(){};
@@ -160,4 +160,6 @@ public class Event {
   {
     return tickets;
   }
+
+
 }

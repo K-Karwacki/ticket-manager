@@ -3,19 +3,26 @@ package dk.easv.ticketmanager.gui.controllers.event.dashboards;
 import dk.easv.ticketmanager.bll.services.interfaces.EventManagementService;
 import dk.easv.ticketmanager.gui.FXMLManager;
 //import dk.easv.ticketmanager.gui.models.EventDataModel;
+import dk.easv.ticketmanager.gui.FXMLPath;
 import dk.easv.ticketmanager.gui.ViewManager;
 import dk.easv.ticketmanager.gui.controllers.event.popups.EventEditorController;
 import dk.easv.ticketmanager.gui.controllers.ticket.SpecialTicketGeneratorController;
 import dk.easv.ticketmanager.gui.controllers.event.popups.TicketCreatorController;
 import dk.easv.ticketmanager.gui.controllers.ticket.TicketGeneratorController;
+import dk.easv.ticketmanager.gui.controllers.user.CoordinatorCardController;
+import dk.easv.ticketmanager.gui.models.UserModel;
 import dk.easv.ticketmanager.gui.models.event.EventModel;
+import dk.easv.ticketmanager.gui.models.event.TicketModel;
 import javafx.beans.binding.Bindings;
+import javafx.collections.SetChangeListener;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.control.Alert;
-import javafx.scene.control.ButtonType;
-import javafx.scene.control.Label;
+import javafx.scene.Parent;
+import javafx.scene.control.*;
+import javafx.scene.layout.VBox;
 import javafx.scene.shape.Rectangle;
+import javafx.util.Pair;
 
 import java.net.URL;
 import java.time.format.DateTimeFormatter;
@@ -54,34 +61,43 @@ public class EventDetailsController implements Initializable {
     @FXML
     private Label lblEventName;
 
+    @FXML
+    private ListView<TicketModel> ticketsListView;
+
+    @FXML
+    private ScrollPane coordinatorsScrollPane;
+
+    @FXML
+    private Button showCoordinatorsBtn;
+
+    @FXML
+    private Button showTicketListViewBtn;
+
+    @FXML
+    private VBox coordinatorsContainerVBox;
+
+
     @Override
     public void initialize(URL location, ResourceBundle resources) {
 //        setEventDetails();
+        ticketsListView.setVisible(false);
+        ticketsListView.setManaged(false);
+        coordinatorsScrollPane.setVisible(false);
+        coordinatorsScrollPane.setManaged(false);
+        rectangleImageContainer.setVisible(true);
+        rectangleImageContainer.setManaged(true);
+
+
     }
 
     public void setServices(EventManagementService eventManagementService) {
         this.eventManagementService = eventManagementService;
     }
 
-    @FXML private void showCoordinatorsListPopup(){
-//        Pair<Parent, CoordinatorListPopupController> p = fxmlManager.loadFXML(COORDINATOR_LIST_POPUP);
-//        p.getValue().setEvent(eventModel);
-//        p.getValue().displayNotAssignedCoordinatorsToEventList();
-
-    }
-
-
-
-    @FXML private void showAssignedCoordinatorsToEventPopup(){
-//        Pair<Parent, CoordinatorListPopupController> p = fxmlManager.loadFXML(COORDINATOR_LIST_POPUP);
-//        p.getValue().setEvent(eventModel);
-//        p.getValue().displayAssignedCoordinatorsToTheEventList();
-    }
-
-
-
     public void setEventDetails(EventModel event) {
         this.eventModel = event;
+
+        loadCoordinatorCards();
 
         lblEventDate.textProperty().bind(Bindings.createStringBinding(
             () -> event.dateProperty().get() != null ? event.dateProperty().get().format(
@@ -99,9 +115,34 @@ public class EventDetailsController implements Initializable {
         lblEventLocation.setText(event.getLocation().toString());
         lblEventDescription.textProperty().bind(event.descriptionProperty());
         lblEventName.textProperty().bind(event.nameProperty());
-//        Image image = event.imageProperty().get();
-//        ImagePattern imagePattern = new ImagePattern(image);
         rectangleImageContainer.setFill(event.getImage());
+
+        ticketsListView.getItems().setAll(event.getTickets());
+
+        this.eventModel.getAssignedCoordinators().addListener((SetChangeListener<UserModel>) (observable -> {
+            if(observable.wasAdded() || observable.wasRemoved()){
+//                System.out.println("lalaa");
+
+                loadCoordinatorCards();
+            }
+        }));
+
+    }
+
+    private void loadCoordinatorCards(){
+        coordinatorsContainerVBox.getChildren().clear();
+        coordinatorsContainerVBox.getChildren().removeAll();
+        for (UserModel assignedCoordinator : this.eventModel.getAssignedCoordinators())
+        {
+            System.out.println(assignedCoordinator.getID());
+            Pair<Parent, CoordinatorCardController> coordinatorCardControllerPair = FXMLManager.INSTANCE.getFXML(
+                COORDINATOR_CARD_COMPONENT);
+            coordinatorCardControllerPair.getValue().setServices(eventManagementService);
+            coordinatorCardControllerPair.getValue().setModel(assignedCoordinator, this.eventModel);
+            if(!coordinatorsContainerVBox.getChildren().contains(coordinatorCardControllerPair.getKey())){
+                coordinatorsContainerVBox.getChildren().add(coordinatorCardControllerPair.getKey());
+            }
+        }
     }
 
     public EventModel getEvent() {
@@ -153,4 +194,49 @@ public class EventDetailsController implements Initializable {
     }
 
 
+    public void onClickShowTickets(ActionEvent actionEvent)
+    {
+        if(showTicketListViewBtn.getStyleClass().contains("active")){
+            showTicketListViewBtn.getStyleClass().remove("active");
+            ticketsListView.setVisible(false);
+            ticketsListView.setManaged(false);
+            rectangleImageContainer.setVisible(true);
+            rectangleImageContainer.setManaged(true);
+            return;
+        }
+
+        rectangleImageContainer.setVisible(false);
+        rectangleImageContainer.setManaged(false);
+        coordinatorsScrollPane.setVisible(false);
+        coordinatorsScrollPane.setManaged(false);
+        ticketsListView.setVisible(true);
+        ticketsListView.setManaged(true);
+        showCoordinatorsBtn.getStyleClass().remove("active");
+        showTicketListViewBtn.getStyleClass().add("active");
+    }
+
+    public void onClickShowCoordinators(ActionEvent actionEvent)
+    {
+        if(showCoordinatorsBtn.getStyleClass().contains("active")){
+            showCoordinatorsBtn.getStyleClass().remove("active");
+            coordinatorsScrollPane.setVisible(false);
+            coordinatorsScrollPane.setManaged(false);
+            rectangleImageContainer.setVisible(true);
+            rectangleImageContainer.setManaged(true);
+            return;
+        }
+
+        rectangleImageContainer.setVisible(false);
+        rectangleImageContainer.setManaged(false);
+        coordinatorsScrollPane.setVisible(true);
+        coordinatorsScrollPane.setManaged(true);
+        ticketsListView.setVisible(false);
+        ticketsListView.setManaged(false);
+        showTicketListViewBtn.getStyleClass().remove("active");
+        showCoordinatorsBtn.getStyleClass().add("active");
+    }
+
+    public void onClickAssignCoordinator(ActionEvent actionEvent)
+    {
+    }
 }

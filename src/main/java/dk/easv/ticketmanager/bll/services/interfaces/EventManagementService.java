@@ -1,6 +1,7 @@
 package dk.easv.ticketmanager.bll.services.interfaces;
 
 import dk.easv.ticketmanager.gui.models.CustomerModel;
+import dk.easv.ticketmanager.gui.models.UserModel;
 import dk.easv.ticketmanager.gui.models.event.GeneratedTicketModel;
 import dk.easv.ticketmanager.gui.models.lists.EventListModel;
 import dk.easv.ticketmanager.gui.models.event.EventModel;
@@ -16,6 +17,9 @@ public interface EventManagementService {
     boolean createNewEvent(EventModel eventModel);
     boolean deleteEvent(EventModel eventModel);
     boolean updateEvent(EventModel eventModel);
+
+    boolean removeCoordinatorFromEvent(UserModel userModel, EventModel eventModel);
+    boolean addCoordinatorToEvent(UserModel userModel, EventModel eventModel);
 
 //    Optional<Event> getEventById(long ID);
 

@@ -19,10 +19,11 @@ public class UserRepositoryImpl implements UserRepository
     }
 
     private void updateCache() {
-        for (User user : getAll()) {
-            userMap.put(user.getId(), user);
-            System.out.println(user.getId());
-        }
+//        for (User user : getAll()) {
+////            System.out.println(user.getCoordinatingEvents().size() + " SIZE OF COORDINATING ");
+//            userMap.put(user.getId(), user);
+//            System.out.println(user.getId());
+//        }
     }
 
 
@@ -35,9 +36,9 @@ public class UserRepositoryImpl implements UserRepository
 
     @Override public Optional<User> getById(long id)
     {
-        if(userMap.containsKey(id)){
-            return Optional.of(userMap.get(id));
-        }
+//        if(userMap.containsKey(id)){
+//            return Optional.of(userMap.get(id));
+//        }
 
         try(EntityManager entityManager = JPAUtil.getEntityManager()){
             return entityManager.createQuery("select u from User u where u.id=:userID", User.class).setParameter("userID", id).getResultStream()

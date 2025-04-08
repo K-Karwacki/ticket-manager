@@ -5,6 +5,7 @@ import dk.easv.ticketmanager.dal.repositories.implementations.AuthRepositoryImpl
 import dk.easv.ticketmanager.dal.repositories.implementations.EventRepositoryImpl;
 import dk.easv.ticketmanager.dal.repositories.implementations.TicketRepositoryImpl;
 import dk.easv.ticketmanager.dal.repositories.implementations.UserRepositoryImpl;
+import dk.easv.ticketmanager.utils.JPAUtil;
 
 import java.util.HashMap;
 import java.util.Map;

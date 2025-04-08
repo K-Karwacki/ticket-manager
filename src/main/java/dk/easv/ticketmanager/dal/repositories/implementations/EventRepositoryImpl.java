@@ -10,6 +10,7 @@ import jakarta.persistence.EntityManager;
 import jakarta.persistence.EntityTransaction;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
 
@@ -19,14 +20,33 @@ public class EventRepositoryImpl implements EventRepository
 
   @Override
   public List<Event> getAll() {
-    EntityManager em = JPAUtil.getEntityManager();
-    return em.createQuery("select e from Event e", Event.class).getResultList();
+    try(EntityManager em = JPAUtil.getEntityManager()){
+      em.getTransaction().begin();
+      List<Event> events = em.createQuery("select e from Event e", Event.class).getResultList();
+      if(!events.isEmpty()){
+        em.getTransaction().commit();
+        return events;
+      }
+    }catch (Exception ex) {
+      ex.printStackTrace();
+    }
+    return Collections.emptyList();
   }
 
   @Override
   public Optional<Event> getById(long id) {
-    EntityManager em = JPAUtil.getEntityManager();
-    return Optional.of(em.find(Event.class, id));
+    try(EntityManager em = JPAUtil.getEntityManager())
+    {
+      em.getTransaction().begin();
+      Event event = em.find(Event.class, id);
+      if(event != null){
+        em.getTransaction().commit();
+        return Optional.of(event);
+      }
+    }catch (Exception ex) {
+      ex.printStackTrace();
+    }
+    return Optional.empty();
   }
 
   @Override
@@ -40,8 +60,9 @@ public class EventRepositoryImpl implements EventRepository
     }
     catch (Exception e)
     {
-      return null;
+      e.printStackTrace();
     }
+    return null;
   }
 
   @Override
@@ -139,8 +160,6 @@ public class EventRepositoryImpl implements EventRepository
 
   public List<EventImage> getAllEventImages(){
       try(EntityManager em = JPAUtil.getEntityManager()){
-        EntityTransaction tx = em.getTransaction();
-        tx.begin();
         return em.createQuery("select e from EventImage e", EventImage.class).getResultList();
       }
     }

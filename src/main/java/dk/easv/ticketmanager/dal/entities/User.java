@@ -38,8 +38,8 @@ public class User {
     @Column(name = "image_data")
     private byte[] imageData;
 
-    @ManyToMany(mappedBy = "coordinators")
-    private final Set<Event> coordinatingEvents = new HashSet<>();
+    @ManyToMany(mappedBy = "coordinators", fetch = FetchType.EAGER)
+    private Set<Event> coordinatingEvents = new HashSet<>();
 
     // Default constructor
     public User() {
@@ -124,6 +124,10 @@ public class User {
         this.coordinatingEvents.add(event);
     }
 
+    public void removeEventFromCoordinator(Event event){
+        this.coordinatingEvents.remove(event);
+    }
+
     public void setHashedPassword(String hashedPassword)
     {
         this.hashedPassword = hashedPassword;
@@ -158,5 +162,18 @@ public class User {
     public void setPhoneNumber(String phoneNumber)
     {
         this.phoneNumber = phoneNumber;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof User)) return false;
+        User other = (User) o;
+        return this.id != -1 && this.id == other.id;
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id);
     }
 }

@@ -82,6 +82,7 @@ public class EventCreatorController {
         // Listen on added tickets
         eventModel.getTickets().addListener((SetChangeListener<TicketModel>) change->{
             if(change.wasAdded() || change.wasRemoved()){
+                System.out.println("ticket added or removed");
                 loadCreatedTickets();
             }
         });

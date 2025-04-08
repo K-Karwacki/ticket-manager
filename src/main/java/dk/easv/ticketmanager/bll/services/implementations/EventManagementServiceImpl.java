@@ -13,11 +13,15 @@ import dk.easv.ticketmanager.gui.models.event.TicketModel;
 import dk.easv.ticketmanager.gui.models.lists.EventListModel;
 import dk.easv.ticketmanager.gui.models.event.EventModel;
 import dk.easv.ticketmanager.utils.ImageConverter;
+import dk.easv.ticketmanager.utils.JPAUtil;
+import jakarta.persistence.EntityManager;
+import jakarta.persistence.EntityTransaction;
 import javafx.scene.image.Image;
 import javafx.util.Pair;
 
 import java.io.IOException;
 import java.util.*;
+import java.util.stream.Collectors;
 
 public class EventManagementServiceImpl implements EventManagementService {
     private final RepositoryService repositoryService;
@@ -41,14 +45,33 @@ public class EventManagementServiceImpl implements EventManagementService {
         if (eventListModel == null || eventRepository == null || repositoryService == null) {
             throw new RuntimeException("Load dependencies for EventManagementService");
         }
-        Collection<Event> events = eventRepository.getAll();
-        for (Event event : events) {
-            EventModel eventModel = new EventModel(event);
-            eventModel.setImage(ImageConverter.convertToImage(event.getEventImage().getImageData()));
-            eventListModel.addEventModel(new EventModel(event));
+
+        EntityManager em = JPAUtil.getEntityManager(); // EntityManager for transaction scope
+        EntityTransaction tx = em.getTransaction();
+        tx.begin();
+
+        try {
+            eventListModel.setEventImages(eventRepository.getAllEventImages());
+            Collection<Event> events = eventRepository.getAll();
+
+            for (Event event : events) {
+                EventModel eventModel = new EventModel(event);
+
+                eventModel.getTickets().addAll(event.getTickets().stream().map(TicketModel::new).collect(Collectors.toSet()));
+                eventModel.getAssignedCoordinators().addAll(event.getCoordinators().stream().map(UserModel::new).collect(Collectors.toSet()));
+                eventModel.setImage(ImageConverter.convertToImage(event.getEventImage().getImageData()));
+                eventListModel.addEventModel(eventModel);
+            }
+            em.flush(); // Make sure changes are flushed to the DB
+            tx.commit(); // Commit the transaction
+        } catch (Exception e) {
+            e.printStackTrace();
+            tx.rollback(); // Rollback in case of failure
+        } finally {
+            em.close(); // Close EntityManager when done
         }
 
-        eventListModel.setEventImages(eventRepository.getAllEventImages());
+
     }
 
     public EventListModel getEventListModel() {
@@ -128,6 +151,54 @@ public class EventManagementServiceImpl implements EventManagementService {
             e.printStackTrace();
             return false;
         }
+    }
+
+    @Override public boolean removeCoordinatorFromEvent(UserModel userModel,
+        EventModel eventModel)
+    {
+        EntityManager em = JPAUtil.getEntityManager(); // EntityManager for transaction scope
+        EntityTransaction tx = em.getTransaction();
+        tx.begin();
+
+        try {
+            User user = em.find(User.class, userModel.getID());
+            Event event= em.find(Event.class, eventModel.getID());
+
+            if (user != null && event != null) {
+                event.removeCoordinatorFromEvent(user);
+                user.removeEventFromCoordinator(event);
+                em.flush(); // Make sure changes are flushed to the DB
+                tx.commit(); // Commit the transaction
+                return true;
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+            tx.rollback(); // Rollback in case of failure
+        } finally {
+            em.close(); // Close EntityManager when done
+        }
+        return false;
+    }
+
+    @Override public boolean addCoordinatorToEvent(UserModel userModel,
+        EventModel eventModel)
+    {
+        Optional<User> userOptional = repositoryService.getRepository(UserRepository.class).getById(
+            userModel.getID());
+        Optional<Event> eventOptional = eventRepository.getById(eventModel.getID());
+
+        if(userOptional.isPresent() && eventOptional.isPresent()){
+            User user = userOptional.get();
+            Event event = eventOptional.get();
+
+//            if(eventRepository.assignCoordinatorToEvent(event, user)){
+//                if(eventRepository.save(event) != null){
+//                    System.out.println("successfully added coordinator to event");
+//                    return true;
+//                }
+//            }
+        }
+        return false;
     }
 
     @Override public Set<TicketModel> getTicketsForEvent(EventModel eventModel)

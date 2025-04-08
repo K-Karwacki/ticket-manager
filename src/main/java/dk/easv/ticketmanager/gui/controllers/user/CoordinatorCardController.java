@@ -1,5 +1,6 @@
 package dk.easv.ticketmanager.gui.controllers.user;
 
+import dk.easv.ticketmanager.bll.services.interfaces.EventManagementService;
 import dk.easv.ticketmanager.gui.FXMLManager;
 //import dk.easv.ticketmanager.gui.models.EventDataModel;
 import dk.easv.ticketmanager.gui.models.event.EventModel;
@@ -14,6 +15,7 @@ public class CoordinatorCardController
 {
 //    private final EventDataModel eventDataModel = new EventDataModel();
     private final FXMLManager fxmlManager = FXMLManager.INSTANCE;
+    private EventManagementService eventManagementService;
     private UserModel userModel;
     private EventModel eventModel;
 
@@ -32,17 +34,24 @@ public class CoordinatorCardController
     @FXML
     private Button btnDeleteButton;
 
-
     @FXML
     private void assign() {
 //        eventDataModel.assignCoordinatorToEvent(this.event, this.user);
-        eventModel.getAssignedCoordinators().add(this.userModel);
+        if(eventModel.getID() > 0){
+            
+        }
+        this.eventModel.getAssignedCoordinators().add(this.userModel);
         setButtonVisibility();
     }
 
     @FXML
     private void unassign(){
-        eventModel.getAssignedCoordinators().remove(this.userModel);
+        if(eventModel.getID() > 0){
+            if(eventManagementService.removeCoordinatorFromEvent(userModel, eventModel)){
+                System.out.println("udalo sie");
+            }
+        }
+        this.eventModel.getAssignedCoordinators().remove(this.userModel);
         setButtonVisibility();
     }
 
@@ -96,5 +105,10 @@ public class CoordinatorCardController
         this.eventModel = eventModel;
 
        setButtonVisibility();
+    }
+
+    public void setServices(EventManagementService eventManagementService)
+    {
+        this.eventManagementService = eventManagementService;
     }
 }

@@ -20,20 +20,20 @@
    <children>
       <HBox styleClass="dashboard-menu">
          <children>
-            <Button mnemonicParsing="false" styleClass="btn" text="Go Back">
+            <Button minHeight="-Infinity" mnemonicParsing="false" prefHeight="30.0" prefWidth="80.0" text="Go Back">
                <font>
-                  <Font name="Geeza Pro Regular" size="14.0" />
+                  <Font name="Verdana" size="14.0" />
                </font>
             </Button>
          </children>
          <padding>
-            <Insets bottom="10.0" top="10.0" />
+            <Insets bottom="10.0" top="15.0" />
          </padding>
          <VBox.margin>
             <Insets bottom="33.0" left="33.0" />
          </VBox.margin>
       </HBox>
-      <ScrollPane fitToWidth="true" focusTraversable="false" hbarPolicy="NEVER" maxHeight="-Infinity" pannable="true" prefHeight="669.0" styleClass="dashboard-root" stylesheets="@../../style/dashboard/dashboard.css" vbarPolicy="ALWAYS">
+      <ScrollPane fitToHeight="true" fitToWidth="true" focusTraversable="false" hbarPolicy="NEVER" maxHeight="-Infinity" pannable="true" prefHeight="550.0" styleClass="dashboard-root" stylesheets="@../../style/dashboard/dashboard.css" vbarPolicy="ALWAYS">
          <content>
             <VBox alignment="CENTER" styleClass="dashboard-root">
                <children>
@@ -43,31 +43,35 @@
                            <children>
                               <Label prefHeight="62.0" prefWidth="200.0" style="-fx-background-color: #9CE2FF #9CE2FF;" text="Event info" textFill="#323232">
                                  <font>
-                                    <Font name="Verdana" size="33.0" />
+                                    <Font name="Verdana" size="30.0" />
                                  </font>
                                  <padding>
                                     <Insets bottom="10.0" left="13.0" top="10.0" />
                                  </padding>
                               </Label>
-                              <TextField fx:id="txtFieldEventName" maxWidth="420.0" promptText="Event title">
-                                 <font>
-                                    <Font name="Geeza Pro Regular" size="17.0" />
-                                 </font>
-                                 <VBox.margin>
-                                    <Insets bottom="10.0" top="25.0" />
-                                 </VBox.margin>
-                              </TextField>
-                              <TextArea fx:id="txtAreaEventDescription" maxHeight="150.0" maxWidth="420.0" promptText="Description" VBox.vgrow="NEVER">
-                                 <font>
-                                    <Font name="Geeza Pro Regular" size="17.0" />
-                                 </font>
-                                 <VBox.margin>
-                                    <Insets bottom="10.0" />
-                                 </VBox.margin>
-                              </TextArea>
+                              <VBox>
+                                 <children>
+                                    <Label text="Label" />
+                                    <TextField fx:id="txtFieldEventName" maxWidth="420.0" promptText="Event title">
+                                       <font>
+                                          <Font name="Verdana" size="17.0" />
+                                       </font>
+                                    </TextField>
+                                 </children>
+                              </VBox>
+                              <VBox>
+                                 <children>
+                                    <Label text="Label" />
+                                    <TextArea fx:id="txtAreaEventDescription" maxHeight="150.0" maxWidth="420.0" promptText="Description">
+                                       <font>
+                                          <Font name="Verdana" size="17.0" />
+                                       </font>
+                                    </TextArea>
+                                 </children>
+                              </VBox>
                               <TextField fx:id="txtFieldEventLocationName" maxWidth="420.0" promptText="Location's name">
                                  <font>
-                                    <Font name="Geeza Pro Regular" size="17.0" />
+                                    <Font name="Verdana" size="17.0" />
                                  </font>
                                  <VBox.margin>
                                     <Insets bottom="10.0" />
@@ -82,7 +86,7 @@
                                     </DatePicker>
                                     <TextField fx:id="txtFieldEventTime" promptText="Time ( e.g. 21:00 )">
                                        <font>
-                                          <Font name="Geeza Pro Regular" size="17.0" />
+                                          <Font name="Verdana" size="17.0" />
                                        </font>
                                     </TextField>
                                  </children>
@@ -92,7 +96,7 @@
                               </HBox>
                               <TextField fx:id="txtFieldEventAddress" maxWidth="420.0" promptText="Address">
                                  <font>
-                                    <Font name="Geeza Pro Regular" size="17.0" />
+                                    <Font name="Verdana" size="17.0" />
                                  </font>
                                  <VBox.margin>
                                     <Insets bottom="10.0" />
@@ -102,7 +106,7 @@
                                  <children>
                                     <TextField fx:id="txtFieldEventCity" promptText="City">
                                        <font>
-                                          <Font name="Geeza Pro Regular" size="17.0" />
+                                          <Font name="Verdana" size="17.0" />
                                        </font>
                                        <HBox.margin>
                                           <Insets right="40.0" />
@@ -110,7 +114,7 @@
                                     </TextField>
                                     <TextField fx:id="txtFieldEventPostalCode" promptText="Postal code">
                                        <font>
-                                          <Font name="Geeza Pro Regular" size="17.0" />
+                                          <Font name="Verdana" size="17.0" />
                                        </font>
                                     </TextField>
                                  </children>
@@ -128,7 +132,7 @@
                                           <Insets right="33.0" />
                                        </HBox.margin>
                                        <font>
-                                          <Font name="Geeza Pro Regular" size="14.0" />
+                                          <Font name="Verdana" size="14.0" />
                                        </font>
                                     </Button>
                                     <Button mnemonicParsing="false" onAction="#onClickOpenAssignCoordinators" style="-fx-background-color: #FFE7B1; -fx-border-color: black; -fx-border-radius: 5;" text="Assign coordinators" textAlignment="CENTER">
@@ -136,7 +140,7 @@
                                           <Cursor fx:constant="HAND" />
                                        </cursor>
                                        <font>
-                                          <Font name="Geeza Pro Regular" size="14.0" />
+                                          <Font name="Verdana" size="14.0" />
                                        </font>
                                     </Button>
                                  </children>
@@ -147,7 +151,7 @@
                            <children>
                               <Label prefHeight="62.0" prefWidth="200.0" style="-fx-background-color: #9CE2FF #9CE2FF;" text="Tickets" textFill="#323232">
                                  <font>
-                                    <Font name="Verdana" size="33.0" />
+                                    <Font name="Verdana" size="30.0" />
                                  </font>
                                  <padding>
                                     <Insets bottom="10.0" left="13.0" top="10.0" />
@@ -167,7 +171,7 @@
                                           <Insets right="33.0" />
                                        </HBox.margin>
                                        <font>
-                                          <Font name="Geeza Pro Regular" size="14.0" />
+                                          <Font name="Verdana" size="14.0" />
                                        </font>
                                     </Button>
                                     <Button layoutX="214.0" layoutY="10.0" mnemonicParsing="false" onAction="#chooseImage" prefWidth="142.0" style="-fx-background-color: #FFE7B1; -fx-border-color: black; -fx-border-radius: 5;" text="Remove ticket" textAlignment="CENTER">
@@ -175,7 +179,7 @@
                                           <Cursor fx:constant="HAND" />
                                        </cursor>
                                        <font>
-                                          <Font name="Geeza Pro Regular" size="14.0" />
+                                          <Font name="Verdana" size="14.0" />
                                        </font>
                                     </Button>
                                  </children>
@@ -193,7 +197,7 @@
                                           <Insets />
                                        </HBox.margin>
                                        <font>
-                                          <Font name="Geeza Pro Regular" size="14.0" />
+                                          <Font name="Verdana" size="14.0" />
                                        </font>
                                     </Button>
                                  </children>
@@ -226,6 +230,9 @@
                                  <VBox.margin>
                                     <Insets bottom="10.0" left="10.0" />
                                  </VBox.margin>
+                                 <font>
+                                    <Font name="Verdana" size="14.0" />
+                                 </font>
                               </CheckBox>
                               <Button mnemonicParsing="false" onAction="#onClickSubmit" prefHeight="30.0" prefWidth="100.0" style="-fx-background-color: #9CE2FF; -fx-border-color: black; -fx-border-radius: 5; -fx-background-radius: 5;" text="Sumbit">
                                  <VBox.margin>
@@ -234,6 +241,9 @@
                                  <cursor>
                                     <Cursor fx:constant="HAND" />
                                  </cursor>
+                                 <font>
+                                    <Font name="Verdana" size="14.0" />
+                                 </font>
                               </Button>
                            </children>
                            <HBox.margin>
@@ -254,6 +264,6 @@
       </ScrollPane>
    </children>
    <padding>
-      <Insets bottom="33.0" left="33.0" right="33.0" top="33.0" />
+      <Insets bottom="33.0" left="33.0" right="33.0" top="15.0" />
    </padding>
 </VBox>

@@ -2,6 +2,7 @@ package dk.easv.ticketmanager.gui.models.event;
 
 import dk.easv.ticketmanager.dal.entities.Event;
 import dk.easv.ticketmanager.dal.entities.EventImage;
+import dk.easv.ticketmanager.gui.FXMLPath;
 import dk.easv.ticketmanager.gui.models.UserModel;
 import dk.easv.ticketmanager.utils.ImageConverter;
 import javafx.beans.property.*;
@@ -51,6 +52,7 @@ public class EventModel {
         ImageConverter.convertToImage(event.getEventImage().getImageData()))));
     this.location.set(new LocationModel(event.getLocation()));
     this.assignedCoordinators.set(FXCollections.observableSet());
+    this.tickets.set(FXCollections.observableSet());
 //    this.eventImage.set(event.getEventImage());
   }
 
@@ -140,5 +142,6 @@ public class EventModel {
   public void removeTicket(TicketModel ticketModel){
     tickets.remove(ticketModel);
   }
+
 }
 
