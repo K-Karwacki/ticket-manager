@@ -49,7 +49,6 @@ public class MenuComponentController
 
   public void onClickOpenUsers(MouseEvent event)
   {
-//    parentRoot.setCenter(FXMLManager.getInstance().getFXML(FXMLPath.USERS_DASHBOARD).getKey());
     viewManager.switchDashboard(FXMLPath.USERS_DASHBOARD, "User management");
     switchButtonsHighlight(event);
   }

@@ -9,6 +9,7 @@ import dk.easv.ticketmanager.gui.models.UserSession;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
+import javafx.scene.input.KeyCode;
 
 import java.io.IOException;
 
@@ -40,6 +41,12 @@ public class LoginWindowController
   }
 
   @FXML private void initialize(){
+    passwordFieldPassword.setOnKeyPressed(event->{
+      if(event.getCode() == KeyCode.ENTER){
+        onClickLogin();
+      }
+    });
+
     textFieldPassword.setManaged(false);
 
     showPasswordCheckBox.setOnAction(actionEvent -> togglePasswordVisibility());
@@ -48,7 +55,7 @@ public class LoginWindowController
     passwordFieldPassword.textProperty().bindBidirectional(textFieldPassword.textProperty());
   }
   @FXML
-    private void onClickLogin(ActionEvent actionEvent) {
+    private void onClickLogin() {
         try {
             String inputUsername = textFieldUsername.getText().trim();
             String inputPassword = textFieldPassword.getText();
@@ -62,7 +69,7 @@ public class LoginWindowController
               errorLabel.setText("Invalid email or password");
               return;
             }
-            goToMainPage(actionEvent);
+            goToMainPage();
         } catch (Exception e) {
             errorLabel.setText("An error occurred during login");
             e.printStackTrace();
@@ -78,7 +85,7 @@ public class LoginWindowController
       errorLabel.setText("Please enter an email and password");
   }
 
-  private void goToMainPage(ActionEvent event) throws IOException {
+  private void goToMainPage(){
       viewManager.showStage(FXMLPath.MAIN, "Main stage", true);
   }
 

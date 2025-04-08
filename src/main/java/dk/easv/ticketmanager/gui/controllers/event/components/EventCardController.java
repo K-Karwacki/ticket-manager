@@ -71,10 +71,10 @@ public class EventCardController
     ));
 
 
-    eventLocationLbl.textProperty().bind(
-        Bindings.createStringBinding(() ->
-            eventModel.locationProperty().get().toString(), eventModel.locationProperty())
-    );
+//    eventLocationLbl.textProperty().bind(
+//        Bindings.createStringBinding(() ->
+//            eventModel.locationProperty().get().toString(), eventModel.locationProperty())
+//    );
 
     eventImageContainer.fillProperty().bind(eventModel.imageProperty());
 

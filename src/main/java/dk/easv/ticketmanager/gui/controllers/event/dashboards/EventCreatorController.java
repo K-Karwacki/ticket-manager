@@ -72,6 +72,7 @@ public class EventCreatorController {
 
     @FXML
     private void initialize(){
+
         // Listen on assigned coordinators
         eventModel.getAssignedCoordinators().addListener((SetChangeListener<UserModel>) change ->{
             if(change.wasAdded() || change.wasRemoved()){
