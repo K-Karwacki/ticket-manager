@@ -65,7 +65,7 @@ public class ProfileDashboardController implements Initializable
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        UserModel currentUser = new UserModel();
+        UserModel currentUser = UserSession.getInstance().getLoggedUserModel();
 
         UserSession.getInstance().setProfileImage(profileCircle);
         txtFirstName.textProperty().bind(currentUser.nameProperty());
