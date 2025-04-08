@@ -1,6 +1,8 @@
 package dk.easv.ticketmanager.gui.controllers.event.popups;
 
+import dk.easv.ticketmanager.bll.services.interfaces.EventManagementService;
 import dk.easv.ticketmanager.bll.services.interfaces.UserManagementService;
+import dk.easv.ticketmanager.dal.entities.Event;
 import dk.easv.ticketmanager.gui.FXMLManager;
 import dk.easv.ticketmanager.gui.FXMLPath;
 import dk.easv.ticketmanager.gui.controllers.user.CoordinatorCardController;
@@ -21,6 +23,7 @@ public class AssignCoordinatorController
     private Consumer<Set<UserModel>> consumer;
     private EventModel eventModel;
     private UserManagementService userManagementService;
+    private EventManagementService eventManagementService;
 
     @FXML
     private FlowPane flowPaneCoordinatorContainer;
@@ -30,8 +33,9 @@ public class AssignCoordinatorController
     }
 
 
-    public void setServices(UserManagementService userManagementService){
+    public void setServices(UserManagementService userManagementService, EventManagementService eventManagementService){
         this.userManagementService = userManagementService;
+        this.eventManagementService = eventManagementService;
 
 //        selectedCoordinators.addListener((SetChangeListener<UserModel>) change ->{
 //            if(change.wasAdded()){
@@ -48,11 +52,11 @@ public class AssignCoordinatorController
             .getUsersObservable())
         {
              if(userModel.roleProperty().get().getName().equals(RoleType.COORDINATOR.name()) && !eventModel.getAssignedCoordinators().contains(userModel)){
-                System.out.println(userModel.getID());
-                 Pair<Parent, CoordinatorCardController> p = FXMLManager.INSTANCE.getFXML(FXMLPath.COORDINATOR_CARD_COMPONENT);
+                 Pair<Parent, CoordinatorCardController> p = FXMLManager.INSTANCE.loadFXML(FXMLPath.COORDINATOR_CARD_COMPONENT);
 
                  CoordinatorCardController coordinatorCardController = p.getValue();
 
+                 coordinatorCardController.setServices(eventManagementService);
                  coordinatorCardController.setModel(userModel, eventModel);
                 flowPaneCoordinatorContainer.getChildren().add(p.getKey());
              }

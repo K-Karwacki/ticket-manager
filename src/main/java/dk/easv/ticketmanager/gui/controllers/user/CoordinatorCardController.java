@@ -36,9 +36,11 @@ public class CoordinatorCardController
 
     @FXML
     private void assign() {
-//        eventDataModel.assignCoordinatorToEvent(this.event, this.user);
+
         if(eventModel.getID() > 0){
-            
+            if(eventManagementService.addCoordinatorToEvent(userModel, eventModel)){
+                System.out.println("Successfully added to the event");
+            }
         }
         this.eventModel.getAssignedCoordinators().add(this.userModel);
         setButtonVisibility();
@@ -48,7 +50,7 @@ public class CoordinatorCardController
     private void unassign(){
         if(eventModel.getID() > 0){
             if(eventManagementService.removeCoordinatorFromEvent(userModel, eventModel)){
-                System.out.println("udalo sie");
+                System.out.println("removed from event");
             }
         }
         this.eventModel.getAssignedCoordinators().remove(this.userModel);
@@ -103,6 +105,8 @@ public class CoordinatorCardController
     {
         this.userModel = userModel;
         this.eventModel = eventModel;
+
+        lblCoordinatorFirstName.setText(userModel.getName());
 
        setButtonVisibility();
     }

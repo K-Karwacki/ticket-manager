@@ -25,6 +25,7 @@ import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
@@ -41,7 +42,7 @@ public class EventCreatorController {
     private EventManagementService eventManagementService;
 
     @FXML
-    private StackPane assignedCoordinatorsContainer;
+    private FlowPane assignedCoordinatorsContainer;
     @FXML
     private VBox formContainer;
     @FXML
@@ -72,7 +73,8 @@ public class EventCreatorController {
 
     @FXML
     private void initialize(){
-
+        loadAssignedCoordinators();
+        loadCreatedTickets();
         // Listen on assigned coordinators
         eventModel.getAssignedCoordinators().addListener((SetChangeListener<UserModel>) change ->{
             if(change.wasAdded() || change.wasRemoved()){
@@ -103,8 +105,9 @@ public class EventCreatorController {
 //        assignedCoordinatorsContainer.getChildren().addAll(eventModel.getAssignedCoordinators());
         for (UserModel assignedCoordinator : eventModel.getAssignedCoordinators())
         {
-            Pair<Parent, CoordinatorCardController> coordinatorCardPair = FXMLManager.INSTANCE.getFXML(
+            Pair<Parent, CoordinatorCardController> coordinatorCardPair = FXMLManager.INSTANCE.loadFXML(
                 COORDINATOR_CARD_COMPONENT);
+            coordinatorCardPair.getValue().setServices(eventManagementService);
             coordinatorCardPair.getValue().setModel(assignedCoordinator, this.eventModel);
             assignedCoordinatorsContainer.getChildren().add(coordinatorCardPair.getKey());
         }
@@ -114,8 +117,6 @@ public class EventCreatorController {
     // Method on click submit new event and try save data to db via event management service
     @FXML
     private void onClickSubmit() {
-        System.out.println(eventModel.getTickets().size());
-
         boolean fieldsFilled = FieldValidator.areAllFieldsFilled(formContainer);
         if(!fieldsFilled){
             System.out.println("ERROR fill all fields");

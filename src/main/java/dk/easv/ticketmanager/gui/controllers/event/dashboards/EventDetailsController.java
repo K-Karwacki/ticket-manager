@@ -5,6 +5,7 @@ import dk.easv.ticketmanager.gui.FXMLManager;
 //import dk.easv.ticketmanager.gui.models.EventDataModel;
 import dk.easv.ticketmanager.gui.FXMLPath;
 import dk.easv.ticketmanager.gui.ViewManager;
+import dk.easv.ticketmanager.gui.controllers.event.popups.AssignCoordinatorController;
 import dk.easv.ticketmanager.gui.controllers.event.popups.EventEditorController;
 import dk.easv.ticketmanager.gui.controllers.ticket.SpecialTicketGeneratorController;
 import dk.easv.ticketmanager.gui.controllers.event.popups.TicketCreatorController;
@@ -134,8 +135,7 @@ public class EventDetailsController implements Initializable {
         coordinatorsContainerVBox.getChildren().removeAll();
         for (UserModel assignedCoordinator : this.eventModel.getAssignedCoordinators())
         {
-            System.out.println(assignedCoordinator.getID());
-            Pair<Parent, CoordinatorCardController> coordinatorCardControllerPair = FXMLManager.INSTANCE.getFXML(
+            Pair<Parent, CoordinatorCardController> coordinatorCardControllerPair = FXMLManager.INSTANCE.loadFXML(
                 COORDINATOR_CARD_COMPONENT);
             coordinatorCardControllerPair.getValue().setServices(eventManagementService);
             coordinatorCardControllerPair.getValue().setModel(assignedCoordinator, this.eventModel);
@@ -215,7 +215,7 @@ public class EventDetailsController implements Initializable {
         showTicketListViewBtn.getStyleClass().add("active");
     }
 
-    public void onClickShowCoordinators(ActionEvent actionEvent)
+    public void onClickShowCoordinators()
     {
         if(showCoordinatorsBtn.getStyleClass().contains("active")){
             showCoordinatorsBtn.getStyleClass().remove("active");
@@ -236,7 +236,14 @@ public class EventDetailsController implements Initializable {
         showCoordinatorsBtn.getStyleClass().add("active");
     }
 
-    public void onClickAssignCoordinator(ActionEvent actionEvent)
+    @FXML
+    private void onClickAssignCoordinator()
     {
+        Pair<Parent, AssignCoordinatorController> parentAssignCoordinatorControllerPair = FXMLManager.INSTANCE.getFXML(
+            COORDINATOR_LIST_POPUP);
+
+        parentAssignCoordinatorControllerPair.getValue().setEventModel(this.eventModel);
+        ViewManager.INSTANCE.showPopup(COORDINATOR_LIST_POPUP, "Assign coordinator");
+
     }
 }

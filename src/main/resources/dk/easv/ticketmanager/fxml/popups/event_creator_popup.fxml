@@ -11,8 +11,8 @@
 <?import javafx.scene.control.TextArea?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.FlowPane?>
 <?import javafx.scene.layout.HBox?>
-<?import javafx.scene.layout.StackPane?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
@@ -213,14 +213,14 @@
                         <Insets />
                      </VBox.margin>
                   </HBox>
-                  <StackPane fx:id="assignedCoordinatorsContainer">
+                  <FlowPane fx:id="assignedCoordinatorsContainer">
                      <VBox.margin>
-                        <Insets />
+                        <Insets bottom="22.0" top="22.0" />
                      </VBox.margin>
                      <padding>
-                        <Insets bottom="33.0" top="33.0" />
+                        <Insets bottom="15.0" left="15.0" right="15.0" top="15.0" />
                      </padding>
-                  </StackPane>
+                  </FlowPane>
                   <HBox alignment="CENTER" layoutX="40.0" layoutY="58.0">
                      <children>
                         <VBox alignment="CENTER" spacing="10.0">

@@ -62,7 +62,8 @@ public class Main extends Application
     eventHomeController.setServices(eventManagementService, authorizationService);
 
     userHomeController.setServices(userManagementService, authorizationService);
-    assignCoordinatorController.setServices(userManagementService);
+
+    assignCoordinatorController.setServices(userManagementService, eventManagementService);
 
     ticketGeneratorController.setServices(ticketAnalysisService);
     ticketController.setServices(ticketAnalysisService);
