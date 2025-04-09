@@ -11,7 +11,9 @@ import dk.easv.ticketmanager.dal.repositories.UserRepository;
 import dk.easv.ticketmanager.exceptions.AuthenticationException;
 import dk.easv.ticketmanager.gui.models.lists.UserListModel;
 import dk.easv.ticketmanager.gui.models.UserModel;
+import dk.easv.ticketmanager.utils.ImageConverter;
 import dk.easv.ticketmanager.utils.PasswordHasher;
+import javafx.scene.image.Image;
 
 import java.util.HashSet;
 import java.util.List;
@@ -61,7 +63,7 @@ public class UserManagementServiceImpl implements UserManagementService {
         return userListModel;
     }
 
-    @Override public UserModel registerNewUser(String firstName, String lastName, long role_id, String email, String phone, String password)
+    @Override public UserModel registerNewUser(String firstName, String lastName, long role_id, String email, String phone, String password, Image image)
     {
         if(userRepository == null){
             throw new RuntimeException("Repositories failed");
@@ -85,7 +87,9 @@ public class UserManagementServiceImpl implements UserManagementService {
         newUser.setEmail(email);
         newUser.setPhoneNumber(phone);
         newUser.setHashedPassword(PasswordHasher.hashPassword(password));
-        //    UserModel registeredUserModel = userRepository.save(newUser);
+        if(image != null) {
+            newUser.setImageData(ImageConverter.convertToByteArray(image));
+        }
         User savedUser = userRepository.save(newUser);
         if(savedUser != null){
             UserModel userDTO = new UserModel(savedUser);
@@ -98,11 +102,33 @@ public class UserManagementServiceImpl implements UserManagementService {
 
     @Override public boolean deleteUser(UserModel userModel)
     {
-        return false;
+        userListModel.deleteUserModel(userModel);
+        Optional<User> user = userRepository.getById(userModel.getID());
+        if(user.isPresent()){
+            userRepository.delete(user.get());
+            return true;
+        }
+        else{
+            return false;
+        }
+
     }
 
     @Override public boolean updateUser(UserModel userModel)
     {
+        userListModel.updateUser(userModel);
+        Optional<User> optionalUser = userRepository.getById(userModel.getID());
+        if(optionalUser.isPresent()){
+            User user = optionalUser.get();
+            user.setFirstName(userModel.getName());
+            user.setLastName(userModel.getLastName());
+            user.setEmail(userModel.getEmail());
+            user.setPhoneNumber(userModel.getPhoneNumber());
+            user.setRole(userModel.getRole());
+            user.setImageData(ImageConverter.convertToByteArray(userModel.getImage()));
+            user.setHashedPassword(PasswordHasher.hashPassword(userModel.getPassword()));
+            return userRepository.update(user) != null;
+        }
         return false;
     }
 

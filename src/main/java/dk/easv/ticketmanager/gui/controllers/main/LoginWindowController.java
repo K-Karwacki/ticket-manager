@@ -3,8 +3,10 @@ package dk.easv.ticketmanager.gui.controllers.main;
 
 import dk.easv.ticketmanager.bll.services.interfaces.AuthenticationService;
 import dk.easv.ticketmanager.bll.services.interfaces.UserManagementService;
+import dk.easv.ticketmanager.gui.FXMLManager;
 import dk.easv.ticketmanager.gui.FXMLPath;
 import dk.easv.ticketmanager.gui.ViewManager;
+import dk.easv.ticketmanager.gui.controllers.components.MenuComponentController;
 import dk.easv.ticketmanager.gui.models.UserSession;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -87,6 +89,8 @@ public class LoginWindowController
 
   private void goToMainPage(){
       viewManager.showStage(FXMLPath.MAIN, "Main stage", true);
+//      MenuComponentController menuComponentController = (MenuComponentController) FXMLManager.INSTANCE.getFXML(FXMLPath.MENU_COMPONENT).getValue();
+//      menuComponentController.initialize();
   }
 
   @FXML

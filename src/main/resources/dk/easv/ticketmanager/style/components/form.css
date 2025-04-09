@@ -47,3 +47,9 @@
     -fx-padding: 10;
     -fx-background-color:  #FFDF99;
 }
+.image-container:hover .profile-image{
+-fx-opacity: 0.7;
+}
+.image-container:hover .browse-image{
+    visibility: visible;
+}

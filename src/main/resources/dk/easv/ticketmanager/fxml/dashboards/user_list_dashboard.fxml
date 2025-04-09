@@ -11,7 +11,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<VBox stylesheets="@../../style/dashboard/dashboard.css" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="dk.easv.ticketmanager.gui.controllers.user.dashboards.UserHomeController">
+<VBox stylesheets="@../../style/dashboard/dashboard.css" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="dk.easv.ticketmanager.gui.controllers.user.dashboards.UserHomeController">
     <children>
         <HBox alignment="CENTER_LEFT" prefHeight="6.0" prefWidth="462.0" spacing="30.0" styleClass="dashboard-menu">
             <children>
