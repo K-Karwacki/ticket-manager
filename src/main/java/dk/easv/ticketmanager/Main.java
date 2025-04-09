@@ -1,5 +1,6 @@
 package dk.easv.ticketmanager;
 
+import dk.easv.ticketmanager.bll.services.EmailSenderService;
 import dk.easv.ticketmanager.bll.services.implementations.*;
 import dk.easv.ticketmanager.bll.services.interfaces.*;
 import dk.easv.ticketmanager.bll.services.factories.RepositoryService;
@@ -12,6 +13,7 @@ import dk.easv.ticketmanager.gui.controllers.event.dashboards.EventHomeControlle
 import dk.easv.ticketmanager.gui.controllers.event.popups.AssignCoordinatorController;
 import dk.easv.ticketmanager.gui.controllers.event.popups.EventEditorController;
 import dk.easv.ticketmanager.gui.controllers.event.popups.ImageSelectorController;
+import dk.easv.ticketmanager.gui.controllers.main.ForgottenPasswordViewController;
 import dk.easv.ticketmanager.gui.controllers.ticket.TicketController;
 import dk.easv.ticketmanager.gui.controllers.main.LoginWindowController;
 import dk.easv.ticketmanager.gui.controllers.ticket.TicketGeneratorController;
@@ -38,10 +40,11 @@ public class Main extends Application
 
   protected final AuthenticationService authenticationService = new AuthenticationServiceImpl(repositoryService);
   protected final AuthorizationService authorizationService = new AuthorizationServiceImpl(repositoryService);
+  protected final EmailSenderService emailSenderService = new EmailSenderService();
 
   protected final TicketAnalysisService ticketAnalysisService = new TicketAnalysisServiceImpl(repositoryService, authorizationService);
   protected final EventManagementService eventManagementService = new EventManagementServiceImpl(repositoryService, authorizationService);
-  protected final UserManagementService userManagementService = new UserManagementServiceImpl(repositoryService, authorizationService);
+  protected final UserManagementService userManagementService = new UserManagementServiceImpl(repositoryService, authorizationService, emailSenderService);
 
   private void setControllersDependencies(){
     LoginWindowController loginWindowController = (LoginWindowController) fxmlManager.getFXML(FXMLPath.LOGIN).getValue();
@@ -55,7 +58,7 @@ public class Main extends Application
     TicketController ticketController = (TicketController) fxmlManager.getFXML(FXMLPath.TICKET_COMPONENT).getValue();
     ImageSelectorController imageSelectorController = (ImageSelectorController) fxmlManager.getFXML(FXMLPath.IMAGE_SELECTOR_POPUP).getValue();
     ChartComponentController chartComponentController = (ChartComponentController) fxmlManager.getFXML(FXMLPath.CHART_COMPONENT).getValue();
-
+    ForgottenPasswordViewController forgottenPasswordViewController = (ForgottenPasswordViewController) fxmlManager.getFXML(FXMLPath.FORGOTTEN_PASSWORD_VIEW).getValue();
     UserHomeController userHomeController = (UserHomeController) fxmlManager.getFXML(FXMLPath.USERS_DASHBOARD).getValue();
 //    UserCreatorController userCreatorController = (UserCreatorController) fxmlManager.getFXML(FXMLPath.USER_CREATOR_POPUP).getValue();
     AssignCoordinatorController assignCoordinatorController = (AssignCoordinatorController) fxmlManager.getFXML(FXMLPath.COORDINATOR_LIST_POPUP).getValue();
@@ -73,6 +76,7 @@ public class Main extends Application
 
 //    ticketGeneratorController.setServices(ticketAnalysisService);
     userCardController.setServices(userManagementService);
+    forgottenPasswordViewController.setServices(userManagementService);
     ticketController.setServices(ticketAnalysisService);
     imageSelectorController.setServices(eventManagementService);
     chartComponentController.setServices(ticketAnalysisService);

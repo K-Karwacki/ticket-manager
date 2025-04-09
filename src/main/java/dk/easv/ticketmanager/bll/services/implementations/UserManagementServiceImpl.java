@@ -1,27 +1,26 @@
 package dk.easv.ticketmanager.bll.services.implementations;
 
+import dk.easv.ticketmanager.bll.services.EmailSenderService;
 import dk.easv.ticketmanager.dal.entities.Role;
 import dk.easv.ticketmanager.dal.entities.User;
-import dk.easv.ticketmanager.bll.services.interfaces.AuthenticationService;
 import dk.easv.ticketmanager.bll.services.interfaces.AuthorizationService;
 import dk.easv.ticketmanager.bll.services.interfaces.UserManagementService;
 import dk.easv.ticketmanager.bll.services.factories.RepositoryService;
 import dk.easv.ticketmanager.dal.repositories.AuthRepository;
 import dk.easv.ticketmanager.dal.repositories.UserRepository;
-import dk.easv.ticketmanager.exceptions.AuthenticationException;
 import dk.easv.ticketmanager.gui.models.lists.UserListModel;
 import dk.easv.ticketmanager.gui.models.UserModel;
 import dk.easv.ticketmanager.utils.ImageConverter;
+import dk.easv.ticketmanager.utils.PasswordGenerator;
 import dk.easv.ticketmanager.utils.PasswordHasher;
 import javafx.scene.image.Image;
 
-import java.util.HashSet;
-import java.util.List;
-import java.util.Optional;
-import java.util.Set;
+import java.io.IOException;
+import java.util.*;
 
 public class UserManagementServiceImpl implements UserManagementService {
     private final RepositoryService repositoryService;
+    private final EmailSenderService emailSenderService;
     private final AuthorizationService authorizationService;
     private final UserRepository userRepository;
 
@@ -32,11 +31,13 @@ public class UserManagementServiceImpl implements UserManagementService {
         authorizationService = null;
         userRepository = null;
         userListModel = null;
+        emailSenderService = null;
     }
 
-    public UserManagementServiceImpl(RepositoryService repositoryService, AuthorizationService authorizationService){
+    public UserManagementServiceImpl(RepositoryService repositoryService, AuthorizationService authorizationService, EmailSenderService emailSenderService) {
         this.repositoryService = repositoryService;
         this.authorizationService = authorizationService;
+        this.emailSenderService = emailSenderService;
         userRepository = this.repositoryService.getRepository(UserRepository.class);
         userListModel = new UserListModel();
 
@@ -132,5 +133,23 @@ public class UserManagementServiceImpl implements UserManagementService {
         return false;
     }
 
+    @Override public boolean updateUser(User user){
+        return userRepository.update(user) != null;
+    }
+    @Override
+    public Optional<User> getUserById(long id) {
+        return userRepository.getById(id);
+    }
+    @Override
+    public Optional<User> getUserByEmail(String email){
+        return userRepository.findUserByEmail(email);
+    }
 
+    public void sendTemporaryPassword(User user) throws IOException {
+            String password = PasswordGenerator.generatePassword(10);
+            user.setHashedPassword(PasswordHasher.hashPassword(password));
+            if(updateUser(user)){
+                emailSenderService.sendEmail(user.getEmail(), "Temporary Password", "Your temporary password: " + password, null);
+            }
+        }
 }
