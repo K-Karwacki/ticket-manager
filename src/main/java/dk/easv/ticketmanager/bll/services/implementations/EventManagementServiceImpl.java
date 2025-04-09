@@ -4,6 +4,7 @@ import dk.easv.ticketmanager.dal.entities.*;
 import dk.easv.ticketmanager.bll.services.interfaces.AuthorizationService;
 import dk.easv.ticketmanager.bll.services.interfaces.EventManagementService;
 import dk.easv.ticketmanager.bll.services.factories.RepositoryService;
+import dk.easv.ticketmanager.dal.repositories.CustomerRepository;
 import dk.easv.ticketmanager.dal.repositories.EventRepository;
 import dk.easv.ticketmanager.dal.repositories.TicketRepository;
 import dk.easv.ticketmanager.dal.repositories.UserRepository;
@@ -20,6 +21,8 @@ import javafx.collections.FXCollections;
 import javafx.scene.image.Image;
 import javafx.util.Pair;
 
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.*;
 import java.util.stream.Collectors;
@@ -39,24 +42,36 @@ public class EventManagementServiceImpl implements EventManagementService {
 
         eventListModel = new EventListModel();
 
-        initialize();
+        try{
+
+            initialize();
+        }catch (Exception e){
+            e.printStackTrace();
+        }
     }
 
-    private void initialize() {
+    private void initialize() throws FileNotFoundException
+    {
         if (eventListModel == null || eventRepository == null || repositoryService == null) {
             throw new RuntimeException("Load dependencies for EventManagementService");
         }
 
         eventListModel.setEventImages(eventRepository.getAllEventImages());
         Collection<Event> events = eventRepository.getAll();
+        if(events.size() > 0){
+            for (Event event : events) {
+                EventModel eventModel = new EventModel(event);
+                eventModel.getTickets().addAll(event.getTickets().stream().map(TicketModel::new).collect(Collectors.toSet()));
+                eventModel.getAssignedCoordinators().addAll(event.getCoordinators().stream().map(UserModel::new).collect(Collectors.toSet()));
 
-        for (Event event : events) {
-            EventModel eventModel = new EventModel(event);
+                if(event.getEventImage() == null){
+                    eventModel.setImage(new Image(new FileInputStream("images/event-template.jpg")));
+                }else{
+                    eventModel.setImage(ImageConverter.convertToImage(event.getEventImage().getImageData()));
+                }
 
-            eventModel.getTickets().addAll(event.getTickets().stream().map(TicketModel::new).collect(Collectors.toSet()));
-            eventModel.getAssignedCoordinators().addAll(event.getCoordinators().stream().map(UserModel::new).collect(Collectors.toSet()));
-            eventModel.setImage(ImageConverter.convertToImage(event.getEventImage().getImageData()));
-            eventListModel.addEventModel(eventModel);
+                eventListModel.addEventModel(eventModel);
+            }
         }
 
     }
@@ -238,9 +253,32 @@ public class EventManagementServiceImpl implements EventManagementService {
         return false;
     }
 
-    @Override public boolean generateTicketsForCustomer(TicketModel ticketModel,
+    @Override public boolean generateTicketsForCustomer(int quantity, TicketModel ticketModel,
         CustomerModel customerModel)
     {
+        if(quantity > 0){
+            Customer customer = new Customer(customerModel.getFirstName(), customerModel.getLastName(), customerModel.getEmail());
+            Customer savedCustomer = repositoryService.getRepository(
+                CustomerRepository.class).save(customer);
+
+            Optional<Ticket> ticket = repositoryService.getRepository(TicketRepository.class).getById(
+                ticketModel.getID());
+
+            if(ticket.isEmpty()){
+                return false;
+            }
+
+            for (int i = 0; i < quantity; i++)
+            {
+                GeneratedTicket generatedTicket = new GeneratedTicket();
+                generatedTicket.setTicket(ticket.get());
+                generatedTicket.setBarCode(UUID.randomUUID());
+                generatedTicket.setCustomer(customer);
+
+                repositoryService.getRepository(TicketRepository.class).saveGeneratedTicket(generatedTicket);
+            }
+            return true;
+        }
         return false;
     }
 

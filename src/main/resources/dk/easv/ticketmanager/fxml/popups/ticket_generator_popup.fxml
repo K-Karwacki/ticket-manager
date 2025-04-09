@@ -10,31 +10,105 @@
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
 
-<VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="383.0" prefWidth="350.0" spacing="5.0" styleClass="container" stylesheets="@../../style/components/form.css" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="dk.easv.ticketmanager.gui.controllers.ticket.TicketGeneratorController">
+<VBox alignment="CENTER" maxWidth="-Infinity" minWidth="-Infinity" prefWidth="350.0" spacing="5.0" styleClass="container" stylesheets="@../../style/components/form.css" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="dk.easv.ticketmanager.gui.controllers.ticket.TicketGeneratorController">
     <children>
         <ImageView fitHeight="59.0" fitWidth="255.0" pickOnBounds="true" preserveRatio="true">
             <image>
                 <Image url="@../../images/easv_logo.png" />
             </image>
             <VBox.margin>
-                <Insets bottom="10.0" top="10.0" />
+                <Insets bottom="33.0" top="10.0" />
             </VBox.margin>
         </ImageView>
-        <Label text="First name" />
-        <TextField fx:id="txtFieldCustomerFirstName" prefHeight="26.0" prefWidth="254.0" />
-        <Label text="Last name" />
-        <TextField fx:id="txtFieldCustomerLastName" />
-        <Label text="Email" />
-        <TextField fx:id="txtFieldCustomerEmail" />
-        <Label text="Ticket type" />
-        <HBox alignment="CENTER_LEFT" prefHeight="100.0" prefWidth="200.0" spacing="25.0">
+      <VBox>
+         <children>
+              <Label text="Customer first name:">
+               <font>
+                  <Font name="Verdana" size="14.0" />
+               </font>
+               <VBox.margin>
+                  <Insets bottom="5.0" />
+               </VBox.margin>
+            </Label>
+              <TextField fx:id="txtFieldCustomerFirstName" prefHeight="26.0" prefWidth="254.0" />
+         </children>
+         <VBox.margin>
+            <Insets bottom="15.0" />
+         </VBox.margin>
+      </VBox>
+      <VBox>
+         <children>
+              <Label text="Customer last name:">
+               <font>
+                  <Font name="Verdana" size="14.0" />
+               </font>
+               <VBox.margin>
+                  <Insets bottom="5.0" />
+               </VBox.margin>
+            </Label>
+              <TextField fx:id="txtFieldCustomerLastName" />
+         </children>
+         <VBox.margin>
+            <Insets bottom="15.0" />
+         </VBox.margin>
+      </VBox>
+      <VBox>
+         <children>
+              <Label text="Customer email:">
+               <font>
+                  <Font name="Verdana" size="14.0" />
+               </font>
+               <VBox.margin>
+                  <Insets bottom="5.0" />
+               </VBox.margin>
+            </Label>
+              <TextField fx:id="txtFieldCustomerEmail" />
+         </children>
+         <VBox.margin>
+            <Insets bottom="15.0" />
+         </VBox.margin>
+      </VBox>
+        <HBox alignment="CENTER_LEFT" spacing="25.0">
             <children>
-                <ComboBox fx:id="comboBoxTicketTypes" onAction="#changePrice" prefWidth="150.0" style="-fx-background-color: white;" />
-                <Label fx:id="lblTicketPrice" text="Price: " />
+            <VBox prefHeight="33.0">
+               <children>
+                    <Label text="Ticket:">
+                     <font>
+                        <Font name="Verdana" size="14.0" />
+                     </font>
+                     <VBox.margin>
+                        <Insets bottom="5.0" />
+                     </VBox.margin>
+                  </Label>
+                      <ComboBox fx:id="comboBoxTickets" onAction="#changePrice" prefHeight="33.0" prefWidth="150.0" style="-fx-background-color: white;" />
+               </children>
+            </VBox>
+            <VBox>
+               <children>
+                  <Label text="Quantity:">
+                     <font>
+                        <Font name="Verdana" size="14.0" />
+                     </font>
+                     <VBox.margin>
+                        <Insets bottom="5.0" />
+                     </VBox.margin>
+                  </Label>
+                  <TextField fx:id="txtFieldTicketQuantity" />
+               </children>
+            </VBox>
             </children>
+         <VBox.margin>
+            <Insets bottom="15.0" />
+         </VBox.margin>
         </HBox>
-        <Button mnemonicParsing="false" onAction="#displayTicketOptions" style="-fx-background-color: #9CE2FF; -fx-border-radius: 5; -fx-background-radius: 5;" text="Generate">
+      <Label fx:id="lblTicketPrice1" text="Price: ">
+         <font>
+            <Font name="Verdana" size="14.0" />
+         </font>
+      </Label>
+        <Button mnemonicParsing="false" onAction="#onClickGenerateTickets" style="-fx-background-color: #9CE2FF; -fx-border-radius: 5; -fx-background-radius: 5;" text="Generate">
             <VBox.margin>
                 <Insets top="10.0" />
             </VBox.margin>
@@ -44,10 +118,12 @@
             <cursor>
                 <Cursor fx:constant="HAND" />
             </cursor>
+         <font>
+            <Font name="Verdana" size="14.0" />
+         </font>
         </Button>
     </children>
     <padding>
-        <Insets bottom="100.0" left="35.0" right="35.0" />
+        <Insets bottom="50.0" left="35.0" right="35.0" />
     </padding>
 </VBox>
-

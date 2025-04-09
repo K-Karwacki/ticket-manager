@@ -1,10 +1,7 @@
 package dk.easv.ticketmanager.bll.services.factories;
 
 import dk.easv.ticketmanager.dal.repositories.*;
-import dk.easv.ticketmanager.dal.repositories.implementations.AuthRepositoryImpl;
-import dk.easv.ticketmanager.dal.repositories.implementations.EventRepositoryImpl;
-import dk.easv.ticketmanager.dal.repositories.implementations.TicketRepositoryImpl;
-import dk.easv.ticketmanager.dal.repositories.implementations.UserRepositoryImpl;
+import dk.easv.ticketmanager.dal.repositories.implementations.*;
 import dk.easv.ticketmanager.utils.JPAUtil;
 
 import java.util.HashMap;
@@ -27,6 +24,7 @@ public class RepositoryServiceFactory
     repositoryMap.putIfAbsent(EventRepository.class, new EventRepositoryImpl());
     repositoryMap.putIfAbsent(TicketRepository.class, new TicketRepositoryImpl());
     repositoryMap.putIfAbsent(AuthRepository.class, new AuthRepositoryImpl());
+    repositoryMap.putIfAbsent(CustomerRepository.class, new CustomerRepositoryImpl());
   }
 
   public void addRepository(Class<?extends BaseRepository<?>> repositoryInterfaceClass, BaseRepository<?> instance){

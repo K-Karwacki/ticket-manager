@@ -1,5 +1,7 @@
 package dk.easv.ticketmanager.dal.repositories.implementations;
 
+import dk.easv.ticketmanager.dal.entities.Customer;
+import dk.easv.ticketmanager.dal.entities.GeneratedTicket;
 import dk.easv.ticketmanager.dal.entities.Ticket;
 //import dk.easv.ticketmanager.dal.entities.TicketType;
 import dk.easv.ticketmanager.dal.repositories.TicketRepository;
@@ -37,7 +39,22 @@ public class TicketRepositoryImpl implements TicketRepository {
         return false;
     }
 
-//    @Override
+    @Override public boolean generateTicketForCustomer(Ticket ticket,
+        Customer customer)
+    {
+//        try (EntityManager em = JPAUtil.getEntityManager()) {
+//
+//        }
+        return false;
+    }
+
+    @Override public List<Ticket> getGeneratedTicketsForCustomerEmail(
+        String email)
+    {
+        return null;
+    }
+
+    //    @Override
 //    public boolean saveTicketType(TicketType ticketType) {
 //        try(EntityManager em = JPAUtil.getEntityManager()){
 //            em.getTransaction().begin();
@@ -71,6 +88,16 @@ public class TicketRepositoryImpl implements TicketRepository {
         }
     }
 
+    @Override public void saveGeneratedTicket(GeneratedTicket generatedTicket)
+    {
+        try(EntityManager em = JPAUtil.getEntityManager()){
+            em.getTransaction().begin();
+            em.persist(generatedTicket);
+            em.flush();
+            em.getTransaction().commit();
+        }
+    }
+
     @Override
     public List<Ticket> getAll() {
         return List.of();
@@ -78,7 +105,9 @@ public class TicketRepositoryImpl implements TicketRepository {
 
     @Override
     public Optional<Ticket> getById(long id) {
-        return null;
+        try(EntityManager em = JPAUtil.getEntityManager()){
+            return Optional.of(em.find(Ticket.class, id));
+        }
     }
 
     @Override

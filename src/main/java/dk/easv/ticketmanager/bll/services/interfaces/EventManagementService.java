@@ -9,6 +9,7 @@ import dk.easv.ticketmanager.gui.models.event.TicketModel;
 import javafx.scene.image.Image;
 
 import java.io.IOException;
+import java.util.Collection;
 import java.util.List;
 import java.util.Set;
 
@@ -27,7 +28,7 @@ public interface EventManagementService {
     boolean addTicketToEvent(TicketModel ticketModel, EventModel eventModel);
     boolean removeTicketFromEvent(TicketModel ticketModel, EventModel eventModel);
 
-    boolean generateTicketsForCustomer(TicketModel ticketModel, CustomerModel customerModel);
+    boolean generateTicketsForCustomer(int quantity,TicketModel ticketModel, CustomerModel customerModel);
 //    Set<GeneratedTicketModel>
     boolean sendTicketsViaEmailToCustomer(TicketModel ticketModel, CustomerModel customerModel);
 

@@ -65,7 +65,7 @@ public class Main extends Application
 
     assignCoordinatorController.setServices(userManagementService, eventManagementService);
 
-    ticketGeneratorController.setServices(ticketAnalysisService);
+//    ticketGeneratorController.setServices(ticketAnalysisService);
     ticketController.setServices(ticketAnalysisService);
     imageSelectorController.setServices(eventManagementService);
     chartComponentController.setServices(ticketAnalysisService);

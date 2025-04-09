@@ -160,7 +160,8 @@ public class EventDetailsController implements Initializable {
     private void showTicketGeneratorForm() {
         viewManager.showPopup(TICKET_GENERATOR_POPUP, "Ticket generator");
        TicketGeneratorController ticketGeneratorController = (TicketGeneratorController) fxmlManager.getFXML(TICKET_GENERATOR_POPUP).getValue();
-//       ticketGeneratorController.addTicketTypes(eventModel);
+       ticketGeneratorController.setServices(eventManagementService);
+       ticketGeneratorController.setEventModel(this.eventModel);
     }
 
     @FXML
