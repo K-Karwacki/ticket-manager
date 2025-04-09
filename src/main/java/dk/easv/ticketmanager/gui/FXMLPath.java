@@ -22,6 +22,7 @@ public class FXMLPath
   public final static String USERS_DASHBOARD = "fxml/dashboards/user_list_dashboard.fxml";
   public final static String SETTINGS_DASHBOARD = "fxml/dashboards/profile_dashboard.fxml";
   public final static String EVENT_DETAILS = "fxml/dashboards/event_details_dashboard.fxml";
+  public final static String FORGOTTEN_PASSWORD_VIEW = "fxml/main/forgotten_password.fxml";
 
   // Popups file paths
   public final static String EVENT_CREATOR_POPUP = "fxml/popups/event_creator_popup.fxml";

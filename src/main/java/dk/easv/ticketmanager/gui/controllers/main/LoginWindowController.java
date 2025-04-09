@@ -1,19 +1,21 @@
 package dk.easv.ticketmanager.gui.controllers.main;
 
 
+import dk.easv.ticketmanager.Main;
 import dk.easv.ticketmanager.bll.services.interfaces.AuthenticationService;
 import dk.easv.ticketmanager.bll.services.interfaces.UserManagementService;
-import dk.easv.ticketmanager.gui.FXMLManager;
 import dk.easv.ticketmanager.gui.FXMLPath;
 import dk.easv.ticketmanager.gui.ViewManager;
-import dk.easv.ticketmanager.gui.controllers.components.MenuComponentController;
 import dk.easv.ticketmanager.gui.models.UserSession;
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyCode;
 
-import java.io.IOException;
+import java.util.Objects;
+
+import static dk.easv.ticketmanager.gui.FXMLPath.FORGOTTEN_PASSWORD_VIEW;
 
 
 public class LoginWindowController
@@ -21,6 +23,9 @@ public class LoginWindowController
     private final ViewManager viewManager;
     private final UserSession userSession;
     private AuthenticationService authenticationService;
+    private boolean isPasswordVisible = false;
+    private final Image VISIBLE_ICON = new Image(Objects.requireNonNull(Main.class.getResourceAsStream("images/icons/visible-icon.png")));
+    private final Image INVISIBLE_ICON = new Image(Objects.requireNonNull(Main.class.getResourceAsStream("images/icons/invisible-icon.png")));
 
 
   @FXML private CheckBox showPasswordCheckBox;
@@ -28,6 +33,7 @@ public class LoginWindowController
   @FXML private TextField textFieldUsername;
   @FXML private PasswordField passwordFieldPassword;
   @FXML private TextField textFieldPassword;
+  @FXML private ImageView imgEyeIcon;
 
 
   public LoginWindowController(){
@@ -50,8 +56,6 @@ public class LoginWindowController
     });
 
     textFieldPassword.setManaged(false);
-
-    showPasswordCheckBox.setOnAction(actionEvent -> togglePasswordVisibility());
 
     // Sync values between PasswordField and TextField
     passwordFieldPassword.textProperty().bindBidirectional(textFieldPassword.textProperty());
@@ -95,26 +99,27 @@ public class LoginWindowController
 
   @FXML
   private void onClickForgotPassword() {
-      Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
-      alert.setTitle("Forgot Password");
-      alert.setHeaderText(null);
-      alert.setContentText("Please contact on of our administrators");
-      alert.showAndWait();
+      viewManager.showStage(FORGOTTEN_PASSWORD_VIEW, "Send Email", true);
   }
 
+  @FXML
   private void togglePasswordVisibility() {
-    if (showPasswordCheckBox.isSelected()) {
+    if (!isPasswordVisible) {
       textFieldPassword.setText(passwordFieldPassword.getText());
       textFieldPassword.setVisible(true);
       textFieldPassword.setManaged(true);
       passwordFieldPassword.setVisible(false);
       passwordFieldPassword.setManaged(false);
+      imgEyeIcon.setImage(INVISIBLE_ICON);
+      isPasswordVisible = true;
     } else {
       passwordFieldPassword.setText(textFieldPassword.getText());
       passwordFieldPassword.setVisible(true);
       passwordFieldPassword.setManaged(true);
       textFieldPassword.setVisible(false);
       textFieldPassword.setManaged(false);
+      imgEyeIcon.setImage(VISIBLE_ICON);
+      isPasswordVisible = false;
     }
   }
 
