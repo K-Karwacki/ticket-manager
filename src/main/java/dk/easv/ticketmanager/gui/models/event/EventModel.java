@@ -143,5 +143,14 @@ public class EventModel {
     tickets.remove(ticketModel);
   }
 
+  public SimpleSetProperty<TicketModel> ticketsProperty()
+  {
+    return tickets;
+  }
+
+  public SimpleSetProperty<UserModel> assignedCoordinatorsProperty()
+  {
+    return assignedCoordinators;
+  }
 }
 

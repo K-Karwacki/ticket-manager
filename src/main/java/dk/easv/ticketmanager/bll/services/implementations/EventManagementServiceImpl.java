@@ -16,6 +16,7 @@ import dk.easv.ticketmanager.utils.ImageConverter;
 import dk.easv.ticketmanager.utils.JPAUtil;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.EntityTransaction;
+import javafx.collections.FXCollections;
 import javafx.scene.image.Image;
 import javafx.util.Pair;
 
@@ -46,31 +47,17 @@ public class EventManagementServiceImpl implements EventManagementService {
             throw new RuntimeException("Load dependencies for EventManagementService");
         }
 
-        EntityManager em = JPAUtil.getEntityManager(); // EntityManager for transaction scope
-        EntityTransaction tx = em.getTransaction();
-        tx.begin();
+        eventListModel.setEventImages(eventRepository.getAllEventImages());
+        Collection<Event> events = eventRepository.getAll();
 
-        try {
-            eventListModel.setEventImages(eventRepository.getAllEventImages());
-            Collection<Event> events = eventRepository.getAll();
+        for (Event event : events) {
+            EventModel eventModel = new EventModel(event);
 
-            for (Event event : events) {
-                EventModel eventModel = new EventModel(event);
-
-                eventModel.getTickets().addAll(event.getTickets().stream().map(TicketModel::new).collect(Collectors.toSet()));
-                eventModel.getAssignedCoordinators().addAll(event.getCoordinators().stream().map(UserModel::new).collect(Collectors.toSet()));
-                eventModel.setImage(ImageConverter.convertToImage(event.getEventImage().getImageData()));
-                eventListModel.addEventModel(eventModel);
-            }
-            em.flush(); // Make sure changes are flushed to the DB
-            tx.commit(); // Commit the transaction
-        } catch (Exception e) {
-            e.printStackTrace();
-            tx.rollback(); // Rollback in case of failure
-        } finally {
-            em.close(); // Close EntityManager when done
+            eventModel.getTickets().addAll(event.getTickets().stream().map(TicketModel::new).collect(Collectors.toSet()));
+            eventModel.getAssignedCoordinators().addAll(event.getCoordinators().stream().map(UserModel::new).collect(Collectors.toSet()));
+            eventModel.setImage(ImageConverter.convertToImage(event.getEventImage().getImageData()));
+            eventListModel.addEventModel(eventModel);
         }
-
 
     }
 
@@ -113,7 +100,14 @@ public class EventManagementServiceImpl implements EventManagementService {
         if (saved == null) {
             throw new RuntimeException("Error creating new event");
         }
+
         EventModel savedModel = new EventModel(saved);
+        savedModel.ticketsProperty().set(FXCollections.observableSet(saved.getTickets().stream().map(
+            TicketModel::new).collect(
+            Collectors.toSet())));
+        savedModel.assignedCoordinatorsProperty().set(FXCollections.observableSet(saved.getCoordinators().stream().map(
+            UserModel::new).collect(
+            Collectors.toSet())));
         eventListModel.addEventModel(savedModel);
         return true;
     }

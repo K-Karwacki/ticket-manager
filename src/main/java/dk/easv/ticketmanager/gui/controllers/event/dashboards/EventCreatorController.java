@@ -73,8 +73,6 @@ public class EventCreatorController {
 
     @FXML
     private void initialize(){
-        loadAssignedCoordinators();
-        loadCreatedTickets();
         // Listen on assigned coordinators
         eventModel.getAssignedCoordinators().addListener((SetChangeListener<UserModel>) change ->{
             if(change.wasAdded() || change.wasRemoved()){
@@ -159,6 +157,8 @@ public class EventCreatorController {
             imageViewSelectedImage.setImage(null);
             FieldValidator.clearFields(formContainer);
             ViewManager.INSTANCE.switchDashboard(EVENTS_DASHBOARD, "Events");
+            EventHomeController imageSelectorController = (EventHomeController) FXMLManager.INSTANCE.getFXML(EVENTS_DASHBOARD).getValue();
+            imageSelectorController.loadEventCards();
         }
     }
 

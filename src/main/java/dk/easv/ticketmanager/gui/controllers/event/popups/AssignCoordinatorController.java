@@ -9,13 +9,16 @@ import dk.easv.ticketmanager.gui.controllers.user.CoordinatorCardController;
 import dk.easv.ticketmanager.gui.models.event.EventModel;
 import dk.easv.ticketmanager.gui.models.UserModel;
 import dk.easv.ticketmanager.utils.RoleType;
+import javafx.collections.ObservableSet;
 import javafx.fxml.FXML;
 import javafx.scene.Parent;
 import javafx.scene.layout.FlowPane;
 import javafx.util.Pair;
 
+import java.util.List;
 import java.util.Set;
 import java.util.function.Consumer;
+import java.util.stream.Collectors;
 
 public class AssignCoordinatorController
 {
@@ -48,18 +51,23 @@ public class AssignCoordinatorController
         flowPaneCoordinatorContainer.getChildren().clear();
         flowPaneCoordinatorContainer.getChildren().removeAll();
 
-        for (UserModel userModel : userManagementService.getUserListModel()
-            .getUsersObservable())
+        ObservableSet<UserModel> all = userManagementService.getUserListModel().getUsersObservable();
+        Set<UserModel> assigned = this.eventModel.getAssignedCoordinators();
+
+        List<UserModel> unassigned = all.stream()
+            .filter(userModel -> !assigned.contains(userModel) && userModel.roleProperty().get().getName().equals(RoleType.COORDINATOR.name()))
+            .collect(Collectors.toList());
+
+//        coordinatorTableView.getItems().setAll(unassigned);
+        for (UserModel userModel : unassigned)
         {
-             if(userModel.roleProperty().get().getName().equals(RoleType.COORDINATOR.name()) && !eventModel.getAssignedCoordinators().contains(userModel)){
-                 Pair<Parent, CoordinatorCardController> p = FXMLManager.INSTANCE.loadFXML(FXMLPath.COORDINATOR_CARD_COMPONENT);
+            Pair<Parent, CoordinatorCardController> p = FXMLManager.INSTANCE.loadFXML(FXMLPath.COORDINATOR_CARD_COMPONENT);
 
-                 CoordinatorCardController coordinatorCardController = p.getValue();
+            CoordinatorCardController coordinatorCardController = p.getValue();
 
-                 coordinatorCardController.setServices(eventManagementService);
-                 coordinatorCardController.setModel(userModel, eventModel);
-                flowPaneCoordinatorContainer.getChildren().add(p.getKey());
-             }
+            coordinatorCardController.setServices(eventManagementService);
+            coordinatorCardController.setModel(userModel, eventModel);
+            flowPaneCoordinatorContainer.getChildren().add(p.getKey());
         }
     }
 

@@ -8,6 +8,8 @@ import javafx.beans.property.SimpleStringProperty;
 import javafx.scene.image.Image;
 import javafx.scene.paint.ImagePattern;
 
+import java.util.Objects;
+
 public class UserModel
 {
   private final SimpleLongProperty ID = new SimpleLongProperty();
@@ -174,5 +176,19 @@ public class UserModel
 
   public SimpleObjectProperty<Image> imageProperty(){
     return image;
+  }
+
+  @Override public boolean equals(Object o)
+  {
+    if (this == o)
+      return true;
+    if (!(o instanceof UserModel userModel))
+      return false;
+    return getID() == userModel.getID();
+  }
+
+  @Override public int hashCode()
+  {
+    return Objects.hash(getID());
   }
 }
