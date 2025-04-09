@@ -26,6 +26,7 @@ public class FXMLPath
   // Popups file paths
   public final static String EVENT_CREATOR_POPUP = "fxml/popups/event_creator_popup.fxml";
   public final static String USER_CREATOR_POPUP = "fxml/popups/user_creator_popup.fxml";
+  public final static String USER_EDITOR_POPUP = "fxml/popups/user_editor_popup.fxml";
   public final static String EVENT_EDITOR_POPUP = "fxml/popups/event_editor_popup.fxml";
   public final static String IMAGE_SELECTOR_POPUP = "fxml/popups/image_selector_popup.fxml";
   public final static String COORDINATOR_LIST_POPUP = "fxml/popups/coordinator_list_popup.fxml";

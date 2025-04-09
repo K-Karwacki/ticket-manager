@@ -8,29 +8,26 @@
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
+<?import javafx.scene.shape.Circle?>
 <?import javafx.scene.text.Font?>
 
-<VBox fx:id="menuRoot" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="657.0" prefWidth="300.0" spacing="22.0" styleClass="root" stylesheets="@../../style/components/menu.css" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="dk.easv.ticketmanager.gui.controllers.components.MenuComponentController">
+<VBox fx:id="menuRoot" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="657.0" prefWidth="300.0" spacing="22.0" styleClass="root" stylesheets="@../../style/components/menu.css" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="dk.easv.ticketmanager.gui.controllers.components.MenuComponentController">
    <HBox alignment="CENTER_LEFT" prefWidth="360.0" VBox.vgrow="NEVER">
       <padding>
          <Insets bottom="10.0" left="20.0" top="17.0" />
       </padding>
-      <ImageView fitHeight="55.0" fitWidth="55.0" pickOnBounds="true" preserveRatio="true" style="background-radius: 50%;">
-         <HBox.margin>
-            <Insets right="20.0" />
-         </HBox.margin>
-      </ImageView>
-      <VBox>
+      <Circle fx:id="profileImage" fill="#f5c777" radius="35.0" stroke="BLACK" strokeType="INSIDE" />
+      <VBox alignment="CENTER_LEFT">
          <children>
             <Label fx:id="menuTextLabel" prefHeight="17.0" text="Welcome!">
                <font>
                   <Font size="19.0" />
                </font>
                <VBox.margin>
-                  <Insets left="7.0" />
+                  <Insets />
                </VBox.margin>
             </Label>
-            <Label fx:id="menuTextLabel1" prefHeight="17.0" text="Ronaldinho Gaucho">
+            <Label fx:id="lblFullName" prefHeight="17.0" text="User">
                <font>
                   <Font size="18.0" />
                </font>
@@ -38,12 +35,10 @@
                   <Insets top="3.0" />
                </VBox.margin>
             </Label>
-            <Label fx:id="menuTextLabel11" layoutX="10.0" layoutY="37.0" prefHeight="17.0" text="Coordinator">
-               <font>
-                  <Font size="18.0" />
-               </font>
-            </Label>
          </children>
+         <padding>
+            <Insets bottom="5.0" left="15.0" right="5.0" top="5.0" />
+         </padding>
       </VBox>
    </HBox>
    <HBox accessibleRole="BUTTON" alignment="CENTER_LEFT" onMouseClicked="#onClickOpenHome" prefHeight="60.0" prefWidth="360.0">

@@ -36,10 +36,6 @@ public class UserRepositoryImpl implements UserRepository
 
     @Override public Optional<User> getById(long id)
     {
-//        if(userMap.containsKey(id)){
-//            return Optional.of(userMap.get(id));
-//        }
-
         try(EntityManager entityManager = JPAUtil.getEntityManager()){
             return entityManager.createQuery("select u from User u where u.id=:userID", User.class).setParameter("userID", id).getResultStream()
                 .findFirst();
@@ -82,10 +78,12 @@ public class UserRepositoryImpl implements UserRepository
         EntityManager em = JPAUtil.getEntityManager();
         try {
             em.getTransaction().begin();
-            em.remove(user);
+            User managedUser = em.merge(user);
+            em.remove(managedUser);
             em.getTransaction().commit();
             return true;
         } catch (Exception e) {
+            System.out.println(e.getMessage());
             if (em.getTransaction().isActive()){
                 em.getTransaction().rollback();
             }
@@ -107,9 +105,23 @@ public class UserRepositoryImpl implements UserRepository
         return false;
     }
 
-    @Override public User update(User updatedUser)
-    {
-        return null;
+    @Override
+    public User update(User updatedUser) {
+        EntityManager em = JPAUtil.getEntityManager();
+        try {
+            em.getTransaction().begin();
+            User mergedUser = em.merge(updatedUser);
+            em.getTransaction().commit();
+            return mergedUser;
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+            if (em.getTransaction().isActive()) {
+                em.getTransaction().rollback();
+            }
+            return null;
+        } finally {
+            em.close();
+        }
     }
 
 

@@ -21,6 +21,7 @@ public class UserModel
   private final SimpleStringProperty phoneNumber = new SimpleStringProperty();
   private final SimpleStringProperty password = new SimpleStringProperty();
   private final SimpleObjectProperty<Image> image = new SimpleObjectProperty<>();
+  private final SimpleObjectProperty<ImagePattern> imagePattern = new SimpleObjectProperty<>();
 
   private String loggedSessionToken;
 
@@ -45,6 +46,7 @@ public class UserModel
     email.set(user.getEmail());
     phoneNumber.set(user.getPhoneNumber());
     image.set(user.getUserImage());
+    imagePattern.set(new ImagePattern(user.getUserImage()));
     password.set(null);
     loggedSessionToken = null;
   }
@@ -83,6 +85,10 @@ public class UserModel
   {
     this.fullName.set(fullName);
   }
+
+  public SimpleObjectProperty<ImagePattern> imagePatternProperty(){
+    return imagePattern;
+}
 
   public String getName()
   {
@@ -172,6 +178,16 @@ public class UserModel
   public Image getImage()
   {
     return image.get();
+  }
+
+  public void setImage(Image image){
+    this.image.set(image);
+    this.imagePattern.set(new ImagePattern(image));
+  }
+
+  public void setImage(ImagePattern imagePattern){
+    this.image.set(imagePattern.getImage());
+    this.imagePattern.set(imagePattern);
   }
 
   public SimpleObjectProperty<Image> imageProperty(){

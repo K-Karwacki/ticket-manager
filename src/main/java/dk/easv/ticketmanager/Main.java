@@ -47,7 +47,8 @@ public class Main extends Application
 
     EventHomeController eventHomeController = (EventHomeController) fxmlManager.getFXML(FXMLPath.EVENTS_DASHBOARD).getValue();
 
-//    TicketTypeCreatorController ticketTypeCreatorController = (TicketTypeCreatorController) fxmlManager.getFXML(FXMLPath.TICKET_TYPE_CREATOR_POPUP).getValue();
+    UserFormController userFormController = new UserFormController();
+    UserCardController userCardController = (UserCardController) fxmlManager.getFXML(FXMLPath.USER_CARD_COMPONENT).getValue();
     TicketGeneratorController ticketGeneratorController = (TicketGeneratorController) fxmlManager.getFXML(FXMLPath.TICKET_GENERATOR_POPUP).getValue();
     TicketController ticketController = (TicketController) fxmlManager.getFXML(FXMLPath.TICKET_COMPONENT).getValue();
     ImageSelectorController imageSelectorController = (ImageSelectorController) fxmlManager.getFXML(FXMLPath.IMAGE_SELECTOR_POPUP).getValue();
@@ -66,6 +67,10 @@ public class Main extends Application
     assignCoordinatorController.setServices(userManagementService, eventManagementService);
 
 //    ticketGeneratorController.setServices(ticketAnalysisService);
+    userFormController.setServices(userManagementService, authorizationService);
+
+    ticketGeneratorController.setServices(ticketAnalysisService);
+    userCardController.setServices(userManagementService);
     ticketController.setServices(ticketAnalysisService);
     imageSelectorController.setServices(eventManagementService);
     chartComponentController.setServices(ticketAnalysisService);
@@ -94,13 +99,13 @@ public class Main extends Application
         System.out.println("Coordinator role created");
       }
       if(authenticationService.findUserByEmail("admin") == null){
-        userManagementService.registerNewUser("Admin","Admin", authorizationService.findRoleByName(RoleType.ADMIN.name()).getId(), "admin", "admin phone", "admin");
+        userManagementService.registerNewUser("Admin","Admin", authorizationService.findRoleByName(RoleType.ADMIN.name()).getId(), "admin", "admin phone", "admin", null);
         System.out.println("Admin account created");
       }
-      if(authenticationService.findUserByEmail("coordinator") == null){
-        userManagementService.registerNewUser("coordinator","coordinator", authorizationService.findRoleByName(RoleType.COORDINATOR.name()).getId(), "coordinator", "coordinator phone", "coordinator");
-        System.out.println("Coordinator account created");
-      }
+//      if(authenticationService.findUserByEmail("coordinator") == null){
+//        userManagementService.registerNewUser("coordinator","coordinator", authorizationService.findRoleByName(RoleType.COORDINATOR.name()).getId(), "coordinator", "coordinator phone", "coordinator", null);
+//        System.out.println("Coordinator account created");
+//      }
 
     }catch(Exception e){
       e.printStackTrace();
