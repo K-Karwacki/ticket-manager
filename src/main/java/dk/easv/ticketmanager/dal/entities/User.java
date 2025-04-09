@@ -36,7 +36,8 @@ public class User {
     @Column(name = "phone_number")
     private String phoneNumber;
 
-    @Column(name = "image_data")
+    @Lob
+    @Column(name = "image_data", columnDefinition = "VARBINARY(MAX)")
     private byte[] imageData;
 
     @ManyToMany(mappedBy = "coordinators", fetch = FetchType.EAGER)

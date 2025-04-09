@@ -40,6 +40,7 @@ public class UserCreatorController extends UserFormController {
 
     ImagePattern imagePattern = (ImagePattern) profilePictureView.getFill();
 
+    System.out.println(imagePattern.getImage());
     if(userManagementService.registerNewUser(firstNameField.getText(), lastNameField.getText(), roleComboBox.getValue().getId(), emailField.getText(), phoneField.getText(), passwordField.getText(), imagePattern.getImage()) != null){
       System.out.println("user created :)");
       ViewManager.INSTANCE.hidePopup(FXMLPath.USER_CREATOR_POPUP);

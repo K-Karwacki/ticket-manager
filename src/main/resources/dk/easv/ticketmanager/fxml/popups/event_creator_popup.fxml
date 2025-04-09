@@ -33,128 +33,198 @@
             <Insets bottom="33.0" left="33.0" />
          </VBox.margin>
       </HBox>
-      <ScrollPane fitToHeight="true" fitToWidth="true" focusTraversable="false" hbarPolicy="NEVER" maxHeight="-Infinity" pannable="true" prefHeight="550.0" styleClass="dashboard-root" stylesheets="@../../style/dashboard/dashboard.css" vbarPolicy="ALWAYS">
+      <ScrollPane fitToHeight="true" fitToWidth="true" focusTraversable="false" hbarPolicy="NEVER" maxHeight="-Infinity" pannable="true" prefHeight="555.0" styleClass="dashboard-root" stylesheets="@../../style/dashboard/dashboard.css" vbarPolicy="ALWAYS">
          <content>
             <VBox alignment="CENTER" styleClass="dashboard-root">
                <children>
                   <HBox alignment="CENTER" layoutY="10.0">
                      <children>
-                        <VBox fx:id="formContainer" HBox.hgrow="ALWAYS">
+                        <VBox fx:id="formContainer" stylesheets="@../../style/components/form.css" HBox.hgrow="ALWAYS">
                            <children>
                               <Label prefHeight="62.0" prefWidth="200.0" style="-fx-background-color: #9CE2FF #9CE2FF;" text="Event info" textFill="#323232">
                                  <font>
                                     <Font name="Verdana" size="30.0" />
                                  </font>
                                  <padding>
-                                    <Insets bottom="10.0" left="13.0" top="10.0" />
+                                    <Insets bottom="4.0" left="13.0" top="4.0" />
                                  </padding>
+                                 <VBox.margin>
+                                    <Insets bottom="30.0" />
+                                 </VBox.margin>
                               </Label>
                               <VBox>
                                  <children>
-                                    <Label text="Label" />
+                                    <Label text="Title:">
+                                       <font>
+                                          <Font name="Verdana" size="18.0" />
+                                       </font>
+                                       <VBox.margin>
+                                          <Insets bottom="4.0" />
+                                       </VBox.margin></Label>
                                     <TextField fx:id="txtFieldEventName" maxWidth="420.0" promptText="Event title">
                                        <font>
                                           <Font name="Verdana" size="17.0" />
                                        </font>
                                     </TextField>
                                  </children>
+                                 <VBox.margin>
+                                    <Insets bottom="17.0" />
+                                 </VBox.margin>
                               </VBox>
                               <VBox>
                                  <children>
-                                    <Label text="Label" />
+                                    <Label text="Description:">
+                                       <font>
+                                          <Font name="Verdana" size="18.0" />
+                                       </font>
+                                       <VBox.margin>
+                                          <Insets bottom="4.0" />
+                                       </VBox.margin></Label>
                                     <TextArea fx:id="txtAreaEventDescription" maxHeight="150.0" maxWidth="420.0" promptText="Description">
                                        <font>
                                           <Font name="Verdana" size="17.0" />
                                        </font>
                                     </TextArea>
                                  </children>
-                              </VBox>
-                              <TextField fx:id="txtFieldEventLocationName" maxWidth="420.0" promptText="Location's name">
-                                 <font>
-                                    <Font name="Verdana" size="17.0" />
-                                 </font>
                                  <VBox.margin>
-                                    <Insets bottom="10.0" />
+                                    <Insets bottom="17.0" />
                                  </VBox.margin>
-                              </TextField>
+                              </VBox>
+                              <VBox>
+                                 <children>
+                                    <Label text="Location's name:">
+                                       <font>
+                                          <Font name="Verdana" size="18.0" />
+                                       </font>
+                                       <VBox.margin>
+                                          <Insets bottom="4.0" />
+                                       </VBox.margin>
+                                    </Label>
+                                    <TextField fx:id="txtFieldEventLocationName" maxWidth="420.0" promptText="Location's name">
+                                       <font>
+                                          <Font name="Verdana" size="17.0" />
+                                       </font>
+                                    </TextField>
+                                 </children>
+                                 <VBox.margin>
+                                    <Insets bottom="17.0" />
+                                 </VBox.margin>
+                              </VBox>
                               <HBox alignment="CENTER" maxWidth="420.0">
                                  <children>
-                                    <DatePicker fx:id="datePickerEventDate" prefHeight="34.0" prefWidth="209.0" promptText="Date">
-                                       <HBox.margin>
-                                          <Insets right="40.0" />
-                                       </HBox.margin>
-                                    </DatePicker>
-                                    <TextField fx:id="txtFieldEventTime" promptText="Time ( e.g. 21:00 )">
+                                    <VBox>
+                                       <children>
+                                          <Label text="Date">
+                                             <font>
+                                                <Font name="Verdana" size="18.0" />
+                                             </font>
+                                             <VBox.margin>
+                                                <Insets bottom="4.0" />
+                                             </VBox.margin>
+                                          </Label>
+                                          <DatePicker fx:id="datePickerEventDate" prefHeight="34.0" prefWidth="209.0" promptText="Date">
+                                             <VBox.margin>
+                                                <Insets right="40.0" />
+                                             </VBox.margin>
+                                          </DatePicker>
+                                       </children>
+                                    </VBox>
+                                    <VBox>
+                                       <children>
+                                          <Label text="Time">
+                                             <font>
+                                                <Font name="Verdana" size="18.0" />
+                                             </font>
+                                             <VBox.margin>
+                                                <Insets bottom="4.0" />
+                                             </VBox.margin>
+                                          </Label>
+                                          <TextField fx:id="txtFieldEventTime" promptText="Time ( e.g. 21:00 )">
+                                             <font>
+                                                <Font name="Verdana" size="17.0" />
+                                             </font>
+                                          </TextField>
+                                       </children>
+                                    </VBox>
+                                 </children>
+                                 <VBox.margin>
+                                    <Insets bottom="17.0" />
+                                 </VBox.margin>
+                              </HBox>
+                              <VBox>
+                                 <children>
+                                    <Label text="Address">
+                                       <font>
+                                          <Font name="Verdana" size="18.0" />
+                                       </font>
+                                       <VBox.margin>
+                                          <Insets bottom="4.0" />
+                                       </VBox.margin>
+                                    </Label>
+                                    <TextField fx:id="txtFieldEventAddress" maxWidth="420.0" promptText="Address">
                                        <font>
                                           <Font name="Verdana" size="17.0" />
                                        </font>
                                     </TextField>
                                  </children>
                                  <VBox.margin>
-                                    <Insets bottom="10.0" />
+                                    <Insets bottom="17.0" />
                                  </VBox.margin>
-                              </HBox>
-                              <TextField fx:id="txtFieldEventAddress" maxWidth="420.0" promptText="Address">
-                                 <font>
-                                    <Font name="Verdana" size="17.0" />
-                                 </font>
-                                 <VBox.margin>
-                                    <Insets bottom="10.0" />
-                                 </VBox.margin>
-                              </TextField>
+                              </VBox>
                               <HBox maxWidth="420.0">
                                  <children>
-                                    <TextField fx:id="txtFieldEventCity" promptText="City">
-                                       <font>
-                                          <Font name="Verdana" size="17.0" />
-                                       </font>
-                                       <HBox.margin>
-                                          <Insets right="40.0" />
-                                       </HBox.margin>
-                                    </TextField>
-                                    <TextField fx:id="txtFieldEventPostalCode" promptText="Postal code">
-                                       <font>
-                                          <Font name="Verdana" size="17.0" />
-                                       </font>
-                                    </TextField>
+                                    <VBox>
+                                       <children>
+                                          <Label text="City">
+                                             <font>
+                                                <Font name="Verdana" size="18.0" />
+                                             </font>
+                                             <VBox.margin>
+                                                <Insets bottom="4.0" />
+                                             </VBox.margin>
+                                          </Label>
+                                          <TextField fx:id="txtFieldEventCity" promptText="City">
+                                             <font>
+                                                <Font name="Verdana" size="17.0" />
+                                             </font>
+                                             <VBox.margin>
+                                                <Insets right="40.0" />
+                                             </VBox.margin>
+                                          </TextField>
+                                       </children>
+                                    </VBox>
+                                    <VBox>
+                                       <children>
+                                          <Label text="Postal code">
+                                             <font>
+                                                <Font name="Verdana" size="18.0" />
+                                             </font>
+                                             <VBox.margin>
+                                                <Insets bottom="4.0" />
+                                             </VBox.margin>
+                                          </Label>
+                                          <TextField fx:id="txtFieldEventPostalCode" promptText="Postal code">
+                                             <font>
+                                                <Font name="Verdana" size="17.0" />
+                                             </font>
+                                          </TextField>
+                                       </children>
+                                    </VBox>
                                  </children>
                                  <VBox.margin>
-                                    <Insets bottom="10.0" />
+                                    <Insets bottom="17.0" />
                                  </VBox.margin>
-                              </HBox>
-                              <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
-                                 <children>
-                                    <Button mnemonicParsing="false" onAction="#chooseImage" prefWidth="142.0" style="-fx-background-color: #FFE7B1; -fx-border-color: black; -fx-border-radius: 5;" text="Choose image" textAlignment="CENTER">
-                                       <cursor>
-                                          <Cursor fx:constant="HAND" />
-                                       </cursor>
-                                       <HBox.margin>
-                                          <Insets right="33.0" />
-                                       </HBox.margin>
-                                       <font>
-                                          <Font name="Verdana" size="14.0" />
-                                       </font>
-                                    </Button>
-                                    <Button mnemonicParsing="false" onAction="#onClickOpenAssignCoordinators" style="-fx-background-color: #FFE7B1; -fx-border-color: black; -fx-border-radius: 5;" text="Assign coordinators" textAlignment="CENTER">
-                                       <cursor>
-                                          <Cursor fx:constant="HAND" />
-                                       </cursor>
-                                       <font>
-                                          <Font name="Verdana" size="14.0" />
-                                       </font>
-                                    </Button>
-                                 </children>
                               </HBox>
                            </children>
                         </VBox>
-                        <VBox layoutX="788.0" layoutY="10.0" styleClass="dashboard-root" HBox.hgrow="ALWAYS">
+                        <VBox layoutX="788.0" layoutY="10.0" styleClass="dashboard-root" stylesheets="@../../style/components/form.css" HBox.hgrow="ALWAYS">
                            <children>
                               <Label prefHeight="62.0" prefWidth="200.0" style="-fx-background-color: #9CE2FF #9CE2FF;" text="Tickets" textFill="#323232">
                                  <font>
                                     <Font name="Verdana" size="30.0" />
                                  </font>
                                  <padding>
-                                    <Insets bottom="10.0" left="13.0" top="10.0" />
+                                    <Insets bottom="4.0" left="13.0" top="4.0" />
                                  </padding>
                               </Label>
                               <ListView fx:id="ticketListView" prefHeight="200.0" prefWidth="420.0">
@@ -163,7 +233,7 @@
                                  </VBox.margin></ListView>
                               <HBox alignment="CENTER">
                                  <children>
-                                    <Button mnemonicParsing="false" onAction="#onClickOpenAddTicket" prefWidth="142.0" style="-fx-background-color: #FFE7B1; -fx-border-color: black; -fx-border-radius: 5;" text="Add new ticket" textAlignment="CENTER">
+                                    <Button mnemonicParsing="false" onAction="#onClickOpenAddTicket" prefWidth="142.0" text="Add new ticket" textAlignment="CENTER">
                                        <cursor>
                                           <Cursor fx:constant="HAND" />
                                        </cursor>
@@ -174,7 +244,7 @@
                                           <Font name="Verdana" size="14.0" />
                                        </font>
                                     </Button>
-                                    <Button layoutX="214.0" layoutY="10.0" mnemonicParsing="false" onAction="#chooseImage" prefWidth="142.0" style="-fx-background-color: #FFE7B1; -fx-border-color: black; -fx-border-radius: 5;" text="Remove ticket" textAlignment="CENTER">
+                                    <Button layoutX="214.0" layoutY="10.0" mnemonicParsing="false" onAction="#chooseImage" prefWidth="142.0" text="Remove ticket" textAlignment="CENTER">
                                        <cursor>
                                           <Cursor fx:constant="HAND" />
                                        </cursor>
@@ -189,7 +259,15 @@
                               </HBox>
                               <HBox alignment="CENTER" layoutX="10.0" layoutY="340.0">
                                  <children>
-                                    <Button mnemonicParsing="false" onAction="#chooseImage" prefWidth="142.0" style="-fx-background-color: #FFE7B1; -fx-border-color: black; -fx-border-radius: 5;" text="Edit ticket" textAlignment="CENTER">
+                                    <Button mnemonicParsing="false" onAction="#chooseImage" prefWidth="142.0" style=": #FFE7B1; : black; -fx-border-radus: 5;" text="Choose image" textAlignment="CENTER">
+                                       <cursor>
+                                          <Cursor fx:constant="HAND" />
+                                       </cursor>
+                                       <font>
+                                          <Font name="Verdana" size="14.0" />
+                                       </font>
+                                    </Button>
+                                    <Button mnemonicParsing="false" onAction="#chooseImage" prefWidth="142.0" text="Edit ticket" textAlignment="CENTER">
                                        <cursor>
                                           <Cursor fx:constant="HAND" />
                                        </cursor>
@@ -203,6 +281,30 @@
                                  </children>
                               </HBox>
                               <ImageView fx:id="imageViewSelectedImage" fitHeight="70.0" fitWidth="140.0" pickOnBounds="true" preserveRatio="true" />
+                              <HBox alignment="CENTER" layoutX="10.0" layoutY="364.0">
+                                 <children>
+                                    <Button mnemonicParsing="false" onAction="#onClickOpenAssignCoordinators" text="Assign coordinators" textAlignment="CENTER">
+                                       <cursor>
+                                          <Cursor fx:constant="HAND" />
+                                       </cursor>
+                                       <font>
+                                          <Font name="Verdana" size="14.0" />
+                                       </font>
+                                    </Button>
+                                 </children>
+                              </HBox>
+                              <ScrollPane fitToHeight="true" fitToWidth="true" hbarPolicy="NEVER">
+                                 <VBox.margin>
+                                    <Insets bottom="22.0" top="22.0" />
+                                 </VBox.margin>
+                                 <content>
+                                    <FlowPane fx:id="assignedCoordinatorsContainer">
+                                       <padding>
+                                          <Insets bottom="15.0" left="15.0" right="15.0" top="15.0" />
+                                       </padding>
+                                    </FlowPane>
+                                 </content>
+                              </ScrollPane>
                            </children>
                            <HBox.margin>
                               <Insets left="100.0" />
@@ -213,14 +315,6 @@
                         <Insets />
                      </VBox.margin>
                   </HBox>
-                  <FlowPane fx:id="assignedCoordinatorsContainer">
-                     <VBox.margin>
-                        <Insets bottom="22.0" top="22.0" />
-                     </VBox.margin>
-                     <padding>
-                        <Insets bottom="15.0" left="15.0" right="15.0" top="15.0" />
-                     </padding>
-                  </FlowPane>
                   <HBox alignment="CENTER" layoutX="40.0" layoutY="58.0">
                      <children>
                         <VBox alignment="CENTER" spacing="10.0">
