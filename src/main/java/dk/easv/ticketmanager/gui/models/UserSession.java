@@ -1,23 +1,19 @@
 package dk.easv.ticketmanager.gui.models;
 
+import javafx.beans.property.SimpleObjectProperty;
 import javafx.scene.paint.ImagePattern;
 import javafx.scene.shape.Circle;
 
-public class UserSession {
-    private static UserSession instance;
-    private UserModel loggedUserModel;
+public enum UserSession {
+    INSTANCE;
+    private SimpleObjectProperty<UserModel> loggedUserModel = new SimpleObjectProperty<>();
 
     private UserSession() {}
 
-    public static UserSession getInstance() {
-        if (instance == null)
-            instance = new UserSession();
-        return instance;
-    }
     public void setProfileImage(Circle profileCircle) {
-        if (loggedUserModel.getImage() != null) {
+        if (getLoggedUserModel().getImage() != null) {
             try {
-                ImagePattern pattern = new ImagePattern(loggedUserModel.getImage());
+                ImagePattern pattern = new ImagePattern(getLoggedUserModel().getImage());
                 profileCircle.setFill(pattern); // profileImage should be a Circle
             } catch (Exception e) {
                 System.out.println("Error loading image: " + e.getMessage());
@@ -29,17 +25,22 @@ public class UserSession {
         if(userModel == null || userModel.getLoggedSessionToken().isEmpty()){
             throw new RuntimeException("Not authorized to do that.");
         }
-        this.loggedUserModel = userModel;
+        this.loggedUserModel.set(userModel);
     }
 
-    public UserModel getLoggedUserModel() {
+
+    public UserModel getLoggedUserModel()
+    {
+        return loggedUserModel.get();
+    }
+
+    public SimpleObjectProperty<UserModel> loggedUserModelProperty()
+    {
         return loggedUserModel;
     }
-//    public String getRoleName() {
-//        return user.getRole().getName();
-//    }
+
+    //
     public void clearSession() {
-        instance = null;
-        loggedUserModel = null;
+        loggedUserModel.set(null);
     }
 }

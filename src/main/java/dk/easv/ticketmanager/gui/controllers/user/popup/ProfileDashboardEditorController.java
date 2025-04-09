@@ -82,9 +82,9 @@ public class ProfileDashboardEditorController implements Initializable {
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        UserModel currentUser = UserSession.getInstance().getLoggedUserModel();
+        UserModel currentUser = UserSession.INSTANCE.getLoggedUserModel();
 
-        UserSession.getInstance().setProfileImage(profileCircle);
+        UserSession.INSTANCE.setProfileImage(profileCircle);
         txtFieldUserFirstName.setText(currentUser.nameProperty().get());
         txtFieldUserLastName.setText(currentUser.nameProperty().get());
         txtFieldUserEmail.setText(currentUser.emailProperty().get());

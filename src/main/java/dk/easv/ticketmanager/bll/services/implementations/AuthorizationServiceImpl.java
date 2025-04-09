@@ -7,7 +7,9 @@ import dk.easv.ticketmanager.dal.entities.Role;
 import dk.easv.ticketmanager.dal.entities.User;
 import dk.easv.ticketmanager.bll.services.interfaces.AuthorizationService;
 import dk.easv.ticketmanager.dal.repositories.AuthRepository;
+import dk.easv.ticketmanager.gui.models.UserModel;
 import dk.easv.ticketmanager.gui.models.UserSession;
+import dk.easv.ticketmanager.utils.RoleType;
 
 import java.util.List;
 import java.util.Optional;
@@ -15,7 +17,7 @@ import java.util.Optional;
 public class AuthorizationServiceImpl implements AuthorizationService
 {
   private final AuthRepository authRepository;
-  private final UserSession userSession = UserSession.getInstance();
+  private final UserSession userSession = UserSession.INSTANCE;
 
   public AuthorizationServiceImpl(){
     this.authRepository = null;
@@ -51,7 +53,33 @@ public class AuthorizationServiceImpl implements AuthorizationService
   }
 
   @Override
-  public boolean canAddUser(User user) {
+  public boolean canAddUserWithRole(Role role) {
+    System.out.println(userSession.getLoggedUserModel().getName());
+    if(userSession.getLoggedUserModel().getRole().getName().equals(
+        RoleType.COORDINATOR.name())){
+      if(role.getName().equals(RoleType.ADMIN.name())){
+        return false;
+      }
+      return true;
+    }
+    if(userSession.getLoggedUserModel().getRole().getName().equals(RoleType.ADMIN.name())){
+      return true;
+    }
+    return false;
+  }
+
+  @Override
+  public boolean canEditUser(UserModel userModel) {
+    if(userSession.getLoggedUserModel().getRole().getName().equals(
+        RoleType.COORDINATOR.name())){
+      if(userSession.getLoggedUserModel().getID() != userModel.getID()){
+        return false;
+      }
+      return true;
+    }
+    if(userSession.getLoggedUserModel().getRole().getName().equals(RoleType.ADMIN.name())){
+      return true;
+    }
     return false;
   }
 

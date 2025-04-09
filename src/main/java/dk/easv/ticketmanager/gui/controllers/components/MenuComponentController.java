@@ -36,17 +36,23 @@ public class MenuComponentController
 
   @FXML
   public void initialize(){
-    ImagePattern imagePattern = UserSession.getInstance().getLoggedUserModel().imagePatternProperty().get();
+    ImagePattern imagePattern = UserSession.INSTANCE.getLoggedUserModel().imagePatternProperty().get();
     if(imagePattern != null){
       profileImage.setFill(imagePattern);
     }
-    String fullName = UserSession.getInstance().getLoggedUserModel().fullNameProperty().get();
+    String fullName = UserSession.INSTANCE.getLoggedUserModel().fullNameProperty().get();
 
     if(fullName != null){
       lblFullName.setText(fullName);
     }
 
+    UserSession.INSTANCE.loggedUserModelProperty().addListener((obs, oldUser, newUser) -> {
+      if (newUser != null) {
+        lblFullName.textProperty().bind(newUser.fullNameProperty());
+      }
+    });
   }
+
 
   public void setParentContainer(BorderPane parentRoot){
       this.parentRoot = parentRoot;
@@ -99,7 +105,7 @@ public class MenuComponentController
 
   public void onClickLogout(MouseEvent event) {
     viewManager.showStage(FXMLPath.LOGIN, "Login", false);
-    UserSession.getInstance().clearSession();
+    UserSession.INSTANCE.clearSession();
   }
 
 //  public void addNewMenuButton()

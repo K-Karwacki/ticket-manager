@@ -60,7 +60,7 @@ public class AuthenticationServiceImpl implements AuthenticationService
     if(verifyPassword(password, userFound.getHashedPassword())){
       this.authenticatedUserModel = new UserModel(userFound);
       this.authenticatedUserModel.setLoggedSessionToken(TokenGenerator.generateSessionToken());
-      UserSession.getInstance().setLoggedUserModel(this.authenticatedUserModel);
+      UserSession.INSTANCE.setLoggedUserModel(this.authenticatedUserModel);
       return true;
     }
     return false;

@@ -38,7 +38,7 @@ public class LoginWindowController
 
   public LoginWindowController(){
     viewManager = ViewManager.INSTANCE;
-    userSession = UserSession.getInstance();
+    userSession = UserSession.INSTANCE;
 
   }
 
@@ -123,7 +123,4 @@ public class LoginWindowController
     }
   }
 
-    public void setAuthenticationService(AuthenticationService authenticationService, AuthenticationService authenticationService1, UserManagementService userManagementService) {
-      this.authenticationService = authenticationService;
-    }
 }

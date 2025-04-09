@@ -33,6 +33,7 @@ public class Main extends Application
   private final ViewManager viewManager = ViewManager.INSTANCE;
   private final FXMLManager fxmlManager = FXMLManager.INSTANCE;
   private final StageManager stageManager = new StageManager();
+  protected final UserSession userSession = UserSession.INSTANCE;
 
   protected final RepositoryServiceFactory repositoryServiceFactory = new RepositoryServiceFactory();
   protected final RepositoryService repositoryService = repositoryServiceFactory.getRepositoryService();
@@ -85,15 +86,14 @@ public class Main extends Application
 
   @Override public void start(Stage primaryStage)
   {
+    setControllersDependencies();
     Locale.setDefault(Locale.ENGLISH);
 
-    UserSession userSession = UserSession.getInstance();
-    userSession.clearSession();
+//    userSession.clearSession();
 
     stageManager.setCurrentStage(primaryStage);
     viewManager.setStageManager(stageManager);
 
-    setControllersDependencies();
 
     try{
       if(authorizationService.findRoleByName(RoleType.ADMIN.name()) == null){
@@ -108,16 +108,10 @@ public class Main extends Application
         userManagementService.registerNewUser("Admin","Admin", authorizationService.findRoleByName(RoleType.ADMIN.name()).getId(), "admin", "admin phone", "admin", null);
         System.out.println("Admin account created");
       }
-//      if(authenticationService.findUserByEmail("coordinator") == null){
-//        userManagementService.registerNewUser("coordinator","coordinator", authorizationService.findRoleByName(RoleType.COORDINATOR.name()).getId(), "coordinator", "coordinator phone", "coordinator", null);
-//        System.out.println("Coordinator account created");
-//      }
-
     }catch(Exception e){
       e.printStackTrace();
     }
 
-    setControllersDependencies();
     viewManager.showStage(FXMLPath.LOGIN, "Login", false);
   }
 

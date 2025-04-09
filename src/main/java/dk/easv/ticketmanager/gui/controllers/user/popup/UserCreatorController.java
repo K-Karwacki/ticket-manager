@@ -40,7 +40,13 @@ public class UserCreatorController extends UserFormController {
 
     ImagePattern imagePattern = (ImagePattern) profilePictureView.getFill();
 
-    System.out.println(imagePattern.getImage());
+    if(!authorizationService.canAddUserWithRole(roleComboBox.getValue())){
+      Alert alert = new Alert(Alert.AlertType.ERROR);
+      alert.setContentText("I'm sorry, You don't have permission to add a user with this role.");
+      alert.show();
+      return;
+    }
+
     if(userManagementService.registerNewUser(firstNameField.getText(), lastNameField.getText(), roleComboBox.getValue().getId(), emailField.getText(), phoneField.getText(), passwordField.getText(), imagePattern.getImage()) != null){
       System.out.println("user created :)");
       ViewManager.INSTANCE.hidePopup(FXMLPath.USER_CREATOR_POPUP);
