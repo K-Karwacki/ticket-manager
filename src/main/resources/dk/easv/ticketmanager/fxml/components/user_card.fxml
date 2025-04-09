@@ -5,7 +5,6 @@
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.effect.DropShadow?>
-<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.Region?>
@@ -14,15 +13,14 @@
 <?import javafx.scene.shape.Circle?>
 <?import javafx.scene.text.Font?>
 
-<HBox alignment="CENTER_LEFT" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="75.0" prefWidth="865.0" styleClass="coordinator" stylesheets="@../../style/dashboard/dashboard.css" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="dk.easv.ticketmanager.gui.controllers.user.components.UserCardController">
+<HBox alignment="CENTER_LEFT" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="75.0" prefWidth="915.0" styleClass="coordinator" stylesheets="@../../style/dashboard/dashboard.css" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="dk.easv.ticketmanager.gui.controllers.user.components.UserCardController">
    <children>
       <AnchorPane prefHeight="75.0" prefWidth="75.0">
          <HBox.margin>
             <Insets left="5.0" />
          </HBox.margin>
          <children>
-            <Circle fx:id="profileCircle" fill="DODGERBLUE" layoutX="42.0" layoutY="38.0" radius="28.0" stroke="#aaaaaa" strokeType="INSIDE" AnchorPane.bottomAnchor="10.0" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="10.0" />
-            <ImageView fx:id="profileImage" fitHeight="56.0" fitWidth="56.0" layoutX="-14.0" pickOnBounds="true" preserveRatio="true" AnchorPane.bottomAnchor="10.0" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="10.0" />
+            <Circle fx:id="profileImage" fill="#ffe9b0" layoutX="42.0" layoutY="38.0" radius="28.0" stroke="#aaaaaa" strokeType="INSIDE" AnchorPane.bottomAnchor="10.0" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="10.0" />
          </children>
       </AnchorPane>
       <VBox alignment="CENTER_LEFT" prefHeight="66.0" prefWidth="120.0" spacing="5.0">
@@ -45,7 +43,7 @@
             <Insets left="20.0" right="20.0" />
          </HBox.margin>
       </VBox>
-      <Label fx:id="txtUserRole" alignment="CENTER" contentDisplay="CENTER" prefHeight="26.0" text="Coordinator" textAlignment="CENTER">
+      <Label fx:id="txtUserRole" prefHeight="26.0" prefWidth="125.0" text="COORDINATOR">
          <font>
             <Font name="Geeza Pro Regular" size="16.0" />
          </font>
@@ -54,7 +52,7 @@
          </HBox.margin>
       </Label>
       <Region prefHeight="65.0" prefWidth="4.0" HBox.hgrow="ALWAYS" />
-      <VBox alignment="CENTER" prefHeight="66.0">
+      <VBox alignment="CENTER_LEFT" prefHeight="65.0" prefWidth="240.0">
          <children>
             <Label fx:id="txtUserEmail" alignment="CENTER" prefHeight="26.0" text="useremail@email.com" textAlignment="CENTER">
                <font>
@@ -68,11 +66,11 @@
             </Label>
          </children>
          <HBox.margin>
-            <Insets right="30.0" />
+            <Insets />
          </HBox.margin>
       </VBox>
       <Region prefHeight="65.0" prefWidth="36.0" HBox.hgrow="ALWAYS" />
-      <Button fx:id="btnEditUser" layoutX="235.0" layoutY="24.0" mnemonicParsing="false" onAction="#onClickOpenEditUser" prefHeight="48.0" prefWidth="80.0" style="-fx-background-color: #FFDF99#FFDF99; -fx-border-color: #aaa; -fx-border-radius: 5; -fx-background-radius: 5;" text="Edit " textAlignment="CENTER" wrapText="true">
+      <Button fx:id="btnEditUser" alignment="CENTER" contentDisplay="CENTER" layoutX="235.0" layoutY="24.0" mnemonicParsing="false" onAction="#onClickOpenEditUser" prefHeight="48.0" prefWidth="80.0" style="-fx-background-color: #FFDF99#FFDF99; -fx-border-color: #aaa; -fx-border-radius: 5; -fx-background-radius: 5;" text="Edit " textAlignment="CENTER" wrapText="true">
          <font>
             <Font name="Geeza Pro Regular" size="16.0" />
          </font>
@@ -93,7 +91,7 @@
       </Button>
    </children>
    <padding>
-      <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+      <Insets bottom="5.0" left="10.0" right="10.0" top="5.0" />
    </padding>
    <effect>
       <DropShadow offsetX="-4.0" offsetY="6.0">

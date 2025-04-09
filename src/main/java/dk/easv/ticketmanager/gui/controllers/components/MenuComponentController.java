@@ -12,6 +12,8 @@ import javafx.scene.control.Label;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
+import javafx.scene.paint.ImagePattern;
+import javafx.scene.shape.Circle;
 import javafx.scene.text.Text;
 import javafx.util.Pair;
 
@@ -22,6 +24,8 @@ public class MenuComponentController
   private BorderPane parentRoot;
   private final ViewManager viewManager = ViewManager.INSTANCE;
   @FXML private Parent menuRoot;
+  @FXML private Circle profileImage;
+  @FXML private Label lblFullName;
 
   public MenuComponentController() {
     parentRoot = null;
@@ -31,8 +35,17 @@ public class MenuComponentController
 
 
   @FXML
-  private void initialize(){
-//    this.viewManager = new ViewManager(parentContainer);
+  public void initialize(){
+    ImagePattern imagePattern = UserSession.getInstance().getLoggedUserModel().imagePatternProperty().get();
+    if(imagePattern != null){
+      profileImage.setFill(imagePattern);
+    }
+    String fullName = UserSession.getInstance().getLoggedUserModel().fullNameProperty().get();
+
+    if(fullName != null){
+      lblFullName.setText(fullName);
+    }
+
   }
 
   public void setParentContainer(BorderPane parentRoot){

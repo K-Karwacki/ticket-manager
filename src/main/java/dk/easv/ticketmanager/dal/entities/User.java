@@ -1,6 +1,7 @@
 package dk.easv.ticketmanager.dal.entities;
 
 import dk.easv.ticketmanager.Main;
+import dk.easv.ticketmanager.gui.models.UserModel;
 import dk.easv.ticketmanager.utils.ImageConverter;
 import jakarta.persistence.*;
 import javafx.scene.image.Image;
@@ -50,6 +51,7 @@ public class User {
         this.hashedPassword = null;
         // Minimal defaults
     }
+
 
 //    // Parameterized constructor
 //    public User(long id, String firstName, String lastName, String email, String hashedPassword, String phoneNumber, String imagePath, Role role) {
@@ -175,5 +177,9 @@ public class User {
     @Override
     public int hashCode() {
         return Objects.hash(id);
+    }
+
+    public void setImageData(byte[] imageData) {
+        this.imageData = imageData;
     }
 }

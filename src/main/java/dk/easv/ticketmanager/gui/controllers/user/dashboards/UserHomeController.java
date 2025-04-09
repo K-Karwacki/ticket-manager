@@ -34,7 +34,6 @@ public class UserHomeController
 
     userModelObservableList.addListener((SetChangeListener<UserModel>) change ->{
       if(change.wasAdded() || change.wasRemoved()){
-        System.out.println("something happend there so wtf");
           loadUserCards();
       }
     });

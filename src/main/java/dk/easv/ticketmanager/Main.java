@@ -8,6 +8,7 @@ import dk.easv.ticketmanager.dal.repositories.AuthRepository;
 import dk.easv.ticketmanager.dal.repositories.UserRepository;
 import dk.easv.ticketmanager.gui.*;
 import dk.easv.ticketmanager.gui.controllers.components.ChartComponentController;
+import dk.easv.ticketmanager.gui.controllers.event.components.EventCardController;
 import dk.easv.ticketmanager.gui.controllers.event.dashboards.EventHomeController;
 import dk.easv.ticketmanager.gui.controllers.event.popups.AssignCoordinatorController;
 import dk.easv.ticketmanager.gui.controllers.event.popups.EventEditorController;
@@ -15,8 +16,10 @@ import dk.easv.ticketmanager.gui.controllers.event.popups.ImageSelectorControlle
 import dk.easv.ticketmanager.gui.controllers.ticket.TicketController;
 import dk.easv.ticketmanager.gui.controllers.main.LoginWindowController;
 import dk.easv.ticketmanager.gui.controllers.ticket.TicketGeneratorController;
+import dk.easv.ticketmanager.gui.controllers.user.components.UserCardController;
 import dk.easv.ticketmanager.gui.controllers.user.dashboards.UserHomeController;
 import dk.easv.ticketmanager.gui.controllers.user.popup.UserCreatorController;
+import dk.easv.ticketmanager.gui.controllers.user.popup.UserFormController;
 import dk.easv.ticketmanager.gui.models.UserSession;
 import dk.easv.ticketmanager.utils.RoleType;
 import javafx.application.Application;
@@ -47,14 +50,14 @@ public class Main extends Application
 
     EventHomeController eventHomeController = (EventHomeController) fxmlManager.getFXML(FXMLPath.EVENTS_DASHBOARD).getValue();
 
-//    TicketTypeCreatorController ticketTypeCreatorController = (TicketTypeCreatorController) fxmlManager.getFXML(FXMLPath.TICKET_TYPE_CREATOR_POPUP).getValue();
+    UserFormController userFormController = new UserFormController();
+    UserCardController userCardController = (UserCardController) fxmlManager.getFXML(FXMLPath.USER_CARD_COMPONENT).getValue();
     TicketGeneratorController ticketGeneratorController = (TicketGeneratorController) fxmlManager.getFXML(FXMLPath.TICKET_GENERATOR_POPUP).getValue();
     TicketController ticketController = (TicketController) fxmlManager.getFXML(FXMLPath.TICKET_COMPONENT).getValue();
     ImageSelectorController imageSelectorController = (ImageSelectorController) fxmlManager.getFXML(FXMLPath.IMAGE_SELECTOR_POPUP).getValue();
     ChartComponentController chartComponentController = (ChartComponentController) fxmlManager.getFXML(FXMLPath.CHART_COMPONENT).getValue();
 
     UserHomeController userHomeController = (UserHomeController) fxmlManager.getFXML(FXMLPath.USERS_DASHBOARD).getValue();
-//    UserCreatorController userCreatorController = (UserCreatorController) fxmlManager.getFXML(FXMLPath.USER_CREATOR_POPUP).getValue();
     AssignCoordinatorController assignCoordinatorController = (AssignCoordinatorController) fxmlManager.getFXML(FXMLPath.COORDINATOR_LIST_POPUP).getValue();
 
     loginWindowController.setServices(authenticationService);
@@ -65,7 +68,10 @@ public class Main extends Application
 
     assignCoordinatorController.setServices(userManagementService, eventManagementService);
 
+    userFormController.setServices(userManagementService, authorizationService);
+
     ticketGeneratorController.setServices(ticketAnalysisService);
+    userCardController.setServices(userManagementService);
     ticketController.setServices(ticketAnalysisService);
     imageSelectorController.setServices(eventManagementService);
     chartComponentController.setServices(ticketAnalysisService);
@@ -94,13 +100,13 @@ public class Main extends Application
         System.out.println("Coordinator role created");
       }
       if(authenticationService.findUserByEmail("admin") == null){
-        userManagementService.registerNewUser("Admin","Admin", authorizationService.findRoleByName(RoleType.ADMIN.name()).getId(), "admin", "admin phone", "admin");
+        userManagementService.registerNewUser("Admin","Admin", authorizationService.findRoleByName(RoleType.ADMIN.name()).getId(), "admin", "admin phone", "admin", null);
         System.out.println("Admin account created");
       }
-      if(authenticationService.findUserByEmail("coordinator") == null){
-        userManagementService.registerNewUser("coordinator","coordinator", authorizationService.findRoleByName(RoleType.COORDINATOR.name()).getId(), "coordinator", "coordinator phone", "coordinator");
-        System.out.println("Coordinator account created");
-      }
+//      if(authenticationService.findUserByEmail("coordinator") == null){
+//        userManagementService.registerNewUser("coordinator","coordinator", authorizationService.findRoleByName(RoleType.COORDINATOR.name()).getId(), "coordinator", "coordinator phone", "coordinator", null);
+//        System.out.println("Coordinator account created");
+//      }
 
     }catch(Exception e){
       e.printStackTrace();
