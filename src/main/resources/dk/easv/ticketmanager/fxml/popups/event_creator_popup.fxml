@@ -248,28 +248,33 @@
                               <Insets bottom="17.0" top="22.0" />
                            </VBox.margin>
                         </HBox>
-                        <HBox alignment="CENTER" layoutX="10.0" layoutY="340.0" spacing="30.0">
-                           <children>
-                              <Button mnemonicParsing="false" onAction="#chooseImage" prefWidth="142.0" style=": #FFE7B1; : black; -fx-border-radus: 5;" styleClass="blueBtn" text="Choose image" textAlignment="CENTER">
-                                 <cursor>
-                                    <Cursor fx:constant="HAND" />
-                                 </cursor>
-                                 <font>
-                                    <Font name="Verdana" size="14.0" />
-                                 </font>
-                              </Button>
-                              <Button mnemonicParsing="false" onAction="#chooseImage" prefWidth="142.0" styleClass="orangeBtn" text="Edit ticket" textAlignment="CENTER">
-                                 <cursor>
-                                    <Cursor fx:constant="HAND" />
-                                 </cursor>
-                                 <HBox.margin>
-                                    <Insets />
-                                 </HBox.margin>
-                                 <font>
-                                    <Font name="Verdana" size="14.0" />
-                                 </font>
-                              </Button>
-                           </children>
+                        <HBox alignment="CENTER" layoutX="10.0" layoutY="340.0"
+                              spacing="30.0">
+                           <Button mnemonicParsing="false"
+                                   onAction="#chooseImage" prefWidth="142.0"
+                                   styleClass="blueBtn" text="Choose image"
+                                   textAlignment="CENTER">
+                              <cursor>
+                                 <Cursor fx:constant="HAND"/>
+                              </cursor>
+                              <font>
+                                 <Font name="Verdana" size="14.0"/>
+                              </font>
+                           </Button>
+                           <Button mnemonicParsing="false"
+                                   onAction="#chooseImage" prefWidth="142.0"
+                                   styleClass="orangeBtn" text="Edit ticket"
+                                   textAlignment="CENTER">
+                              <cursor>
+                                 <Cursor fx:constant="HAND"/>
+                              </cursor>
+                              <HBox.margin>
+                                 <Insets/>
+                              </HBox.margin>
+                              <font>
+                                 <Font name="Verdana" size="14.0"/>
+                              </font>
+                           </Button>
                         </HBox>
                         <ImageView fx:id="imageViewSelectedImage" fitHeight="70.0" fitWidth="140.0" pickOnBounds="true" preserveRatio="true">
                            <VBox.margin>

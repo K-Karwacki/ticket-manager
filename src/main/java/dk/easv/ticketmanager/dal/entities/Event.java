@@ -25,9 +25,6 @@ public class Event {
   @JoinColumn(name = "event_image_id")
   private EventImage eventImage;
 
-//  @Column (name = "image_data")
-//  private byte[] imageData;
-
   @Column(name = "date")
   private LocalDate date;
 

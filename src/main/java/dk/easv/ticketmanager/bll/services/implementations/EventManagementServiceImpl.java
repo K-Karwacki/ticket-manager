@@ -64,9 +64,7 @@ public class EventManagementServiceImpl implements EventManagementService {
                 eventModel.getTickets().addAll(event.getTickets().stream().map(TicketModel::new).collect(Collectors.toSet()));
                 eventModel.getAssignedCoordinators().addAll(event.getCoordinators().stream().map(UserModel::new).collect(Collectors.toSet()));
 
-                if(event.getEventImage() == null){
-                    eventModel.setImage(new Image(new FileInputStream("images/event-template.jpg")));
-                }else{
+                if(event.getEventImage() != null){
                     eventModel.setImage(ImageConverter.convertToImage(event.getEventImage().getImageData()));
                 }
 
@@ -83,48 +81,53 @@ public class EventManagementServiceImpl implements EventManagementService {
     @Override
     public boolean createNewEvent(EventModel eventModel) {
         Event newEvent = new Event();
-        newEvent.setLocation(new Location(eventModel.getLocation().getName(), eventModel.getLocation().getAddress(), eventModel.getLocation().getCity(), eventModel.getLocation().getPost_code()));
-        EventImage eventImage = eventRepository.getEventImageByID(eventModel.getEventImage().getId());
-        newEvent.setEventImage(eventImage);
-        newEvent.setName(eventModel.nameProperty().get());
-        newEvent.setTime(eventModel.timeProperty().get());
-        newEvent.setDate(eventModel.dateProperty().get());
-        newEvent.setDescription(eventModel.descriptionProperty().get());
 
-        for (TicketModel ticketModel : eventModel.getTickets()) {
-            Ticket newTicketForEvent = new Ticket();
-            newTicketForEvent.setInfo(ticketModel.getInfo());
-            newTicketForEvent.setPrice(ticketModel.getPrice());
-            newTicketForEvent.setType(ticketModel.getType());
-            newTicketForEvent.setEvent(newEvent);
+        try(EntityManager em = JPAUtil.getEntityManager()){
+            em.getTransaction().begin();
+            newEvent.setLocation(new Location(eventModel.getLocation().getName(), eventModel.getLocation().getAddress(), eventModel.getLocation().getCity(), eventModel.getLocation().getPost_code()));
+            EventImage eventImage = em.find(EventImage.class, eventModel.getEventImage().getId());
+            System.out.println(eventImage.getId());
+            newEvent.setEventImage(eventImage);
+            newEvent.setName(eventModel.nameProperty().get());
+            newEvent.setTime(eventModel.timeProperty().get());
+            newEvent.setDate(eventModel.dateProperty().get());
+            newEvent.setDescription(eventModel.descriptionProperty().get());
 
-            newEvent.addTicket(newTicketForEvent);
-        }
+            for (TicketModel ticketModel : eventModel.getTickets()) {
+                Ticket newTicketForEvent = new Ticket();
+                newTicketForEvent.setInfo(ticketModel.getInfo());
+                newTicketForEvent.setPrice(ticketModel.getPrice());
+                newTicketForEvent.setType(ticketModel.getType());
+                newTicketForEvent.setEvent(newEvent);
 
-        for (UserModel assignedCoordinator : eventModel.getAssignedCoordinators())
-        {
-            Optional<User> assignedCoordinatorFetched = repositoryService.getRepository(
-                UserRepository.class).getById(assignedCoordinator.getID());
-            System.out.println("found two " + assignedCoordinatorFetched.get().getId());
-            assignedCoordinatorFetched.ifPresent(
-                newEvent::assignCoordinatorToEvent);
-        }
+                newEvent.addTicket(newTicketForEvent);
+            }
 
+            for (UserModel assignedCoordinator : eventModel.getAssignedCoordinators())
+            {
+                Optional<User> assignedCoordinatorFetched = repositoryService.getRepository
+                    (UserRepository.class).getById(assignedCoordinator.getID());
 
-        Event saved = eventRepository.save(newEvent);
-        if (saved == null) {
+                assignedCoordinatorFetched.ifPresent(newEvent::assignCoordinatorToEvent);
+            }
+
+            System.out.println("before save.");
+
+            Event saved = em.merge(newEvent);
+            if (saved != null) {
+                em.getTransaction().commit();
+                EventModel savedModel = new EventModel(saved);
+                savedModel.ticketsProperty().set(FXCollections.observableSet(saved.getTickets().stream().map(
+                    TicketModel::new).collect(
+                    Collectors.toSet())));
+                savedModel.assignedCoordinatorsProperty().set(FXCollections.observableSet(saved.getCoordinators().stream().map(
+                    UserModel::new).collect(
+                    Collectors.toSet())));
+                eventListModel.addEventModel(savedModel);
+                return true;
+            }
             throw new RuntimeException("Error creating new event");
         }
-
-        EventModel savedModel = new EventModel(saved);
-        savedModel.ticketsProperty().set(FXCollections.observableSet(saved.getTickets().stream().map(
-            TicketModel::new).collect(
-            Collectors.toSet())));
-        savedModel.assignedCoordinatorsProperty().set(FXCollections.observableSet(saved.getCoordinators().stream().map(
-            UserModel::new).collect(
-            Collectors.toSet())));
-        eventListModel.addEventModel(savedModel);
-        return true;
     }
 
     @Override
@@ -200,12 +203,13 @@ public class EventManagementServiceImpl implements EventManagementService {
             User user = userOptional.get();
             Event event = eventOptional.get();
 
-//            if(eventRepository.assignCoordinatorToEvent(event, user)){
-//                if(eventRepository.save(event) != null){
-//                    System.out.println("successfully added coordinator to event");
-//                    return true;
-//                }
-//            }
+            event.assignCoordinatorToEvent(user);
+            user.assignEventToCoordinator(event);
+            if(eventRepository.save(event) != null){
+                System.out.println("successfully added coordinator to event");
+                return true;
+            }
+
         }
         return false;
     }
@@ -329,7 +333,7 @@ public class EventManagementServiceImpl implements EventManagementService {
     }
 
     @Override
-    public boolean uploadEventImage(Image image, boolean saveToDB) throws IOException {
+    public boolean uploadEventImage(Image image) throws IOException {
         EventImage eventImage = new EventImage();
         eventImage.setImageData(ImageConverter.convertToByteArray(image));
         EventImage saved = eventRepository.saveEventImage(eventImage);

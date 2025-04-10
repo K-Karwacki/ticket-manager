@@ -74,7 +74,7 @@ public class ImageSelectorController
             if (selectedFile != null) {
                 try {
                     Image image = new Image(new FileInputStream(selectedFile));
-                    if(eventManagementService.uploadEventImage(image, false)){
+                    if(eventManagementService.uploadEventImage(image)){
                         loadEventImages();
                     }
                 } catch (IOException e) {

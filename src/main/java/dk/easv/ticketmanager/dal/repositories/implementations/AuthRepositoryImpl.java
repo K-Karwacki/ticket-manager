@@ -1,6 +1,5 @@
 package dk.easv.ticketmanager.dal.repositories.implementations;
 
-import dk.easv.ticketmanager.dal.entities.Permission;
 import dk.easv.ticketmanager.dal.entities.Role;
 import dk.easv.ticketmanager.dal.repositories.AuthRepository;
 import dk.easv.ticketmanager.utils.JPAUtil;
@@ -12,10 +11,7 @@ import java.util.Optional;
 
 public class AuthRepositoryImpl implements AuthRepository
 {
-  @Override public List<Permission> getPermissionsForRole(Role role)
-  {
-    return null;
-  }
+
 
   @Override public Optional<Role> findRoleByName(String roleName)
   {

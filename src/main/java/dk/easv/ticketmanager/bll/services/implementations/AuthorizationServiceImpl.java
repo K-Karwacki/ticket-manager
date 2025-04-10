@@ -1,7 +1,6 @@
 package dk.easv.ticketmanager.bll.services.implementations;
 
 import dk.easv.ticketmanager.bll.services.factories.RepositoryService;
-import dk.easv.ticketmanager.dal.entities.Permission;
 import dk.easv.ticketmanager.dal.entities.Role;
 
 import dk.easv.ticketmanager.dal.entities.User;
@@ -25,14 +24,8 @@ public class AuthorizationServiceImpl implements AuthorizationService
 
   public AuthorizationServiceImpl(RepositoryService repositoryService){
     this.authRepository = repositoryService.getRepository(AuthRepository.class);
-  }
 
-  @Override public List<Permission> getPermissionsForRole(String roleName)
-  {
-    if(authRepository == null){
-      return null;
-    }
-    return authRepository.findRoleByName(roleName).map(authRepository::getPermissionsForRole).orElse(null);
+//    return authRepository.findRoleByName(roleName).map(authRepository::getPermissionsForRole).orElse(null);
   }
 
   @Override public void createNewRole(String name)

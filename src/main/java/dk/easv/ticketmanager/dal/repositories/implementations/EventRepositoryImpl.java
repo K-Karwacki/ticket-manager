@@ -8,6 +8,7 @@ import dk.easv.ticketmanager.dal.repositories.EventRepository;
 import dk.easv.ticketmanager.utils.JPAUtil;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.EntityTransaction;
+import jakarta.persistence.Lob;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -125,6 +126,7 @@ public class EventRepositoryImpl implements EventRepository
     return new ArrayList<>();
   }
 
+  @Override
   public void assignCoordinatorToEvent(Event event, User user) {
     EntityManager em = JPAUtil.getEntityManager();
     EntityTransaction tx = em.getTransaction();
@@ -144,7 +146,7 @@ public class EventRepositoryImpl implements EventRepository
     }
   }
 
-
+@Override
   public void dissociateEventFromCoordinator(Event event, User user) {
     try (EntityManager em = JPAUtil.getEntityManager()) {
       EntityTransaction tx = em.getTransaction();
@@ -158,6 +160,7 @@ public class EventRepositoryImpl implements EventRepository
   }
 
 
+  @Override
   public List<EventImage> getAllEventImages(){
       try(EntityManager em = JPAUtil.getEntityManager()){
         return em.createQuery("select e from EventImage e", EventImage.class).getResultList();
@@ -169,12 +172,9 @@ public class EventRepositoryImpl implements EventRepository
     try (EntityManager em = JPAUtil.getEntityManager())
     {
       em.getTransaction().begin();
-      EventImage e = em.merge(eventImage);
-      if(e != null){
-       em.getTransaction().commit();
-        return e;
-      }
-
+      em.persist(eventImage);
+      em.getTransaction().commit();
+      em.flush();
     }
     catch (Exception e)
     {
@@ -186,8 +186,7 @@ public class EventRepositoryImpl implements EventRepository
   @Override public EventImage getEventImageByID(Long eventImageID)
   {
     try(EntityManager em = JPAUtil.getEntityManager()) {
-      Optional<EventImage> eventImageOptional = em.createQuery("Select i from EventImage i where id = :imageId", EventImage.class).setParameter("imageId", eventImageID).getResultList().stream().findAny();
-      return eventImageOptional.orElse(null);
+      return em.find(EventImage.class, eventImageID);
     }
   }
 

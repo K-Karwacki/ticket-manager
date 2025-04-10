@@ -149,6 +149,7 @@ public class EventCreatorController {
         eventModel.setLocation(locationModel);
 
         // calls service. If true reset fields and switch dashboard
+        System.out.println(eventModel.getEventImage().getId());
         if(eventManagementService.createNewEvent(eventModel)){
             //reset the model
             eventModel = new EventModel();

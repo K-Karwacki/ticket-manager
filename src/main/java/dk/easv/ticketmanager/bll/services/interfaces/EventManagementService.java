@@ -34,5 +34,5 @@ public interface EventManagementService {
 
     List<Image> getAllImages();
 
-    boolean uploadEventImage(Image image, boolean saveToDB) throws IOException;
+    boolean uploadEventImage(Image image) throws IOException;
 }

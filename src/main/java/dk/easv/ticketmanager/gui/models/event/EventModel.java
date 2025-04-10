@@ -48,8 +48,7 @@ public class EventModel {
     this.time.set(event.getTime());
     this.date.set(event.getDate());
     this.eventImage.set(event.getEventImage());
-    this.image.set(new ImagePattern(Objects.requireNonNull(
-        ImageConverter.convertToImage(event.getEventImage().getImageData()))));
+    this.image.set(null);
     this.location.set(new LocationModel(event.getLocation()));
     this.assignedCoordinators.set(FXCollections.observableSet());
     this.tickets.set(FXCollections.observableSet());

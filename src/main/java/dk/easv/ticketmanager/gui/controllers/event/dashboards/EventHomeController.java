@@ -82,7 +82,7 @@ public class EventHomeController
     eventListRoot.getChildren().removeAll();
     eventListRoot.getChildren().clear();
     List<EventModel> events = eventManagementService.getEventListModel().getEventsObservable();
-    System.out.println(events.size());
+    System.out.println(events.size() + "OBSERVALE");
     events.forEach(event -> {
       Pair<Parent, EventCardController> p = fxmlManager.loadFXML(EVENT_CARD_COMPONENT);
       p.getValue().setServices(eventManagementService);
