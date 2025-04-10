@@ -80,12 +80,6 @@ public class MenuComponentController
 
   }
 
-  public void onClickOpenSettings(MouseEvent event)
-  {
-    viewManager.switchDashboard(FXMLPath.SETTINGS_DASHBOARD, "Settings");
-    switchButtonsHighlight(event);
-
-  }
 
   private void switchButtonsHighlight(MouseEvent event){
     menuRoot.getChildrenUnmodifiable().forEach(node -> {

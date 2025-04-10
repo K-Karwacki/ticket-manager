@@ -1,4 +1,4 @@
-package dk.easv.ticketmanager.gui.controllers.user.popup;
+package dk.easv.ticketmanager.gui.controllers.menu;
 
 import dk.easv.ticketmanager.bll.services.EmailSenderService;
 import dk.easv.ticketmanager.bll.services.factories.RepositoryServiceFactory;

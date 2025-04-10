@@ -93,25 +93,6 @@
          </HBox.margin>
       </Label>
    </HBox>
-   <HBox accessibleRole="BUTTON" alignment="CENTER_LEFT" onMouseClicked="#onClickOpenSettings" prefHeight="60.0" prefWidth="360.0" styleClass="menu-btn">
-      <padding>
-         <Insets left="41.0" />
-      </padding>
-      <VBox.margin>
-         <Insets />
-      </VBox.margin>
-      <ImageView fitHeight="27.0" fitWidth="27.0" pickOnBounds="true" preserveRatio="true" style="-fx-opacity: 0.8;">
-         <Image url="@../../images/icons/settings-icon.png" />
-      </ImageView>
-      <Label text="Settings" textFill="#050505">
-         <font>
-            <Font size="19.0" />
-         </font>
-         <HBox.margin>
-            <Insets left="10.0" />
-         </HBox.margin>
-      </Label>
-   </HBox>
    <HBox accessibleRole="BUTTON" alignment="CENTER_LEFT" onMouseClicked="#onClickLogout" prefHeight="60.0" prefWidth="356.0">
       <padding>
          <Insets left="41.0" />
