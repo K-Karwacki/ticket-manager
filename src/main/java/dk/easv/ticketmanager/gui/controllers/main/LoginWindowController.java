@@ -4,18 +4,23 @@ package dk.easv.ticketmanager.gui.controllers.main;
 import dk.easv.ticketmanager.Main;
 import dk.easv.ticketmanager.bll.services.interfaces.AuthenticationService;
 import dk.easv.ticketmanager.bll.services.interfaces.UserManagementService;
+import dk.easv.ticketmanager.gui.FXMLManager;
 import dk.easv.ticketmanager.gui.FXMLPath;
 import dk.easv.ticketmanager.gui.ViewManager;
+import dk.easv.ticketmanager.gui.controllers.menu.ProfileDashboardController;
 import dk.easv.ticketmanager.gui.models.UserSession;
 import javafx.fxml.FXML;
+import javafx.scene.Parent;
 import javafx.scene.control.*;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyCode;
+import javafx.util.Pair;
 
 import java.util.Objects;
 
 import static dk.easv.ticketmanager.gui.FXMLPath.FORGOTTEN_PASSWORD_VIEW;
+import static dk.easv.ticketmanager.gui.FXMLPath.SETTINGS_DASHBOARD;
 
 
 public class LoginWindowController
@@ -75,6 +80,7 @@ public class LoginWindowController
               errorLabel.setText("Invalid email or password");
               return;
             }
+            reinitializeControllers();
             goToMainPage();
         } catch (Exception e) {
             errorLabel.setText("An error occurred during login");
@@ -93,8 +99,11 @@ public class LoginWindowController
 
   private void goToMainPage(){
       viewManager.showStage(FXMLPath.MAIN, "Main stage", true);
-//      MenuComponentController menuComponentController = (MenuComponentController) FXMLManager.INSTANCE.getFXML(FXMLPath.MENU_COMPONENT).getValue();
-//      menuComponentController.initialize();
+  }
+
+  private void reinitializeControllers(){
+  Pair<Parent, ProfileDashboardController> p = FXMLManager.INSTANCE.getFXML(SETTINGS_DASHBOARD);
+  p.getValue().setDetails();
   }
 
   @FXML

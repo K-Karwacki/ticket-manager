@@ -155,12 +155,14 @@ public class ProfileDashboardEditorController implements Initializable {
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        UserModel currentUser = UserSession.INSTANCE.getLoggedUserModel();
 
-        UserSession.INSTANCE.setProfileImage(profileCircle);
-        txtFieldUserFirstName.setText(currentUser.nameProperty().get());
-        txtFieldUserLastName.setText(currentUser.nameProperty().get());
-        txtFieldUserEmail.setText(currentUser.emailProperty().get());
-        txtFieldUserPhoneNumber.setText(currentUser.phoneNumberProperty().get());
+    }
+
+    public void setDetails(UserModel currentUser) {
+        profileCircle.fillProperty().bind(currentUser.imagePatternProperty());
+        txtFieldUserEmail.textProperty().bind(currentUser.emailProperty());
+        txtFieldUserFirstName.textProperty().bind(currentUser.nameProperty());
+        txtFieldUserLastName.textProperty().bind(currentUser.lastNameProperty());
+        txtFieldUserPhoneNumber.textProperty().bind(currentUser.phoneNumberProperty());
     }
 }
