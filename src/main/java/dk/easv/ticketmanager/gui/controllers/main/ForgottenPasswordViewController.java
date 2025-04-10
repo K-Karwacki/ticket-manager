@@ -6,6 +6,7 @@ import dk.easv.ticketmanager.gui.FXMLPath;
 import dk.easv.ticketmanager.gui.ViewManager;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
 
 import java.io.IOException;
@@ -15,21 +16,28 @@ public class ForgottenPasswordViewController {
     @FXML
     private TextField txtFieldEmail;
 
+    @FXML
+    private Button btnSendEmail;
+
     private UserManagementService userManagementService;
 
 
     @FXML
     private void onClickShowLogin(ActionEvent actionEvent) {
         ViewManager.INSTANCE.showStage(FXMLPath.LOGIN, "Login", false);
+        btnSendEmail.setDisable(false);
     }
 
     @FXML
-    private void onClickSendEmail() throws IOException {
+    private void onClickSendEmail(ActionEvent event) throws IOException {
+        Button btn = (Button) event.getSource();
         String email = txtFieldEmail.getText();
         Optional<User> optionalUser = userManagementService.getUserByEmail(email);
         if (optionalUser.isPresent()) {
             User user = optionalUser.get();
             userManagementService.sendTemporaryPassword(user);
+            btn.setDisable(true);
+            btn.setText("Email Sent!");
         }
 
     }
