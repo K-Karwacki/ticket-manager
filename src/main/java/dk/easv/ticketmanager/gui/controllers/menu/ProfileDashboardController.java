@@ -3,7 +3,6 @@ package dk.easv.ticketmanager.gui.controllers.menu;
 import dk.easv.ticketmanager.gui.FXMLManager;
 import dk.easv.ticketmanager.gui.SceneManager;
 import dk.easv.ticketmanager.gui.ViewManager;
-import dk.easv.ticketmanager.gui.controllers.user.popup.ProfileDashboardEditorController;
 import dk.easv.ticketmanager.gui.models.UserModel;
 import dk.easv.ticketmanager.gui.models.UserSession;
 import javafx.event.ActionEvent;
@@ -84,5 +83,17 @@ public class ProfileDashboardController implements Initializable
         txtRole.textProperty().bind(currentUser.roleProperty().asString());
         txtPhoneNumber.textProperty().bind(currentUser.phoneNumberProperty());
         txtEmail.textProperty().bind(currentUser.emailProperty());
+
+        UserSession.INSTANCE.loggedUserModelProperty().addListener((obs, oldUser, newUser) -> {
+            if (newUser != null) {
+                currentUser = newUser;
+                txtFirstName.textProperty().bind(newUser.nameProperty());
+                txtLastName.textProperty().bind(newUser.lastNameProperty());
+                txtRole.textProperty().bind(newUser.roleProperty().asString());
+                txtPhoneNumber.textProperty().bind(newUser.phoneNumberProperty());
+                txtEmail.textProperty().bind(newUser.emailProperty());
+                UserSession.INSTANCE.setProfileImage(profileCircle);
+            }
+        });
     }
 }

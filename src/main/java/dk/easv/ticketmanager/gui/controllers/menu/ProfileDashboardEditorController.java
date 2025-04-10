@@ -18,6 +18,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.layout.StackPane;
 import javafx.scene.paint.ImagePattern;
 import javafx.scene.shape.Circle;
 import javafx.stage.FileChooser;
@@ -31,22 +32,15 @@ import static dk.easv.ticketmanager.gui.FXMLPath.SETTINGS_DASHBOARD;
 public class ProfileDashboardEditorController implements Initializable {
 
     @FXML private Circle profileCircle;
-    @FXML private ImageView imageViewSelectedImage;
+    @FXML private ImageView imgViewEditIcon;
     @FXML private TextField txtFieldUserOldPassword, txtFieldUserNewPassword, txtFieldUserFirstName, txtFieldUserLastName, txtFieldUserEmail, txtFieldUserPhoneNumber;
-
+    @FXML private StackPane stackPaneImageContainer;
     private UserManagementService userManagementService;
+    private AuthenticationService authenticationService;
 
-    public void setUserManagementService(UserManagementService userManagementService) {
+    public void setServices(UserManagementService userManagementService, AuthenticationService authenticationService) {
         this.userManagementService = userManagementService;
-    }
-
-
-    public ImageView getImageViewSelectedImage() {
-        return imageViewSelectedImage;
-    }
-
-    public void setImageViewSelectedImage(ImageView imageViewSelectedImage) {
-        this.imageViewSelectedImage = imageViewSelectedImage;
+        this.authenticationService = authenticationService;
     }
 
     public TextField getTxtFieldUserFirstName() {
@@ -97,51 +91,29 @@ public class ProfileDashboardEditorController implements Initializable {
         this.txtFieldUserNewPassword = txtFieldUserNewPassword;
     }
 
-    public void chooseImage(ActionEvent actionEvent) {
+    @FXML
+    private void chooseImage() {
         FileChooser fileChooser = new FileChooser();
         fileChooser.getExtensionFilters().addAll(
-               new FileChooser.ExtensionFilter("Image Files", "*png", "*jpg", "*jpeg", "*bmp")
+               new FileChooser.ExtensionFilter("Image Files", "*.png", "*.jpg", "*.jpeg", "*.bmp")
         );
         File selectedFile = fileChooser.showOpenDialog(null);
 
         if (selectedFile != null) {
             Image image = new Image(selectedFile.toURI().toString());
-            imageViewSelectedImage.setImage(image);
             profileCircle.setFill(new ImagePattern(image));
-            UserSession.INSTANCE.setProfileImage(profileCircle);
         }
     }
 
-    public void updateUser(ActionEvent actionEvent) {
+    @FXML
+    private void updateUser(ActionEvent actionEvent) {
         UserModel currentUser = UserSession.INSTANCE.getLoggedUserModel();
         //Update basic user information
         currentUser.nameProperty().set(txtFieldUserFirstName.getText());
         currentUser.lastNameProperty().set(txtFieldUserLastName.getText());
         currentUser.emailProperty().set(txtFieldUserEmail.getText());
         currentUser.phoneNumberProperty().set(txtFieldUserPhoneNumber.getText());
-        //Handle password change
-        String oldPassword = txtFieldUserOldPassword.getText();
-        String newPassword = txtFieldUserNewPassword.getText();
-
-        if (newPassword != null && !newPassword.isEmpty()) {
-            //If user entered a new password, verify the old one first
-            RepositoryServiceFactory factory = new RepositoryServiceFactory();
-            AuthenticationService authService = new AuthenticationServiceImpl(factory.getRepositoryService());
-
-            try {
-                boolean isAuthenticated = authService.authenticateUser(currentUser.getEmail(), oldPassword);
-                if (isAuthenticated) {
-                    String hashedNewPassword = PasswordHasher.hashPassword(newPassword);
-                    currentUser.setPassword(hashedNewPassword);
-                } else {
-                    System.out.println("Wrong current password");
-                    return;
-                }
-            } catch (AuthenticationException e) {
-                e.printStackTrace();
-                return;
-            }
-        }
+        currentUser.setImage((ImagePattern) profileCircle.getFill());
 
         try {
             userManagementService.updateUser(currentUser);
@@ -153,16 +125,42 @@ public class ProfileDashboardEditorController implements Initializable {
         ViewManager.INSTANCE.switchDashboard(SETTINGS_DASHBOARD, "ProfileDashBoard");
     }
 
+    @FXML
+    private void updatePassword(ActionEvent actionEvent) {
+        UserModel currentUser = UserSession.INSTANCE.getLoggedUserModel();
+        String oldPassword = txtFieldUserOldPassword.getText();
+        String newPassword = txtFieldUserNewPassword.getText();
+        if (newPassword != null && !newPassword.isEmpty()) {
+
+            try {
+                boolean isAuthenticated = authenticationService.authenticateUser(currentUser.getEmail(), oldPassword);
+                if (isAuthenticated) {
+                    currentUser.setPassword(newPassword);
+                    userManagementService.updateUser(currentUser);
+                    ViewManager.INSTANCE.switchDashboard(SETTINGS_DASHBOARD, "ProfileDashBoard");
+                } else {
+                    System.out.println("Wrong current password");
+                    return;
+                }
+            } catch (AuthenticationException e) {
+                e.printStackTrace();
+                return;
+            }
+        }
+    }
+
     @Override
     public void initialize(URL location, ResourceBundle resources) {
 
     }
 
     public void setDetails(UserModel currentUser) {
-        profileCircle.fillProperty().bind(currentUser.imagePatternProperty());
-        txtFieldUserEmail.textProperty().bind(currentUser.emailProperty());
-        txtFieldUserFirstName.textProperty().bind(currentUser.nameProperty());
-        txtFieldUserLastName.textProperty().bind(currentUser.lastNameProperty());
-        txtFieldUserPhoneNumber.textProperty().bind(currentUser.phoneNumberProperty());
+        txtFieldUserNewPassword.setText("");
+        txtFieldUserOldPassword.setText("");
+        profileCircle.setFill(currentUser.imagePatternProperty().getValue());
+        txtFieldUserFirstName.setText(currentUser.nameProperty().get());
+        txtFieldUserLastName.setText(currentUser.lastNameProperty().get());
+        txtFieldUserEmail.setText(currentUser.emailProperty().get());
+        txtFieldUserPhoneNumber.setText(currentUser.phoneNumberProperty().get());
     }
 }

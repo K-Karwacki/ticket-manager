@@ -13,10 +13,8 @@ import javafx.scene.layout.VBox;
 import java.net.URL;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
-import java.util.LinkedHashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.ResourceBundle;
+import java.util.*;
+import java.util.concurrent.ThreadLocalRandom;
 
 public class ChartComponentController implements Initializable {
     private TicketAnalysisService ticketAnalysisService;
@@ -31,10 +29,12 @@ public class ChartComponentController implements Initializable {
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
+        LocalDateTime start = LocalDateTime.of(2023, 1, 1, 0, 0, 0);
+        LocalDateTime end = LocalDateTime.of(2025, 4, 10, 23, 59, 59);
+        generateRandomDates(1000, start, end); // To comment later - inserting mock data
         barChart.setAnimated(false);
         barChart.setVerticalGridLinesVisible(false); // Hide vertical grid lines
         barChart.getStyleClass().add("custom-bar-chart"); // For CSS styling
-        System.out.println("Initialize - Controller instance: " + this);
         if (datesOfPurchases != null) {
             updateChart("day");
         }
@@ -63,18 +63,14 @@ public class ChartComponentController implements Initializable {
 
     public void setServices(TicketAnalysisService ticketAnalysisService) {
         this.ticketAnalysisService = ticketAnalysisService;
-        System.out.println("setServices - Controller instance: " + this);
         if (ticketAnalysisService != null) {
             datesOfPurchases = ticketAnalysisService.getAllDatesForPurchasedTickets();
-            System.out.println("Dates loaded in setServices: " + datesOfPurchases.size());
             updateChart("month");
         }
     }
 
     private void updateChart(String period) {
         barChart.getData().clear();
-        System.out.println("updateChart - Dates size: " + (datesOfPurchases != null ? datesOfPurchases.size() : 0));
-
         Map<String, Integer> counts = new LinkedHashMap<>(); // Use LinkedHashMap to preserve insertion order
         LocalDateTime now = LocalDateTime.now();
         DateTimeFormatter formatter;
@@ -168,5 +164,29 @@ public class ChartComponentController implements Initializable {
         yAxis.setUpperBound(maxValue + 1); // Add 1 to ensure top bar is fully visible
         yAxis.setTickUnit(1); // Set tick unit to 1 for integer values
         yAxis.setMinorTickVisible(false); // Hide minor ticks
+    }
+    public static List<LocalDateTime> generateRandomDates(int size, LocalDateTime startRange, LocalDateTime endRange) {
+        if (size < 0) {
+            throw new IllegalArgumentException("Size must be non-negative");
+        }
+        if (startRange.isAfter(endRange)) {
+            throw new IllegalArgumentException("Start range must be before end range");
+        }
+
+        datesOfPurchases = new ArrayList<>(size);
+        long startNanos = startRange.toEpochSecond(java.time.ZoneOffset.UTC) * 1_000_000_000L + startRange.getNano();
+        long endNanos = endRange.toEpochSecond(java.time.ZoneOffset.UTC) * 1_000_000_000L + endRange.getNano();
+
+        for (int i = 0; i < size; i++) {
+            // Generate a random nanosecond value between start and end
+            long randomNanos = ThreadLocalRandom.current().nextLong(startNanos, endNanos);
+            datesOfPurchases.add(LocalDateTime.ofEpochSecond(
+                    randomNanos / 1_000_000_000L,
+                    (int) (randomNanos % 1_000_000_000L),
+                    java.time.ZoneOffset.UTC
+            ));
+        }
+
+        return datesOfPurchases;
     }
 }

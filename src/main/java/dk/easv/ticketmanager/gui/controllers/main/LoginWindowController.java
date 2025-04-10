@@ -80,7 +80,6 @@ public class LoginWindowController
               errorLabel.setText("Invalid email or password");
               return;
             }
-            reinitializeControllers();
             goToMainPage();
         } catch (Exception e) {
             errorLabel.setText("An error occurred during login");
@@ -101,10 +100,7 @@ public class LoginWindowController
       viewManager.showStage(FXMLPath.MAIN, "Main stage", true);
   }
 
-  private void reinitializeControllers(){
-  Pair<Parent, ProfileDashboardController> p = FXMLManager.INSTANCE.getFXML(SETTINGS_DASHBOARD);
-  p.getValue().setDetails();
-  }
+
 
   @FXML
   private void onClickForgotPassword() {

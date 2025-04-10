@@ -17,7 +17,7 @@
          <Insets bottom="10.0" left="20.0" top="17.0" />
       </padding>
       <Circle fx:id="profileImage" fill="#f5c777" radius="35.0" stroke="BLACK" strokeType="INSIDE" />
-      <VBox alignment="CENTER_LEFT">
+      <VBox alignment="CENTER_LEFT" prefHeight="70.0" prefWidth="194.0">
          <children>
             <Label fx:id="menuTextLabel" prefHeight="17.0" text="Welcome!">
                <font>
@@ -27,14 +27,20 @@
                   <Insets />
                </VBox.margin>
             </Label>
-            <Label fx:id="lblFullName" prefHeight="17.0" text="User">
-               <font>
-                  <Font size="18.0" />
-               </font>
-               <VBox.margin>
-                  <Insets top="3.0" />
-               </VBox.margin>
-            </Label>
+            <HBox prefHeight="0.0" prefWidth="0.0" spacing="2.0">
+               <children>
+                  <Label fx:id="lblFirstName" prefHeight="23.0" text="User">
+                     <font>
+                        <Font size="18.0" />
+                     </font>
+                  </Label>
+                  <Label fx:id="lblLastName" prefHeight="23.0" text="Label">
+                     <font>
+                        <Font size="18.0" />
+                     </font>
+                  </Label>
+               </children>
+            </HBox>
          </children>
          <padding>
             <Insets bottom="5.0" left="15.0" right="5.0" top="5.0" />

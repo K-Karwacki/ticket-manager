@@ -121,13 +121,28 @@ public class UserManagementServiceImpl implements UserManagementService {
         Optional<User> optionalUser = userRepository.getById(userModel.getID());
         if(optionalUser.isPresent()){
             User user = optionalUser.get();
-            user.setFirstName(userModel.getName());
-            user.setLastName(userModel.getLastName());
-            user.setEmail(userModel.getEmail());
-            user.setPhoneNumber(userModel.getPhoneNumber());
-            user.setRole(userModel.getRole());
-            user.setImageData(ImageConverter.convertToByteArray(userModel.getImage()));
+            if(userModel.getName() != null){
+                user.setFirstName(userModel.getName());
+            }
+            if(userModel.getLastName() != null){
+                user.setLastName(userModel.getLastName());
+            }
+            if(userModel.getRole() != null){
+                user.setRole(userModel.getRole());
+            }
+            if(userModel.getEmail() != null){
+                user.setEmail(userModel.getEmail());
+            }
+            if(userModel.getPhoneNumber() != null){
+                user.setPhoneNumber(userModel.getPhoneNumber());
+            }
+            if(userModel.getImage() != null){
+                user.setImageData(ImageConverter.convertToByteArray(userModel.getImage()));
+            }
+            if(userModel.getPassword() != null)
+            {
             user.setHashedPassword(PasswordHasher.hashPassword(userModel.getPassword()));
+            }
             return userRepository.update(user) != null;
         }
         return false;

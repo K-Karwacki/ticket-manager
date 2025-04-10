@@ -4,6 +4,7 @@ import dk.easv.ticketmanager.gui.FXMLManager;
 import dk.easv.ticketmanager.gui.FXMLPath;
 import dk.easv.ticketmanager.gui.ViewManager;
 import dk.easv.ticketmanager.gui.controllers.event.dashboards.EventHomeController;
+import dk.easv.ticketmanager.gui.models.UserModel;
 import dk.easv.ticketmanager.gui.models.UserSession;
 import javafx.fxml.FXML;
 import javafx.scene.Node;
@@ -25,7 +26,7 @@ public class MenuComponentController
   private final ViewManager viewManager = ViewManager.INSTANCE;
   @FXML private Parent menuRoot;
   @FXML private Circle profileImage;
-  @FXML private Label lblFullName;
+  @FXML private Label lblFirstName, lblLastName;
 
   public MenuComponentController() {
     parentRoot = null;
@@ -36,19 +37,24 @@ public class MenuComponentController
 
   @FXML
   public void initialize(){
-    ImagePattern imagePattern = UserSession.INSTANCE.getLoggedUserModel().imagePatternProperty().get();
-    if(imagePattern != null){
-      profileImage.setFill(imagePattern);
-    }
-    String fullName = UserSession.INSTANCE.getLoggedUserModel().fullNameProperty().get();
+    UserModel currentUser = UserSession.INSTANCE.getLoggedUserModel();
 
-    if(fullName != null){
-      lblFullName.setText(fullName);
+    if(currentUser.nameProperty() != null){
+      lblFirstName.textProperty().bind(currentUser.nameProperty());
+    }
+    if(currentUser.lastNameProperty() != null){
+      lblLastName.textProperty().bind(currentUser.lastNameProperty());
+    }
+
+    if(currentUser.imagePatternProperty() != null){
+      profileImage.fillProperty().bind(currentUser.imagePatternProperty());
     }
 
     UserSession.INSTANCE.loggedUserModelProperty().addListener((obs, oldUser, newUser) -> {
       if (newUser != null) {
-        lblFullName.textProperty().bind(newUser.fullNameProperty());
+        lblFirstName.textProperty().bind(newUser.nameProperty());
+        lblLastName.textProperty().bind(newUser.lastNameProperty());
+        profileImage.fillProperty().bind(newUser.imagePatternProperty());
       }
     });
   }

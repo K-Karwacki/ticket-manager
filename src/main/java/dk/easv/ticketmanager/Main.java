@@ -14,13 +14,12 @@ import dk.easv.ticketmanager.gui.controllers.event.popups.AssignCoordinatorContr
 import dk.easv.ticketmanager.gui.controllers.event.popups.EventEditorController;
 import dk.easv.ticketmanager.gui.controllers.event.popups.ImageSelectorController;
 import dk.easv.ticketmanager.gui.controllers.main.ForgottenPasswordViewController;
+import dk.easv.ticketmanager.gui.controllers.menu.ProfileDashboardEditorController;
 import dk.easv.ticketmanager.gui.controllers.ticket.TicketController;
 import dk.easv.ticketmanager.gui.controllers.main.LoginWindowController;
 import dk.easv.ticketmanager.gui.controllers.ticket.TicketGeneratorController;
 import dk.easv.ticketmanager.gui.controllers.user.components.UserCardController;
 import dk.easv.ticketmanager.gui.controllers.user.dashboards.UserHomeController;
-import dk.easv.ticketmanager.gui.controllers.user.popup.ProfileDashboardEditorController;
-import dk.easv.ticketmanager.gui.controllers.user.popup.UserCreatorController;
 import dk.easv.ticketmanager.gui.controllers.user.popup.UserFormController;
 import dk.easv.ticketmanager.gui.models.UserSession;
 import dk.easv.ticketmanager.utils.RoleType;
@@ -74,7 +73,7 @@ public class Main extends Application
 
     assignCoordinatorController.setServices(userManagementService, eventManagementService);
 
-    profileDashBoardEditor.setUserManagementService(userManagementService);
+    profileDashBoardEditor.setServices(userManagementService, authenticationService);
 
 //    ticketGeneratorController.setServices(ticketAnalysisService);
     userFormController.setServices(userManagementService, authorizationService);
