@@ -14,9 +14,6 @@ public interface TicketRepository extends BaseRepository<Ticket>{
     boolean generateTicketForCustomer(Ticket ticket, Customer customer);
     List<Ticket> getGeneratedTicketsForCustomerEmail(String email);
 
-//    boolean saveTicketType(TicketType ticketType);
-//    boolean deleteTicketType(TicketType ticketType);
-//    List<TicketType> getAllTicketTypesForTicket();
     List<LocalDateTime> getAllDatesForPurchasedTickets();
     void saveGeneratedTicket(GeneratedTicket generatedTicket);
 }

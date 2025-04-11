@@ -47,7 +47,7 @@ public class Event {
   private Set<Ticket> tickets = new HashSet<>();
 
 
-  public Event(){};
+  public Event(){}
 
   public Event(EventModel eventModel) {
     setID(eventModel.getID());
@@ -55,8 +55,7 @@ public class Event {
     setDate(eventModel.dateProperty().get());
     setDescription(eventModel.descriptionProperty().get());
     setTime(eventModel.timeProperty().get());
-//    setCoordinators();
-//    setEventImage(eventModel.getEventImage());
+
 
   }
 
@@ -127,11 +126,6 @@ public class Event {
   public Set<User> getCoordinators()
   {
     return coordinators;
-  }
-
-  public void setCoordinators(Set<User> coordinators)
-  {
-    this.coordinators = coordinators;
   }
 
   public void assignCoordinatorToEvent(User user)

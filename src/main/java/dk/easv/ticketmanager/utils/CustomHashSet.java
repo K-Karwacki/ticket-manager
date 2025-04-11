@@ -1,6 +1,5 @@
 package dk.easv.ticketmanager.utils;
 
-import dk.easv.ticketmanager.gui.models.UserModel;
 
 import java.util.*;
 

@@ -64,7 +64,6 @@ public class UserCardController
     this.txtUserPhoneNumber.textProperty().bind(userModel.phoneNumberProperty());
     profileImage.fillProperty().bind(userModel.imagePatternProperty());
     if (UserSession.INSTANCE.getLoggedUserModel() != null) {
-      System.out.println("USER ROLE : " + UserSession.INSTANCE.getLoggedUserModel().roleProperty().get().getName());
       if ("COORDINATOR".equals(UserSession.INSTANCE.getLoggedUserModel().roleProperty().get().getName())) {
         System.out.println("ROLE IS COORDINATOR");
         btnDeleteUser.setVisible(false);

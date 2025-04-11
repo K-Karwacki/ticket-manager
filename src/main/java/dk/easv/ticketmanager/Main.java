@@ -5,13 +5,10 @@ import dk.easv.ticketmanager.bll.services.implementations.*;
 import dk.easv.ticketmanager.bll.services.interfaces.*;
 import dk.easv.ticketmanager.bll.services.factories.RepositoryService;
 import dk.easv.ticketmanager.bll.services.factories.RepositoryServiceFactory;
-import dk.easv.ticketmanager.dal.repositories.AuthRepository;
-import dk.easv.ticketmanager.dal.repositories.UserRepository;
 import dk.easv.ticketmanager.gui.*;
 import dk.easv.ticketmanager.gui.controllers.components.ChartComponentController;
 import dk.easv.ticketmanager.gui.controllers.event.dashboards.EventHomeController;
 import dk.easv.ticketmanager.gui.controllers.event.popups.AssignCoordinatorController;
-import dk.easv.ticketmanager.gui.controllers.event.popups.EventEditorController;
 import dk.easv.ticketmanager.gui.controllers.event.popups.ImageSelectorController;
 import dk.easv.ticketmanager.gui.controllers.main.ForgottenPasswordViewController;
 import dk.easv.ticketmanager.gui.controllers.menu.ProfileDashboardEditorController;
@@ -20,7 +17,6 @@ import dk.easv.ticketmanager.gui.controllers.main.LoginWindowController;
 import dk.easv.ticketmanager.gui.controllers.user.components.UserCardController;
 import dk.easv.ticketmanager.gui.controllers.user.dashboards.UserHomeController;
 import dk.easv.ticketmanager.gui.controllers.user.popup.UserFormController;
-import dk.easv.ticketmanager.gui.models.UserSession;
 import dk.easv.ticketmanager.utils.RoleType;
 import javafx.application.Application;
 import javafx.stage.Stage;
@@ -32,7 +28,6 @@ public class Main extends Application
   private final ViewManager viewManager = ViewManager.INSTANCE;
   private final FXMLManager fxmlManager = FXMLManager.INSTANCE;
   private final StageManager stageManager = new StageManager();
-  protected final UserSession userSession = UserSession.INSTANCE;
 
   protected final RepositoryServiceFactory repositoryServiceFactory = new RepositoryServiceFactory();
   protected final RepositoryService repositoryService = repositoryServiceFactory.getRepositoryService();
@@ -48,10 +43,7 @@ public class Main extends Application
 
   private void setControllersDependencies(){
     LoginWindowController loginWindowController = (LoginWindowController) fxmlManager.getFXML(FXMLPath.LOGIN).getValue();
-    EventEditorController eventEditorController = (EventEditorController) fxmlManager.getFXML(FXMLPath.EVENT_EDITOR_POPUP).getValue();
-
     EventHomeController eventHomeController = (EventHomeController) fxmlManager.getFXML(FXMLPath.EVENTS_DASHBOARD).getValue();
-
     ForgottenPasswordViewController forgottenPasswordViewController = (ForgottenPasswordViewController) fxmlManager.getFXML(FXMLPath.FORGOTTEN_PASSWORD_VIEW).getValue();
     ProfileDashboardEditorController profileDashBoardEditor = (ProfileDashboardEditorController)  fxmlManager.getFXML(FXMLPath.PROFILE_DASHBOARD_EDITOR).getValue();
     AssignCoordinatorController assignCoordinatorController = (AssignCoordinatorController) fxmlManager.getFXML(FXMLPath.COORDINATOR_LIST_POPUP).getValue();

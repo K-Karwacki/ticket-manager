@@ -5,11 +5,9 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
-import javafx.util.Pair;
 
 import java.util.HashMap;
 import java.util.Map;
-import java.util.MissingResourceException;
 
 public class StageManager
 {
@@ -111,35 +109,6 @@ public class StageManager
       e.printStackTrace();
     }
   }
-//  public <T> T showPopup(String fxmlFile, String title) {
-//    try {
-//      Pair<Parent, ?> fxmlData = fxmlManager.getFXML(fxmlFile);
-//      Parent root = fxmlData.getKey();
-//      T controller = (T) fxmlData.getValue();
-//
-//      Stage popupStage = stageCache.get(fxmlFile);
-//      if (popupStage == null) {
-//        popupStage = new Stage();
-//        popupStage.setScene(new Scene(root));
-//        popupStage.setTitle(title);
-//
-//        popupStage.initModality(Modality.APPLICATION_MODAL);
-//
-//        stageCache.put(fxmlFile, popupStage);
-//      }
-//
-//      if (popupStage.getOwner() != null) {
-//        popupStage.centerOnScreen();
-//      }
-//
-//      popupStage.show();
-//
-//      return controller;
-//    } catch (Exception e) {
-//      e.printStackTrace();
-//      return null;
-//    }
-//  }
 
   public SceneManager getSceneManager()
   {

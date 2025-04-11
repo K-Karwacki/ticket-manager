@@ -1,7 +1,6 @@
 package dk.easv.ticketmanager.dal.repositories.implementations;
 
 import dk.easv.ticketmanager.dal.entities.Customer;
-import dk.easv.ticketmanager.dal.repositories.BaseRepository;
 import dk.easv.ticketmanager.dal.repositories.CustomerRepository;
 import dk.easv.ticketmanager.utils.JPAUtil;
 import jakarta.persistence.EntityManager;

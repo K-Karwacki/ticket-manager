@@ -23,14 +23,7 @@ public class Ticket {
     @Column(name = "info")
     private String info;
 
-
-    public Ticket(Event event, Customer customer, double price, String type, String ticket_code) {
-        this.type = type;
-    }
-
-    public Ticket() {
-//        this.issued_date = LocalDateTime.now();
-    }
+    public Ticket() {}
 
     public Ticket(TicketModel ticketModel){
         setType(ticketModel.getType());
