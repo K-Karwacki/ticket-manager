@@ -2,8 +2,8 @@ package dk.easv.ticketmanager.utils;
 
 public enum RoleType
 {
-  ADMIN("Administrator"),
-  COORDINATOR("Coordinator");
+  ADMIN("ADMINISTRATOR"),
+  COORDINATOR("COORDINATOR");
 
   private final String name;
 

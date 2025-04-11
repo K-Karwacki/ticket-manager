@@ -25,6 +25,7 @@ import javafx.scene.layout.VBox;
 import javafx.scene.shape.Rectangle;
 import javafx.util.Pair;
 
+import javax.swing.text.View;
 import java.net.URL;
 import java.time.format.DateTimeFormatter;
 import java.util.ResourceBundle;
@@ -246,5 +247,10 @@ public class EventDetailsController implements Initializable {
         parentAssignCoordinatorControllerPair.getValue().setEventModel(this.eventModel);
         ViewManager.INSTANCE.showPopup(COORDINATOR_LIST_POPUP, "Assign coordinator");
 
+    }
+
+    @FXML
+    private void goToHomeEventDashboard() {
+        ViewManager.INSTANCE.switchDashboard(EVENTS_DASHBOARD, "Event Dashboard");
     }
 }

@@ -17,7 +17,6 @@ import dk.easv.ticketmanager.gui.controllers.main.ForgottenPasswordViewControlle
 import dk.easv.ticketmanager.gui.controllers.menu.ProfileDashboardEditorController;
 import dk.easv.ticketmanager.gui.controllers.ticket.TicketController;
 import dk.easv.ticketmanager.gui.controllers.main.LoginWindowController;
-import dk.easv.ticketmanager.gui.controllers.ticket.TicketGeneratorController;
 import dk.easv.ticketmanager.gui.controllers.user.components.UserCardController;
 import dk.easv.ticketmanager.gui.controllers.user.dashboards.UserHomeController;
 import dk.easv.ticketmanager.gui.controllers.user.popup.UserFormController;
@@ -53,17 +52,15 @@ public class Main extends Application
 
     EventHomeController eventHomeController = (EventHomeController) fxmlManager.getFXML(FXMLPath.EVENTS_DASHBOARD).getValue();
 
+    ForgottenPasswordViewController forgottenPasswordViewController = (ForgottenPasswordViewController) fxmlManager.getFXML(FXMLPath.FORGOTTEN_PASSWORD_VIEW).getValue();
     ProfileDashboardEditorController profileDashBoardEditor = (ProfileDashboardEditorController)  fxmlManager.getFXML(FXMLPath.PROFILE_DASHBOARD_EDITOR).getValue();
+    AssignCoordinatorController assignCoordinatorController = (AssignCoordinatorController) fxmlManager.getFXML(FXMLPath.COORDINATOR_LIST_POPUP).getValue();
     UserFormController userFormController = new UserFormController();
     UserCardController userCardController = (UserCardController) fxmlManager.getFXML(FXMLPath.USER_CARD_COMPONENT).getValue();
-    TicketGeneratorController ticketGeneratorController = (TicketGeneratorController) fxmlManager.getFXML(FXMLPath.TICKET_GENERATOR_POPUP).getValue();
     TicketController ticketController = (TicketController) fxmlManager.getFXML(FXMLPath.TICKET_COMPONENT).getValue();
     ImageSelectorController imageSelectorController = (ImageSelectorController) fxmlManager.getFXML(FXMLPath.IMAGE_SELECTOR_POPUP).getValue();
     ChartComponentController chartComponentController = (ChartComponentController) fxmlManager.getFXML(FXMLPath.CHART_COMPONENT).getValue();
-    ForgottenPasswordViewController forgottenPasswordViewController = (ForgottenPasswordViewController) fxmlManager.getFXML(FXMLPath.FORGOTTEN_PASSWORD_VIEW).getValue();
     UserHomeController userHomeController = (UserHomeController) fxmlManager.getFXML(FXMLPath.USERS_DASHBOARD).getValue();
-//    UserCreatorController userCreatorController = (UserCreatorController) fxmlManager.getFXML(FXMLPath.USER_CREATOR_POPUP).getValue();
-    AssignCoordinatorController assignCoordinatorController = (AssignCoordinatorController) fxmlManager.getFXML(FXMLPath.COORDINATOR_LIST_POPUP).getValue();
 
     loginWindowController.setServices(authenticationService);
 

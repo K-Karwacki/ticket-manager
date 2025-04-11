@@ -29,7 +29,7 @@ public class EventRepositoryImpl implements EventRepository
         return events;
       }
     }catch (Exception ex) {
-      ex.printStackTrace();
+      throw new RuntimeException(ex);
     }
     return Collections.emptyList();
   }

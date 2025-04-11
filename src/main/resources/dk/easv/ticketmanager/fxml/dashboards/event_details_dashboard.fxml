@@ -18,7 +18,7 @@
    <children>
       <HBox prefWidth="200.0" styleClass="dashboard-menu">
          <children>
-            <Button minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" prefHeight="30.0" prefWidth="80.0" text="Go Back">
+            <Button onAction="#goToHomeEventDashboard" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" prefHeight="30.0" prefWidth="80.0" text="Go Back">
                <font>
                   <Font name="Verdana" size="14.0" />
                </font>

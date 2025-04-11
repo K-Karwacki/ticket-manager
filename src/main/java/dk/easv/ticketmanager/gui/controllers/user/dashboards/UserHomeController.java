@@ -8,6 +8,7 @@ import dk.easv.ticketmanager.gui.ViewManager;
 import dk.easv.ticketmanager.gui.controllers.user.components.UserCardController;
 import dk.easv.ticketmanager.gui.controllers.user.popup.UserCreatorController;
 import dk.easv.ticketmanager.gui.models.UserModel;
+import dk.easv.ticketmanager.gui.models.UserSession;
 import javafx.collections.ObservableSet;
 import javafx.collections.SetChangeListener;
 import javafx.fxml.FXML;
@@ -37,8 +38,8 @@ public class UserHomeController
           loadUserCards();
       }
     });
-
     loadUserCards();
+
   }
 
   @FXML
@@ -52,7 +53,7 @@ public class UserHomeController
     userCreatorController.setServices(userManagementService, authorizationService);
   }
 
-  private void loadUserCards(){
+  public void loadUserCards(){
     if(userManagementService.getUserListModel().getUsersObservable().isEmpty()){
       userListRoot.getChildren().add(new Label("No users to show"));
     }
@@ -65,6 +66,6 @@ public class UserHomeController
       p.getValue().setUserModel(userModel);
       userListRoot.getChildren().add(p.getKey());
     });
-
   }
+
 }

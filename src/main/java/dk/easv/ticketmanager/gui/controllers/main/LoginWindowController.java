@@ -8,6 +8,7 @@ import dk.easv.ticketmanager.gui.FXMLManager;
 import dk.easv.ticketmanager.gui.FXMLPath;
 import dk.easv.ticketmanager.gui.ViewManager;
 import dk.easv.ticketmanager.gui.controllers.menu.ProfileDashboardController;
+import dk.easv.ticketmanager.gui.controllers.user.dashboards.UserHomeController;
 import dk.easv.ticketmanager.gui.models.UserSession;
 import javafx.fxml.FXML;
 import javafx.scene.Parent;
@@ -19,8 +20,7 @@ import javafx.util.Pair;
 
 import java.util.Objects;
 
-import static dk.easv.ticketmanager.gui.FXMLPath.FORGOTTEN_PASSWORD_VIEW;
-import static dk.easv.ticketmanager.gui.FXMLPath.SETTINGS_DASHBOARD;
+import static dk.easv.ticketmanager.gui.FXMLPath.*;
 
 
 public class LoginWindowController
@@ -81,6 +81,7 @@ public class LoginWindowController
               return;
             }
             goToMainPage();
+            reloadControllers();
         } catch (Exception e) {
             errorLabel.setText("An error occurred during login");
             e.printStackTrace();
@@ -101,6 +102,10 @@ public class LoginWindowController
   }
 
 
+  private void reloadControllers(){
+      Pair<Parent, UserHomeController> p = FXMLManager.INSTANCE.getFXML(USERS_DASHBOARD);
+      p.getValue().loadUserCards();
+  }
 
   @FXML
   private void onClickForgotPassword() {
