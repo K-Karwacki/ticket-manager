@@ -247,4 +247,8 @@ public class EventDetailsController implements Initializable {
         ViewManager.INSTANCE.showPopup(COORDINATOR_LIST_POPUP, "Assign coordinator");
 
     }
+
+    public void goBackToEvents() {
+        ViewManager.INSTANCE.switchDashboard(EVENTS_DASHBOARD, "Events Dashboard");
+    }
 }
